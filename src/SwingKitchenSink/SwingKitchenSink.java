@@ -28,17 +28,20 @@ public class SwingKitchenSink {
 	 * 	Returns an initialized window with the given name and a black background.
 	 * 
 	 * @author Can Alper
+	 * @param name
+	 * @param size
 	 * @return JFrame
 	 */
-	public static JFrame createWindow(String name) {
+	public static JFrame createWindow(String name, Point2D size) {
 		// Create the new window with the given name.
 		JFrame window = new JFrame(name);
 		// Set the background thread to terminate when the window is closed.
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Set the background color of the window.
 		window.getContentPane().setBackground(Color.black);
-		// Auto size the window to fit.
+		// Set window size the window to fit.
 		window.pack();
+		window.setSize(size.x, size.y);
 		// Make the window visible.
 		window.setVisible(true);
 		// Set the layout manager to null for programmers to move things around.
@@ -105,7 +108,7 @@ public class SwingKitchenSink {
 	 */
 	public static void main(String[] args) {
 		// Initialize the window.
-		JFrame mainWindow = createWindow("Kitchen sink window.");
+		JFrame mainWindow = createWindow("Kitchen sink window.", new Point2D(400,200));
 		// Create a label and link it to the main window
 		final JLabel testLabel = createLabel("Test Label", new Point2D(0, 0), new Point2D(125,20));
 		System.out.println("Linking testLabel to window.");
