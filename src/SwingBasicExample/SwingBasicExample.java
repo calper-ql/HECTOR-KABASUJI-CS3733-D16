@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class SwingBasicExample {
 	
-	/** This method  taken from the Oracle website and modified.
+	/** This method was taken from the Oracle website and modified.
 	 * 	
 	 * 	Here we can see a window getting created and displayed.
 	 */
@@ -40,7 +40,7 @@ public class SwingBasicExample {
         createAndShowGUI();
         System.out.println("You will see the \"End of the program\" text printed but the program will keep running until the window is closed.");
         System.out.println("The reason for this is that Java is a high level language.");
-        System.out.println("Unlike languages like C or C++, Java actually handles GUI on the background by default.");
+        System.out.println("Unlike languages like C or C++, Java actually handles GUI on the background by default.(Dependent on framework...)");
 		System.out.println("End of the program.");
 	}
 
