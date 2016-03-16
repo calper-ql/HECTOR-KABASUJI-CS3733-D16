@@ -74,6 +74,7 @@ public class SwingKitchenSink {
 	/** createButton:
 	 * 	Creates and returns a button with the given text and point.
 	 * 
+	 * @author Can Alper
 	 * @param text
 	 * @param point
 	 * @param size
@@ -96,6 +97,12 @@ public class SwingKitchenSink {
 		return button;
 	}
 	
+	/**	main:
+	 * 	Main program that creates every object.
+	 * 
+	 * @author Can Alper
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Initialize the window.
 		JFrame mainWindow = createWindow("Kitchen sink window.");
