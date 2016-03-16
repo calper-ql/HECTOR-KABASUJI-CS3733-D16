@@ -1,14 +1,15 @@
-/*	Basic Example
+/**	SwingBasic Example
  *	This is a basic example for the Swing library
  * 
- * 	Written by Can Alper
+ * 	Author(s):
+ * 		Can Alper.
  */
 
 package SwingBasicExample;
 import java.awt.Color;
 import javax.swing.*;
 
-public class BasicExample {
+public class SwingBasicExample {
 	
 	/** This method  taken from the Oracle website and modified.
 	 * 	
