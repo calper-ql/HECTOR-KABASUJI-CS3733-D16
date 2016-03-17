@@ -121,10 +121,10 @@ public class SwingKitchenSink {
 		// There is a weird java feature where you can intercept a class and add code into it. Java...
 		testButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(testLabel.getText().equals("Test Label")){
+				if(testLabel.getText().equals("HI")){
 					testLabel.setText("Not Test Label");
 				}else{
-					testLabel.setText("Test Label");
+					testLabel.setText("HI");
 				}
 			}
 		});
