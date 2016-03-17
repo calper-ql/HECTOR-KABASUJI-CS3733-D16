@@ -38,7 +38,7 @@ public class SwingKitchenSink {
 		// Set the background thread to terminate when the window is closed.
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Set the background color of the window.
-		window.getContentPane().setBackground(Color.green);
+		window.getContentPane().setBackground(Color.cyan);
 		// Set window size the window to fit.
 		window.pack();
 		window.setSize(size.x, size.y);
@@ -91,7 +91,7 @@ public class SwingKitchenSink {
 		// Set the button foreground color to black.
 		button.setForeground(Color.black);
 		// Set the button background color to white.
-		button.setBackground(Color.white);
+		button.setBackground(Color.red);
 		// Set the button location (move...).
 		button.setLocation(point.x, point.y);
 		// Set the size.
