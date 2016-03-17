@@ -116,7 +116,7 @@ public class SwingKitchenSink {
 		System.out.println("Linking testLabel to window.");
 		mainWindow.getContentPane().add(testLabel);
 		// Create a button and link it to the main window.
-		JButton testButton = createButton("Test Button", new Point2D(125,50), new Point2D(125,50) );
+		JButton testButton = createButton("Test Button", new Point2D(125,40), new Point2D(125,50) );
 		System.out.println("Linking testButton to window.");
 		mainWindow.getContentPane().add(testButton);
 		// Add a functionality to testButton
