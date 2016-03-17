@@ -92,6 +92,8 @@ public class SwingKitchenSink {
 		button.setForeground(Color.black);
 		// Set the button background color to white.
 		button.setBackground(Color.gray);
+		button.setOpaque(true);
+		button.setBorderPainted(false);
 		// Set the button location (move...).
 		button.setLocation(point.x, point.y);
 		// Set the size.
