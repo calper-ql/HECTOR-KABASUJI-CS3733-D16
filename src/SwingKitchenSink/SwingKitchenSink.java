@@ -38,7 +38,7 @@ public class SwingKitchenSink {
 		// Set the background thread to terminate when the window is closed.
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Set the background color of the window.
-		window.getContentPane().setBackground(Color.cyan);
+		window.getContentPane().setBackground(Color.red);
 		// Set window size the window to fit.
 		window.pack();
 		window.setSize(size.x, size.y);
@@ -91,7 +91,7 @@ public class SwingKitchenSink {
 		// Set the button foreground color to black.
 		button.setForeground(Color.black);
 		// Set the button background color to white.
-		button.setBackground(Color.gray);
+		button.setBackground(Color.orange);
 		button.setOpaque(true);
 		button.setBorderPainted(false);
 		// Set the button location (move...).
@@ -116,7 +116,7 @@ public class SwingKitchenSink {
 		System.out.println("Linking testLabel to window.");
 		mainWindow.getContentPane().add(testLabel);
 		// Create a button and link it to the main window.
-		JButton testButton = createButton("Test Button", new Point2D(125,50), new Point2D(125,50) );
+		JButton testButton = createButton("Test Button", new Point2D(125,40), new Point2D(125,50) );
 		System.out.println("Linking testButton to window.");
 		mainWindow.getContentPane().add(testButton);
 		// Add a functionality to testButton
