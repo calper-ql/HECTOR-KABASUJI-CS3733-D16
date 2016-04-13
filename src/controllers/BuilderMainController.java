@@ -7,7 +7,7 @@ public class BuilderMainController extends MainController{
 	private BuilderLevelSelectController blsc;
 	
 	public BuilderMainController() {
-		ssc = new SplashScreenController();
+		ssc = new SplashScreenController(true);
 		blsc= new BuilderLevelSelectController(this);
 	}
 	

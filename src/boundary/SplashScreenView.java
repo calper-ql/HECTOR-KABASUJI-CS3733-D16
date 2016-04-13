@@ -40,7 +40,7 @@ public class SplashScreenView {
 		title.setForeground(Color.white);
 		teamName.setForeground(Color.white);
 		
-		title.setBounds(width/2 - 400/2, 50, 400, 100);
+		title.setBounds(width/2 - 1000/2, 50, 1000, 100);
 		teamName.setBounds(width/2 - 200/2,	150, 200, 50);
 		
 		jp.add(title);

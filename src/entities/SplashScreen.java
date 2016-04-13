@@ -15,7 +15,7 @@ public class SplashScreen {
 		nameList.add("Zach Armsby");
 		nameList.add("Mike Harney");
 		nameList.add("Morgan Garbett");
-		nameList.add("He showed up...");
+		nameList.add("Ryan Wiesenberg");
 		nameList.add("Courtney Davis");
 		if(isBuilder) mainTitle = "Kabasuji Level Builder";
 		else mainTitle = "Kabasuji";

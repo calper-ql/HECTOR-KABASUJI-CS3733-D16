@@ -8,8 +8,8 @@ import entities.SplashScreen;
 public class SplashScreenController implements Controller{
 	private SplashScreen ss;
 	private SplashScreenView ssv;
-	public SplashScreenController() {
-		ss = new SplashScreen(false);
+	public SplashScreenController(boolean isBuilder) {
+		ss = new SplashScreen(isBuilder);
 		ssv = new SplashScreenView(ss);
 	}
 	public SplashScreen get(){ return ss; }

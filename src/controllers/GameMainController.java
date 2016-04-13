@@ -7,7 +7,7 @@ public class GameMainController extends MainController{
 	private MainMenuController mmc;
 	
 	public GameMainController() {
-		ssc = new SplashScreenController();
+		ssc = new SplashScreenController(false);
 		mmc = new MainMenuController(this);
 	}
 	

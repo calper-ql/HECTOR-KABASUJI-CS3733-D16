@@ -44,7 +44,7 @@ public class BuilderLevelView {
 		p.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Lightning mode - 3");
+		JLabel lblNewLabel = new JLabel("Lightning mode");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setBounds(83, 6, 137, 45);
@@ -136,8 +136,8 @@ public class BuilderLevelView {
 		
 		int X   = panel.getX();
 		int Y = panel.getY();
-		//int width  = panel.getWidth();
-		//int height = panel.getHeight();
+		int widthP  = panel.getWidth();
+		int heightP = panel.getHeight();
 		
 		JPanel tiles[][] = new JPanel[12][12];
 		for(int i = 0;	i < 12; i++){
@@ -147,18 +147,16 @@ public class BuilderLevelView {
 				tiles[k][i].setVisible(true);
 				tiles[k][i].setBorder(new LineBorder(new Color(0, 0, 0)));
 				panel.add(tiles[k][i]);
-				int x =  ((width/12)*k);
-				int y = ((height/12)*i);
-				int w = (width/12);
-				int h = (height/12);
+				int x =  ((widthP/12)*k);
+				int y = ((heightP/12)*i);
+				int w = (widthP/12);
+				int h = (heightP/12);
 				tiles[k][i].setBounds(x, y, w, h);
 				tiles[k][i].setBackground(new Color(250,255,255));
 				
 				if(((i==9) || (i == 11)) && (k == 7 || k == 9)){
 					tiles[k][i].setBackground(Color.darkGray);
 				}	
-				
-				System.out.println(x);
 			}
 		}
 		

@@ -37,7 +37,7 @@ public class MainMenuView {
 		btnLevels.setBounds(50, 185, 200, 50);
 		jp.add(btnLevels);
 		
-		btnAchivements = new JButton("Achivements");
+		btnAchivements = new JButton("Achievements");
 		btnAchivements.setBounds(50, 245, 200, 50);
 		jp.add(btnAchivements);
 		

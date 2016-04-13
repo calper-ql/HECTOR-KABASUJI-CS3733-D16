@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 public class AchievementView {
 	private JButton backButton;
+	private JButton resetButton;
 	
 	public AchievementView() {
 		// TODO Auto-generated constructor stub
@@ -31,7 +32,9 @@ public class AchievementView {
 		backButton.setBounds(10, 5, 65, 50);
 		p.add(backButton);
 		
-		
+		resetButton = new JButton("reset");
+		resetButton.setBounds(640-20-65, 5, 65, 50);
+		p.add(resetButton);
 		
 		BufferedImage achive_img = null;
 		try {
@@ -60,7 +63,7 @@ public class AchievementView {
 		lblNewLabel.setIcon(new ImageIcon(achive_img_r));
 		p.add(lblNewLabel_1);
 		
-		JLabel lblEarnedAchivements = new JLabel("Earned Achivements");
+		JLabel lblEarnedAchivements = new JLabel("Earned Achievements");
 		lblEarnedAchivements.setFont(new Font("Menlo", Font.PLAIN, 28));
 		lblEarnedAchivements.setForeground(Color.WHITE);
 		lblEarnedAchivements.setBounds(153, 6, 311, 68);

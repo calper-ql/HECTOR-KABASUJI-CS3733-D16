@@ -58,7 +58,7 @@ private JButton backButton;
 		p.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Puzzle mode - 3");
+		JLabel lblNewLabel = new JLabel("Puzzle mode");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setBounds(83, 6, 137, 45);
@@ -71,7 +71,7 @@ private JButton backButton;
 		
 		BufferedImage star_img = null;
 		try {
-			URL img = boundary.LevelView.class.getResource("/img/888267.jpg");
+			URL img = boundary.LevelView.class.getResource("/img/star-xxl.png");
 			star_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +80,7 @@ private JButton backButton;
 		
 		BufferedImage info_img = null;
 		try {
-			URL img = boundary.LevelView.class.getResource("/img/888267.jpg");
+			URL img = boundary.LevelView.class.getResource("/img/info.png");
 			info_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -124,8 +124,8 @@ private JButton backButton;
 		
 		int X   = panel.getX();
 		int Y = panel.getY();
-		//int width  = panel.getWidth();
-		//int height = panel.getHeight();
+		int widthP  = panel.getWidth();
+		int heightP = panel.getHeight();
 		
 		JPanel tiles[][] = new JPanel[12][12];
 		for(int i = 0;	i < 12; i++){
@@ -135,61 +135,18 @@ private JButton backButton;
 				tiles[k][i].setVisible(true);
 				tiles[k][i].setBorder(new LineBorder(new Color(0, 0, 0)));
 				panel.add(tiles[k][i]);
-				int x =  ((width/12)*k);
-				int y = ((height/12)*i);
-				int w = (width/12);
-				int h = (height/12);
+				int x =  ((widthP/12)*k);
+				int y = ((heightP/12)*i);
+				int w = (widthP/12);
+				int h = (heightP/12);
 				tiles[k][i].setBounds(x, y, w, h);
 				tiles[k][i].setBackground(new Color(250,255,255));
 				
 				if(((i==9) || (i == 11)) && (k == 7 || k == 9)){
 					tiles[k][i].setBackground(Color.darkGray);
 				}	
-				
 			}
 		}
-		
-		
-		
-		
-		
-		/*
-		
-		BufferedImage achive_img = null;
-		try {
-			// load relative image
-			URL img = boundry.AchievementView.class.getResource("/img/888267.jpg");
-			achive_img = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		Image achive_img_r = achive_img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-		
-		
-		
-		
-		JLabel lblNewLabel = new JLabel("\n");
-		lblNewLabel.setBounds(45, 84, 101, 61);
-		p.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Pros only");
-		lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 28));
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(55, 142, 65, 48);
-		lblNewLabel.setIcon(new ImageIcon(achive_img_r));
-		p.add(lblNewLabel_1);
-		
-		JLabel lblEarnedAchivements = new JLabel("Earned Achivements");
-		lblEarnedAchivements.setFont(new Font("Menlo", Font.PLAIN, 28));
-		lblEarnedAchivements.setForeground(Color.WHITE);
-		lblEarnedAchivements.setBounds(153, 6, 311, 68);
-		p.add(lblEarnedAchivements);
-		
-		
-		*/
 		
 		return p;
 	}
