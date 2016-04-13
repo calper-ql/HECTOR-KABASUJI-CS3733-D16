@@ -13,9 +13,9 @@ public class LevelSelectController implements Controller{
 	private MainController mc;
 	private Controller back;
 	private JButton backButton;
-	private JButton puzzleButtons[];
-	private JButton lightningButtons[];
-	private JButton releaseButtons[];
+	private JButton[] puzzleButtons;
+	private JButton[] lightningButtons;
+	private JButton[] releaseButtons;
 	
 	public LevelSelectController(MainController mc, Controller back) {
 		// TODO Auto-generated constructor stub
@@ -35,11 +35,44 @@ public class LevelSelectController implements Controller{
 			}	
 		});
 		
+		puzzleButtons = lsv.getPuzzleButtons();
+		
+		
+		puzzleButtons[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				puzzleButtonClicked(1);
+			}	
+		});
+		puzzleButtons[1].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				puzzleButtonClicked(2);
+			}	
+		});
+		puzzleButtons[2].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				puzzleButtonClicked(3);
+			}	
+		});
+		puzzleButtons[3].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				puzzleButtonClicked(4);
+			}	
+		});
+		puzzleButtons[4].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				puzzleButtonClicked(5);
+			}	
+		});
+		
 		return p;		
 	}
 	
 	private void backButtonClicked() {
 		// TODO Auto-generated method stub
 		mc.requestSwap(back);
+	}
+	
+	private void puzzleButtonClicked(int i){
+		
 	}
 }

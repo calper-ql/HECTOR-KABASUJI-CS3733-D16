@@ -21,6 +21,7 @@ public class MainMenuView {
 	
 	public JPanel render(){
 		JPanel jp = new JPanel();
+		jp.setBackground(Color.darkGray);
 		int width = 640;
 		int height = 535;
 		jp.setBounds(0, 0, width, height);
@@ -29,7 +30,7 @@ public class MainMenuView {
 		JLabel menuLabel = new JLabel("Kabasuji");
 		menuLabel.setFont(new Font("Menlo", Font.PLAIN, 99));
 		menuLabel.setForeground(Color.WHITE);
-		menuLabel.setBounds(40, 10, 400, 160);
+		menuLabel.setBounds(40, 10, 500, 160);
 		jp.add(menuLabel);
 		
 		btnLevels = new JButton("Levels");
