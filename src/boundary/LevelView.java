@@ -1,4 +1,4 @@
-package boundry;
+package boundary;
 
 import java.awt.Color;
 import java.awt.Dimension;

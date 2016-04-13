@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.AchievementView;
+import boundary.AchievementView;
 
 public class AchievementController implements Controller{
 	private AchievementView av;

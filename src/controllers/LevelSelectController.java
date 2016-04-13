@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.LevelSelectView;
+import boundary.LevelSelectView;
 
 public class LevelSelectController implements Controller{
 	private LevelSelectView lsv;

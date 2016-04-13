@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.MainMenuView;
+import boundary.MainMenuView;
 
 public class MainMenuController implements Controller {
 	private MainMenuView mmv;

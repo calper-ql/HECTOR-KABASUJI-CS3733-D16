@@ -1,6 +1,6 @@
 package controllers;
 
-import boundry.WindowManager;
+import boundary.WindowManager;
 
 public class GameMainController extends MainController{
 	private SplashScreenController ssc;

@@ -1,4 +1,4 @@
-package boundry;
+package boundary;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -36,7 +36,7 @@ public class AchievementView {
 		BufferedImage achive_img = null;
 		try {
 			// load relative image
-			URL img = boundry.AchievementView.class.getResource("/img/888267.jpg");
+			URL img = boundary.AchievementView.class.getResource("/img/888267.jpg");
 			achive_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

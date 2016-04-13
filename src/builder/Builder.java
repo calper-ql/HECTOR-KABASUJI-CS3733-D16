@@ -1,6 +1,6 @@
 package builder;
 
-import boundry.WindowManager;
+import boundary.WindowManager;
 import controllers.BuilderMainController;
 
 public class Builder {
