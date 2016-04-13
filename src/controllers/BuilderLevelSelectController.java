@@ -28,16 +28,10 @@ public class BuilderLevelSelectController implements Controller{
 
 	@Override
 	public JPanel getRenderedView() {
-		JPanel p = lsv.render();
+		JPanel p = blsv.render();
 		
-		backButton = lsv.getBackButton();
-		backButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				backButtonClicked();
-			}	
-		});
 		
-		puzzleButtons = lsv.getPuzzleButtons();
+		puzzleButtons = blsv.getPuzzleButtons();
 		
 		
 		puzzleButtons[0].addActionListener(new ActionListener(){
@@ -69,10 +63,6 @@ public class BuilderLevelSelectController implements Controller{
 		return p;		
 	}
 	
-	private void backButtonClicked() {
-		// TODO Auto-generated method stub
-		mc.requestSwap(back);
-	}
 	
 	private void puzzleButtonClicked(int i){
 		mc.requestSwap(lvl);

@@ -20,6 +20,6 @@ public class BuilderMainController extends MainController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.requestSwap(mmc);
+		this.requestSwap(blsc);
 	}
 }

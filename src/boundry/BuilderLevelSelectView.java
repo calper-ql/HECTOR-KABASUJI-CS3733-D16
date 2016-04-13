@@ -54,4 +54,16 @@ public class BuilderLevelSelectView {
 		return p;
 	}
 	
+	
+	public JButton[] getPuzzleButtons(){
+		return puzzleButtons;
+	}
+	
+	public JButton[] getLightningButtons(){
+		return lightningButtons;
+	}
+	
+	public JButton[] getReleaseButtons(){
+		return releaseButtons;
+	}
 }
