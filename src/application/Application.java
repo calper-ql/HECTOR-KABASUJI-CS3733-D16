@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import boundry.MainMenuView;
 import boundry.SplashScreenView;
 import boundry.WindowManager;
+import controllers.MainController;
 import controllers.SplashScreenController;
 import entities.SplashScreen;
 

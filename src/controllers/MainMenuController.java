@@ -11,15 +11,18 @@ import javax.swing.JPanel;
 
 import boundry.MainMenuView;
 
-public class MainMenuController  {
-	
+public class MainMenuController implements Controller {
 	private MainMenuView mmv;
 	private JButton lb;
 	private JButton ab;
+	private MainController mc;
+	LevelSelectController lsc;
 	
-	public MainMenuController(MainMenuView mmv) {
+	public MainMenuController(MainController mc) {
 		// TODO Auto-generated constructor stub
-		this.mmv = mmv;
+		this.mmv = new MainMenuView();
+		this.mc = mc;
+		lsc = new LevelSelectController(mc, this);
 	}
 	
 	
@@ -44,11 +47,11 @@ public class MainMenuController  {
 	}
 	
 	private void levelsButtonClicked(){
-		System.out.println("Poop");
+		mc.requestSwap(lsc);
 	}
 	
 	private void achivementsButtonClicked(){
-		System.out.println("Pee");
+	
 	}
 
 }

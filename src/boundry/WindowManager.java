@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import application.MainController;
+import controllers.MainController;
 
 public class WindowManager {
 	private JFrame mainFrame;
