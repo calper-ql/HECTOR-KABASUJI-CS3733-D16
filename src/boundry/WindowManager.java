@@ -4,11 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainBoundry {
+import application.MainController;
+
+public class WindowManager {
 	private JFrame mainFrame;
 	private JPanel currentContext;
+	private MainController mctrl;
 	
-	public MainBoundry(int x, int y, int width, int height) {
+	public WindowManager(int x, int y, int width, int height) {
 		currentContext = new JPanel();
 		mainFrame = new JFrame();
 		mainFrame.setVisible(true);
@@ -26,5 +29,11 @@ public class MainBoundry {
 		mainFrame.getContentPane().removeAll();
 		mainFrame.getContentPane().add(nextContext);
 		mainFrame.validate();
+	}
+
+	public void link(MainController mainController) {
+		// TODO Auto-generated method stub
+		mctrl = mainController;
+		mctrl.link(this);
 	}
 }

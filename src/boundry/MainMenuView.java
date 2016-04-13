@@ -8,37 +8,47 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import entities.MainMenu;
+import controllers.MainMenuController;
 import entities.SplashScreen;
 
 public class MainMenuView {
-	private MainMenu sp;
-	public MainMenuView(MainMenu sp){
-		this.sp = sp;
+	private JButton btnLevels;
+	private JButton btnAchivements;
+	
+	public MainMenuView(){
+
 	}
 	
 	public JPanel render(){
 		JPanel jp = new JPanel();
-		jp.setLayout(null);
 		int width = 640;
 		int height = 535;
 		jp.setBounds(0, 0, width, height);
+		jp.setLayout(null);
 		
+		JLabel menuLabel = new JLabel("Kabasuji");
+		menuLabel.setFont(new Font("Menlo", Font.PLAIN, 99));
+		menuLabel.setForeground(Color.WHITE);
+		menuLabel.setBounds(40, 10, 400, 160);
+		jp.add(menuLabel);
 		
+		btnLevels = new JButton("Levels");
+		btnLevels.setBounds(50, 185, 200, 50);
+		jp.add(btnLevels);
 		
-		JLabel lblNewLabel = new JLabel("Kabasuji");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 99));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(37, 6, 413, 156);
-		jp.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("Levels");
-		btnNewButton.setBounds(47, 185, 197, 50);
-		jp.add(btnNewButton);
-		
-		JButton btnAchivements = new JButton("Achivements");
-		btnAchivements.setBounds(47, 247, 197, 50);
+		btnAchivements = new JButton("Achivements");
+		btnAchivements.setBounds(50, 245, 200, 50);
+		jp.add(btnAchivements);
 		
 		return jp;
 	}
+	
+	public JButton getAchivementButton(){
+		return btnAchivements;
+	}
+	
+	public JButton getLevelsButton(){
+		return btnLevels;
+	}
+	
 }
