@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class BuilderLevelView {
+	private JButton backButton;
+	
 	public BuilderLevelView(){
 
 	}
@@ -48,9 +50,9 @@ public class BuilderLevelView {
 		lblNewLabel.setBounds(83, 6, 137, 45);
 		p.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("<");
-		btnNewButton.setBounds(10, 5, 65, 48);
-		p.add(btnNewButton);
+		backButton = new JButton("<");
+		backButton.setBounds(10, 5, 65, 48);
+		p.add(backButton);
 		
 		
 		BufferedImage star_img = null;
@@ -162,5 +164,8 @@ public class BuilderLevelView {
 		
 		
 		return p;
+	}
+	public JButton getBackButton(){
+		return backButton;
 	}
 }
