@@ -7,14 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BuilderMainMenuView {
-	
+public class BuilderLevelSelectView {
 	private JButton[] puzzleButtons;
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
 	
 	
-	public BuilderMainMenuView(){
+	public BuilderLevelSelectView(){
 
 	}
 	
@@ -55,4 +54,16 @@ public class BuilderMainMenuView {
 		return p;
 	}
 	
+	
+	public JButton[] getPuzzleButtons(){
+		return puzzleButtons;
+	}
+	
+	public JButton[] getLightningButtons(){
+		return lightningButtons;
+	}
+	
+	public JButton[] getReleaseButtons(){
+		return releaseButtons;
+	}
 }

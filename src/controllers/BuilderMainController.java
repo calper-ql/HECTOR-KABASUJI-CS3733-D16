@@ -4,11 +4,11 @@ import boundry.WindowManager;
 
 public class BuilderMainController extends MainController{
 	private SplashScreenController ssc;
-	private MainMenuController mmc;
+	private BuilderLevelSelectController blsc;
 	
 	public BuilderMainController() {
 		ssc = new SplashScreenController();
-		mmc = new MainMenuController(this);
+		blsc= new BuilderLevelSelectController(this);
 	}
 	
 	public void link(WindowManager wm){
@@ -20,6 +20,6 @@ public class BuilderMainController extends MainController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.requestSwap(mmc);
+		this.requestSwap(blsc);
 	}
 }
