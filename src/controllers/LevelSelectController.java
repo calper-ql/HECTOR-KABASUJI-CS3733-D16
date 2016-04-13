@@ -12,6 +12,8 @@ public class LevelSelectController implements Controller{
 	private LevelSelectView lsv;
 	private MainController mc;
 	private Controller back;
+	private Controller lvl;
+	
 	private JButton backButton;
 	private JButton[] puzzleButtons;
 	private JButton[] lightningButtons;
@@ -21,6 +23,9 @@ public class LevelSelectController implements Controller{
 		// TODO Auto-generated constructor stub
 		this.mc = mc;
 		this.back = back;
+		
+		this.lvl = new LevelController(mc, back);
+		
 		lsv = new LevelSelectView();
 	}
 
@@ -73,6 +78,6 @@ public class LevelSelectController implements Controller{
 	}
 	
 	private void puzzleButtonClicked(int i){
-		
+		mc.requestSwap(lvl);
 	}
 }

@@ -6,26 +6,26 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.AchievementView;
+import boundry.LevelView;
 
-public class AchievementController implements Controller{
-	private AchievementView av;
+public class LevelController implements Controller{
+	private LevelView lv;
 	private MainController mc;
 	private Controller back;
 	private JButton backButton;
 	
-	public AchievementController(MainController mc, Controller back) {
+	public LevelController(MainController mc, Controller back) {
 		// TODO Auto-generated constructor stub
 		this.mc = mc;
 		this.back = back;
-		av = new AchievementView();
+		lv = new LevelView();
 	}
 
 	@Override
 	public JPanel getRenderedView() {
-		JPanel p = av.render();
+		JPanel p = lv.render();
 		
-		backButton = av.getBackButton();
+		backButton = lv.getBackButton();
 		backButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();

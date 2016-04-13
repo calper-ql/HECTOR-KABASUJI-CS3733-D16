@@ -66,29 +66,6 @@ public class AchievementView {
 		lblEarnedAchivements.setBounds(153, 6, 311, 68);
 		p.add(lblEarnedAchivements);
 		
-		
-		
-		
-		
-		
-		/*puzzleButtons = new JButton[5];
-		lightningButtons = new JButton[5];
-		releaseButtons = new JButton[5];
-		
-		for(int i = 0; i < 5; i++){
-			puzzleButtons[i] = new JButton(new Integer(i+1).toString());
-			lightningButtons[i] = new JButton(new Integer(i+1).toString());
-			releaseButtons[i] = new JButton(new Integer(i+1).toString());
-			
-			puzzleButtons[i]   .setBounds(50 + i*110, height/4   - 40, 100, 75);
-			lightningButtons[i].setBounds(50 + i*110, height/4*2 - 40, 100, 75);
-			releaseButtons[i]  .setBounds(50 + i*110, height/4*3 - 40, 100, 75);
-			
-			p.add(puzzleButtons[i]);
-			p.add(lightningButtons[i]);
-			p.add(releaseButtons[i]);
-		}*/
-		
 		return p;
 	}
 	

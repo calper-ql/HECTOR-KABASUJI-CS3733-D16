@@ -68,6 +68,7 @@ public class mockup {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		/*
 		Block block_1 = new Block(384/12,new Color(10,255,10));
 		block_1.setLocation(0, 0);
 		Block block_2 = new Block(384/12,new Color(10,255,10));
@@ -129,7 +130,7 @@ public class mockup {
 		block_32.linkUp(block_42);
 		block_22.linkUp(block_52);
 		block_52.linkUp(block_62);
-		block_12.build();
+		block_12.build();*/
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
