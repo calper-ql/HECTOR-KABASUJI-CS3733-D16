@@ -57,7 +57,7 @@ public class BuilderLevelView {
 		
 		BufferedImage star_img = null;
 		try {
-			URL img = MockupGuiBuilder.mockup.class.getResource("/img/star-xxl.png");
+			URL img = boundary.BuilderLevelView.class.getResource("/img/star-xxl.png");
 			star_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -66,7 +66,7 @@ public class BuilderLevelView {
 		
 		BufferedImage info_img = null;
 		try {
-			URL img = MockupGuiBuilder.mockup.class.getResource("/img/888267.jpg");
+			URL img = boundary.BuilderLevelView.class.getResource("/img/888267.jpg");
 			info_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
