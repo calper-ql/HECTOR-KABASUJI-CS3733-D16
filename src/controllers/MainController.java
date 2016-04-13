@@ -1,8 +1,8 @@
 package controllers;
 
-import boundry.MainMenuView;
-import boundry.SplashScreenView;
-import boundry.WindowManager;
+import boundary.MainMenuView;
+import boundary.SplashScreenView;
+import boundary.WindowManager;
 import entities.SplashScreen;
 
 public class MainController {

@@ -2,7 +2,7 @@ package controllers;
 
 import javax.swing.JPanel;
 
-import boundry.SplashScreenView;
+import boundary.SplashScreenView;
 import entities.SplashScreen;
 
 public class SplashScreenController implements Controller{

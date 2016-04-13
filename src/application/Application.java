@@ -3,10 +3,9 @@ package application;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-import boundry.MainMenuView;
-import boundry.SplashScreenView;
-import boundry.WindowManager;
+import boundary.MainMenuView;
+import boundary.SplashScreenView;
+import boundary.WindowManager;
 import controllers.GameMainController;
 import controllers.MainController;
 import controllers.SplashScreenController;

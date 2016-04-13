@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.BuilderLevelView;
+import boundary.BuilderLevelView;
 
 public class BuilderLevelController implements Controller{
 	private BuilderLevelView blv;

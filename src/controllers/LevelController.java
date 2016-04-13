@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.LevelView;
+import boundary.LevelView;
 
 public class LevelController implements Controller{
 	private LevelView lv;

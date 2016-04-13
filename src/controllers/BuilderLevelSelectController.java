@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import boundry.BuilderLevelSelectView;
-import boundry.LevelSelectView;
+import boundary.BuilderLevelSelectView;
+import boundary.LevelSelectView;
 
 public class BuilderLevelSelectController implements Controller{
 	private BuilderLevelSelectView blsv;
