@@ -71,7 +71,7 @@ private JButton backButton;
 		
 		BufferedImage star_img = null;
 		try {
-			URL img = MockupGui.mockup.class.getResource("/img/888267.jpg");
+			URL img = boundary.LevelView.class.getResource("/img/888267.jpg");
 			star_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +80,7 @@ private JButton backButton;
 		
 		BufferedImage info_img = null;
 		try {
-			URL img = MockupGui.mockup.class.getResource("/img/888267.jpg");
+			URL img = boundary.LevelView.class.getResource("/img/888267.jpg");
 			info_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -146,7 +146,6 @@ private JButton backButton;
 					tiles[k][i].setBackground(Color.darkGray);
 				}	
 				
-				System.out.println(x);
 			}
 		}
 		
