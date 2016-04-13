@@ -17,12 +17,14 @@ public class MainMenuController implements Controller {
 	private JButton ab;
 	private MainController mc;
 	LevelSelectController lsc;
+	AchievementController ac;
 	
 	public MainMenuController(MainController mc) {
 		// TODO Auto-generated constructor stub
 		this.mmv = new MainMenuView();
 		this.mc = mc;
 		lsc = new LevelSelectController(mc, this);
+		ac = new AchievementController(mc, this);
 	}
 	
 	
@@ -51,7 +53,7 @@ public class MainMenuController implements Controller {
 	}
 	
 	private void achivementsButtonClicked(){
-	
+		mc.requestSwap(ac);
 	}
 
 }
