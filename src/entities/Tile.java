@@ -6,6 +6,7 @@ public class Tile {
 	int col;
 	ReleaseNumber num;
 	
+	
 	public Tile(Block block, int row, int col, ReleaseNumber num){
 		this.block = block;
 		this.row = row;

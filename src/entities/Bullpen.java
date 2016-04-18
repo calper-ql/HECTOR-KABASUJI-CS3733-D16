@@ -11,11 +11,12 @@ public class Bullpen {
 	}
 	
 	void addPiece(Piece piece){
-		return;
+		pieces.add(piece);
 	}
 	
-	Block removePiece(Piece piece){
-		return piece.getBlock();
+	void removePiece(Piece piece) throws Exception{
+		boolean success = pieces.remove(piece);
+		if(!success) throw new Exception("Piece not found");
 	}
 
 }

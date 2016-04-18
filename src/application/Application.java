@@ -1,15 +1,7 @@
 package application;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import boundary.MainMenuView;
-import boundary.SplashScreenView;
 import boundary.WindowManager;
 import controllers.GameMainController;
-import controllers.MainController;
-import controllers.SplashScreenController;
-import entities.SplashScreen;
 
 public class Application {
 
