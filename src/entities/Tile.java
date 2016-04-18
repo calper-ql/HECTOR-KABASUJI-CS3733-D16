@@ -5,24 +5,30 @@ public class Tile {
 	int row;
 	int col;
 	ReleaseNumber num;
-	boolean enabled;
+	boolean isEnabled;
 	
-	public Tile(IBlock block, int row, int col, ReleaseNumber num, boolean enabled){
+	public Tile(IBlock block, int row, int col, ReleaseNumber num, boolean isEnabled){
 		this.block = block;
 		this.row = row;
 		this.col = col;
 		this.num = num;
-		this.enabled = enabled;
+		this.isEnabled = isEnabled;
 	}
+	
+	int getRow(){ return row; }
+	
+	int getCol(){ return col; }
 	
 	void recieveBlock(Block block){
 		this.block = block;
 		return;
 	}
 	
-	void enable(){ enabled = true; }
+	boolean enabled(){ return isEnabled; }
 	
-	void disable(){ enabled = false; }
+	void enable(){ isEnabled = true; }
+	
+	void disable(){ isEnabled = false; }
 	
 	IBlock removeBlock(){
 		return block;
