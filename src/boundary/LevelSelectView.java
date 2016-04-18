@@ -1,8 +1,15 @@
 package boundary;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class LevelSelectView {
@@ -43,6 +50,23 @@ public class LevelSelectView {
 			p.add(lightningButtons[i]);
 			p.add(releaseButtons[i]);
 		}
+		
+		//Render Lightning Level Icon
+		BufferedImage light_img = null;
+		try {
+			URL img = boundary.BuilderLevelView.class.getResource("/img/light.png");
+			light_img = ImageIO.read(img);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Image light_img_r = light_img.getScaledInstance(35, 50, Image.SCALE_SMOOTH);
+		
+		JLabel light_label = new JLabel("");
+		light_label.setIcon(new ImageIcon(light_img_r));
+		light_label.setBounds(9, 230, 100, 75);
+		p.add(light_label);
 		
 		return p;
 	}
