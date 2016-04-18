@@ -9,4 +9,16 @@ public class ReleaseNumber {
 		this.num = num;
 		return;
 	}
+	
+	public String getColor(){
+		return color;
+	}
+	
+	public void setColor(String color){
+		this.color = color;
+	}
+	
+	public int getNum(){
+		return num;
+	}
 }
