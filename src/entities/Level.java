@@ -17,5 +17,15 @@ public class Level {
 		return;
 	}
 	
+	public int getLevelNum(){
+		return levelNum;
+	}
 	
+	public Bullpen getBullpen(){
+		return bPen;
+	}
+	
+	public Board getBoard(){
+		return board;
+	}
 }
