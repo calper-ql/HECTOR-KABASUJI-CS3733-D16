@@ -12,53 +12,39 @@ public class Block implements IBlock{
 		this.piece = piece;
 	}
 	
-	public void rotate(){
-		rotateBlock(this);
-		return;
+	public void rotate(boolean CC){
+		if(CC){
+			rotateBlock(this);
+		}else{
+			rotateBlock(this);
+			rotateBlock(this);
+			rotateBlock(this);
+		}
 	}
+	
 	public void rotateBlock(IBlock caller){
-		
-		IBlock holder;
-		holder = this.east;
-		
+		IBlock holder = this.east;
 		this.east = this.north;
 		this.north = this.west;
 		this.west = this.south;
 		this.south = holder;
-		
-		if (caller != this.north){
-			this.north.rotateBlock(this);
-		}
-		if (caller != this.east){
-			this.east.rotateBlock(this);
-		}
-		if (caller != this.south){
-			this.south.rotateBlock(this);
-		}
-		if (caller != this.west){
-			this.west.rotateBlock(this);
-		}
-		return;
+		if (caller != this.north) this.north.rotateBlock(this);
+		if (caller != this.east)  this.east.rotateBlock(this);
+		if (caller != this.south) this.south.rotateBlock(this);
+		if (caller != this.west)  this.west.rotateBlock(this);
 	}
 	
 	public void flip(){
 		flipBlock(this);
 		return;
 	}
+
 	public void flipBlock(IBlock caller){
-		IBlock holder;
-		holder = this.east;
-		
+		IBlock holder = this.east;
 		this.east = this.west;
 		this.west = holder;
-		
-		if (caller != this.west){
-			this.west.flipBlock(this);
-		}
-		if (caller != this.east){
-			this.east.flipBlock(this);
-		}
-		
+		if (caller != this.west) this.west.flipBlock(this);
+		if (caller != this.east) this.east.flipBlock(this);
 	}
 
 	public void linkNorth(Block b){
