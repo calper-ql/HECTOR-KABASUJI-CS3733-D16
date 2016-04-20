@@ -6,4 +6,10 @@ public interface IBlock {
 
 	void flipBlock(IBlock block);
 	
+	IBlock getNorth();
+	IBlock getSouth();
+	IBlock getEast();
+	IBlock getWest();
+	boolean isValidBlock();
+	
 }

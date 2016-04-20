@@ -16,4 +16,35 @@ public class EmptyBlock implements IBlock{
 		
 	}
 
+	@Override
+	public IBlock getNorth() {
+		// TODO Auto-generated method stub
+		return new EmptyBlock();
+	}
+
+	@Override
+	public IBlock getSouth() {
+		// TODO Auto-generated method stub
+		return new EmptyBlock();
+	}
+
+	@Override
+	public IBlock getEast() {
+		// TODO Auto-generated method stub
+		return new EmptyBlock();
+	}
+
+	@Override
+	public IBlock getWest() {
+		// TODO Auto-generated method stub
+		return new EmptyBlock();
+	}
+
+	@Override
+	public boolean isValidBlock() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }
