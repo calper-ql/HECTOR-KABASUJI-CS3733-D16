@@ -2,7 +2,7 @@ package entities;
 
 public class EmptyBlock implements IBlock{
 	
-	EmptyBlock(){}
+	public EmptyBlock(){}
 
 	@Override
 	public void rotateBlock(IBlock block) {
