@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -18,15 +19,23 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+import entities.Board;
+import entities.Level;
+import entities.Tile;
+
 public class LevelView {
 	private JButton backButton;
+	
 	private BoardView boardView;
 	private BullPenView bullView;
 	
-	public LevelView() {
-		this.boardView = new BoardView();
-		this.bullView = new BullPenView();
-		// TODO Auto-generated constructor stub
+	private Level level;
+	
+	public LevelView(Level level) {
+		this.boardView = new BoardView(215, 100, 384, 384, level.getBoard());
+		this.bullView = new BullPenView(6, 100, 192, 384);
+		
+		this.level = level;
 	}
 	
 	public JPanel render(){
