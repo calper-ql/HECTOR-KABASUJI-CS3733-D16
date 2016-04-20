@@ -6,10 +6,33 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import entities.Board;
+
 public class BoardView {
 	
-	public BoardView() {
-		// TODO Auto-generated constructor stub
+	int x = 215;
+	int y = 100;
+	int width = 384;
+	int height = 384;
+	
+	Board board;
+	
+	TileView tileViews[][] = new TileView[12][12];
+	
+	public BoardView(int x, int y, int width, int height, Board board) {
+		
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = width;
+		
+		this.board = board;
+		
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				tileViews[k][i] = (new TileView(width/12,k,i, board.getTile(k, i)));
+			}
+		}
 	}
 	
 	public JPanel render(){
@@ -17,21 +40,13 @@ public class BoardView {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(215, 100, 384, 384);
+		panel.setBounds(x, y, width, height);
 		panel.setLayout(null);
 		
-		int X = panel.getX();
-		int Y = panel.getY();
-		int widthP  = panel.getWidth();
-		int heightP = panel.getHeight();
 		
-		JPanel tiles[][] = new JPanel[12][12];
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
-				
-				tiles[k][i] = (new TileView(widthP/12,k,i)).render();
-				panel.add(tiles[k][i]);
-				
+				panel.add(tileViews[k][i].render());
 			}
 		}
 		

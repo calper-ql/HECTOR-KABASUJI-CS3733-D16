@@ -5,15 +5,21 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import entities.Tile;
+
 public class TileView {
 	int size;
 	int col;
 	int row;
 	
-	public TileView(int size, int col, int row){
+	Tile tile;
+	
+	public TileView(int size, int col, int row, Tile tile){
 		this.size = size;
 		this.col = col;
 		this.row = row;
+		
+		this.tile = tile;
 	}
 	
 	public JPanel render(){

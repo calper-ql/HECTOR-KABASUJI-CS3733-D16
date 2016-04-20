@@ -10,28 +10,36 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class BullPenView {
-	public BullPenView(){
-		
+	int x;
+	int y;
+	int width;
+	int height;
+	
+	public BullPenView(int x, int y, int width, int height){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 	
 	public JPanel render(){
 		
 		JPanel panel = new JPanel();
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(0, 0, 192, 384);
+		scrollPane.setBounds(0, 0, width, height);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setMaximumSize(new Dimension(100, 32767));
-		scrollPane.setViewportView(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
+		scrollPane.setViewportView(panel_1);
 		
-		panel.setBounds(6, 100, 192, 384);
+		panel.setBounds(x, y, width, height);
 		panel.setLayout(null);
-		
 		panel.add(scrollPane);
 		
 		return panel;
