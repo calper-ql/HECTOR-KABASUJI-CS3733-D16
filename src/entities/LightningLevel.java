@@ -20,12 +20,18 @@ public class LightningLevel extends Level{
 		this.timeRemaining = timeRemaining;
 	}
 	
-	public boolean hasWon(){
+	public boolean hasFinished(){
 		int emptyTiles = 144;
 		if(timeRemaining == 0){
-			for(int i = 0; i < 144; i++){
-				
+			for(int c = 0; c < 12; c++){
+				for(int r = 0; r < 12; r++){
+					Tile curTile = board.tiles.get(c).get(r);
+					if(!curTile.enabled() || curTile.block.){
+						emptyTiles--; 
+					}
+				}
 			}
+			return true;
 		} else return false;
 	}
 }

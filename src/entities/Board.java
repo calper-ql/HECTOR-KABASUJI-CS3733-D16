@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 public class Board {
-	ArrayList<ArrayList<Tile>> tiles;
+	ArrayList<ArrayList<Tile>> tiles; // column, row
 	
 	public Board(ArrayList<ArrayList<Tile>> tiles){
 		this.tiles = tiles;

@@ -39,7 +39,7 @@ public class Level implements ILevel {
 		} else this.stars = 0;
 	}
 	
-	public boolean hasWon(){
+	public boolean hasFinished(){
 		return false;
 	}
 }

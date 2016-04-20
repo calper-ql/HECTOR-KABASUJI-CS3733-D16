@@ -1,5 +1,5 @@
 package entities;
 
 public interface ILevel {
-	public boolean hasWon();
+	public boolean hasFinished();
 }
