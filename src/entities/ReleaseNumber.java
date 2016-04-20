@@ -7,7 +7,6 @@ public class ReleaseNumber {
 	public ReleaseNumber(String color, int num){
 		this.color = color;
 		this.num = num;
-		return;
 	}
 	
 	public String getColor(){
@@ -20,5 +19,9 @@ public class ReleaseNumber {
 	
 	public int getNum(){
 		return num;
+	}
+	
+	public void setNum(int num){
+		this.num = num;
 	}
 }

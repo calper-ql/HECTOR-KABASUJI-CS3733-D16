@@ -34,4 +34,11 @@ public class ReleaseNumberSet {
 		
 		return con1 & con2 & con3 & con4 & con5 & con6;
 	}
+	
+	public boolean addNumber(ReleaseNumber number){
+		if (number.getColor() == color){
+			numbers.add(number);
+			return true;
+		} else return false;
+	}
 }
