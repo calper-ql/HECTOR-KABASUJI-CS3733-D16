@@ -33,7 +33,7 @@ public class LevelView {
 	
 	public LevelView(Level level) {
 		this.boardView = new BoardView(215, 100, 384, 384, level.getBoard());
-		this.bullView = new BullPenView(6, 100, 192, 384);
+		this.bullView = new BullPenView(6, 100, 192, 384, level.getBullpen());
 		
 		this.level = level;
 	}
