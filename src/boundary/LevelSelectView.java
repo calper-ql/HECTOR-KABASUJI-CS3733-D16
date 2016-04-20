@@ -11,7 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Courtney, 
+ *
+ */
 public class LevelSelectView {
 	private JButton backButton;
 	private JButton[] puzzleButtons;
