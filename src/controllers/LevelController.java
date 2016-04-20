@@ -3,7 +3,10 @@ package controllers;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> c5961984bdc768f083a0af9bd967787fcfd1e559
 import java.util.LinkedList;
 
 import javax.swing.JButton;
@@ -11,12 +14,15 @@ import javax.swing.JPanel;
 
 import boundary.JBlockPanel;
 import boundary.LevelView;
+<<<<<<< HEAD
 import entities.Board;
 import entities.Bullpen;
 import entities.EmptyBlock;
 import entities.Level;
 import entities.Piece;
 import entities.Tile;
+=======
+>>>>>>> c5961984bdc768f083a0af9bd967787fcfd1e559
 import entities.Block;
 import entities.EmptyBlock;
 import entities.Piece;
@@ -27,14 +33,18 @@ public class LevelController implements Controller{
 	private Controller back;
 	private JButton backButton;
 	BlockController bc;
+<<<<<<< HEAD
 	
 	
 	
+=======
+>>>>>>> c5961984bdc768f083a0af9bd967787fcfd1e559
 	
 	public LevelController(MainController mc, Controller back) {
 		// TODO Auto-generated constructor stub
 		this.mc = mc;
 		this.back = back;
+<<<<<<< HEAD
 		
 		ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 		Tile mockTile = new Tile(new EmptyBlock(), null, true);
@@ -74,6 +84,10 @@ public class LevelController implements Controller{
 		
 		lv = new LevelView(mockLevel);
 		bc = new BlockController(new EmptyBlock());
+=======
+		bc = new BlockController(new EmptyBlock());
+		lv = new LevelView();
+>>>>>>> c5961984bdc768f083a0af9bd967787fcfd1e559
 	}
 
 	@Override
