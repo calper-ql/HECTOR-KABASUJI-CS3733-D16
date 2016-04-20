@@ -8,8 +8,17 @@ public class Block implements IBlock{
 	IBlock south;
 	IBlock west;
 	
+	public Piece getPiece(){
+		return piece;
+	}
+	
 	public Block(Piece piece){
 		this.piece = piece;
+		piece.addBlock(this);
+		north = new EmptyBlock();
+		south = new EmptyBlock();
+		east = new EmptyBlock();
+		west = new EmptyBlock();
 	}
 	
 	public void rotate(boolean CC){
@@ -65,6 +74,36 @@ public class Block implements IBlock{
 	public void linkEast(Block b){
 		east = b;
 		b.west = this;
+	}
+
+	@Override
+	public IBlock getNorth() {
+		// TODO Auto-generated method stub
+		return north;
+	}
+
+	@Override
+	public IBlock getSouth() {
+		// TODO Auto-generated method stub
+		return south;
+	}
+
+	@Override
+	public IBlock getEast() {
+		// TODO Auto-generated method stub
+		return east;
+	}
+
+	@Override
+	public IBlock getWest() {
+		// TODO Auto-generated method stub
+		return west;
+	}
+
+	@Override
+	public boolean isValidBlock() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	
