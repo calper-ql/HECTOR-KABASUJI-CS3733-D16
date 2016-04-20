@@ -1,14 +1,21 @@
 package controllers;
 
+import application.Application;
 import boundary.WindowManager;
+import entities.Model;
 
 public class GameMainController extends MainController{
 	private SplashScreenController ssc;
 	private MainMenuController mmc;
+	private Model model;
+	private Application app;
 	
-	public GameMainController() {
+	public GameMainController(Application app) {
+		
+		this.model = app.getModel();
+		
 		ssc = new SplashScreenController(false);
-		mmc = new MainMenuController(this);
+		mmc = new MainMenuController(this, model);
 	}
 	
 	public void link(WindowManager wm){

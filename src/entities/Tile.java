@@ -11,18 +11,18 @@ public class Tile {
 		this.isEnabled = isEnabled;
 	}
 	
-	void recieveBlock(Block block){
+	public void recieveBlock(Block block){
 		this.block = block;
 		return;
 	}
 	
-	boolean enabled(){ return isEnabled; }
+	public boolean enabled(){ return isEnabled; }
 	
-	void enable(){ isEnabled = true; }
+	public void enable(){ isEnabled = true; }
 	
-	void disable(){ isEnabled = false; }
+	public void disable(){ isEnabled = false; }
 	
-	IBlock removeBlock(){
+	public IBlock removeBlock(){
 		return block;
 	}
 }
