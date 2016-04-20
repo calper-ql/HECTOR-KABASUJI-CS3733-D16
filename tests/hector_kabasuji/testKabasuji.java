@@ -46,13 +46,7 @@ public void testPeice() throws Exception{
 	IBlock testBlock4 = new Block(testPiece);
 	IBlock testBlock5 = new Block(testPiece);
 	IBlock testBlock6 = new Block(testPiece);
-	ArrayList<IBlock> blocks = new ArrayList<IBlock>(6);
-	blocks.add(testBlock1);
-	blocks.add(testBlock2);
-	blocks.add(testBlock3);
-	blocks.add(testBlock4);
-	blocks.add(testBlock5);
-	blocks.add(testBlock6);
+
 	//Test you can get Block from an index < 6 and > 0
 	assertEquals(testPiece.getBlock(0), testBlock6);
 	//Test you can't get Block from an index > 6 or < 0
