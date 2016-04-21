@@ -37,29 +37,19 @@ public class LevelController implements Controller{
 	public LevelController(MainController mc, Controller back, Model model) {
 		this.mc = mc;
 		this.back = back;
-		
+		bc = new BlockController(new EmptyBlock());
 		lv = new LevelView(model.getLevel(0));
 	}
 
 	@Override
 	public JPanel getRenderedView() {
-		Block a1 = new Block(new Piece(Color.CYAN));
-		Block a2 = new Block(a1.getPiece());
-		Block a3 = new Block(a1.getPiece());
-		
-		a1.linkNorth(a2);
-		a1.linkEast(a3);
-		
-		bc = new BlockController(a1);
 		JPanel p = lv.render(bc.getAllViews(100 , 100));
-		
 		backButton = lv.getBackButton();
 		backButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
-		
 		return p;		
 	}
 	
