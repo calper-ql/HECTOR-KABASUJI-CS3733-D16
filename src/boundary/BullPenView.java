@@ -47,6 +47,8 @@ public class BullPenView {
 		panel.setLayout(null);
 		panel.add(scrollPane);
 		
+		
+		
 		return panel;
 	}
 }
