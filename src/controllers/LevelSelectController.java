@@ -26,7 +26,7 @@ public class LevelSelectController implements Controller{
 		this.back = back;
 		this.model = model;
 		
-		this.lvl = new LevelController(mc, back, model);
+		this.lvl = new LevelController(mc, back);
 		
 		lsv = new LevelSelectView();
 	}
