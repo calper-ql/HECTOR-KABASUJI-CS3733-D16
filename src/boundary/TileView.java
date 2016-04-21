@@ -23,11 +23,11 @@ public class TileView {
 	}
 	
 	public JPanel render(){
-		JPanel tile = new JPanel();
-		tile.setVisible(true);
-		tile.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tile.setBounds(size*col, size*row, size,size);
-		tile.setBackground(new Color(250,255,255));
-		return tile;
+		JPanel tilep = new JPanel();
+		tilep.setVisible(tile.enabled());
+		tilep.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tilep.setBounds(size*col, size*row, size,size);
+		tilep.setBackground(new Color(250,255,255));
+		return tilep;
 	}
 }
