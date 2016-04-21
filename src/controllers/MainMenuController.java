@@ -10,20 +10,25 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import boundary.MainMenuView;
+import entities.Model;
 
 public class MainMenuController implements Controller {
 	private MainMenuView mmv;
 	private JButton lb;
 	private JButton ab;
 	private MainController mc;
+	
+	private Model model;
 	LevelSelectController lsc;
 	AchievementController ac;
 	
-	public MainMenuController(MainController mc) {
+	public MainMenuController(MainController mc, Model model) {
 		// TODO Auto-generated constructor stub
 		this.mmv = new MainMenuView();
 		this.mc = mc;
-		lsc = new LevelSelectController(mc, this);
+		this.model = model;
+		
+		lsc = new LevelSelectController(mc, this, model);
 		ac = new AchievementController(mc, this);
 	}
 	

@@ -9,17 +9,22 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import entities.Bullpen;
+
 public class BullPenView {
 	int x;
 	int y;
 	int width;
 	int height;
+	Bullpen bullpen;
 	
-	public BullPenView(int x, int y, int width, int height){
+	public BullPenView(int x, int y, int width, int height, Bullpen bullpen){
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		this.bullpen = bullpen;
 	}
 	
 	public JPanel render(){

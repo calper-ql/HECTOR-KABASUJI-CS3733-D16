@@ -7,24 +7,26 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import boundary.LevelSelectView;
+import entities.Model;
 
 public class LevelSelectController implements Controller{
 	private LevelSelectView lsv;
 	private MainController mc;
 	private Controller back;
 	private Controller lvl;
+	private Model model;
 	
 	private JButton backButton;
 	private JButton[] puzzleButtons;
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
 	
-	public LevelSelectController(MainController mc, Controller back) {
-		// TODO Auto-generated constructor stub
+	public LevelSelectController(MainController mc, Controller back, Model model) {
 		this.mc = mc;
 		this.back = back;
+		this.model = model;
 		
-		this.lvl = new LevelController(mc, back);
+		this.lvl = new LevelController(mc, back, model);
 		
 		lsv = new LevelSelectView();
 	}

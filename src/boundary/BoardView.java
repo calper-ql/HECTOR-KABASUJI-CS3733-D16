@@ -30,7 +30,7 @@ public class BoardView {
 		
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
-				tileViews[k][i] = (new TileView(width/12,k,i, board.getTile(k, i)));
+				this.tileViews[k][i] = (new TileView(width/12,k,i, board.getTile(k, i)));
 			}
 		}
 	}
@@ -38,7 +38,7 @@ public class BoardView {
 	public JPanel render(){
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(Color.darkGray);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(x, y, width, height);
 		panel.setLayout(null);

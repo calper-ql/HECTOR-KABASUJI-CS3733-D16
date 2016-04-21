@@ -13,4 +13,8 @@ public class Model {
 		this.achievements = achievements;
 		this.levels  = levels;
 	}
+	
+	public Level getLevel(int num){
+		return levels.get(num);
+	}
 }
