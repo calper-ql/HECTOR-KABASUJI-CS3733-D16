@@ -6,7 +6,7 @@ public class Level implements ILevel {
 	Bullpen bPen;
 	Board board;
 	boolean hints;
-	int stars;
+	int stars = 0;
 	
 	public Level(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints){
 		this.isLocked = isLocked;
@@ -14,7 +14,6 @@ public class Level implements ILevel {
 		this.bPen = bPen;
 		this.board = board;
 		this.hints = hints;
-		this.stars = 0;
 	}
 	
 	public int getLevelNum(){
