@@ -17,6 +17,7 @@ import boundary.LevelView;
 import entities.Board;
 import entities.Bullpen;
 import entities.EmptyBlock;
+import entities.IBlock;
 import entities.Level;
 import entities.Model;
 import entities.Piece;
@@ -41,6 +42,11 @@ public class LevelController implements Controller{
 		lv = new LevelView(model.getLevel(0));
 	}
 
+	public void update(IBlock block){
+		bc = new BlockController(block);
+		mc.requestSwap(this);
+	}
+	
 	@Override
 	public JPanel getRenderedView() {
 		JPanel p = lv.render(bc.getAllViews(100 , 100));
