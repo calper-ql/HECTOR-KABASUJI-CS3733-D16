@@ -48,8 +48,6 @@ public class BullPenView {
 		panel.setBounds(x, y, width, height);
 		panel.setLayout(null);
 		panel.add(scrollPane);
-		
-		
 	
 		for(int i = 0; i < bullpen.getSize(); i++){
 			BlockView bv = new BlockView();
@@ -90,6 +88,7 @@ public class BullPenView {
 			panel_1.add(panelToAdd);
 			
 		}
+
 		
 		return panel;
 	}
