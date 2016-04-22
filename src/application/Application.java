@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import controllers.GameMainController;
 import entities.Model;
 import entities.Piece;
 import entities.Achievement;
+import entities.Block;
 import entities.Board;
 import entities.Bullpen;
 import entities.EmptyBlock;
@@ -74,6 +76,30 @@ public class Application {
 		ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
 		Board mockBoard = new Board(mockTiles);
 		Bullpen mockBullpen = new Bullpen(mockArrayPieces);
+		
+		// PIECE TEST FOR BULLPEN
+		Piece a1p = new Piece(Color.cyan);
+		Block a1 = new Block(a1p);
+		Block b1 = new Block(a1p);
+		Block c1 = new Block(a1p);
+		Block d1 = new Block(a1p);
+		Block e1 = new Block(a1p);
+		Block g1 = new Block(a1p);
+		
+		a1.linkNorth(b1);
+		a1.linkEast(c1);
+		c1.linkEast(d1);
+		a1.linkWest(e1);
+		e1.linkSouth(g1);
+		
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		mockArrayPieces.add(a1p);
+		
 		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
 		
 		ArrayList<Level> mockLevels = new ArrayList<Level>();
