@@ -1,5 +1,8 @@
 package boundary;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +21,11 @@ public class WindowManager {
 		mainFrame.setBounds(x, y, width, height);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().add(currentContext);
+		
+	}
+	
+	public Point getMouseLocation(){
+		return mainFrame.getMousePosition();
 	}
 	
 	public void render(){
@@ -29,10 +37,11 @@ public class WindowManager {
 		mainFrame.getContentPane().removeAll();
 		mainFrame.getContentPane().add(nextContext);
 		mainFrame.validate();
+		mainFrame.repaint();
+		
 	}
 
 	public void link(MainController mainController) {
-		// TODO Auto-generated method stub
 		mctrl = mainController;
 		mctrl.link(this);
 	}
