@@ -10,13 +10,21 @@ public class Bullpen {
 		return;
 	}
 	
-	void addPiece(Piece piece){
+	public void addPiece(Piece piece){
 		pieces.add(piece);
 	}
 	
-	void removePiece(Piece piece) throws Exception{
+	public void removePiece(Piece piece) throws Exception{
 		boolean success = pieces.remove(piece);
 		if(!success) throw new Exception("Piece not found");
+	}
+	
+	public Piece getPiece(int index){
+		return pieces.get(index);
+	}
+	
+	public int getSize(){
+		return pieces.size();
 	}
 
 }

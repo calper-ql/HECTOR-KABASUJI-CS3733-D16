@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
+import controllers.BlockController;
 import entities.Board;
 import entities.Level;
 import entities.Tile;
@@ -36,9 +38,9 @@ public class LevelView {
 	
 	private Level level;
 	
-	public LevelView(Level level) {
+	public LevelView(Level level, BlockController bc) {
 		this.boardView = new BoardView(215, 100, 384, 384, level.getBoard());
-		this.bullView = new BullPenView(6, 100, 192, 384, level.getBullpen());
+		this.bullView = new BullPenView(6, 100, 192, 384, level.getBullpen(), bc);
 		
 		this.level = level;
 	}
@@ -82,7 +84,6 @@ public class LevelView {
 			URL img = boundary.LevelView.class.getResource("/img/star-xxl.png");
 			star_img = ImageIO.read(img);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -91,7 +92,6 @@ public class LevelView {
 			URL img = boundary.LevelView.class.getResource("/img/info.png");
 			info_img = ImageIO.read(img);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -134,7 +134,6 @@ public class LevelView {
 		p.add(boardView.render());
 		
 		lp.add(p, new Integer(0), 0);
-		
 		
 		for(JBlockPanel block: blocks){
 				lp.add(block, new Integer(1), 0);
