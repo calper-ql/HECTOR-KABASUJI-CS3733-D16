@@ -41,7 +41,6 @@ public class BlockView{
 			p.setBounds(x, y, size, size);
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
 			list.add(p);
-			System.out.println(block);
 			if(caller.isValidBlock()){
 				if(caller != block.getNorth())renderToList(block.getNorth(), block, list, x, y-size);
 				if(caller != block.getSouth())renderToList(block.getSouth(), block, list, x, y+size);
