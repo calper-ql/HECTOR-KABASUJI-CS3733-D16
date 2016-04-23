@@ -1,9 +1,11 @@
 package controllers;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import java.util.LinkedList;
@@ -35,28 +37,44 @@ public class LevelController implements Controller{
 	
 	BlockController bc;
 	
+	int ofsetx;
+	int ofsety;
+	JPanel p;
+	
+	
 	public LevelController(MainController mc, Controller back, Model model) {
 		this.mc = mc;
 		this.back = back;
-		bc = new BlockController(new EmptyBlock());
-		lv = new LevelView(model.getLevel(0));
+		bc = new BlockController(new EmptyBlock(), this);
+		lv = new LevelView(model.getLevel(0), bc);
+		ofsetx = 0;
+		ofsety = 0;
 	}
 
-	public void update(IBlock block){
-		bc = new BlockController(block);
+	
+	public void update(IBlock block, int x, int y){
+		ofsetx = x;
+		ofsety = y;
+		bc.setBlock(block);
+		System.out.println("hit");
 		mc.requestSwap(this);
 	}
 	
 	@Override
 	public JPanel getRenderedView() {
-		JPanel p = lv.render(bc.getAllViews(100 , 100));
+		Point loc = mc.getMouseLocation();
+		LinkedList<JBlockPanel> blocks = bc.getAllViews(loc.x - ofsetx , loc.y - ofsety, true);
+		p = lv.render(blocks);
+		
 		backButton = lv.getBackButton();
 		backButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
-		return p;		
+		
+		return p;
+		
 	}
 	
 	private void backButtonClicked() {
