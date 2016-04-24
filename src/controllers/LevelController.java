@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import boundary.JBlockPanel;
@@ -35,36 +36,26 @@ public class LevelController implements Controller{
 	private Controller back;
 	private JButton backButton;
 	
-	BlockController bc;
-	
-	int ofsetx;
-	int ofsety;
+	LinkedList<JBlockPanel> blocks;
+	BullpenControler bucont;
+	BoardController bocont;
+	BlockController blcont;
 	JPanel p;
-	
 	
 	public LevelController(MainController mc, Controller back, Model model) {
 		this.mc = mc;
 		this.back = back;
-		bc = new BlockController(new EmptyBlock(), this);
-		lv = new LevelView(model.getLevel(0), bc);
-		ofsetx = 0;
-		ofsety = 0;
+		lv = new LevelView(model.getLevel(0));
+		blcont = new BlockController(new EmptyBlock(), this);
+		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
 	}
+	
 
-	
-	public void update(IBlock block, int x, int y){
-		ofsetx = x;
-		ofsety = y;
-		bc.setBlock(block);
-		System.out.println("hit");
-		mc.requestSwap(this);
-	}
-	
 	@Override
 	public JPanel getRenderedView() {
 		Point loc = mc.getMouseLocation();
-		LinkedList<JBlockPanel> blocks = bc.getAllViews(loc.x - ofsetx , loc.y - ofsety, true);
-		p = lv.render(blocks);
+		
+		p = lv.render();
 		
 		backButton = lv.getBackButton();
 		backButton.addActionListener(new ActionListener(){
@@ -73,11 +64,36 @@ public class LevelController implements Controller{
 			}	
 		});
 		
+		lv.getLayeredPane().add(bucont.render(),new Integer(0), 0);
+		
 		return p;
 		
 	}
 	
 	private void backButtonClicked() {
 		mc.requestSwap(back);
+	}
+
+	public void piecePressed(JBlockPanel jBlockPanel) {
+		LinkedList<JBlockPanel> list = bucont.pop(jBlockPanel);
+		try{
+			if(list.isEmpty()) return;
+		}catch(Exception e){
+			return;
+		}
+		for(JBlockPanel item: list){
+			try{
+				p.add(item,new Integer(1), 0);
+			}catch(Exception e){
+						
+			}
+		}
+	}
+
+
+	public void released(JBlockPanel jBlockPanel) {
+		JLayeredPane layers = lv.getLayeredPane();
+		layers = new JLayeredPane();
+		mc.requestSwap(this);
 	}
 }

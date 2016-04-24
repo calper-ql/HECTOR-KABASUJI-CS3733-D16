@@ -21,6 +21,7 @@ public class BullPenView {
 	int height;
 	Bullpen bullpen;
 	BlockController bc;
+	LinkedList<LinkedList<JBlockPanel>> blocks;
 	
 	public BullPenView(int x, int y, int width, int height, Bullpen bullpen, BlockController bc){
 		this.x = x;
@@ -29,6 +30,30 @@ public class BullPenView {
 		this.height = height;
 		this.bc = bc;
 		this.bullpen = bullpen;
+		blocks = new LinkedList<LinkedList<JBlockPanel>>();
+	}
+	
+	public LinkedList<JBlockPanel> pop(JBlockPanel jbp){
+		for(LinkedList<JBlockPanel> elements: blocks){
+			for(JBlockPanel obj: elements){
+				if(obj == jbp){
+					blocks.remove(elements);
+					return elements;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public LinkedList<JBlockPanel> get(JBlockPanel jbp) {
+		for(LinkedList<JBlockPanel> elements: blocks){
+			for(JBlockPanel obj: elements){
+				if(obj == jbp){
+					return elements;
+				}
+			}
+		}
+		return null;
 	}
 	
 	public JPanel render(){
@@ -36,11 +61,13 @@ public class BullPenView {
 		JPanel panel = new JPanel();
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVisible(true);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 0, width, height);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setVisible(true);
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setMaximumSize(new Dimension(100, 32767));
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
@@ -79,9 +106,10 @@ public class BullPenView {
 				horizontal = horizontal.getEast();
 			}
 			
-			LinkedList<JBlockPanel> blocks = bv.render(currentBlock, horizontal_ofset, vertical_ofset, false);
+			blocks.add(bv.render(currentBlock, horizontal_ofset, vertical_ofset));
 			
-			for(JBlockPanel b: blocks){
+			for(JBlockPanel b: blocks.getLast()){
+				b.setVisible(true);
 				panelToAdd.add(b);
 			}
 			
@@ -90,8 +118,9 @@ public class BullPenView {
 			
 		}
 	
-		
+		panel.setVisible(true);
 		
 		return panel;
 	}
+	
 }
