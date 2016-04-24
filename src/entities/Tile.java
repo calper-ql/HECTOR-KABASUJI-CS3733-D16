@@ -1,6 +1,8 @@
 package entities;
 
-public class Tile {
+import java.io.Serializable;
+
+public class Tile implements Serializable {
 	IBlock block;
 	ReleaseNumber num;
 	boolean isEnabled;

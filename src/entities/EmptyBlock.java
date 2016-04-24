@@ -1,6 +1,8 @@
 package entities;
 
-public class EmptyBlock implements IBlock{
+import java.io.Serializable;
+
+public class EmptyBlock implements IBlock ,Serializable{
 	
 	public EmptyBlock(){}
 
