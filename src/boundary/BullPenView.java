@@ -135,9 +135,6 @@ public class BullPenView {
 		list.add(first);
 		findEastMostDistHelper(first, list, new EmptyBlock());
 		int biggest = 0;
-		if(list.size() != 6){
-			System.out.println("Something went wrong");
-		}
 		for(BMARK item: list){
 			if(item.getDist() > biggest){
 				biggest = item.getDist();
@@ -152,15 +149,11 @@ public class BullPenView {
 		list.add(first);
 		findNorthMostDistHelper(first, list, new EmptyBlock());
 		int biggest = 0;
-		if(list.size() != 6){
-			System.out.println("Something went wrong");
-		}
 		for(BMARK item: list){
 			if(item.getDist() > biggest){
 				biggest = item.getDist();
 			}
 		}
-		System.out.println(biggest);
 		return biggest;
 	}
 	

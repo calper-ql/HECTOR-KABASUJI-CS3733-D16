@@ -11,5 +11,6 @@ public interface IBlock {
 	IBlock getEast();
 	IBlock getWest();
 	boolean isValidBlock();
+	Piece getPiece();
 	
 }

@@ -11,7 +11,7 @@ public class Tile {
 		this.isEnabled = isEnabled;
 	}
 	
-	public void recieveBlock(Block block){
+	public void setBlock(IBlock block){
 		this.block = block;
 		return;
 	}
@@ -22,7 +22,17 @@ public class Tile {
 	
 	public void disable(){ isEnabled = false; }
 	
-	public IBlock removeBlock(){
+	public boolean hasBlock(){
+		return block.isValidBlock();
+	}
+	
+	public IBlock getBlock(){
 		return block;
+	}
+	
+	public IBlock removeBlock(){
+		IBlock temp = block;
+		block = new EmptyBlock();
+		return temp;
 	}
 }

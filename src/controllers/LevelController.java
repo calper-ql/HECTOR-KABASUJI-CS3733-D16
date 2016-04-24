@@ -41,6 +41,7 @@ public class LevelController implements Controller{
 	BoardController bocont;
 	BlockController blcont;
 	JPanel p;
+	LinkedList<JBlockPanel> currentList ;
 	
 	public LevelController(MainController mc, Controller back, Model model) {
 		this.mc = mc;
@@ -48,6 +49,8 @@ public class LevelController implements Controller{
 		lv = new LevelView(model.getLevel(0));
 		blcont = new BlockController(new EmptyBlock(), this);
 		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
+		bocont = new BoardController(model.getLevel(0).getBoard());
+		currentList = null;
 	}
 	
 
@@ -64,7 +67,8 @@ public class LevelController implements Controller{
 			}	
 		});
 		
-		lv.getLayeredPane().add(bucont.render(),new Integer(0), 0);
+		lv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
+		lv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
 		
 		return p;
 		
@@ -76,6 +80,7 @@ public class LevelController implements Controller{
 
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		LinkedList<JBlockPanel> list = bucont.pop(jBlockPanel);
+		currentList = list;
 		try{
 			if(list.isEmpty()) return;
 		}catch(Exception e){
@@ -94,6 +99,29 @@ public class LevelController implements Controller{
 	public void released(JBlockPanel jBlockPanel) {
 		JLayeredPane layers = lv.getLayeredPane();
 		layers = new JLayeredPane();
+		// Check for the board
+		// do the move
+		LinkedList<Tile> tl = new LinkedList<>();
+		
+		for(JBlockPanel jbp: currentList){
+			try{
+				Tile temp = bocont.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
+				tl.add(temp);
+			} catch (Exception e){
+				System.out.println("stt");
+			}
+		}		
+		
+		if(tl.size() != 6){
+			mc.requestSwap(this);
+			System.out.println("stt err");
+			return;
+		}
+		
+		for(int i = 0; i < currentList.size(); i++){
+			tl.get(i).setBlock(jBlockPanel.getBlock());
+		}	
+		
 		mc.requestSwap(this);
 	}
 }

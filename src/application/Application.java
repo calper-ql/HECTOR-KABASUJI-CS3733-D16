@@ -43,36 +43,17 @@ public class Application {
 	
 	public void initializeModel(){
 		
-		ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
-		Tile mockTile = new Tile(new EmptyBlock(), null, true);
-		Tile mockTile2 = new Tile(new EmptyBlock(), null, false);
-		
-		boolean test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
 		
 		ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
+		
+		for(int i = 0;	i < 12; i++){
+			ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
+			for(int k = 0; k < 12; k++){
+				Tile mockTile = new Tile(new EmptyBlock(), null, true);
+				mockTileRow.add(mockTile);
+			}
+			mockTiles.add(mockTileRow);
+		}
 		
 		ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
 		DefinedPieces dp = new DefinedPieces();

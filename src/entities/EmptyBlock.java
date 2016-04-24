@@ -46,5 +46,11 @@ public class EmptyBlock implements IBlock{
 		return false;
 	}
 
+	@Override
+	public Piece getPiece() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

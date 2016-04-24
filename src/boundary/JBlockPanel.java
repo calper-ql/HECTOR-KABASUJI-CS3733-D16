@@ -68,4 +68,9 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	public void mouseMoved(MouseEvent e) {
 	
 	}
+
+	public IBlock getBlock() {
+		// TODO Auto-generated method stub
+		return ib;
+	}
 }
