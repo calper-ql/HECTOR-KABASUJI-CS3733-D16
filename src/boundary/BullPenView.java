@@ -94,8 +94,7 @@ public class BullPenView {
 			int vertical_ofset = 0;
 			int horizontal_ofset = 0;
 			
-			
-			vertical_ofset = 32*findNorthMostDist(currentBlock);
+			vertical_ofset += 32*findNorthMostDist(currentBlock);
 			horizontal_ofset += 32*findEastMostDist(currentBlock);
 			
 			blocks.add(bv.render(currentBlock, horizontal_ofset, vertical_ofset));
@@ -136,6 +135,9 @@ public class BullPenView {
 		list.add(first);
 		findEastMostDistHelper(first, list, new EmptyBlock());
 		int biggest = 0;
+		if(list.size() != 6){
+			System.out.println("Something went wrong");
+		}
 		for(BMARK item: list){
 			if(item.getDist() > biggest){
 				biggest = item.getDist();
@@ -150,11 +152,15 @@ public class BullPenView {
 		list.add(first);
 		findNorthMostDistHelper(first, list, new EmptyBlock());
 		int biggest = 0;
+		if(list.size() != 6){
+			System.out.println("Something went wrong");
+		}
 		for(BMARK item: list){
 			if(item.getDist() > biggest){
 				biggest = item.getDist();
 			}
 		}
+		System.out.println(biggest);
 		return biggest;
 	}
 	
@@ -196,29 +202,29 @@ public class BullPenView {
 		IBlock callerS = caller.getBlock().getSouth();
 		IBlock callerE = caller.getBlock().getEast();
 		IBlock callerW = caller.getBlock().getWest();
-		
+
 		if(callerN != last && callerN.isValidBlock()){
 			BMARK next = new BMARK(callerN, caller.getDist()+1);
 			list.add(next);
-			findEastMostDistHelper(next, list, caller.getBlock());
+			findNorthMostDistHelper(next, list, caller.getBlock());
 		}
 		
 		if(callerS != last && callerS.isValidBlock()){
 			BMARK next = new BMARK(callerS, caller.getDist()-1);
 			list.add(next);
-			findEastMostDistHelper(next, list, caller.getBlock());
+			findNorthMostDistHelper(next, list, caller.getBlock());
 		}
 		
 		if(callerE != last && callerE.isValidBlock()){
 			BMARK next = new BMARK(callerE, caller.getDist());
 			list.add(next);
-			findEastMostDistHelper(next, list, caller.getBlock());
+			findNorthMostDistHelper(next, list, caller.getBlock());
 		}
 		
 		if(callerW != last && callerW.isValidBlock()){
 			BMARK next = new BMARK(callerW, caller.getDist());
 			list.add(next);
-			findEastMostDistHelper(next, list, caller.getBlock());
+			findNorthMostDistHelper(next, list, caller.getBlock());
 		}
 		
 		
