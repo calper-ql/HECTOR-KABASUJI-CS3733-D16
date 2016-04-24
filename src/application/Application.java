@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,8 +15,10 @@ import controllers.GameMainController;
 import entities.Model;
 import entities.Piece;
 import entities.Achievement;
+import entities.Block;
 import entities.Board;
 import entities.Bullpen;
+import entities.DefinedPieces;
 import entities.EmptyBlock;
 import entities.Level;
 import entities.Tile;
@@ -40,41 +43,40 @@ public class Application {
 	
 	public void initializeModel(){
 		
-		ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
-		Tile mockTile = new Tile(new EmptyBlock(), null, true);
-		Tile mockTile2 = new Tile(new EmptyBlock(), null, false);
-		
-		boolean test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile);
-		test = mockTileRow.add(mockTile2);
-		test = mockTileRow.add(mockTile);
-		
+		/*
 		ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
-		test = mockTiles.add(mockTileRow);
+		
+		for(int i = 0;	i < 12; i++){
+			ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
+			for(int k = 0; k < 12; k++){
+				Tile mockTile = new Tile(new EmptyBlock(), null, true);
+				mockTileRow.add(mockTile);
+			}
+			mockTiles.add(mockTileRow);
+		}
 		
 		ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
+		DefinedPieces dp = new DefinedPieces();
+		mockArrayPieces = dp.getPieces();
+		
 		Board mockBoard = new Board(mockTiles);
 		Bullpen mockBullpen = new Bullpen(mockArrayPieces);
-		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
+		
+		*/
+		Level mockLevel = new Level(true, 16 ,null, null, true);
+		
+		
+		//mockLevel.saveToFile();
+		try {
+			mockLevel = mockLevel.getFromFile(16);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		ArrayList<Level> mockLevels = new ArrayList<Level>();
 		mockLevels.add(mockLevel);

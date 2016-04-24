@@ -50,6 +50,16 @@ public class DefinedPieces {
 		pieces.add(this.setUpPiece34());
 		pieces.add(this.setUpPiece35());
 	}
+	
+	/**
+	 * Return the whole list of defined pieces.
+	 * 
+	 * @return The list being requested.
+	 */
+	public ArrayList<Piece> getPieces() {
+		return pieces;
+	}
+	
 	/**
 	 * Return a specified piece from a defined list of 35.
 	 * 
