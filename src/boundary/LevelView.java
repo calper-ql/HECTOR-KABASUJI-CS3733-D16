@@ -1,6 +1,7 @@
 package boundary;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -37,22 +39,42 @@ public class LevelView {
 	private BullPenView bullView;
 	
 	private Level level;
+	JLayeredPane lp;
 	
-	public LevelView(Level level, BlockController bc) {
-		this.boardView = new BoardView(215, 100, 384, 384, level.getBoard());
-		this.bullView = new BullPenView(6, 100, 192, 384, level.getBullpen(), bc);
-		
+	public LevelView(Level level) {
 		this.level = level;
 	}
 	
-	public JPanel render(LinkedList<JBlockPanel> blocks){
+	public JLayeredPane getLayeredPane(){
+		return lp;
+	}
+	
+	public void addJBlockPanel(JBlockPanel bv){
+		lp.add(bv, new Integer(1), 0);
+	}
+	
+	public void clear(){
+		removeLayer(lp, 1);
+	}
+	
+	void removeLayer(JLayeredPane pane, int layer) {    
+		Component[] comps = pane.getComponentsInLayer(layer);    
+		for(int x = 0; x < comps.length; x++) {       
+			pane.remove(comps[x]);   
+		}    
+		pane.repaint();
+		System.out.println("Should be removed");
+	} 
+	
+	public JPanel render(){
 		int width = 640;
 		int height = 535;
 		
 		JPanel mp = new JPanel();
 		mp.setLayout(null);
 		
-		JLayeredPane lp = new JLayeredPane();
+		lp = new JLayeredPane();
+		
 		JPanel p = new JPanel();
 		
 		lp.setLayout(null);
@@ -130,15 +152,7 @@ public class LevelView {
 		label_1.setBounds(20, 54, 40, 40);
 		p.add(label_1);
 		
-		p.add(bullView.render());
-		p.add(boardView.render());
-		
 		lp.add(p, new Integer(0), 0);
-		
-		for(JBlockPanel block: blocks){
-				lp.add(block, new Integer(1), 0);
-		}
-		
 		mp.add(lp);
 		
 		return mp;

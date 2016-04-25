@@ -1,12 +1,15 @@
 package boundary;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import entities.Block;
 import entities.Board;
+import entities.Tile;
 
 public class BoardView {
 	
@@ -36,20 +39,26 @@ public class BoardView {
 	}
 	
 	public JPanel render(){
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.darkGray);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(x, y, width, height);
 		panel.setLayout(null);
 		
-		
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
+				if(board.getTile(k, i).hasBlock()){
+					this.tileViews[k][i].setColor(((board.getTile(k, i).getBlock())).getPiece().getColor());
+				}
 				panel.add(tileViews[k][i].render());
 			}
 		}
 		
 		return panel;
+	}
+	
+	public Tile getTileAtPoint(Point p){
+		Point abs = new Point(p.x - x,p.y - y);
+		return board.getTile(abs.x/32, abs.y/32);
 	}
 }
