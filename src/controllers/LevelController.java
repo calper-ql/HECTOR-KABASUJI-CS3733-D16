@@ -30,7 +30,7 @@ import entities.Block;
 import entities.EmptyBlock;
 import entities.Piece;
 
-public class LevelController implements Controller{
+public class LevelController implements Controller, ILevelController{
 	private LevelView lv;
 	private MainController mc;
 	private Controller back;
@@ -96,7 +96,7 @@ public class LevelController implements Controller{
 	}
 
 
-	public void released(JBlockPanel jBlockPanel) {
+	public void pieceReleased(JBlockPanel jBlockPanel) {
 		JLayeredPane layers = lv.getLayeredPane();
 		layers = new JLayeredPane();
 		// Check for the board
