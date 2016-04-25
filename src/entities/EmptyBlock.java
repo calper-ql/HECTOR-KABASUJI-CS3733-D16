@@ -1,6 +1,8 @@
 package entities;
 
-public class EmptyBlock implements IBlock{
+import java.io.Serializable;
+
+public class EmptyBlock implements IBlock ,Serializable{
 	
 	public EmptyBlock(){}
 
@@ -44,6 +46,12 @@ public class EmptyBlock implements IBlock{
 	public boolean isValidBlock() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Piece getPiece() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

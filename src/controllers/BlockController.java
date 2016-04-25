@@ -9,6 +9,7 @@ import entities.IBlock;
 public class BlockController implements Controller{
 	IBlock block;
 	BlockView all;
+	
 	LevelController lc;
 	
 	public BlockController(IBlock block, LevelController lc) {
@@ -23,39 +24,26 @@ public class BlockController implements Controller{
 		return null;
 	}
 	
-	int ofsetx;
-	int ofsety;
-	public void sendToLevelController(IBlock ib, int x, int y){
-		ofsetx = x;
-		ofsety = y;
-		lc.update(ib, x, y);
-	}
-	
-	public LinkedList<JBlockPanel> getAllViews(int x, int y, boolean isOnLevel) {
+	public LinkedList<JBlockPanel> getAllViews(int x, int y) {
 		
-		LinkedList<JBlockPanel> panels = all.render(block, x, y, isOnLevel);
+		LinkedList<JBlockPanel> panels = all.render(block, x, y);
 		
 		for(JBlockPanel p: panels){
-			if(isOnLevel){
-				p.setOfsetX(ofsetx);
-				p.setOfsetY(ofsety);
-			}
+			
 		}
 		
 		return panels;
 	}
-	
-	public void setBlock(IBlock b){
-		block = b;
+
+	public void pressed(JBlockPanel jBlockPanel) {
+		lc.piecePressed(jBlockPanel);
+	}
+
+	public void released(JBlockPanel jBlockPanel) {
+		lc.released(jBlockPanel);
+		
 	}
 	
-	public IBlock getBlock(){
-		return block;
-	}
-	
-	public void move(int x, int y){
-		all.update(x, y);
-	}
 }
 
 

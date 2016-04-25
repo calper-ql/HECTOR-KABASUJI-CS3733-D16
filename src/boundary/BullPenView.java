@@ -12,6 +12,7 @@ import javax.swing.ScrollPaneConstants;
 
 import controllers.BlockController;
 import entities.Bullpen;
+import entities.EmptyBlock;
 import entities.IBlock;
 
 public class BullPenView {
@@ -21,6 +22,7 @@ public class BullPenView {
 	int height;
 	Bullpen bullpen;
 	BlockController bc;
+	LinkedList<LinkedList<JBlockPanel>> blocks;
 	
 	JPanel panel;
 	JScrollPane scrollPane;
@@ -37,75 +39,197 @@ public class BullPenView {
 		this.height = height;
 		this.bc = bc;
 		this.bullpen = bullpen;
+		blocks = new LinkedList<LinkedList<JBlockPanel>>();
+	}
+	
+	public LinkedList<JBlockPanel> pop(JBlockPanel jbp){
+		for(LinkedList<JBlockPanel> elements: blocks){
+			for(JBlockPanel obj: elements){
+				if(obj == jbp){
+					blocks.remove(elements);
+					return elements;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public LinkedList<JBlockPanel> get(JBlockPanel jbp) {
+		for(LinkedList<JBlockPanel> elements: blocks){
+			for(JBlockPanel obj: elements){
+				if(obj == jbp){
+					return elements;
+				}
+			}
+		}
+		return null;
 	}
 	
 	public JPanel render(){
-		if (panel == null){
-			panel = new JPanel();
-			
-			scrollPane = new JScrollPane();
-			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			scrollPane.setBounds(0, 0, width, height);
-			
-			//scrollPane.get
-			
-			panel_1 = new JPanel();
-			panel_1.setBackground(Color.WHITE);
-			panel_1.setMaximumSize(new Dimension(100, 32767));
-			panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-			
-			scrollPane.setViewportView(panel_1);
-			
-			panel.setBounds(x, y, width, height);
-			panel.setLayout(null);
-			panel.add(scrollPane);
+
+
 		
-			for(int i = 0; i < bullpen.getSize(); i++){
-				BlockView bv = new BlockView(bc);
-				JPanel panelToAdd = new JPanel();
-				panelToAdd.setBorder(BorderFactory.createLineBorder(Color.black));
-				panelToAdd.setLayout(null);
-				IBlock currentBlock = null;
-				try {
-					currentBlock = bullpen.getPiece(i).getBlock(0);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				IBlock vertical = currentBlock;
-				IBlock horizontal = currentBlock;
-				
-				int vertical_ofset = -32;
-				int horizontal_ofset = -32;
-				
-				while(vertical.isValidBlock()){
-					vertical_ofset += 32;
-					vertical = vertical.getNorth();
-				}
-				
-				while(horizontal.isValidBlock()){
-					horizontal_ofset += 32;
-					horizontal = horizontal.getEast();
-				}
-				
-				LinkedList<JBlockPanel> blocks = bv.render(currentBlock, horizontal_ofset, vertical_ofset, false);
-				
-				for(JBlockPanel b: blocks){
-					panelToAdd.add(b);
-				}
-				
-				panelToAdd.setPreferredSize(new Dimension(100, 32*6));
-				panel_1.add(panelToAdd);
-				
+		JPanel panel = new JPanel();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVisible(true);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(0, 0, width, height);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setVisible(true);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setMaximumSize(new Dimension(100, 32767));
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		scrollPane.setViewportView(panel_1);
+		
+		panel.setBounds(x, y, width, height);
+		panel.setLayout(null);
+		panel.add(scrollPane);
+	
+		for(int i = 0; i < bullpen.getSize(); i++){
+			BlockView bv = new BlockView(bc);
+			JPanel panelToAdd = new JPanel();
+			panelToAdd.setBorder(BorderFactory.createLineBorder(Color.black));
+			panelToAdd.setLayout(null);
+			IBlock currentBlock = null;
+			try {
+				currentBlock = bullpen.getPiece(i).getBlock(0);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		
-		} else {
-			panel.repaint();
-			scrollPane.repaint();
-			panel_1.repaint();
+			
+			int vertical_ofset = 0;
+			int horizontal_ofset = 0;
+			
+			vertical_ofset += 32*findNorthMostDist(currentBlock);
+			horizontal_ofset += 32*findEastMostDist(currentBlock);
+			
+			blocks.add(bv.render(currentBlock, horizontal_ofset, vertical_ofset));
+			
+			for(JBlockPanel b: blocks.getLast()){
+				b.setVisible(true);
+				panelToAdd.add(b);
+			}
+			
+			panelToAdd.setPreferredSize(new Dimension(100, 32*6));
+			panel_1.add(panelToAdd);
+			
 		}
-		
+	
+		panel.setVisible(true);
 		return panel;
 	}
+	
+	public class BMARK{
+		int dist;
+		boolean mark;
+		IBlock block;
+		public BMARK(IBlock block, int dist){
+			this.block = block;
+			this.mark = false;
+			this.dist = dist;
+		}
+		public int getDist(){return dist;}
+		public boolean isMarked(){return mark;}
+		public void doMark(){mark = true;}
+		public IBlock getBlock(){return block;}
+	}
+	
+	public int findEastMostDist(IBlock caller){
+		LinkedList<BMARK> list = new LinkedList<BMARK>();
+		BMARK first = new BMARK(caller, 0);
+		list.add(first);
+		findEastMostDistHelper(first, list, new EmptyBlock());
+		int biggest = 0;
+		for(BMARK item: list){
+			if(item.getDist() > biggest){
+				biggest = item.getDist();
+			}
+		}
+		return biggest;
+	}
+	
+	public int findNorthMostDist(IBlock caller){
+		LinkedList<BMARK> list = new LinkedList<BMARK>();
+		BMARK first = new BMARK(caller, 0);
+		list.add(first);
+		findNorthMostDistHelper(first, list, new EmptyBlock());
+		int biggest = 0;
+		for(BMARK item: list){
+			if(item.getDist() > biggest){
+				biggest = item.getDist();
+			}
+		}
+		return biggest;
+	}
+	
+	public void findEastMostDistHelper(BMARK caller, LinkedList<BMARK> list, IBlock last){
+		IBlock callerN = caller.getBlock().getNorth();
+		IBlock callerS = caller.getBlock().getSouth();
+		IBlock callerE = caller.getBlock().getEast();
+		IBlock callerW = caller.getBlock().getWest();
+		
+		if(callerN != last && callerN.isValidBlock()){
+			BMARK next = new BMARK(callerN, caller.getDist());
+			list.add(next);
+			findEastMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerS != last && callerS.isValidBlock()){
+			BMARK next = new BMARK(callerS, caller.getDist());
+			list.add(next);
+			findEastMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerE != last && callerE.isValidBlock()){
+			BMARK next = new BMARK(callerE, caller.getDist() + 1);
+			list.add(next);
+			findEastMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerW != last && callerW.isValidBlock()){
+			BMARK next = new BMARK(callerW, caller.getDist() - 1);
+			list.add(next);
+			findEastMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		
+	}
+	
+	public void findNorthMostDistHelper(BMARK caller, LinkedList<BMARK> list, IBlock last){
+		IBlock callerN = caller.getBlock().getNorth();
+		IBlock callerS = caller.getBlock().getSouth();
+		IBlock callerE = caller.getBlock().getEast();
+		IBlock callerW = caller.getBlock().getWest();
+
+		if(callerN != last && callerN.isValidBlock()){
+			BMARK next = new BMARK(callerN, caller.getDist()+1);
+			list.add(next);
+			findNorthMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerS != last && callerS.isValidBlock()){
+			BMARK next = new BMARK(callerS, caller.getDist()-1);
+			list.add(next);
+			findNorthMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerE != last && callerE.isValidBlock()){
+			BMARK next = new BMARK(callerE, caller.getDist());
+			list.add(next);
+			findNorthMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		if(callerW != last && callerW.isValidBlock()){
+			BMARK next = new BMARK(callerW, caller.getDist());
+			list.add(next);
+			findNorthMostDistHelper(next, list, caller.getBlock());
+		}
+		
+		
+	}
+	
 }
