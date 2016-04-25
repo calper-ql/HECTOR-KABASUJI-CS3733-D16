@@ -114,7 +114,8 @@ public class LevelController implements Controller{
 		
 		if(tl.size() != 6){
 			mc.requestSwap(this);
-			System.out.println("stt err");
+			bucont.add(currentList);
+			//System.out.println("stt err");
 			return;
 		}
 		
