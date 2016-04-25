@@ -10,9 +10,9 @@ public class BlockController implements Controller{
 	IBlock block;
 	BlockView all;
 	
-	LevelController lc;
+	ILevelController lc;
 	
-	public BlockController(IBlock block, LevelController lc) {
+	public BlockController(IBlock block, ILevelController lc) {
 		this.block = block;
 		 all = new BlockView(this);
 		 this.lc = lc;
@@ -25,13 +25,8 @@ public class BlockController implements Controller{
 	}
 	
 	public LinkedList<JBlockPanel> getAllViews(int x, int y) {
-		
 		LinkedList<JBlockPanel> panels = all.render(block, x, y);
-		
-		for(JBlockPanel p: panels){
-			
-		}
-		
+		for(JBlockPanel p: panels){}
 		return panels;
 	}
 
@@ -40,7 +35,7 @@ public class BlockController implements Controller{
 	}
 
 	public void released(JBlockPanel jBlockPanel) {
-		lc.released(jBlockPanel);
+		lc.pieceReleased(jBlockPanel);
 		
 	}
 	

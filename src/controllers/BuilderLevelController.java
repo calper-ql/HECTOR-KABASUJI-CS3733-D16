@@ -7,8 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import boundary.BuilderLevelView;
+import boundary.JBlockPanel;
 
-public class BuilderLevelController implements Controller{
+public class BuilderLevelController implements Controller, ILevelController{
 	private BuilderLevelView blv;
 	private MainController mc;
 	private Controller back;
@@ -38,5 +39,17 @@ public class BuilderLevelController implements Controller{
 	private void backButtonClicked() {
 		// TODO Auto-generated method stub
 		mc.requestSwap(back);
+	}
+
+	@Override
+	public void piecePressed(JBlockPanel jBlockPanel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pieceReleased(JBlockPanel jBlockPanel) {
+		// TODO Auto-generated method stub
+		
 	}
 }
