@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import boundary.MainMenuView;
 import entities.Model;
 
-public class MainMenuController implements Controller {
+public class MainMenuController implements IController {
 	private MainMenuView mmv;
 	private JButton lb;
 	private JButton ab;

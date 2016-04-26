@@ -42,5 +42,9 @@ public class BullpenControler {
 		//bpv.render();
 	}
 
+	public void disablePress() {
+		bpv.disablePress();
+	}
+
 }
 

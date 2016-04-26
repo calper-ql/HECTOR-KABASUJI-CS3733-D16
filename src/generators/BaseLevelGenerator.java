@@ -1,4 +1,4 @@
-package baseLevelGenerator;
+package generators;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class BaseLevelGenerator {
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), null, true);
+					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);
@@ -36,7 +36,7 @@ public class BaseLevelGenerator {
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), null, true);
+					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);
@@ -60,7 +60,7 @@ public class BaseLevelGenerator {
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), null, true);
+					Tile mockTile = new Tile(new EmptyBlock(), new ReleaseNumber(0,0), true);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);

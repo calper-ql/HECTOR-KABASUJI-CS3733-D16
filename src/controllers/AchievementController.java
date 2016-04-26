@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 
 import boundary.AchievementView;
 
-public class AchievementController implements Controller{
+public class AchievementController implements IController{
 	private AchievementView av;
 	private MainController mc;
-	private Controller back;
+	private IController back;
 	private JButton backButton;
 	
-	public AchievementController(MainController mc, Controller back) {
+	public AchievementController(MainController mc, IController back) {
 		// TODO Auto-generated constructor stub
 		this.mc = mc;
 		this.back = back;

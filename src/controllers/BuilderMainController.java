@@ -1,14 +1,18 @@
 package controllers;
 
 import boundary.WindowManager;
+import builder.Builder;
+import entities.Model;
 
 public class BuilderMainController extends MainController{
 	private SplashScreenController ssc;
 	private BuilderLevelSelectController blsc;
+	private Model model;
 	
-	public BuilderMainController() {
+	public BuilderMainController(Builder app) {
 		ssc = new SplashScreenController(true);
-		blsc= new BuilderLevelSelectController(this);
+		model = app.getModel();
+		blsc= new BuilderLevelSelectController(this, model);
 	}
 	
 	public void link(WindowManager wm){
@@ -17,7 +21,6 @@ public class BuilderMainController extends MainController{
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.requestSwap(blsc);

@@ -18,6 +18,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	IBlock ib;
 	
 	Point clickLocation;
+	boolean enabled;
 	
 	public JBlockPanel(BlockView bv, IBlock ib) {
 		super();
@@ -26,7 +27,16 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		this.bv = bv;
+		enabled = true;
 		this.ib = ib;
+	}
+	
+	public void enablePress(){
+		enabled = true;
+	}
+	
+	public void disablePress(){
+		enabled = false;
 	}
 	
 	public int getOfsetX() {return ofsetx;}
@@ -40,6 +50,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if(!enabled) return;
 		ofsetx = e.getX();
 		ofsety = e.getY();
 		bv.pressed(this);
@@ -48,7 +59,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		bv.released(this);
+		if(enabled)bv.released(this);
 	}
 
 	@Override
@@ -61,7 +72,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		bv.update(e.getX()-ofsetx, e.getY()-ofsety);
+		if(enabled)bv.update(e.getX()-ofsetx, e.getY()-ofsety);
 	}
 
 	@Override

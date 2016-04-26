@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import achievementGenerator.AchievementGenerator;
 import boundary.WindowManager;
 
 import controllers.GameMainController;
@@ -25,6 +24,7 @@ import entities.EmptyBlock;
 import entities.EmptyReleaseNumber;
 import entities.Level;
 import entities.Tile;
+import generators.AchievementGenerator;
 
 
 public class Application {

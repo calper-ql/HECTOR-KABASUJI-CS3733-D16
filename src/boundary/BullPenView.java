@@ -231,5 +231,13 @@ public class BullPenView {
 		
 		
 	}
+
+	public void disablePress() {
+		for(LinkedList<JBlockPanel> elements: blocks){
+			for(JBlockPanel obj: elements){
+				obj.disablePress();
+			}
+		}
+	}
 	
 }
