@@ -114,6 +114,7 @@ public class LevelController implements Controller, ILevelController{
 		
 		if(tl.size() != 6){
 			mc.requestSwap(this);
+			bucont.add(jBlockPanel);
 			System.out.println("stt err");
 			return;
 		}
