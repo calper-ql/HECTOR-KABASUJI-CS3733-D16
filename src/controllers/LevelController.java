@@ -15,7 +15,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import boundary.JBlockPanel;
-import boundary.LevelView;
+import boundary.BaseLevelView;
 
 import entities.Board;
 import entities.Bullpen;
@@ -30,10 +30,10 @@ import entities.Block;
 import entities.EmptyBlock;
 import entities.Piece;
 
-public class LevelController implements Controller, ILevelController{
-	private LevelView lv;
+public class LevelController implements IController, ILevelController{
+	private BaseLevelView lv;
 	private MainController mc;
-	private Controller back;
+	private IController back;
 	private JButton backButton;
 	
 	LinkedList<JBlockPanel> blocks;
@@ -43,10 +43,10 @@ public class LevelController implements Controller, ILevelController{
 	JPanel p;
 	LinkedList<JBlockPanel> currentList ;
 	
-	public LevelController(MainController mc, Controller back, Model model) {
+	public LevelController(MainController mc, IController back, Model model) {
 		this.mc = mc;
 		this.back = back;
-		lv = new LevelView(model.getLevel(0));
+		lv = new BaseLevelView(model.getLevel(0));
 		blcont = new BlockController(new EmptyBlock(), this);
 		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
 		bocont = new BoardController(model.getLevel(0).getBoard());
@@ -70,7 +70,7 @@ public class LevelController implements Controller, ILevelController{
 		
 		lv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
 		lv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
-		bocont.enableBuilderMode();
+
 		return p;
 		
 	}

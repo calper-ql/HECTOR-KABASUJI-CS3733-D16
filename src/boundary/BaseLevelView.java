@@ -32,16 +32,15 @@ import entities.Tile;
 
 import entities.IBlock;
 
-public class LevelView {
+public class BaseLevelView {
 	private JButton backButton;
-	
 	private BoardView boardView;
 	private BullPenView bullView;
 	
 	private Level level;
 	JLayeredPane lp;
 	
-	public LevelView(Level level) {
+	public BaseLevelView(Level level) {
 		this.level = level;
 	}
 	
@@ -90,20 +89,13 @@ public class LevelView {
 		p.add(backButton);
 		
 		
-		JLabel lblNewLabel = new JLabel("Puzzle mode");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(83, 6, 137, 45);
-		p.add(lblNewLabel);
-		
 		JButton btnNewButton = new JButton("<");
 		btnNewButton.setBounds(10, 5, 65, 48);
 		p.add(btnNewButton);
 		
-		
 		BufferedImage star_img = null;
 		try {
-			URL img = boundary.LevelView.class.getResource("/img/star-xxl.png");
+			URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
 			star_img = ImageIO.read(img);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -111,7 +103,7 @@ public class LevelView {
 		
 		BufferedImage info_img = null;
 		try {
-			URL img = boundary.LevelView.class.getResource("/img/info.png");
+			URL img = boundary.BaseLevelView.class.getResource("/img/info.png");
 			info_img = ImageIO.read(img);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -120,32 +112,40 @@ public class LevelView {
 		Image star_img_r = star_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		Image info_img_r = info_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-		lblNewLabel_1.setBounds(341, 27, 40, 40);
-		p.add(lblNewLabel_1);
+		if(level.getStars() == 0){
+			
+		}else if(level.getStars() == 1){
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			p.add(lblNewLabel_1);
+		}else if(level.getStars() == 2){
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			p.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setBounds(445, 27, 40, 40);
+			lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+			p.add(lblNewLabel_2);
+		}else if(level.getStars() == 3){
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			p.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setBounds(445, 27, 40, 40);
+			lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+			p.add(lblNewLabel_2);
+			
+			JLabel lblNewLabel_3 = new JLabel("");
+			lblNewLabel_3.setBounds(393, 27, 40, 40);
+			lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
+			p.add(lblNewLabel_3);
+		}
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(445, 27, 40, 40);
-		lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
-		p.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(393, 27, 40, 40);
-		lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
-		p.add(lblNewLabel_3);
-		
-		JLabel label = new JLabel("01:34");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label.setForeground(Color.WHITE);
-		label.setBackground(Color.WHITE);
-		label.setBounds(518, 27, 78, 39);
-		p.add(label);
-		
-		JLabel lblTimeLeft = new JLabel("Time left:");
-		lblTimeLeft.setForeground(Color.WHITE);
-		lblTimeLeft.setBounds(508, 20, 61, 16);
-		p.add(lblTimeLeft);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(info_img_r));

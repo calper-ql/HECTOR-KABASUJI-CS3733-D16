@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import boundary.SplashScreenView;
 import entities.SplashScreen;
 
-public class SplashScreenController implements Controller{
+public class SplashScreenController implements IController{
 	private SplashScreen ss;
 	private SplashScreenView ssv;
 	public SplashScreenController(boolean isBuilder) {

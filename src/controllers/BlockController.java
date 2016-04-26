@@ -6,7 +6,7 @@ import boundary.BlockView;
 import boundary.JBlockPanel;
 import entities.IBlock;
 
-public class BlockController implements Controller{
+public class BlockController implements IController{
 	IBlock block;
 	BlockView all;
 	

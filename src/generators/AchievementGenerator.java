@@ -1,4 +1,4 @@
-package achievementGenerator;
+package generators;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,16 +12,16 @@ public class AchievementGenerator {
 	
 	public static ArrayList<Achievement> makeAchievements(){
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-		URL i1 = achievementGenerator.AchievementGenerator.class.getResource("/img/i1.png");
-		URL i2 = achievementGenerator.AchievementGenerator.class.getResource("/img/i2.png");
-		URL i3 = achievementGenerator.AchievementGenerator.class.getResource("/img/i3.png");
-		URL i4 = achievementGenerator.AchievementGenerator.class.getResource("/img/i4.png");
-		URL i5 = achievementGenerator.AchievementGenerator.class.getResource("/img/i5.png");
-		URL i6 = achievementGenerator.AchievementGenerator.class.getResource("/img/i6.png");
-		URL i7 = achievementGenerator.AchievementGenerator.class.getResource("/img/i7.png");
-		URL i8 = achievementGenerator.AchievementGenerator.class.getResource("/img/i8.png");
-		URL i9 = achievementGenerator.AchievementGenerator.class.getResource("/img/i9.png");
-		URL i10 = achievementGenerator.AchievementGenerator.class.getResource("/img/i10.png");
+		URL i1 = generators.AchievementGenerator.class.getResource("/img/i1.png");
+		URL i2 = generators.AchievementGenerator.class.getResource("/img/i2.png");
+		URL i3 = generators.AchievementGenerator.class.getResource("/img/i3.png");
+		URL i4 = generators.AchievementGenerator.class.getResource("/img/i4.png");
+		URL i5 = generators.AchievementGenerator.class.getResource("/img/i5.png");
+		URL i6 = generators.AchievementGenerator.class.getResource("/img/i6.png");
+		URL i7 = generators.AchievementGenerator.class.getResource("/img/i7.png");
+		URL i8 = generators.AchievementGenerator.class.getResource("/img/i8.png");
+		URL i9 = generators.AchievementGenerator.class.getResource("/img/i9.png");
+		URL i10 = generators.AchievementGenerator.class.getResource("/img/i10.png");
 		
 		Achievement a1 = new Achievement("Earned One Star In Puzzle!", i1, false);
 		Achievement a2 = new Achievement("Earned Two Stars In Puzzle!", i2, false);

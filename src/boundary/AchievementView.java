@@ -14,8 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import achievementGenerator.AchievementGenerator;
 import entities.Achievement;
+import generators.AchievementGenerator;
 
 public class AchievementView {
 	private JButton backButton;

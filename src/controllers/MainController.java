@@ -21,7 +21,7 @@ public class MainController {
 		  this.wm = wm;
 	  }
 	  
-	  public void requestSwap(Controller ctrl){
+	  public void requestSwap(IController ctrl){
 		  current = ctrl.getRenderedView();
 		  wm.swap(current);
 	  }
