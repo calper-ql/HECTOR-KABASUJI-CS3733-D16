@@ -71,7 +71,7 @@ public class Achievement {
 		return true;
 	}
 	
-	public Achievement getAchievementFromFile() throws IOException, ClassNotFoundException{
+	public Achievement getAchievementFromFile(String name) throws IOException, ClassNotFoundException{
 		FileInputStream fout;
 		ObjectInputStream oos;
 		
