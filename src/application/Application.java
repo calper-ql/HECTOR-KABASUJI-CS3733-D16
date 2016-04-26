@@ -67,6 +67,7 @@ public class Application {
 		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
 
 		mockLevel.saveToFile();
+		
 		try {
 			mockLevel = mockLevel.getFromFile(16);
 		} catch (ClassNotFoundException e1) {
