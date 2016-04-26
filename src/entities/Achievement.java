@@ -16,7 +16,7 @@ public class Achievement {
 	String name;
 	Image img;
 	URL url;
-	boolean unlocked;
+	boolean unlocked = true;
 	
 	public Achievement(String name, URL url, boolean unlocked){
 		this.name = name;
@@ -81,5 +81,13 @@ public class Achievement {
 		oos.close();
 		return loaded;
 		
+	}
+	
+	public boolean isUnlocked(){
+		return this.unlocked;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 }
