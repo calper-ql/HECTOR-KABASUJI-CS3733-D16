@@ -24,6 +24,10 @@ public class BullPenView {
 	BlockController bc;
 	LinkedList<LinkedList<JBlockPanel>> blocks;
 	
+	JPanel panel;// = new JPanel();
+	JPanel panel_1;// = new JPanel();
+	JScrollPane scrollPane; //= new JScrollPane();
+	
 	public BullPenView(int x, int y, int width, int height, Bullpen bullpen, BlockController bc){
 		this.x = x;
 		this.y = y;
@@ -32,6 +36,29 @@ public class BullPenView {
 		this.bc = bc;
 		this.bullpen = bullpen;
 		blocks = new LinkedList<LinkedList<JBlockPanel>>();
+		
+		
+		panel = new JPanel();
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setVisible(true);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(0, 0, width, height);
+		
+		panel_1 = new JPanel();
+		panel_1.setVisible(true);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setMaximumSize(new Dimension(100, 32767));
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		scrollPane.setViewportView(panel_1);
+		
+		panel.setBounds(x, y, width, height);
+		panel.setLayout(null);
+		panel.add(scrollPane);
+		
+		panel.setVisible(true);
 	}
 	
 	public LinkedList<JBlockPanel> pop(JBlockPanel jbp){
@@ -59,26 +86,8 @@ public class BullPenView {
 	
 	public JPanel render(){
 		
-		JPanel panel = new JPanel();
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVisible(true);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(0, 0, width, height);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setVisible(true);
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setMaximumSize(new Dimension(100, 32767));
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		scrollPane.setViewportView(panel_1);
-		
-		panel.setBounds(x, y, width, height);
-		panel.setLayout(null);
-		panel.add(scrollPane);
-	
+		panel_1.removeAll();
 		for(int i = 0; i < bullpen.getSize(); i++){
 			BlockView bv = new BlockView(bc);
 			JPanel panelToAdd = new JPanel();
@@ -109,7 +118,7 @@ public class BullPenView {
 			
 		}
 	
-		panel.setVisible(true);
+		
 		
 		return panel;
 	}
