@@ -45,6 +45,8 @@ public class Application {
 	
 	public void initializeModel(){
 		
+
+
 		
 		ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
 		
