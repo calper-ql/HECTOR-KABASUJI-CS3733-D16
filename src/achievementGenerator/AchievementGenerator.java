@@ -22,7 +22,7 @@ public class AchievementGenerator {
 		URL i8 = achievementGenerator.AchievementGenerator.class.getResource("/img/i8.png");
 		URL i9 = achievementGenerator.AchievementGenerator.class.getResource("/img/i9.png");
 		URL i10 = achievementGenerator.AchievementGenerator.class.getResource("/img/i10.png");
-		/**
+		
 		Achievement a1 = new Achievement("Earned One Star In Puzzle!", i1, false);
 		Achievement a2 = new Achievement("Earned Two Stars In Puzzle!", i2, false);
 		Achievement a3 = new Achievement("Earned Three Stars In Puzzle!", i3, false);
@@ -44,13 +44,10 @@ public class AchievementGenerator {
 		achievements.add(a8);
 		achievements.add(a9);
 		achievements.add(a10);
-		achievements.saveArrayToFile();
-		*/
+		for (Achievement a : achievements){
+			a.saveAchievementToFile();
+		}
 		return achievements;
-		
-	}
-	
-	public void saveArrayToFile(){
 		
 	}
 	

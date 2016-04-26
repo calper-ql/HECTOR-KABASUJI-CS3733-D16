@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import achievementGenerator.AchievementGenerator;
 import boundary.WindowManager;
 
 import controllers.GameMainController;
@@ -95,26 +96,18 @@ public class Application {
 		mockLevels.add(mockLevel);
 		mockLevels.add(mockLevel);
 		mockLevels.add(mockLevel);
-		
-		
-		BufferedImage mock_img = null;
-		try {
-			// load relative image
-			URL img = boundary.AchievementView.class.getResource("/img/888267.jpg");
-			mock_img = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Image mock_img_r = mock_img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-		
-		Achievement mockAchievement = new Achievement("yolo",mock_img_r, true);
+
+	/*	URL img = boundary.AchievementView.class.getResource("/img/888267.jpg");
+		Achievement mockAchievement = new Achievement("yolo", img, true);
 		ArrayList<Achievement> mockAchievements = new ArrayList<Achievement>();
 		mockAchievements.add(mockAchievement);
+	*/
 		
+
+		AchievementGenerator ag = new AchievementGenerator();
+		ArrayList<Achievement> achievementList = ag.makeAchievements();
 		
-		Model mockModel = new Model("Kabasuji", mockAchievements, mockLevels);
+		Model mockModel = new Model("Kabasuji", achievementList, mockLevels);
 		
 		this.model = mockModel;
 	}
