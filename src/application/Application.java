@@ -14,12 +14,14 @@ import boundary.WindowManager;
 import controllers.GameMainController;
 import entities.Model;
 import entities.Piece;
+import entities.ReleaseNumber;
 import entities.Achievement;
 import entities.Block;
 import entities.Board;
 import entities.Bullpen;
 import entities.DefinedPieces;
 import entities.EmptyBlock;
+import entities.EmptyReleaseNumber;
 import entities.Level;
 import entities.Tile;
 
@@ -43,14 +45,13 @@ public class Application {
 	
 	public void initializeModel(){
 		
-		/*
 		
 		ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
 		
 		for(int i = 0;	i < 12; i++){
 			ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 			for(int k = 0; k < 12; k++){
-				Tile mockTile = new Tile(new EmptyBlock(), null, true);
+				Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
 				mockTileRow.add(mockTile);
 			}
 			mockTiles.add(mockTileRow);
@@ -63,11 +64,10 @@ public class Application {
 		Board mockBoard = new Board(mockTiles);
 		Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 		
-		*/
-		Level mockLevel = new Level(true, 16 ,null, null, true);
 		
+		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
 		
-		//mockLevel.saveToFile();
+		mockLevel.saveToFile();
 		try {
 			mockLevel = mockLevel.getFromFile(16);
 		} catch (ClassNotFoundException e1) {
