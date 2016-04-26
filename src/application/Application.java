@@ -45,6 +45,7 @@ public class Application {
 	
 	public void initializeModel(){
 		
+	
 		
 		ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
 		
@@ -64,11 +65,9 @@ public class Application {
 		Board mockBoard = new Board(mockTiles);
 		Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 		
-
 		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
 
 		mockLevel.saveToFile();
-		
 		try {
 			mockLevel = mockLevel.getFromFile(16);
 		} catch (ClassNotFoundException e1) {
