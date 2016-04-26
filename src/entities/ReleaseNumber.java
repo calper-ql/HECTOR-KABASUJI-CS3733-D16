@@ -1,19 +1,21 @@
 package entities;
 
-public class ReleaseNumber {
-	String color;
+import java.io.Serializable;
+
+public class ReleaseNumber implements Serializable {
+	int color; // 0 to 2
 	int num;
 	
-	public ReleaseNumber(String color, int num){
+	public ReleaseNumber(int color, int num){
 		this.color = color;
 		this.num = num;
 	}
 	
-	public String getColor(){
+	public int getColor(){
 		return color;
 	}
 	
-	public void setColor(String color){
+	public void setColor(int color){
 		this.color = color;
 	}
 	
