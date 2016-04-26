@@ -22,11 +22,11 @@ public class Tile implements Serializable {
 	public void iterateState(){
 		if(num instanceof EmptyReleaseNumber){
 			if(!isEnabled) enable();
-			if(isEnabled) disable();
+			else disable();
 		}else{
 			if(!isEnabled) enable();
 			else{
-				if(num.getNum() == 6 && num.getColor() == 2){
+				if(num.getNum() >= 6 && num.getColor() >= 2){
 					num.setNum(0);
 					num.setColor(0);
 					disable();
