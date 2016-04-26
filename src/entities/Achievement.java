@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.Image;
+import java.net.URL;
 
 public class Achievement {
 	String name;
@@ -12,4 +13,7 @@ public class Achievement {
 		this.img = img;
 		this.unlocked = unlocked;
 	}
+/**loadImage
+getImage
+*/
 }
