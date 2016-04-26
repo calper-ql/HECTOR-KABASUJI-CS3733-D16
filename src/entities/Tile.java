@@ -20,20 +20,25 @@ public class Tile implements Serializable {
 	}
 	
 	public void iterateState(){
-		if(!isEnabled) enable();
-		else{
-			if(num.getNum() == 6 && num.getColor() == 2){
-				num.setNum(0);
-				num.setColor(0);
-				disable();
-			}else{
-				if(num.getNum() == 6){
-					num.setColor(num.getColor()+1);
-					num.setNum(1);
+		if(num instanceof EmptyReleaseNumber){
+			if(!isEnabled) enable();
+			if(isEnabled) disable();
+		}else{
+			if(!isEnabled) enable();
+			else{
+				if(num.getNum() == 6 && num.getColor() == 2){
+					num.setNum(0);
+					num.setColor(0);
+					disable();
 				}else{
-					num.setNum(num.getNum()+1);
-				}
+					if(num.getNum() == 6){
+						num.setColor(num.getColor()+1);
+						num.setNum(1);
+					}else{
+						num.setNum(num.getNum()+1);
+					}
 				
+				}
 			}
 		}
 	}
