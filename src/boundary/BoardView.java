@@ -61,4 +61,12 @@ public class BoardView {
 		Point abs = new Point(p.x - x,p.y - y);
 		return board.getTile(abs.x/32, abs.y/32);
 	}
+	
+	public void enableBuilderMode(){
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].enableBuilderMode();
+			}
+		}
+	}
 }

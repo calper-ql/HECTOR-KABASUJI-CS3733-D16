@@ -51,6 +51,7 @@ public class LevelController implements Controller, ILevelController{
 		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
 		bocont = new BoardController(model.getLevel(0).getBoard());
 		currentList = null;
+		
 	}
 	
 
@@ -69,7 +70,7 @@ public class LevelController implements Controller, ILevelController{
 		
 		lv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
 		lv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
-		
+		bocont.enableBuilderMode();
 		return p;
 		
 	}

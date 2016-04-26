@@ -25,5 +25,9 @@ public class BoardController {
 	public Tile getTileAtPoint(Point p){
 		return bv.getTileAtPoint(p);
 	}
+	
+	public void enableBuilderMode(){
+		bv.enableBuilderMode();
+	}
 
 }

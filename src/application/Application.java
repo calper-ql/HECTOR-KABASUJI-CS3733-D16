@@ -51,7 +51,7 @@ public class Application {
 		for(int i = 0;	i < 12; i++){
 			ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 			for(int k = 0; k < 12; k++){
-				Tile mockTile = new Tile(new EmptyBlock(), new ReleaseNumber(2, 2), true);
+				Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
 				mockTileRow.add(mockTile);
 			}
 			mockTiles.add(mockTileRow);

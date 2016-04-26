@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import entities.Tile;
@@ -27,7 +28,7 @@ public class TileView {
 		this.tile = tile;
 	}
 	
-	public void enableBuilder(){
+	public void enableBuilderMode(){
 		tilep.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -45,17 +46,28 @@ public class TileView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tile.iterateState();
+				propertiesInit();
 			}
 		});
 	}
 	
 	public JPanel render(){
 		tilep = new JPanel();
-		tilep.setVisible(tile.enabled());
+		propertiesInit();
+		
+		return tilep;
+	}
+	
+	private void propertiesInit(){
+		tilep.removeAll();
+		tilep.setVisible(true);
 		tilep.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tilep.setBounds(size*col, size*row, size,size);
-		tilep.setBackground(tileColor);
+		if(tile.enabled()) tilep.setBackground(tileColor);
+		else tilep.setBackground(Color.darkGray);
 		JLabel release = new JLabel();
+		release.setHorizontalAlignment(SwingConstants.CENTER);
+		release.setVerticalAlignment(SwingConstants.CENTER);
 		release.setBounds(0,0,size,size);
 		if(tile.getReleaseNumber().getNum() > 0){
 			release.setText((new Integer(tile.getReleaseNumber().getNum())).toString());
@@ -64,8 +76,6 @@ public class TileView {
 			if(tile.getReleaseNumber().getColor() == 2) release.setForeground(Color.GREEN);
 			tilep.add(release);
 		}
-		
-		return tilep;
 	}
 	
 	public void reset(){
