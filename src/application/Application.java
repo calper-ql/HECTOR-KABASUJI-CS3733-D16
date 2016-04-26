@@ -14,12 +14,14 @@ import boundary.WindowManager;
 import controllers.GameMainController;
 import entities.Model;
 import entities.Piece;
+import entities.ReleaseNumber;
 import entities.Achievement;
 import entities.Block;
 import entities.Board;
 import entities.Bullpen;
 import entities.DefinedPieces;
 import entities.EmptyBlock;
+import entities.EmptyReleaseNumber;
 import entities.Level;
 import entities.Tile;
 
@@ -49,7 +51,7 @@ public class Application {
 		for(int i = 0;	i < 12; i++){
 			ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 			for(int k = 0; k < 12; k++){
-				Tile mockTile = new Tile(new EmptyBlock(), null, true);
+				Tile mockTile = new Tile(new EmptyBlock(), new ReleaseNumber(2, 2), true);
 				mockTileRow.add(mockTile);
 			}
 			mockTiles.add(mockTileRow);
@@ -64,7 +66,6 @@ public class Application {
 		
 		
 		Level mockLevel = new Level(true, 16 ,mockBullpen, mockBoard, true);
-		
 		
 		mockLevel.saveToFile();
 		try {
