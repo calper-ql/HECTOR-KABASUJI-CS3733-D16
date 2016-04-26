@@ -64,7 +64,7 @@ public class Application {
 		Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 		
 		*/
-		Level mockLevel = new Level(true, 16 , null, null, true);
+		Level mockLevel = new Level(true, 16 ,null, null, true);
 		
 		
 		//mockLevel.saveToFile();
