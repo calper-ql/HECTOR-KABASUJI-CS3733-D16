@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import boundary.LevelSelectView;
+import controllers.lightning.LightningLevelController;
 import controllers.puzzle.PuzzleLevelController;
 import entities.Model;
 
@@ -73,6 +74,15 @@ public class LevelSelectController implements IController{
 		puzzleButtons[4].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				puzzleButtonClicked(5);
+			}	
+		});
+		//!!!
+
+		lightningButtons = lsv.getLightningButtons();
+		
+		lightningButtons[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(6);
 			}	
 		});
 
@@ -137,6 +147,11 @@ public class LevelSelectController implements IController{
 	private void puzzleButtonClicked(int i){
 		model.reload();
 		this.lvl = new PuzzleLevelController(mc, this, model, i);
+		mc.requestSwap(lvl);
+	}
+	private void lightningButtonClicked(int i){
+		model.reload();
+		this.lvl = new LightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 }
