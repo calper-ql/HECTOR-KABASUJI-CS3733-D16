@@ -26,6 +26,7 @@ public class BuilderBaseLevelView {
 	private JButton backButton;
 	private JButton resetButton;
 	private JButton saveButton;
+	private JButton undoButton;
 	
 	JLayeredPane lp;
 	
@@ -59,34 +60,23 @@ public class BuilderBaseLevelView {
 		
 		backButton = new JButton("<");
 		backButton.setBounds(10, 5, 65, 50);
+		backButton.setBackground(Color.white);
 		p.add(backButton);
 		
+		undoButton = new JButton("undo");
+		undoButton.setBounds(10, 60, 90, 30);
+		undoButton.setBackground(Color.white);
+		p.add(undoButton);
 		
-		JLabel lblNewLabel = new JLabel("Puzzle mode");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(83, 6, 137, 45);
-		p.add(lblNewLabel);
+		resetButton = new JButton("reset");
+		resetButton.setBounds(210, 60, 90, 30);
+		resetButton.setBackground(Color.white);
+		p.add(resetButton);
 		
-		JButton btnNewButton = new JButton("<");
-		btnNewButton.setBounds(10, 5, 65, 48);
-		p.add(btnNewButton);
-		
-		BufferedImage info_img = null;
-		try {
-			URL img = boundary.BaseLevelView.class.getResource("/img/info.png");
-			info_img = ImageIO.read(img);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Image info_img_r = info_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-		
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(info_img_r));
-		label_1.setBounds(20, 54, 40, 40);
-		p.add(label_1);
+		saveButton = new JButton("save");
+		saveButton.setBounds(110, 60, 90, 30);
+		saveButton.setBackground(Color.white);
+		p.add(saveButton);
 		
 		lp.add(p, new Integer(0), 0);
 		mp.add(lp);
@@ -96,5 +86,13 @@ public class BuilderBaseLevelView {
 	
 	public JButton getBackButton(){
 		return backButton;
+	}
+	
+	public JButton getResetButton(){
+		return resetButton;
+	}
+	
+	public JButton getSaveButton(){
+		return saveButton;
 	}
 }

@@ -6,9 +6,10 @@ import entities.*;
 
 public class BaseLevelGenerator {
 	public BaseLevelGenerator(){
+		
 	}
-	public static ArrayList<ILevel> makeBaseLevels(){
-		ArrayList<ILevel> baseLevels = new ArrayList<ILevel>();
+	public static ArrayList<Level> makeBaseLevels(){
+		ArrayList<Level> baseLevels = new ArrayList<Level>();
 		//Make base Puzzle Levels
 		for (int i = 1; i <= 5; i++){
 			ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
@@ -23,7 +24,7 @@ public class BaseLevelGenerator {
 			}
 			ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
 			DefinedPieces dp = new DefinedPieces();
-			mockArrayPieces = dp.getPieces();
+			//mockArrayPieces = dp.getPieces();
 			
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
@@ -44,7 +45,7 @@ public class BaseLevelGenerator {
 			// Create Base Pieces
 			ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
 			DefinedPieces dp = new DefinedPieces();
-			mockArrayPieces = dp.getPieces();
+			//mockArrayPieces = dp.getPieces();
 			// Create Base Bull-pen and Board
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
@@ -67,20 +68,21 @@ public class BaseLevelGenerator {
 			}
 			ArrayList<Piece> mockArrayPieces = (new ArrayList<Piece>());
 			DefinedPieces dp = new DefinedPieces();
-			mockArrayPieces = dp.getPieces();
+			//mockArrayPieces = dp.getPieces();
 			
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 			//!!! Fix the releaseNumbers
 			baseLevels.add(new ReleaseLevel(true, i, mockBullpen, mockBoard, false, releaseNumbers));
 		}
-		for (ILevel l : baseLevels){
-			l.saveToFile();
-		}
+		
 		return baseLevels;
 	}
 	
 	public static void main(String[] args) {
-		makeBaseLevels();
+		ArrayList<Level> baseLevels = makeBaseLevels();
+		for (Level l : baseLevels){
+			l.saveToFile();
+		}
 	}
 }

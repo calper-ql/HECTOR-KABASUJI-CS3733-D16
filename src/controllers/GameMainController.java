@@ -1,8 +1,8 @@
 package controllers;
 
-import application.Application;
 import boundary.WindowManager;
 import entities.Model;
+import kabasuji.application.Application;
 
 public class GameMainController extends MainController{
 	private SplashScreenController ssc;

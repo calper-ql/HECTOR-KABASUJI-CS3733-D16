@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import boundary.LevelSelectView;
+import controllers.puzzle.PuzzleLevelController;
 import entities.Model;
 
 public class LevelSelectController implements IController{
@@ -32,9 +33,6 @@ public class LevelSelectController implements IController{
 		this.mc = mc;
 		this.back = back;
 		this.model = model;
-
-		this.lvl = new LevelController(mc, back, model);
-
 		lsv = new LevelSelectView();
 	}
 
@@ -133,11 +131,12 @@ public class LevelSelectController implements IController{
 	}
 
 	private void backButtonClicked() {
-		// TODO Auto-generated method stub
 		mc.requestSwap(back);
 	}
 
 	private void puzzleButtonClicked(int i){
+		model.reload();
+		this.lvl = new PuzzleLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 }

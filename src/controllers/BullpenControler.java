@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -7,6 +8,8 @@ import javax.swing.JPanel;
 import boundary.BullPenView;
 import boundary.JBlockPanel;
 import entities.Bullpen;
+import entities.DefinedPieces;
+import entities.Piece;
 
 public class BullpenControler {
 	
@@ -44,6 +47,14 @@ public class BullpenControler {
 
 	public void disablePress() {
 		bpv.disablePress();
+	}
+
+	public void enableBuilderMode() {
+		bpv.enableBuilderMode();
+	}
+	
+	public ArrayList<Piece> generatePieceList(){
+		return bpv.generatePieceList();
 	}
 
 }

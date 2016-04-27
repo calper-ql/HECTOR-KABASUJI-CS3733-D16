@@ -24,6 +24,7 @@ public class LevelSelectView {
 		
 		backButton = new JButton("<");
 		backButton.setBounds(10, 5, 65, 50);
+		backButton.setBackground(Color.WHITE);
 		p.add(backButton);
 		
 		puzzleButtons = new JButton[5];
@@ -38,6 +39,10 @@ public class LevelSelectView {
 			puzzleButtons[i]   .setBounds(50 + i*110, height/4   - 40, 100, 75);
 			lightningButtons[i].setBounds(50 + i*110, height/4*2 - 40, 100, 75);
 			releaseButtons[i]  .setBounds(50 + i*110, height/4*3 - 40, 100, 75);
+			
+			puzzleButtons[i].setBackground(Color.WHITE);
+			lightningButtons[i].setBackground(Color.WHITE);
+			releaseButtons[i].setBackground(Color.WHITE);
 			
 			p.add(puzzleButtons[i]);
 			p.add(lightningButtons[i]);

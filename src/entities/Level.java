@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 import javax.print.DocFlavor.URL;
 
-public class Level implements ILevel, Serializable {
+public class Level implements Serializable {
 	boolean isLocked;
 	int levelNum;
 	Bullpen bPen;
@@ -25,6 +25,14 @@ public class Level implements ILevel, Serializable {
 		this.bPen = bPen;
 		this.board = board;
 		this.hints = hints;
+	}
+	
+	public boolean locked(){
+		return isLocked;
+	}
+	
+	public void unlock(){
+		isLocked = true;
 	}
 	
 	public int getLevelNum(){
