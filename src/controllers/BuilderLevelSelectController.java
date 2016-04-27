@@ -34,9 +34,7 @@ public class BuilderLevelSelectController implements IController{
 	public JPanel getRenderedView() {
 		JPanel p = blsv.render();
 		
-		
 		puzzleButtons = blsv.getPuzzleButtons();
-		
 		
 		puzzleButtons[0].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
