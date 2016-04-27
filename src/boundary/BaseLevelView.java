@@ -86,6 +86,7 @@ public class BaseLevelView {
 		
 		backButton = new JButton("<");
 		backButton.setBounds(10, 5, 65, 50);
+		backButton.setBackground(Color.WHITE);
 		p.add(backButton);
 		
 		

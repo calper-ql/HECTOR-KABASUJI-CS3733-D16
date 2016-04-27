@@ -30,7 +30,7 @@ public class BlockView{
 
 	public LinkedList<JBlockPanel> render(IBlock block, int x, int y){
 		LinkedList<JBlockPanel> list = new LinkedList<JBlockPanel>();
-		IBlock dummyBlock = new Block(new Piece(Color.black));
+		IBlock dummyBlock = new Block(new Piece(Color.black, 0));
 		renderToList(block, dummyBlock, list, x, y);
 		currentList = list;
 		currentBlock = block;

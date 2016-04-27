@@ -1,8 +1,8 @@
 package controllers;
 
 import boundary.WindowManager;
-import builder.Builder;
 import entities.Model;
+import kabasuji.builder.Builder;
 
 public class BuilderMainController extends MainController{
 	private SplashScreenController ssc;

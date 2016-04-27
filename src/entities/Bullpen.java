@@ -28,4 +28,8 @@ public class Bullpen implements Serializable{
 		return pieces.size();
 	}
 
+	public void replacePieceList(ArrayList<Piece> generatePieceList) {
+		pieces = generatePieceList;
+	}
+
 }

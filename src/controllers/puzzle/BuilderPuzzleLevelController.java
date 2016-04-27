@@ -18,14 +18,17 @@ import controllers.IController;
 import controllers.ILevelController;
 import controllers.MainController;
 import entities.EmptyBlock;
+import entities.Level;
 import entities.Model;
+import entities.PuzzleLevel;
+import generators.BaseLevelGenerator;
 
 public class BuilderPuzzleLevelController implements IController, ILevelController{
 	private BuilderPuzzleLevelView blv;
 	private MainController mc;
 	private IController back;
-	private JButton backButton;
 	private int level;
+	Model model;
 	
 	LinkedList<JBlockPanel> blocks;
 	BullpenControler bucont;
@@ -39,36 +42,71 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.mc = mc;
 		this.back = back;
 		this.level = level;
-		blv = new BuilderPuzzleLevelView();
+		this.model = model;
+		init();
+		
+	}
+	
+	private void init(){
+		blv = new BuilderPuzzleLevelView(((PuzzleLevel)model.getLevel(level)).getTotalMoves());
 		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
-		bocont = new BoardController(model.getLevel(0).getBoard());
-		
-		
+		bucont = new BullpenControler(model.getLevel(level).getBullpen(), blcont);
+		bocont = new BoardController(model.getLevel(level).getBoard());
 	}
 	
 	@Override
 	public JPanel getRenderedView() {
 		p = blv.render();
 		
-		backButton = blv.getBackButton();
-		backButton.addActionListener(new ActionListener(){
+		blv.getBackButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
 		
+		blv.getSaveButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				saveButtonClicked();
+			}
+		});
+		
+		blv.getResetButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				resetButtonClicked();
+			}
+
+		});
+		
+		bucont.enableBuilderMode();
 		blv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
 		blv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
 		bocont.enableBuilderMode();
 		bucont.disablePress();
 		
+		
 		return p;		
 	}
 	
 	private void backButtonClicked() {
-		// TODO Auto-generated method stub
+		model.reload();
 		mc.requestSwap(back);
+	}
+	
+	private void saveButtonClicked() {
+		Level lvl = model.getLevel(level);
+		((PuzzleLevel)lvl).setTotalMoves(blv.getMoves());
+		lvl.getBullpen().replacePieceList(bucont.generatePieceList());
+		lvl.saveToFile();
+		model.reload();
+		init();
+		mc.requestSwap(this);
+	}	
+	
+
+	private void resetButtonClicked() {
+		model.setLevel(level, BaseLevelGenerator.makeBaseLevels().get(level-1));
+		init();
+		mc.requestSwap(this);
 	}
 
 	@Override
@@ -82,4 +120,5 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		
 		
 	}
+
 }

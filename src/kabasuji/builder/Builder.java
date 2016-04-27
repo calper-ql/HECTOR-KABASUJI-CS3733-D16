@@ -1,4 +1,4 @@
-package builder;
+package kabasuji.builder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,26 +35,9 @@ public class Builder {
 	}
 	
 	public void initializeModel(){
-		
-		Level level = new Level(true, 16 , null, null, true);
-		ArrayList<Level> levels = new ArrayList<Level>();
-		
-		for(int i = 1; i < 16; i++){
-			try {
-				level = level.getFromFile(i);
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			levels.add(level);
-		}
-
-		
-		ArrayList<Achievement> achievementList = null;
-		
-		Model mockModel = new Model("Kabasuji", achievementList, levels);
-		
-		this.model = mockModel;
+		Model model = new Model("Kabasuji", null, null);
+		model.reload();
+		this.model = model;
 	}
 	
 	public static void main(String[] args) {
