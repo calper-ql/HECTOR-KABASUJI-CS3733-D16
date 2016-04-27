@@ -32,7 +32,7 @@ public class NonOverlayMove implements IMove{
 	//@Override
 	public boolean valid() {
 		for(Tile t : tlist){
-			if(t.hasBlock()){
+			if(t.hasBlock() || !t.enabled()){
 				return false;
 			}
 		}

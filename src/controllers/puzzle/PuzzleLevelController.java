@@ -31,8 +31,9 @@ import entities.IBlock;
 import entities.Level;
 import entities.Model;
 import entities.Piece;
+import entities.PuzzleLevel;
 import entities.Tile;
-
+import move.NonOverlayMove;
 import entities.Block;
 import entities.EmptyBlock;
 import entities.Piece;
@@ -86,6 +87,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 	}
 	
 	private void backButtonClicked() {
+		model.reload();
 		mc.requestSwap(back);
 	}
 
@@ -113,26 +115,34 @@ public class PuzzleLevelController implements IController, ILevelController{
 		// Check for the board
 		// do the move
 		LinkedList<Tile> tl = new LinkedList<>();
+		LinkedList<IBlock> bl= new LinkedList<>();
 		
 		for(JBlockPanel jbp: currentList){
 			try{
 				Tile temp = bocont.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
+				bl.add(jbp.getBlock());
 				tl.add(temp);
 			} catch (Exception e){
-				System.out.println("stt");
+	
 			}
 		}		
 		
 		if(tl.size() != 6){
 			mc.requestSwap(this);
-			bucont.add(jBlockPanel);
-			System.out.println("stt err");
 			return;
 		}
 		
-		for(int i = 0; i < currentList.size(); i++){
-			tl.get(i).setBlock(jBlockPanel.getBlock());
-		}	
+		if(new NonOverlayMove(bl, tl).doMove()){
+			try {
+				model.getLevel(level).getBullpen().removePiece(bl.getFirst().getPiece());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(level);
+			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
+			
+		}
 		
 		mc.requestSwap(this);
 	}

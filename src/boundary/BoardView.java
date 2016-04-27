@@ -59,6 +59,8 @@ public class BoardView {
 	
 	public Tile getTileAtPoint(Point p){
 		Point abs = new Point(p.x - x,p.y - y);
+		if(abs.x < 0) return board.getTile(-1, -1);
+		if(abs.y < 0) return board.getTile(-1, -1);
 		return board.getTile(abs.x/32, abs.y/32);
 	}
 	
