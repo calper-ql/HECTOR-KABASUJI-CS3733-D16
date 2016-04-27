@@ -12,13 +12,12 @@ package boundary.puzzle;
 
 import java.awt.Color;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import entities.PuzzleLevel;
 
 import boundary.BaseLevelView;
 import entities.Level;
+import entities.PuzzleLevel;
 
 public class PuzzleLevelView extends BaseLevelView{
 

@@ -1,19 +1,18 @@
+/**	Puzzle Level Controller
+ * 	This Controller class is to control the gameplay of the Puzzle Level
+ * 
+ * 	@author Can Alper - calper@wpi.edu
+ */
+
 package controllers.puzzle;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-
 import java.util.LinkedList;
-
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
 import boundary.JBlockPanel;
 import boundary.puzzle.PuzzleLevelView;
 import controllers.BlockController;
@@ -22,128 +21,162 @@ import controllers.BullpenControler;
 import controllers.IController;
 import controllers.ILevelController;
 import controllers.MainController;
-import boundary.BaseLevelView;
-
-import entities.Board;
-import entities.Bullpen;
 import entities.EmptyBlock;
 import entities.IBlock;
-import entities.Level;
 import entities.Model;
-import entities.Piece;
 import entities.PuzzleLevel;
 import entities.Tile;
 import move.NonOverlayMove;
-import entities.Block;
-import entities.EmptyBlock;
-import entities.Piece;
 
 public class PuzzleLevelController implements IController, ILevelController{
-	private PuzzleLevelView lv;
-	private MainController mc;
+	private PuzzleLevelView puzzleLevelView;
+	private MainController mainController;
 	private IController back;
-	private JButton backButton;
 	private Model model;
-	int level;
+	int levelNum;
 	
-	LinkedList<JBlockPanel> blocks;
-	BullpenControler bucont;
-	BoardController bocont;
-	BlockController blcont;
-	JPanel p;
-	LinkedList<JBlockPanel> currentList ;
+	BullpenControler bullpenController;
+	BoardController boardController;
+	BlockController blockController;
+	JPanel renderPanel;
+	LinkedList<JBlockPanel> currentBlockPanelList;
 	
-	public PuzzleLevelController(MainController mc, IController back, Model model, int level) {
-		this.mc = mc;
+	
+	/**
+	 * Constructor for class
+	 * 
+	 * mainController is for the rendering.
+	 * back is the Controller that was the context before this one.
+	 * model is the given model.
+	 * levelNum is the current level number.
+	 * 
+	 * @param mainController
+	 * @param back
+	 * @param model
+	 * @param levelNum
+	 */
+	public PuzzleLevelController(MainController mainController, IController back, Model model, int levelNum) {
+		this.mainController = mainController;
 		this.back = back;
-		lv = new PuzzleLevelView(model.getLevel(level));
-		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(level).getBullpen(), blcont);
-		bocont = new BoardController(model.getLevel(level).getBoard());
-		currentList = null;
 		this.model = model;
-		this.level = level;
+		this.levelNum = levelNum;
+		
+		puzzleLevelView = new PuzzleLevelView(model.getLevel(levelNum));
+		blockController = new BlockController(new EmptyBlock(), this);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		currentBlockPanelList = null;
+		
 	}
 	
-
+	/**
+	 * This function adds the functionality to button and renders the views
+	 * 
+	 * @return panel
+	 */
 	@Override
 	public JPanel getRenderedView() {
-		Point loc = mc.getMouseLocation();
+		// Render the main view
+		renderPanel = puzzleLevelView.render();
 		
-		p = lv.render();
-		
-		backButton = lv.getBackButton();
-		backButton.addActionListener(new ActionListener(){
+		// Attach button
+		puzzleLevelView.getBackButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
 		
-		lv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
-		lv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
+		// Render the components to the 0th layer
+		puzzleLevelView.getLayeredPane().add(boardController.render(), new Integer(0), 0);
+		puzzleLevelView.getLayeredPane().add(bullpenController.render(), new Integer(0), 0);
 
-		return p;
+		return renderPanel;
 		
 	}
 	
+	// Reload and swap to the higher controller
 	private void backButtonClicked() {
 		model.reload();
-		mc.requestSwap(back);
+		mainController.requestSwap(back);
 	}
 
+	/**
+	 * 	Receives the pressed block panel from the view and adds the list containing that panel 
+	 *  from the bullpen to the layer 1 of this instance.
+	 * 
+	 * -----------------------------------
+	 * -    LAYER 0 
+	 * - 
+	 * -   ------------------------------------
+	 * -   -   
+	 * -   -    LAYER 1
+	 * -   -
+	 * -   -
+	 * -   -
+	 *     -
+	 *     -
+	 *     -
+	 * 
+	 * @param jBlockPanel
+	 */
 	public void piecePressed(JBlockPanel jBlockPanel) {
-		LinkedList<JBlockPanel> list = bucont.pop(jBlockPanel);
-		currentList = list;
-		try{
-			if(list.isEmpty()) return;
-		}catch(Exception e){
-			return;
-		}
-		for(JBlockPanel item: list){
+		currentBlockPanelList = bullpenController.pop(jBlockPanel);
+		
+		for(JBlockPanel item: currentBlockPanelList){
 			try{
-				p.add(item,new Integer(1), 0);
+				renderPanel.add(item, new Integer(1), 0);
 			}catch(Exception e){
-						
+				e.printStackTrace();	
 			}
 		}
 	}
 
 
+	/**
+	 * Receives the released signal from the view on a JBlockPanel.
+	 * Checks for the move and acts accordingly.
+	 * 
+	 *  @param jBlockPanel
+	 */
 	public void pieceReleased(JBlockPanel jBlockPanel) {
-		JLayeredPane layers = lv.getLayeredPane();
-		layers = new JLayeredPane();
-		// Check for the board
-		// do the move
+		// Lists for the move
 		LinkedList<Tile> tl = new LinkedList<>();
 		LinkedList<IBlock> bl= new LinkedList<>();
 		
-		for(JBlockPanel jbp: currentList){
+		
+		// Populating the lists
+		for(JBlockPanel jbp: currentBlockPanelList){
 			try{
-				Tile temp = bocont.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
+				// The tile underneath the JBlockPanel is found and added to the same index of the lists
+				Tile temp = boardController.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
 				bl.add(jbp.getBlock());
 				tl.add(temp);
 			} catch (Exception e){
-	
+				// If the bounds are out of board we will receive an exception and it is handled here
+				// The solution is to re-render without any moves whatsoever.
+				mainController.requestSwap(this);
+				return;
 			}
 		}		
 		
-		if(tl.size() != 6){
-			mc.requestSwap(this);
-			return;
-		}
-		
+		// If we get here we check for the validity of the move in doMove() and we act according to it
 		if(new NonOverlayMove(bl, tl).doMove()){
+			// If the processor gets here this means that the move was valid
 			try {
-				model.getLevel(level).getBullpen().removePiece(bl.getFirst().getPiece());
+				// We get the level and remove the piece from the bullpen
+				// Can be different for other level types
+				model.getLevel(levelNum).getBullpen().removePiece(bl.getFirst().getPiece());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(level);
+			
+			// Update the moves left
+			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			
 		}
 		
-		mc.requestSwap(this);
+		// finally we re-render
+		mainController.requestSwap(this);
 	}
 }
