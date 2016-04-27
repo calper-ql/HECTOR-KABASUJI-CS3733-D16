@@ -38,6 +38,7 @@ public class PuzzleLevelView extends BaseLevelView{
 	 * 
 	 * 	@return panel
 	 */
+	
 	public JPanel render() {
 		// Render to the super panel
 		JPanel superPanel = super.render();
