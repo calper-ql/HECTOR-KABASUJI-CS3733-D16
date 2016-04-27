@@ -95,6 +95,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	private void saveButtonClicked() {
 		Level lvl = model.getLevel(level);
 		((PuzzleLevel)lvl).setTotalMoves(blv.getMoves());
+		((PuzzleLevel)lvl).setRemaingMoves(blv.getMoves());
 		lvl.getBullpen().replacePieceList(bucont.generatePieceList());
 		lvl.saveToFile();
 		model.reload();

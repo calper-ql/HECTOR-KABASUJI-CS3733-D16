@@ -38,7 +38,6 @@ public class Application {
 		return model;
 	}
 	
-	
 	public void initialize() {
 		initializeModel();
 		

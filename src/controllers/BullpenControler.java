@@ -22,12 +22,6 @@ public class BullpenControler {
 	}
 	
 	public LinkedList<JBlockPanel> pop(JBlockPanel jbp){
-		try {
-			bp.removePiece(jbp.getBlock().getPiece());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return bpv.pop(jbp);
 	}
 
