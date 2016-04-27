@@ -1,14 +1,19 @@
+/**    	Builder Puzzle Controller
+ * 		
+ * 		This Class controls and links the entities to boundaries.
+ * 		
+ * 		Specifically it uses BuilderPuzzleLevelView to display the builder.
+ * 		It handles things like button presses.
+ * 
+ * 		@author Can Alper - calper@wpi.edu
+ */
+
 package controllers.puzzle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import boundary.BuilderBaseLevelView;
 import boundary.JBlockPanel;
 import boundary.puzzle.BuilderPuzzleLevelView;
 import controllers.BlockController;
@@ -24,102 +29,145 @@ import entities.PuzzleLevel;
 import generators.BaseLevelGenerator;
 
 public class BuilderPuzzleLevelController implements IController, ILevelController{
-	private BuilderPuzzleLevelView blv;
-	private MainController mc;
+	
+	/* Things we need */
+	private MainController mainController;
 	private IController back;
-	private int level;
-	Model model;
+	private int levelNum;
+	private Model model;
 	
-	LinkedList<JBlockPanel> blocks;
-	BullpenControler bucont;
-	BoardController bocont;
-	BlockController blcont;
-	JPanel p;
-	LinkedList<JBlockPanel> currentList;
+	/* Things we create */
+	private BuilderPuzzleLevelView builderPuzzleLevelView;
+	private BullpenControler bullpenController;
+	private BoardController boardController;
+	private BlockController blockController;
+	private JPanel renderPanel;
 	
-	public BuilderPuzzleLevelController(MainController mc, IController back, Model model, int level) {
-		// TODO Auto-generated constructor stub
-		this.mc = mc;
+	/**
+	 * Constructor for the class.
+	 * mainController is for the rendering.
+	 * back is the Controller that was the context before this one.
+	 * model is the given model.
+	 * levelNum is the current level number.
+	 * 
+	 * @param mainController
+	 * @param back
+	 * @param model
+	 * @param levelNum
+	 */
+	public BuilderPuzzleLevelController(MainController mainController, IController back, Model model, int levelNum) {
+		this.mainController = mainController;
 		this.back = back;
-		this.level = level;
+		this.levelNum = levelNum;
 		this.model = model;
 		init();
 		
 	}
 	
+	/* 
+	 * Initializes the Controllers and the view.
+	 */
 	private void init(){
-		blv = new BuilderPuzzleLevelView(((PuzzleLevel)model.getLevel(level)).getTotalMoves());
-		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(level).getBullpen(), blcont);
-		bocont = new BoardController(model.getLevel(level).getBoard());
+		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel)model.getLevel(levelNum)).getTotalMoves());
+		blockController = new BlockController(new EmptyBlock(), this);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		boardController = new BoardController(model.getLevel(levelNum).getBoard());
 	}
 	
+	/**
+	 * This function adds the button listeners and renders the bullpen and board to the view.
+	 * 
+	 * @return panel
+	 */
 	@Override
 	public JPanel getRenderedView() {
-		p = blv.render();
+		renderPanel = builderPuzzleLevelView.render();
 		
-		blv.getBackButton().addActionListener(new ActionListener(){
+		// Back button
+		builderPuzzleLevelView.getBackButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
 		
-		blv.getSaveButton().addActionListener(new ActionListener(){
+		// Save button
+		builderPuzzleLevelView.getSaveButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				saveButtonClicked();
 			}
 		});
 		
-		blv.getResetButton().addActionListener(new ActionListener(){
+		// Reset button
+		builderPuzzleLevelView.getResetButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				resetButtonClicked();
 			}
 
 		});
 		
-		bucont.enableBuilderMode();
-		blv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
-		blv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
-		bocont.enableBuilderMode();
-		bucont.disablePress();
+		// Both the bullpen and the board needs to be at the 0th layer.
 		
+		// Warning!!! 
+		// bullpenController must be enabled for builder !BEFORE! the rendering.
+		bullpenController.enableBuilderMode();
+		builderPuzzleLevelView.getLayeredPane().add(bullpenController.render(), new Integer(0), 0);
+		bullpenController.disablePress();
 		
-		return p;		
+		// Warning!!! 
+		// boardController must be enabled for builder !AFTER! the rendering.
+		builderPuzzleLevelView.getLayeredPane().add(boardController.render(), new Integer(0), 0);
+		boardController.enableBuilderMode();
+		
+		// return the renderPanel.
+		return renderPanel;		
 	}
 	
+	// Reload the model before backing up.
 	private void backButtonClicked() {
 		model.reload();
-		mc.requestSwap(back);
+		// send the request to re-render to the higher controller
+		mainController.requestSwap(back);
 	}
 	
+	// Save to file
 	private void saveButtonClicked() {
-		Level lvl = model.getLevel(level);
-		((PuzzleLevel)lvl).setTotalMoves(blv.getMoves());
-		((PuzzleLevel)lvl).setRemaingMoves(blv.getMoves());
-		lvl.getBullpen().replacePieceList(bucont.generatePieceList());
+		// get level
+		Level lvl = model.getLevel(levelNum);
+		
+		// set the total moves
+		((PuzzleLevel)lvl).setTotalMoves(builderPuzzleLevelView.getMovesLeft());
+		
+		// set the remaining moves which is total moves
+		((PuzzleLevel)lvl).setRemaingMoves(builderPuzzleLevelView.getMovesLeft());
+		
+		// replace the piece list with the generated one
+		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
+		
+		// save to file
 		lvl.saveToFile();
+		
+		// reload the model to update and reinitialize
 		model.reload();
 		init();
-		mc.requestSwap(this);
+		
+		// send the request to re-render
+		mainController.requestSwap(this);
 	}	
 	
-
 	private void resetButtonClicked() {
-		model.setLevel(level, BaseLevelGenerator.makeBaseLevels().get(level-1));
+		// reset the level
+		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum-1));
 		init();
-		mc.requestSwap(this);
+		// send the request to re-render
+		mainController.requestSwap(this);
 	}
 
+	// Rest is not used...
+	
 	@Override
-	public void piecePressed(JBlockPanel jBlockPanel) {
-		
-		
-	}
+	public void piecePressed(JBlockPanel jBlockPanel) {}
 
 	@Override
-	public void pieceReleased(JBlockPanel jBlockPanel) {
-		
-		
-	}
+	public void pieceReleased(JBlockPanel jBlockPanel) {}
 
 }

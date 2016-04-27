@@ -1,63 +1,81 @@
+/**    	Builder Puzzle level View
+ * 
+ * 	  	This class is the puzzle level view for the builder.
+ * 	 	A puzzle level keeps track of moves and in order to set the moves,
+ * 		this class utilizes a JSpinner. More on the JSpinner is explained in the code.
+ * 		This class is an extension of the BuilderBaseLevelView.
+ * 
+ * 		@author Can Alper - calper@wpi.edu
+ */
+
 package boundary.puzzle;
 
 import java.awt.Color;
-import java.awt.Container;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import boundary.BuilderBaseLevelView;
-import entities.DefinedPieces;
-import entities.Piece;
 
 public class BuilderPuzzleLevelView extends BuilderBaseLevelView {
 	
-	int moves;
+	/* A class field to keep track of the moves. */
+	int movesLeft;
 	
-	public BuilderPuzzleLevelView(int moves){
+	/** Constructor  
+	 * Moves Left for the initial view.
+	 * @param movesLeft
+	 * 
+	 */
+	public BuilderPuzzleLevelView(int movesLeft){
 		super();
-		this.moves = moves;
+		this.movesLeft = movesLeft;
 	}
 	
-	public int getMoves(){
-		return moves;
+	
+	/** Returns the current value of the JSpinner.
+	 * 
+	 * @param movesLeft
+	 */
+	public int getMovesLeft(){
+		return movesLeft;
 	}
 
+	/**	Renders the Builder Base Level View and adds the JSpinner to the right corner of the screen.
+	 * 
+	 * @return panel
+	 */
 	public JPanel render() {
+		// Render the the Builder Base Level View
 		JPanel superPanel = super.render();
 		
+		// Create a label for the moves
 		JLabel spLabel = new JLabel("moves:");
 		spLabel.setBounds(350, 10, 100, 50);
 		spLabel.setVisible(true);
 		spLabel.setForeground(Color.white);
 		
-		JSpinner sp = new JSpinner(new SpinnerNumberModel(moves, 0, 1000,1));
-		sp.setBounds(400, 10, 50, 50);
-		sp.setVisible(true);
+		// Create a JSpinner for the View and Give the model of 0 to 1000
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(movesLeft, 0, 1000,1));
+		spinner.setBounds(400, 10, 50, 50);
+		spinner.setVisible(true);
 		
-		sp.addChangeListener(new ChangeListener() {
+		// Add the listener. This will update the moves.
+		spinner.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				moves = (int) ((JSpinner)arg0.getSource()).getValue();
+				movesLeft = (int) ((JSpinner)arg0.getSource()).getValue();
 			}
 	    });
 		
-		this.getLayeredPane().add(sp,new Integer(0), 0);
+		// Add the label and the spinner to the Layered Pane's 0th layer
+		this.getLayeredPane().add(spinner,new Integer(0), 0);
 		this.getLayeredPane().add(spLabel,new Integer(0), 0);
-
+		
+		// return the rendered super panel
 		return superPanel;
 	}
 
-	public JLayeredPane getLayeredPane() {
-		return super.getLayeredPane();
-	}
-	 
 }
