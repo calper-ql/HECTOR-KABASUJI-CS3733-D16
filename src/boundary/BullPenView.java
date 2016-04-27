@@ -341,10 +341,9 @@ public class BullPenView {
 	
 	public ArrayList<Piece> generatePieceList(){
 		ArrayList<Piece> list = new ArrayList<Piece>();
-		ArrayList<Piece> tempList = new DefinedPieces().getPieces();
 			for(int i = 0; i < pieceNumber.size(); i++){
 				for(int k = 0; k < pieceNumber.get(i).intValue(); k++){
-					
+					ArrayList<Piece> tempList = new DefinedPieces().getPieces();
 					list.add(tempList.get(i));
 				}
 			}
