@@ -12,6 +12,15 @@ public class LightningLevel extends Level{
 		this.timeRemaining = totalTime;
 	}
 	
+	public int getTotalTime(){
+		return this.totalTime;
+		
+	}
+	
+	public void setTotalTime(int time){
+		this.totalTime = time;
+	}
+	
 	public int getTimeRemaining(){
 		return timeRemaining;
 	}

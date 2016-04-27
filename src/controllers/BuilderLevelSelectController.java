@@ -69,27 +69,27 @@ public class BuilderLevelSelectController implements IController{
 		
 		lightningButtons[0].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lightningButtonClicked(1);
+				lightningButtonClicked(6);
 			}	
 		});
 		lightningButtons[1].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lightningButtonClicked(2);
+				lightningButtonClicked(7);
 			}	
 		});
 		lightningButtons[2].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lightningButtonClicked(3);
+				lightningButtonClicked(8);
 			}	
 		});
 		lightningButtons[3].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lightningButtonClicked(4);
+				lightningButtonClicked(9);
 			}	
 		});
 		lightningButtons[4].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lightningButtonClicked(5);
+				lightningButtonClicked(10);
 			}	
 		});
 		
