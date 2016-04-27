@@ -21,6 +21,7 @@ public class AchievementView {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	public JPanel render(){
 		JPanel p = new JPanel();
 		p.setBackground(Color.darkGray);
