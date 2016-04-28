@@ -2,10 +2,12 @@ package hector_Kabasuji;
 
 import java.awt.Color;
 
-import application.*;
+import generators.*;
 import boundary.*;
 import controllers.*;
 import entities.*;
+import kabasuji.application.*;
+import move.*;
 import junit.framework.TestCase;
 
 public class testKabasuji extends TestCase {
@@ -19,7 +21,7 @@ public class testKabasuji extends TestCase {
 
 	// Start of Entity Controllers
 	
-		Piece p0 = new Piece(Color.black);
+		Piece p0 = new Piece(Color.black, -1);
 		Block b0 = new Block(p0);
 		Block b1 = new Block(p0);
 		Block b2 = new Block(p0);
