@@ -50,7 +50,7 @@ public class Level implements Serializable {
 	public int getStars(){
 		return stars;
 	}
-	
+
 	public boolean saveToFile(){
 		
 		FileOutputStream fout;
