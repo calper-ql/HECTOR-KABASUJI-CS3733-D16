@@ -99,4 +99,17 @@ public class Level implements Serializable {
 	public boolean hasFinished(){
 		return false;
 	}
+	
+	public int getEmptyTileCount(){
+		int emptyTiles = 144;
+		for(int c = 0; c < 12; c++){
+			for(int r = 0; r < 12; r++){
+				Tile curTile = board.tiles.get(c).get(r);
+				if(!curTile.enabled() || curTile.hasBlock()){
+					emptyTiles--; 
+				}
+			}
+		}
+		return emptyTiles;
+	}
 }
