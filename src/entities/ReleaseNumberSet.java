@@ -3,15 +3,15 @@ package entities;
 import java.util.LinkedList;
 
 public class ReleaseNumberSet {
-	String color;
+	int color;
 	LinkedList<ReleaseNumber> numbers = new LinkedList<ReleaseNumber>();
 	
-	public ReleaseNumberSet(String color, LinkedList<ReleaseNumber> numbers){
+	public ReleaseNumberSet(int color, LinkedList<ReleaseNumber> numbers){
 		this.color = color;
 		this.numbers = numbers;
 	}
 	
-	public String getColor(){
+	public int getColor(){
 		return color;
 	}
 	

@@ -1,6 +1,8 @@
 package entities;
 
-public class Block implements IBlock{
+import java.io.Serializable;
+
+public class Block implements IBlock, Serializable{
 	Piece piece;
 	
 	IBlock north;

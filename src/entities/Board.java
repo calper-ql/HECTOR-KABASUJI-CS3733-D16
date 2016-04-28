@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable{
 	ArrayList<ArrayList<Tile>> tiles; // column, row
 	
 	public Board(ArrayList<ArrayList<Tile>> tiles){

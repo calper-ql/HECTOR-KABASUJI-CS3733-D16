@@ -2,6 +2,6 @@ package controllers;
 
 import javax.swing.JPanel;
 
-public interface Controller {
+public interface IController {
 	JPanel getRenderedView();
 }
