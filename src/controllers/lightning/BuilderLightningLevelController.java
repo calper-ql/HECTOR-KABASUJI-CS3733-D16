@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import boundary.JBlockPanel;
 import boundary.lightning.BuilderLightningLevelView;
+import boundary.puzzle.BuilderPuzzleLevelView;
 import controllers.BlockController;
 import controllers.BoardController;
 import controllers.BullpenControler;
@@ -17,105 +18,126 @@ import controllers.MainController;
 import entities.EmptyBlock;
 import entities.Level;
 import entities.Model;
+import entities.PuzzleLevel;
 import entities.LightningLevel;
 import generators.BaseLevelGenerator;
 
 public class BuilderLightningLevelController implements IController, ILevelController{
-	private BuilderLightningLevelView blv;
-	private MainController mc;
+	/* Things we need */
+	private MainController mainController;
 	private IController back;
-	private int level;
-	Model model;
+	private int levelNum;
+	private Model model;
 	
-	LinkedList<JBlockPanel> blocks;
-	BullpenControler bucont;
-	BoardController bocont;
-	BlockController blcont;
-	JPanel p;
-	LinkedList<JBlockPanel> currentList;
+	/* Things we create */
+	private BuilderLightningLevelView builderLightningLevelView;
+	private BullpenControler bullpenController;
+	private BoardController boardController;
+	private BlockController blockController;
+	private JPanel renderPanel;
 	
-	public BuilderLightningLevelController(MainController mc, IController back, Model model, int level) {
-		// TODO Auto-generated constructor stub
-		this.mc = mc;
+	public BuilderLightningLevelController(MainController mainController, IController back, Model model, int levelNum) {
+		this.mainController = mainController;
 		this.back = back;
-		this.level = level;
+		this.levelNum = levelNum;
 		this.model = model;
 		init();
 		
 	}
 	
 	private void init(){
-		blv = new BuilderLightningLevelView(((LightningLevel)model.getLevel(level)).getTotalTime());
-		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(level).getBullpen(), blcont);
-		bocont = new BoardController(model.getLevel(level).getBoard());
+		builderLightningLevelView = new BuilderLightningLevelView(((LightningLevel)model.getLevel(levelNum)).getTotalTime());
+		blockController = new BlockController(new EmptyBlock(), this);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		boardController = new BoardController(model.getLevel(levelNum).getBoard());
 	}
 	
 	@Override
 	public JPanel getRenderedView() {
-		p = blv.render();
+renderPanel = builderLightningLevelView.render();
 		
-		blv.getBackButton().addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				backButtonClicked();
+		// Back button
+		builderLightningLevelView.getBackButton().addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			backButtonClicked();
 			}	
 		});
 		
-		blv.getSaveButton().addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				saveButtonClicked();
+		// Save button
+		builderLightningLevelView.getSaveButton().addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			saveButtonClicked();
 			}
 		});
 		
-		blv.getResetButton().addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				resetButtonClicked();
+		// Reset button
+		builderLightningLevelView.getResetButton().addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			resetButtonClicked();
 			}
 
 		});
 		
-		bucont.enableBuilderMode();
-		blv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
-		blv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
-		bocont.enableBuilderMode();
-		bucont.disablePress();
+		// Both the bull-pen and the board needs to be at the 0th layer.
 		
+		// Warning!!! 
+		// bullpenController must be enabled for builder !BEFORE! the rendering.
+		bullpenController.enableBuilderMode();
+		builderLightningLevelView.getLayeredPane().add(bullpenController.render(), new Integer(0), 0);
+		bullpenController.disablePress();
 		
-		return p;		
+		// Warning!!! 
+		// boardController must be enabled for builder !AFTER! the rendering.
+		builderLightningLevelView.getLayeredPane().add(boardController.render(), new Integer(0), 0);
+		boardController.enableBuilderMode();
+		
+		// return the renderPanel.
+		return renderPanel;		
 	}
 	
 	private void backButtonClicked() {
 		model.reload();
-		mc.requestSwap(back);
+		// send the request to re-render to the higher controller
+		mainController.requestSwap(back);
 	}
 	
 	private void saveButtonClicked() {
-		Level lvl = model.getLevel(level);
-		((LightningLevel)lvl).setTotalTime(blv.getTime());
-		lvl.getBullpen().replacePieceList(bucont.generatePieceList());
+		// get level
+		Level lvl = model.getLevel(levelNum);
+				
+		// set the total time
+		((LightningLevel)lvl).setTotalTime(builderLightningLevelView.getTimeLeft());
+				
+		// set the remaining moves which is total moves
+		((LightningLevel)lvl).setTimeRemaining(((LightningLevel)lvl).getTimeRemaining() - 1);
+		
+		// replace the piece list with the generated one
+		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
+				
+		// save to file
 		lvl.saveToFile();
+				
+		// reload the model to update and reinitialize
 		model.reload();
 		init();
-		mc.requestSwap(this);
+				
+		// send the request to re-render
+		mainController.requestSwap(this);
 	}	
 	
 
 	private void resetButtonClicked() {
-		model.setLevel(level, BaseLevelGenerator.makeBaseLevels().get(level-1));
+		// reset the level
+		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum-1));
 		init();
-		mc.requestSwap(this);
+		// send the request to re-render
+		mainController.requestSwap(this);
 	}
 
 	@Override
-	public void piecePressed(JBlockPanel jBlockPanel) {
-		
-		
-	}
+	public void piecePressed(JBlockPanel jBlockPanel) {}
 
 	@Override
-	public void pieceReleased(JBlockPanel jBlockPanel) {
-		
-		
-	}
+	public void pieceReleased(JBlockPanel jBlockPanel) {}
 
 }

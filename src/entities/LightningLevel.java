@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class LightningLevel extends Level{
 	int totalTime;
 	int timeRemaining;
@@ -28,25 +30,46 @@ public class LightningLevel extends Level{
 	public void setTimeRemaining(int timeRemaining){
 		this.timeRemaining = timeRemaining;
 	}
-	
 	public boolean hasFinished(){
-		int emptyTiles = 144;
 		// check finish condition
-		if(timeRemaining == 0){
-			for(int c = 0; c < 12; c++){
-				for(int r = 0; r < 12; r++){
-					Tile curTile = board.tiles.get(c).get(r);
-					if(!curTile.enabled() || curTile.hasBlock()){
-						emptyTiles--; 
-					}
-				}
-			}
-			// now update the score
-			if(emptyTiles > 12) setStars(0);
-			if(emptyTiles <= 12) setStars(1);
-			if(emptyTiles <= 6) setStars(2);
-			if(emptyTiles == 0) setStars(3);
+		int emptyTiles = this.getEmptyTileCount();
+		if(timeRemaining == 0 || emptyTiles == 0){
 			return true;
 		} else return false;
+	}
+	
+	public void updateStars(){
+		int emptyTiles = this.getEmptyTileCount();
+	
+		// now update the score
+		if(emptyTiles > 12) setStars(0);
+		if(emptyTiles <= 12) setStars(1);
+		if(emptyTiles <= 6) setStars(2);
+		if(emptyTiles == 0) setStars(3);
+	}
+	
+	public void updateAchievements(){
+		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+		if(this.getStars() == 1){
+			achievements.get(3).setisUnlocked();
+			achievements.get(3).saveAchievementToFile();
+		}
+		
+		if(this.getStars() == 2){
+			achievements.get(3).setisUnlocked();
+			achievements.get(3).saveAchievementToFile();
+			achievements.get(4).setisUnlocked();
+			achievements.get(4).saveAchievementToFile();
+		}
+		
+		if(this.getStars() == 3){
+			achievements.get(3).setisUnlocked();
+			achievements.get(3).saveAchievementToFile();
+			achievements.get(4).setisUnlocked();
+			achievements.get(4).saveAchievementToFile();
+			achievements.get(5).setisUnlocked();
+			achievements.get(5).saveAchievementToFile();			
+		}
+	
 	}
 }
