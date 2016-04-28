@@ -12,6 +12,15 @@ public class LightningLevel extends Level{
 		this.timeRemaining = totalTime;
 	}
 	
+	public int getTotalTime(){
+		return this.totalTime;
+		
+	}
+	
+	public void setTotalTime(int time){
+		this.totalTime = time;
+	}
+	
 	public int getTimeRemaining(){
 		return timeRemaining;
 	}
@@ -27,7 +36,7 @@ public class LightningLevel extends Level{
 			for(int c = 0; c < 12; c++){
 				for(int r = 0; r < 12; r++){
 					Tile curTile = board.tiles.get(c).get(r);
-					if(!curTile.enabled() || curTile.block.isValidBlock()){
+					if(!curTile.enabled() || curTile.hasBlock()){
 						emptyTiles--; 
 					}
 				}

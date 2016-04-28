@@ -14,13 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import boundary.LevelSelectView;
+import controllers.lightning.LightningLevelController;
+import controllers.puzzle.PuzzleLevelController;
 import entities.Model;
 
-public class LevelSelectController implements Controller{
+public class LevelSelectController implements IController{
 	private LevelSelectView lsv;
 	private MainController mc;
-	private Controller back;
-	private Controller lvl;
+	private IController back;
+	private IController lvl;
 	private Model model;
 
 	private JButton backButton;
@@ -28,13 +30,10 @@ public class LevelSelectController implements Controller{
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
 
-	public LevelSelectController(MainController mc, Controller back, Model model) {
+	public LevelSelectController(MainController mc, IController back, Model model) {
 		this.mc = mc;
 		this.back = back;
 		this.model = model;
-
-		this.lvl = new LevelController(mc, back, model);
-
 		lsv = new LevelSelectView();
 	}
 
@@ -77,11 +76,20 @@ public class LevelSelectController implements Controller{
 				puzzleButtonClicked(5);
 			}	
 		});
+		//!!!
+
+		lightningButtons = lsv.getLightningButtons();
+		
+		lightningButtons[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(6);
+			}	
+		});
 
 		//Render Puzzle Level Icon
 		BufferedImage puzzle_img = null;
 		try {
-			URL img = boundary.BuilderLevelView.class.getResource("/img/puzzle.png");
+			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/puzzle.png");
 			puzzle_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +106,7 @@ public class LevelSelectController implements Controller{
 		//Render Lightning Level Icon
 		BufferedImage light_img = null;
 		try {
-			URL img = boundary.BuilderLevelView.class.getResource("/img/light.png");
+			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/light.png");
 			light_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -116,7 +124,7 @@ public class LevelSelectController implements Controller{
 		//Render Release Level Icon
 		BufferedImage release_img = null;
 		try {
-			URL img = boundary.BuilderLevelView.class.getResource("/img/release.png");
+			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/release.png");
 			release_img = ImageIO.read(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -133,11 +141,17 @@ public class LevelSelectController implements Controller{
 	}
 
 	private void backButtonClicked() {
-		// TODO Auto-generated method stub
 		mc.requestSwap(back);
 	}
 
 	private void puzzleButtonClicked(int i){
+		model.reload();
+		this.lvl = new PuzzleLevelController(mc, this, model, i);
+		mc.requestSwap(lvl);
+	}
+	private void lightningButtonClicked(int i){
+		model.reload();
+		this.lvl = new LightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 }

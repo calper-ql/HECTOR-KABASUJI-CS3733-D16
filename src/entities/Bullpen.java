@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Bullpen {
+public class Bullpen implements Serializable{
 	ArrayList<Piece> pieces;
 	
 	public Bullpen(ArrayList<Piece> pieces){
@@ -25,6 +26,10 @@ public class Bullpen {
 	
 	public int getSize(){
 		return pieces.size();
+	}
+
+	public void replacePieceList(ArrayList<Piece> generatePieceList) {
+		pieces = generatePieceList;
 	}
 
 }

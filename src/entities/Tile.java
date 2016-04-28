@@ -1,6 +1,9 @@
 package entities;
 
-public class Tile {
+import java.awt.Color;
+import java.io.Serializable;
+
+public class Tile implements Serializable {
 	IBlock block;
 	ReleaseNumber num;
 	boolean isEnabled;
@@ -11,9 +14,37 @@ public class Tile {
 		this.isEnabled = isEnabled;
 	}
 	
-	public void recieveBlock(Block block){
+	public void setBlock(IBlock block){
 		this.block = block;
 		return;
+	}
+	
+	public void iterateState(){
+		if(num instanceof EmptyReleaseNumber){
+			if(!isEnabled) enable();
+			else disable();
+		}else{
+			if(!isEnabled) enable();
+			else{
+				if(num.getNum() >= 6 && num.getColor() >= 2){
+					num.setNum(0);
+					num.setColor(0);
+					disable();
+				}else{
+					if(num.getNum() == 6){
+						num.setColor(num.getColor()+1);
+						num.setNum(1);
+					}else{
+						num.setNum(num.getNum()+1);
+					}
+				
+				}
+			}
+		}
+	}
+	
+	public ReleaseNumber getReleaseNumber(){
+		return num;
 	}
 	
 	public boolean enabled(){ return isEnabled; }
@@ -22,7 +53,18 @@ public class Tile {
 	
 	public void disable(){ isEnabled = false; }
 	
-	public IBlock removeBlock(){
+	public boolean hasBlock(){
+		return block.isValidBlock();
+	}
+	
+	public IBlock getBlock(){
 		return block;
 	}
+	
+	public IBlock removeBlock(){
+		IBlock temp = block;
+		block = new EmptyBlock();
+		return temp;
+	}
+
 }

@@ -50,6 +50,16 @@ public class DefinedPieces {
 		pieces.add(this.setUpPiece34());
 		pieces.add(this.setUpPiece35());
 	}
+	
+	/**
+	 * Return the whole list of defined pieces.
+	 * 
+	 * @return The list being requested.
+	 */
+	public ArrayList<Piece> getPieces() {
+		return pieces;
+	}
+	
 	/**
 	 * Return a specified piece from a defined list of 35.
 	 * 
@@ -65,7 +75,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece1() {
 		// Set Up Piece and Link Blocks
-		Piece piece1 = new Piece(Color.GREEN);
+		Piece piece1 = new Piece(Color.GREEN,1);
 		Block block1 = new Block(piece1);
 		Block block2 = new Block(piece1);
 		Block block3 = new Block(piece1);
@@ -85,7 +95,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece2() {
 		// Set Up Piece and Link Blocks
-		Piece piece2 = new Piece(Color.RED);
+		Piece piece2 = new Piece(Color.RED,2);
 		Block block1 = new Block(piece2);
 		Block block2 = new Block(piece2);
 		Block block3 = new Block(piece2);
@@ -105,7 +115,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece3() {
 		// Set Up Piece and Link Blocks
-		Piece piece3 = new Piece(Color.CYAN);
+		Piece piece3 = new Piece(Color.CYAN, 3);
 		Block block1 = new Block(piece3);
 		Block block2 = new Block(piece3);
 		Block block3 = new Block(piece3);
@@ -125,7 +135,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece4() {
 		// Set Up Piece and Link Blocks
-		Piece piece4 = new Piece(Color.MAGENTA);
+		Piece piece4 = new Piece(Color.MAGENTA, 4);
 		Block block1 = new Block(piece4);
 		Block block2 = new Block(piece4);
 		Block block3 = new Block(piece4);
@@ -145,7 +155,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece5() {
 		// Set Up Piece and Link Blocks
-		Piece piece5 = new Piece(Color.PINK);
+		Piece piece5 = new Piece(Color.PINK, 5);
 		Block block1 = new Block(piece5);
 		Block block2 = new Block(piece5);
 		Block block3 = new Block(piece5);
@@ -165,7 +175,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece6() {
 		// Set Up Piece and Link Blocks
-		Piece piece6 = new Piece(Color.GREEN);
+		Piece piece6 = new Piece(Color.GREEN, 6);
 		Block block1 = new Block(piece6);
 		Block block2 = new Block(piece6);
 		Block block3 = new Block(piece6);
@@ -185,7 +195,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece7() {
 		// Set Up Piece and Link Blocks
-		Piece piece7 = new Piece(Color.RED);
+		Piece piece7 = new Piece(Color.RED, 7);
 		Block block1 = new Block(piece7);
 		Block block2 = new Block(piece7);
 		Block block3 = new Block(piece7);
@@ -205,7 +215,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece8() {
 		// Set Up Piece and Link Blocks
-		Piece piece8 = new Piece(Color.CYAN);
+		Piece piece8 = new Piece(Color.CYAN, 8);
 		Block block1 = new Block(piece8);
 		Block block2 = new Block(piece8);
 		Block block3 = new Block(piece8);
@@ -225,7 +235,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece9() {
 		// Set Up Piece and Link Blocks
-		Piece piece9 = new Piece(Color.MAGENTA);
+		Piece piece9 = new Piece(Color.MAGENTA, 9);
 		Block block1 = new Block(piece9);
 		Block block2 = new Block(piece9);
 		Block block3 = new Block(piece9);
@@ -245,7 +255,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece10() {
 		// Set Up Piece and Link Blocks
-		Piece piece10 = new Piece(Color.PINK);
+		Piece piece10 = new Piece(Color.PINK, 10);
 		Block block1 = new Block(piece10);
 		Block block2 = new Block(piece10);
 		Block block3 = new Block(piece10);
@@ -265,7 +275,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece11() {
 		// Set Up Piece and Link Blocks
-		Piece piece11 = new Piece(Color.GREEN);
+		Piece piece11 = new Piece(Color.GREEN, 11);
 		Block block1 = new Block(piece11);
 		Block block2 = new Block(piece11);
 		Block block3 = new Block(piece11);
@@ -285,7 +295,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece12() {
 		// Set Up Piece and Link Blocks
-		Piece piece12 = new Piece(Color.RED);
+		Piece piece12 = new Piece(Color.RED, 12);
 		Block block1 = new Block(piece12);
 		Block block2 = new Block(piece12);
 		Block block3 = new Block(piece12);
@@ -305,7 +315,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece13() {
 		// Set Up Piece and Link Blocks
-		Piece piece13 = new Piece(Color.CYAN);
+		Piece piece13 = new Piece(Color.CYAN, 13);
 		Block block1 = new Block(piece13);
 		Block block2 = new Block(piece13);
 		Block block3 = new Block(piece13);
@@ -325,7 +335,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece14() {
 		// Set Up Piece and Link Blocks
-		Piece piece14 = new Piece(Color.MAGENTA);
+		Piece piece14 = new Piece(Color.MAGENTA, 14);
 		Block block1 = new Block(piece14);
 		Block block2 = new Block(piece14);
 		Block block3 = new Block(piece14);
@@ -345,7 +355,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece15() {
 		// Set Up Piece and Link Blocks
-		Piece piece15 = new Piece(Color.PINK);
+		Piece piece15 = new Piece(Color.PINK, 15);
 		Block block1 = new Block(piece15);
 		Block block2 = new Block(piece15);
 		Block block3 = new Block(piece15);
@@ -365,7 +375,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece16() {
 		// Set Up Piece and Link Blocks
-		Piece piece16 = new Piece(Color.GREEN);
+		Piece piece16 = new Piece(Color.GREEN, 16);
 		Block block1 = new Block(piece16);
 		Block block2 = new Block(piece16);
 		Block block3 = new Block(piece16);
@@ -385,7 +395,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece17() {
 		// Set Up Piece and Link Blocks
-		Piece piece17 = new Piece(Color.RED);
+		Piece piece17 = new Piece(Color.RED, 17);
 		Block block1 = new Block(piece17);
 		Block block2 = new Block(piece17);
 		Block block3 = new Block(piece17);
@@ -405,7 +415,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece18() {
 		// Set Up Piece and Link Blocks
-		Piece piece18 = new Piece(Color.CYAN);
+		Piece piece18 = new Piece(Color.CYAN, 18);
 		Block block1 = new Block(piece18);
 		Block block2 = new Block(piece18);
 		Block block3 = new Block(piece18);
@@ -425,7 +435,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece19() {
 		// Set Up Piece and Link Blocks
-		Piece piece19 = new Piece(Color.MAGENTA);
+		Piece piece19 = new Piece(Color.MAGENTA, 19);
 		Block block1 = new Block(piece19);
 		Block block2 = new Block(piece19);
 		Block block3 = new Block(piece19);
@@ -445,7 +455,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece20() {
 		// Set Up Piece and Link Blocks
-		Piece piece20 = new Piece(Color.PINK);
+		Piece piece20 = new Piece(Color.PINK, 20);
 		Block block1 = new Block(piece20);
 		Block block2 = new Block(piece20);
 		Block block3 = new Block(piece20);
@@ -465,7 +475,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece21() {
 		// Set Up Piece and Link Blocks
-		Piece piece21 = new Piece(Color.GREEN);
+		Piece piece21 = new Piece(Color.GREEN, 21);
 		Block block1 = new Block(piece21);
 		Block block2 = new Block(piece21);
 		Block block3 = new Block(piece21);
@@ -485,7 +495,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece22() {
 		// Set Up Piece and Link Blocks
-		Piece piece22 = new Piece(Color.RED);
+		Piece piece22 = new Piece(Color.RED, 22);
 		Block block1 = new Block(piece22);
 		Block block2 = new Block(piece22);
 		Block block3 = new Block(piece22);
@@ -505,7 +515,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece23() {
 		// Set Up Piece and Link Blocks
-		Piece piece23 = new Piece(Color.CYAN);
+		Piece piece23 = new Piece(Color.CYAN, 23);
 		Block block1 = new Block(piece23);
 		Block block2 = new Block(piece23);
 		Block block3 = new Block(piece23);
@@ -525,7 +535,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece24() {
 		// Set Up Piece and Link Blocks
-		Piece piece24 = new Piece(Color.MAGENTA);
+		Piece piece24 = new Piece(Color.MAGENTA, 24);
 		Block block1 = new Block(piece24);
 		Block block2 = new Block(piece24);
 		Block block3 = new Block(piece24);
@@ -545,7 +555,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece25() {
 		// Set Up Piece and Link Blocks
-		Piece piece25 = new Piece(Color.PINK);
+		Piece piece25 = new Piece(Color.PINK, 25);
 		Block block1 = new Block(piece25);
 		Block block2 = new Block(piece25);
 		Block block3 = new Block(piece25);
@@ -565,7 +575,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece26() {
 		// Set Up Piece and Link Blocks
-		Piece piece26 = new Piece(Color.GREEN);
+		Piece piece26 = new Piece(Color.GREEN, 26);
 		Block block1 = new Block(piece26);
 		Block block2 = new Block(piece26);
 		Block block3 = new Block(piece26);
@@ -585,7 +595,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece27() {
 		// Set Up Piece and Link Blocks
-		Piece piece27 = new Piece(Color.RED);
+		Piece piece27 = new Piece(Color.RED, 27);
 		Block block1 = new Block(piece27);
 		Block block2 = new Block(piece27);
 		Block block3 = new Block(piece27);
@@ -605,7 +615,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece28() {
 		// Set Up Piece and Link Blocks
-		Piece piece28 = new Piece(Color.CYAN);
+		Piece piece28 = new Piece(Color.CYAN, 28);
 		Block block1 = new Block(piece28);
 		Block block2 = new Block(piece28);
 		Block block3 = new Block(piece28);
@@ -625,7 +635,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece29() {
 		// Set Up Piece and Link Blocks
-		Piece piece29 = new Piece(Color.MAGENTA);
+		Piece piece29 = new Piece(Color.MAGENTA, 29);
 		Block block1 = new Block(piece29);
 		Block block2 = new Block(piece29);
 		Block block3 = new Block(piece29);
@@ -645,7 +655,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece30() {
 		// Set Up Piece and Link Blocks
-		Piece piece30 = new Piece(Color.PINK);
+		Piece piece30 = new Piece(Color.PINK, 30);
 		Block block1 = new Block(piece30);
 		Block block2 = new Block(piece30);
 		Block block3 = new Block(piece30);
@@ -665,7 +675,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece31() {
 		// Set Up Piece and Link Blocks
-		Piece piece31 = new Piece(Color.GREEN);
+		Piece piece31 = new Piece(Color.GREEN, 31);
 		Block block1 = new Block(piece31);
 		Block block2 = new Block(piece31);
 		Block block3 = new Block(piece31);
@@ -685,7 +695,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece32() {
 		// Set Up Piece and Link Blocks
-		Piece piece32 = new Piece(Color.RED);
+		Piece piece32 = new Piece(Color.RED, 32);
 		Block block1 = new Block(piece32);
 		Block block2 = new Block(piece32);
 		Block block3 = new Block(piece32);
@@ -705,7 +715,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece33() {
 		// Set Up Piece and Link Blocks
-		Piece piece33 = new Piece(Color.CYAN);
+		Piece piece33 = new Piece(Color.CYAN, 33);
 		Block block1 = new Block(piece33);
 		Block block2 = new Block(piece33);
 		Block block3 = new Block(piece33);
@@ -725,7 +735,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece34() {
 		// Set Up Piece and Link Blocks
-		Piece piece34 = new Piece(Color.MAGENTA);
+		Piece piece34 = new Piece(Color.MAGENTA, 34);
 		Block block1 = new Block(piece34);
 		Block block2 = new Block(piece34);
 		Block block3 = new Block(piece34);
@@ -745,7 +755,7 @@ public class DefinedPieces {
 	 */
 	public Piece setUpPiece35() {
 		// Set Up Piece and Link Blocks
-		Piece piece35 = new Piece(Color.PINK);
+		Piece piece35 = new Piece(Color.PINK, 35);
 		Block block1 = new Block(piece35);
 		Block block2 = new Block(piece35);
 		Block block3 = new Block(piece35);

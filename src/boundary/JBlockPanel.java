@@ -1,6 +1,7 @@
 package boundary;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,7 +16,9 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	int ofsety;
 	BlockView bv;
 	IBlock ib;
-	boolean _isOnLevel;
+	
+	Point clickLocation;
+	boolean enabled;
 	
 	public JBlockPanel(BlockView bv, IBlock ib) {
 		super();
@@ -24,17 +27,16 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		this.bv = bv;
+		enabled = true;
 		this.ib = ib;
-		_isOnLevel = false;
 	}
 	
-	public boolean isOnLevel(){
-		return _isOnLevel;
+	public void enablePress(){
+		enabled = true;
 	}
 	
-	
-	public void onLevel(){
-		_isOnLevel = true;
+	public void disablePress(){
+		enabled = false;
 	}
 	
 	public int getOfsetX() {return ofsetx;}
@@ -48,24 +50,21 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if(!enabled) return;
 		ofsetx = e.getX();
 		ofsety = e.getY();
+		bv.pressed(this);
+		clickLocation = this.getLocation();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		bv.pressed(new EmptyBlock(), 0 ,0);
+		if(enabled)bv.released(this);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if(_isOnLevel){
-			
-		}else {
-			ofsetx = e.getX();
-			ofsety = e.getY();
-			bv.pressed(ib , ofsetx, ofsety);
-		}
+		
 	}
 
 	@Override
@@ -73,11 +72,16 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if(_isOnLevel)bv.update(e.getX()-ofsetx, e.getY()-ofsety);
+		if(enabled)bv.update(e.getX()-ofsetx, e.getY()-ofsety);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 	
+	}
+
+	public IBlock getBlock() {
+		// TODO Auto-generated method stub
+		return ib;
 	}
 }

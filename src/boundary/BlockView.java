@@ -28,34 +28,31 @@ public class BlockView{
 		this.bc = bc;
 	}
 
-	public LinkedList<JBlockPanel> render(IBlock block, int x, int y, boolean isOnLevel){
+	public LinkedList<JBlockPanel> render(IBlock block, int x, int y){
 		LinkedList<JBlockPanel> list = new LinkedList<JBlockPanel>();
-		IBlock dummyBlock = new Block(new Piece(Color.black));
-		renderToList(block, dummyBlock, list, x, y, isOnLevel);
+		IBlock dummyBlock = new Block(new Piece(Color.black, 0));
+		renderToList(block, dummyBlock, list, x, y);
 		currentList = list;
 		currentBlock = block;
 		return list;
 	}
 	
-	public void renderToList(IBlock block, IBlock caller,LinkedList<JBlockPanel> list, int x, int y,  boolean isOnLevel){
+	public void renderToList(IBlock block, IBlock caller,LinkedList<JBlockPanel> list, int x, int y){
 		if(block.isValidBlock()){
 			JBlockPanel p = new JBlockPanel(this, block);
-			if(isOnLevel) p.onLevel();
 			p.setBackground(((Block) block).getPiece().getColor());
 			p.setBounds(x, y, size, size);
-			if(p.isOnLevel()){p.setBorder(BorderFactory.createLineBorder(Color.white));}
-			else {p.setBorder(BorderFactory.createLineBorder(Color.black));}
+			p.setBorder(BorderFactory.createLineBorder(Color.black));
 			list.add(p);
 			if(caller.isValidBlock()){
-				if(caller != block.getNorth())renderToList(block.getNorth(), block, list, x, y-size, isOnLevel);
-				if(caller != block.getSouth())renderToList(block.getSouth(), block, list, x, y+size, isOnLevel);
-				if(caller != block.getEast())renderToList(block.getEast(), block, list, x-size, y, isOnLevel);
-				if(caller != block.getWest())renderToList(block.getWest(), block, list, x+size, y, isOnLevel);
+				if(caller != block.getNorth())renderToList(block.getNorth(), block, list, x, y-size);
+				if(caller != block.getSouth())renderToList(block.getSouth(), block, list, x, y+size);
+				if(caller != block.getEast())renderToList(block.getEast(), block, list, x-size, y);
+				if(caller != block.getWest())renderToList(block.getWest(), block, list, x+size, y);
 			}
 		}
 		
 	}
-
 
 	public void update(int x, int y) {
 		for(JBlockPanel bp: currentList){
@@ -63,9 +60,13 @@ public class BlockView{
 			bp.setLocation(p.x + x, p.y + y);
 		}
 	}
-	
-	public void pressed(IBlock ib, int x, int y){
-		bc.sendToLevelController(ib, x, y);
+
+	public void pressed(JBlockPanel jBlockPanel) {
+		bc.pressed(jBlockPanel);
+	}
+
+	public void released(JBlockPanel jBlockPanel) {
+		bc.released(jBlockPanel);
 	}
 	
 }

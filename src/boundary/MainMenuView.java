@@ -34,10 +34,12 @@ public class MainMenuView {
 		jp.add(menuLabel);
 		
 		btnLevels = new JButton("Levels");
+		btnLevels.setBackground(Color.WHITE);
 		btnLevels.setBounds(50, 185, 200, 50);
 		jp.add(btnLevels);
 		
 		btnAchivements = new JButton("Achievements");
+		btnAchivements.setBackground(Color.WHITE);
 		btnAchivements.setBounds(50, 245, 200, 50);
 		jp.add(btnAchivements);
 		

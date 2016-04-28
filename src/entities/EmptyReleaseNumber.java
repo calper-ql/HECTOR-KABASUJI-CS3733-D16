@@ -2,15 +2,13 @@ package entities;
 
 public class EmptyReleaseNumber extends ReleaseNumber {
 
-	public EmptyReleaseNumber(String color, int num){
-		super(color, num);
+	public EmptyReleaseNumber(){
+		super(0, 0);
 		
-		this.color = "none";
-		this.num = 0;
 	}
 	
-	public String getColor(){
-		return "none";
+	public int getColor(){
+		return this.color;
 	}
 	
 	public void setColor(String color){
