@@ -166,6 +166,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 				// We get the level and remove the piece from the bullpen
 				// Can be different for other level types
 				model.getLevel(levelNum).getBullpen().removePiece(bl.getFirst().getPiece());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -173,6 +174,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 			// Update the moves left
 			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
+			lvl.updateStars();
 			
 		}
 		
