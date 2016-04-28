@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class PuzzleLevel extends Level{
 	int movesTotal;
@@ -53,6 +54,25 @@ public class PuzzleLevel extends Level{
 		if(emptyTiles <= 12) setStars(1);
 		if(emptyTiles <= 6) setStars(2);
 		if(emptyTiles == 0) setStars(3);
+	}
+	
+	public void updateAchievements(){
+		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+		if(this.getStars() == 1){
+			achievements.get(0).unlocked = true;
+		}
+		
+		if(this.getStars() == 2){
+			achievements.get(0).unlocked = true;
+			achievements.get(1).unlocked = true;			
+		}
+		
+		if(this.getStars() == 3){
+			achievements.get(0).unlocked = true;
+			achievements.get(1).unlocked = true;
+			achievements.get(2).unlocked = true;			
+		}
+	
 	}
 
 }
