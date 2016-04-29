@@ -177,6 +177,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
+			
 			// Unlock next level if stars >= 1
 			try {
 				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
