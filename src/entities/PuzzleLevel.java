@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class PuzzleLevel extends Level{
 	int movesTotal;
@@ -39,8 +40,8 @@ public class PuzzleLevel extends Level{
 	
 	public boolean hasFinished(){
 		// check finish condition
-		if(movesRemaining == 0){
-			
+		int emptyTiles = this.getEmptyTileCount();
+		if(movesRemaining == 0 || emptyTiles == 0){
 			return true;
 		} else return false;
 	}
@@ -53,6 +54,31 @@ public class PuzzleLevel extends Level{
 		if(emptyTiles <= 12) setStars(1);
 		if(emptyTiles <= 6) setStars(2);
 		if(emptyTiles == 0) setStars(3);
+	}
+	
+	public void updateAchievements(){
+		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+		if(this.getStars() == 1){
+			achievements.get(0).setisUnlocked();
+			achievements.get(0).saveAchievementToFile();
+			}
+		
+		if(this.getStars() == 2){
+			achievements.get(0).setisUnlocked();
+			achievements.get(0).saveAchievementToFile();
+			achievements.get(1).setisUnlocked();
+			achievements.get(1).saveAchievementToFile();
+		}
+		
+		if(this.getStars() == 3){
+			achievements.get(0).setisUnlocked();
+			achievements.get(0).saveAchievementToFile();
+			achievements.get(1).setisUnlocked();
+			achievements.get(1).saveAchievementToFile();
+			achievements.get(2).setisUnlocked();
+			achievements.get(2).saveAchievementToFile();			
+		}
+	
 	}
 
 }
