@@ -119,7 +119,7 @@ public class testKabasuji extends TestCase {
 		}
 	}
 	
-	public void testPieceRotate(){
+	public void testPieceRotateCCW(){
 		b0.linkEast(b1);
 		b1.linkEast(b2);
 		b2.linkNorth(b3);
@@ -149,17 +149,62 @@ public class testKabasuji extends TestCase {
 			assertEquals(p0.getBlock(3).getEast(), b2);
 			assertEquals(p0.getBlock(3).getWest(), b5);
 			
-			assertEquals(p0.getBlock(4).getNorth().isValidBlock(), false);
+			assertEquals(p0.getBlock(4).getNorth(), b3);
 			assertEquals(p0.getBlock(4).getSouth().isValidBlock(), false);
-			assertEquals(p0.getBlock(4).getEast(), 	b3);
+			assertEquals(p0.getBlock(4).getEast().isValidBlock(), false);
 			assertEquals(p0.getBlock(4).getWest().isValidBlock(), false);
 			
 			assertEquals(p0.getBlock(5).getNorth().isValidBlock(), false);
-			assertEquals(p0.getBlock(5).getSouth(), b3);
-			assertEquals(p0.getBlock(5).getEast().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getSouth().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getEast(), b3);
 			assertEquals(p0.getBlock(5).getWest().isValidBlock(), false);
 		} catch (Exception e) {
 			
 		}
 	}
+	
+	public void testPieceRotateClockwise(){
+		b0.linkEast(b1);
+		b1.linkEast(b2);
+		b2.linkNorth(b3);
+		b3.linkWest(b4);
+		b3.linkNorth(b5);
+		b0.rotate(false);
+		
+		try {
+			assertEquals(p0.getBlock(0).getNorth().isValidBlock(), false);
+			assertEquals(p0.getBlock(0).getSouth(), b1);
+			assertEquals(p0.getBlock(0).getEast().isValidBlock(), false);
+			assertEquals(p0.getBlock(0).getWest().isValidBlock(), false);
+			
+			assertEquals(p0.getBlock(1).getNorth(), b0);
+			assertEquals(p0.getBlock(1).getSouth(), b2);
+			assertEquals(p0.getBlock(1).getEast().isValidBlock(), false);
+			assertEquals(p0.getBlock(1).getWest().isValidBlock(), false);
+			
+			assertEquals(p0.getBlock(2).getNorth(), b1);
+			assertEquals(p0.getBlock(2).getSouth().isValidBlock(), false);
+			assertEquals(p0.getBlock(2).getEast(), b3);
+			assertEquals(p0.getBlock(2).getWest().isValidBlock(), false);
+			
+			assertEquals(p0.getBlock(3).getNorth(), b4);
+			assertEquals(p0.getBlock(3).getSouth().isValidBlock(), false);
+			assertEquals(p0.getBlock(3).getEast(), b5);
+			assertEquals(p0.getBlock(3).getWest(), 	b2);
+			
+			assertEquals(p0.getBlock(4).getNorth().isValidBlock(), false);
+			assertEquals(p0.getBlock(4).getSouth(), b3);
+			assertEquals(p0.getBlock(4).getEast().isValidBlock(), false);
+			assertEquals(p0.getBlock(4).getWest().isValidBlock(), false);
+			
+			assertEquals(p0.getBlock(5).getNorth().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getSouth().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getEast().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getWest(), b3);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
 }

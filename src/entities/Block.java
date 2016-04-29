@@ -55,28 +55,10 @@ public class Block implements IBlock, Serializable{
 		this.east = this.west;
 		this.west = holder;
 		
-		if (caller == this){
-			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
-			if(this.west.isValidBlock())	this.west.flipBlock(this);
-			if(this.north.isValidBlock())	this.north.flipBlock(this);
-			if(this.south.isValidBlock())	this.south.flipBlock(this);
-		} else if (caller != this.east && caller != this.north && caller != this.south) {
-			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
-			if(this.north.isValidBlock())	this.north.flipBlock(this);
-			if(this.south.isValidBlock())	this.south.flipBlock(this);
-		} else if (caller != this.west && caller != this.north && caller != this.south) {
-			if(this.west.isValidBlock())	this.west.flipBlock(this);
-			if(this.north.isValidBlock())	this.north.flipBlock(this);
-			if(this.south.isValidBlock())	this.south.flipBlock(this);
-		} else if (caller != this.east && caller != this.west && caller != this.south) {
-			if(this.east.isValidBlock())	this.east.flipBlock(this);
-			if(this.west.isValidBlock())	this.west.flipBlock(this);
-			if(this.south.isValidBlock())	this.south.flipBlock(this);
-		} else if (caller != this.east && caller != this.west && caller != this.north) {
-			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
-			if(this.west.isValidBlock())	this.west.flipBlock(this);
-			if(this.north.isValidBlock())	this.north.flipBlock(this);
-		}
+		if(caller != this.east) if(this.east.isValidBlock()) this.east.flipBlock(this);
+		if(caller != this.west) if(this.west.isValidBlock()) this.west.flipBlock(this);
+		if(caller != this.north) if(this.north.isValidBlock()) this.north.flipBlock(this);
+		if(caller != this.south) if(this.south.isValidBlock())	this.south.flipBlock(this);
 	}
 
 	public void linkNorth(Block b){
