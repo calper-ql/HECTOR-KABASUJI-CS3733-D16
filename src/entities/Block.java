@@ -34,15 +34,15 @@ public class Block implements IBlock, Serializable{
 	}
 	
 	public void rotateBlock(IBlock caller){
-		IBlock holder = this.east;
-		this.east = this.north;
-		this.north = this.west;
-		this.west = this.south;
+		IBlock holder = this.west;
+		this.west = this.north;
+		this.north = this.east; 
+		this.east = this.south;
 		this.south = holder;
-		if (caller != this.north) this.north.rotateBlock(this);
-		if (caller != this.east)  this.east.rotateBlock(this);
-		if (caller != this.south) this.south.rotateBlock(this);
-		if (caller != this.west)  this.west.rotateBlock(this);
+		if (caller != this.north && this.north.isValidBlock()) this.north.rotateBlock(this);
+		if (caller != this.east && this.east.isValidBlock()) this.east.rotateBlock(this);
+		if (caller != this.south && this.south.isValidBlock()) this.south.rotateBlock(this);
+		if (caller != this.west && this.west.isValidBlock()) this.west.rotateBlock(this);
 	}
 	
 	public void flip(){
