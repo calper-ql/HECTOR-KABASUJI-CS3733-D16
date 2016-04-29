@@ -56,27 +56,30 @@ public class LevelSelectController implements IController{
 				puzzleButtonClicked(1);
 			}	
 		});
+		
 		puzzleButtons[1].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				puzzleButtonClicked(2);
 			}	
 		});
+		
 		puzzleButtons[2].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				puzzleButtonClicked(3);
 			}	
 		});
+		
 		puzzleButtons[3].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				puzzleButtonClicked(4);
 			}	
 		});
+		
 		puzzleButtons[4].addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				puzzleButtonClicked(5);
 			}	
 		});
-		//!!!
 
 		lightningButtons = lsv.getLightningButtons();
 		
@@ -85,7 +88,66 @@ public class LevelSelectController implements IController{
 				lightningButtonClicked(6);
 			}	
 		});
-
+		
+		lightningButtons[1].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(7);
+			}	
+		});
+		
+		lightningButtons[2].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(8);
+			}	
+		});
+		
+		lightningButtons[3].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(9);
+			}	
+		});
+		
+		lightningButtons[4].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				lightningButtonClicked(10);
+			}	
+		});
+		
+		/** !!! When Release is implemented 
+		releaseButtons = lsv.getReleaseButtons();
+		
+		releaseButtons[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(11);
+			}	
+		});
+		
+			releaseButtons[1].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(12);
+			}	
+		});
+		
+			releaseButtons[2].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(13);
+			}	
+		});
+		
+			releaseButtons[3].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(14);
+			}	
+		});
+		
+			releaseButtons[4].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(15);
+			}	
+		});
+		*/
+		
+		
 		//Render Puzzle Level Icon
 		BufferedImage puzzle_img = null;
 		try {
@@ -154,4 +216,11 @@ public class LevelSelectController implements IController{
 		this.lvl = new LightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
+	//!!! when release implemented
+	/**private void releaseButtonClicked(int i){
+		model.reload();
+		this.lvl = new ReleaseLevelController(mc, this, model, i);
+		mc.requestSwap(lvl);
+	}
+	*/
 }
