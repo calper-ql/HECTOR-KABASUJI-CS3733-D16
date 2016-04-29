@@ -36,7 +36,6 @@ public class AchievementController implements IController{
 	}
 	
 	private void backButtonClicked() {
-		// TODO Auto-generated method stub
 		mc.requestSwap(back);
 	}
 }

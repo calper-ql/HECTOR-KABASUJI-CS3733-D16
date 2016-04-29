@@ -30,4 +30,18 @@ public class BoardController {
 		bv.enableBuilderMode();
 	}
 
+	public void disableBuilderMode() {
+		bv.disableBuilderMode();
+		
+	}
+
+	public void enableHintSelection() {
+		bv.enableHintSelection();
+		
+	}
+	public void disableHintSelection() {
+		bv.disableHintSelection();
+		
+	}
+
 }

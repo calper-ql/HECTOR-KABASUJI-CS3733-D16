@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -27,6 +28,7 @@ public class BuilderBaseLevelView {
 	private JButton resetButton;
 	private JButton saveButton;
 	private JButton undoButton;
+	private JRadioButton hintButton;
 	
 	JLayeredPane lp;
 	
@@ -78,6 +80,11 @@ public class BuilderBaseLevelView {
 		saveButton.setBackground(Color.white);
 		p.add(saveButton);
 		
+		hintButton = new JRadioButton("Enable Hints");
+		hintButton.setBounds(500, 60, 95, 30);
+		hintButton.setBackground(Color.white);
+		p.add(hintButton);
+		
 		lp.add(p, new Integer(0), 0);
 		mp.add(lp);
 		
@@ -94,5 +101,9 @@ public class BuilderBaseLevelView {
 	
 	public JButton getSaveButton(){
 		return saveButton;
+	}
+	
+	public JRadioButton getHintButton(){
+		return hintButton;
 	}
 }
