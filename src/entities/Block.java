@@ -23,8 +23,8 @@ public class Block implements IBlock, Serializable{
 		west = new EmptyBlock();
 	}
 	
-	public void rotate(boolean CC){
-		if(CC){
+	public void rotate(boolean CounterClockwise){
+		if(CounterClockwise){
 			rotateBlock(this);
 		}else{
 			rotateBlock(this);
@@ -54,8 +54,29 @@ public class Block implements IBlock, Serializable{
 		IBlock holder = this.east;
 		this.east = this.west;
 		this.west = holder;
-		if (caller != this.west) this.west.flipBlock(this);
-		if (caller != this.east) this.east.flipBlock(this);
+		
+		if (caller == this){
+			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
+			if(this.west.isValidBlock())	this.west.flipBlock(this);
+			if(this.north.isValidBlock())	this.north.flipBlock(this);
+			if(this.south.isValidBlock())	this.south.flipBlock(this);
+		} else if (caller != this.east && caller != this.north && caller != this.south) {
+			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
+			if(this.north.isValidBlock())	this.north.flipBlock(this);
+			if(this.south.isValidBlock())	this.south.flipBlock(this);
+		} else if (caller != this.west && caller != this.north && caller != this.south) {
+			if(this.west.isValidBlock())	this.west.flipBlock(this);
+			if(this.north.isValidBlock())	this.north.flipBlock(this);
+			if(this.south.isValidBlock())	this.south.flipBlock(this);
+		} else if (caller != this.east && caller != this.west && caller != this.south) {
+			if(this.east.isValidBlock())	this.east.flipBlock(this);
+			if(this.west.isValidBlock())	this.west.flipBlock(this);
+			if(this.south.isValidBlock())	this.south.flipBlock(this);
+		} else if (caller != this.east && caller != this.west && caller != this.north) {
+			if(this.east.isValidBlock()) 	this.east.flipBlock(this);
+			if(this.west.isValidBlock())	this.west.flipBlock(this);
+			if(this.north.isValidBlock())	this.north.flipBlock(this);
+		}
 	}
 
 	public void linkNorth(Block b){
