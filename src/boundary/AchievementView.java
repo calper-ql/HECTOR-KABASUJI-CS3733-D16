@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entities.Achievement;
+import entities.Model;
 import generators.AchievementGenerator;
 
 public class AchievementView {
@@ -37,7 +38,14 @@ public class AchievementView {
 		resetButton.setBounds(640-20-65, 5, 65, 50);
 		p.add(resetButton);
 		
-		ArrayList<Achievement> achievementList = AchievementGenerator.makeAchievements();
+		Model model = new Model("", null, null);
+		model.reload();
+		
+		model.generateAchievements();
+		model.getLevel(1).setStars(3);
+		model.unlockAchievements();
+		
+		ArrayList<Achievement> achievementList = model.getAchievements();
 		
 		for(int i = 0; i<=2; i++){
 			Achievement a = achievementList.get(i);
