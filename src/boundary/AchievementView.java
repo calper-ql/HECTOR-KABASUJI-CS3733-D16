@@ -42,7 +42,6 @@ public class AchievementView {
 		model.reload();
 		
 		model.generateAchievements();
-		model.getLevel(1).setStars(3);
 		model.unlockAchievements();
 		
 		ArrayList<Achievement> achievementList = model.getAchievements();

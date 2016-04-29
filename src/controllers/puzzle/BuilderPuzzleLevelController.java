@@ -12,6 +12,8 @@ package controllers.puzzle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 import boundary.JBlockPanel;
@@ -104,6 +106,22 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			}
 
 		});
+		
+		// Hint button
+				builderPuzzleLevelView.getHintButton().addItemListener(new ItemListener() {
+					
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						if(e.getStateChange() == 1){
+							boardController.disableBuilderMode();
+							boardController.enableHintSelection();
+						} else {
+							boardController.disableHintSelection();
+							boardController.enableBuilderMode();
+						}
+						
+					}
+				});
 		
 		// Both the bullpen and the board needs to be at the 0th layer.
 		

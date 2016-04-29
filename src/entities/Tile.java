@@ -7,11 +7,24 @@ public class Tile implements Serializable {
 	IBlock block;
 	ReleaseNumber num;
 	boolean isEnabled;
+	boolean _isHintTile;
 	
 	public Tile(IBlock block, ReleaseNumber num, boolean isEnabled){
 		this.block = block;
 		this.num = num;
 		this.isEnabled = isEnabled;
+	}
+	
+	public void enableHintTile(){
+		this._isHintTile = true;
+	}
+	
+	public void disableHintTile(){
+		this._isHintTile = false;
+	}
+	
+	public boolean isHintTile(){
+		return _isHintTile;
 	}
 	
 	public void setBlock(IBlock block){

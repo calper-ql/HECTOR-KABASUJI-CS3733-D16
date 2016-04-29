@@ -2,6 +2,8 @@ package controllers.lightning;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -77,7 +79,21 @@ renderPanel = builderLightningLevelView.render();
 			}
 
 		});
-		
+		// Hint button
+		builderLightningLevelView.getHintButton().addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == 1){
+					boardController.disableBuilderMode();
+					boardController.enableHintSelection();
+				} else {
+					boardController.disableHintSelection();
+					boardController.enableBuilderMode();
+				}
+				
+			}
+		});
 		// Both the bull-pen and the board needs to be at the 0th layer.
 		
 		// Warning!!! 
