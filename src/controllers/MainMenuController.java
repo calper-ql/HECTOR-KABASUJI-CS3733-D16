@@ -59,6 +59,7 @@ public class MainMenuController implements IController {
 	
 	private void achivementsButtonClicked(){
 		mc.requestSwap(ac);
+		
 	}
 
 }

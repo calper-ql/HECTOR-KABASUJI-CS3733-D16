@@ -45,44 +45,6 @@ public class Achievement {
 		this.unlocked = true;
 	}
 	
-	public boolean saveAchievementToFile(){
-		FileOutputStream fout;
-		ObjectOutputStream oos;
-		try {
-			File dir = new File("achievements");
-			if(!dir.exists()){
-				dir.mkdirs();
-			}
-			
-			File save = new File(dir, "achievement " + name);
-			if(!save.exists()){
-				save.createNewFile();
-			}
-			
-			fout = new FileOutputStream("achievements/achievement " + name);
-			oos = new ObjectOutputStream(fout);
-			oos.writeObject(this);
-			oos.flush();
-			fout.flush();
-			oos.close();
-		} catch (IOException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	public Achievement getAchievementFromFile(String name) throws IOException, ClassNotFoundException{
-		FileInputStream fout;
-		ObjectInputStream oos;
-		
-		fout = new FileInputStream(("achievements/achievement " + name));
-		oos = new ObjectInputStream(fout);
-		Achievement loaded = (Achievement) oos.readObject();
-		oos.close();
-		return loaded;
-		
-	}
-	
 	public boolean isUnlocked(){
 		return this.unlocked;
 	}
