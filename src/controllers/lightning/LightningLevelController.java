@@ -24,7 +24,7 @@ import entities.Tile;
 import move.NonOverlayMove;
 import move.OverlayMove;
 
-public class LightningLevelController implements IController, ILevelController{
+public class LightningLevelController implements IController, ILevelController, Runnable{
 	private LightningLevelView lightningLevelView;
 	private MainController mainController;
 	private IController back;
@@ -48,7 +48,8 @@ public class LightningLevelController implements IController, ILevelController{
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
 		boardController = new BoardController(model.getLevel(levelNum).getBoard());
 		currentBlockPanelList = null;
-		
+		Thread counter = new Thread(this);
+		counter.start();
 	}
 	
 
@@ -130,6 +131,21 @@ public class LightningLevelController implements IController, ILevelController{
 		
 		// finally we re-render
 		mainController.requestSwap(this);
+	}
+
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LightningLevel lvl = (LightningLevel)model.getLevel(levelNum);
+		(lvl).setTimeRemaining(lvl.getTimeRemaining()-1);
+		new Thread(this).start();
+		lightningLevelView.updateTimer();
 	}
 }
 

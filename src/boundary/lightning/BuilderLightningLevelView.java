@@ -17,13 +17,18 @@ public class BuilderLightningLevelView extends BuilderBaseLevelView {
 	
 	public BuilderLightningLevelView(int seconds){
 		super();
-		this.seconds = seconds;
+		this.seconds = seconds%60;
+		this.minutes = (seconds-this.seconds)/60; 
 	}
 	
-	public int getTimeLeft(){
+	public int getSecondsLeft(){
 		return this.seconds;
 	}
 
+	public int getMinutesLeft(){
+		return this.minutes;
+	}
+	
 	public JPanel render() {
 		JPanel superPanel = super.render();
 		
@@ -33,7 +38,7 @@ public class BuilderLightningLevelView extends BuilderBaseLevelView {
 		spLabel.setForeground(Color.white);
 		
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(minutes, 0, 1000, 1));
-		sp.setBounds(400, 10, 50, 50);
+		sp.setBounds(350, 10, 50, 50);
 		sp.setVisible(true);
 		
 		sp.addChangeListener(new ChangeListener() {
@@ -54,9 +59,9 @@ public class BuilderLightningLevelView extends BuilderBaseLevelView {
 			}
 	    });
 		
-		
+		this.getLayeredPane().add(sp2, new Integer(0), 0);
 		this.getLayeredPane().add(sp,new Integer(0), 0);
-		this.getLayeredPane().add(spLabel,new Integer(0), 0);
+		//this.getLayeredPane().add(spLabel,new Integer(0), 0);
 
 		return superPanel;
 	}

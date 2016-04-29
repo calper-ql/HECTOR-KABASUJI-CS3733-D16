@@ -106,10 +106,10 @@ renderPanel = builderLightningLevelView.render();
 		Level lvl = model.getLevel(levelNum);
 				
 		// set the total time
-		((LightningLevel)lvl).setTotalTime(builderLightningLevelView.getTimeLeft());
+		((LightningLevel)lvl).setTotalTime(builderLightningLevelView.getSecondsLeft() + builderLightningLevelView.getMinutesLeft()*60);
 				
 		// set the remaining moves which is total moves
-		((LightningLevel)lvl).setTimeRemaining(((LightningLevel)lvl).getTimeRemaining() - 1);
+		((LightningLevel)lvl).setTimeRemaining(((LightningLevel)lvl).getTotalTime());
 		
 		// replace the piece list with the generated one
 		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
