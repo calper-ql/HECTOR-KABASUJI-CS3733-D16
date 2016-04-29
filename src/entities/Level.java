@@ -27,7 +27,7 @@ public class Level implements Serializable {
 		this.hints = hints;
 	}
 	
-	public boolean locked(){
+	public boolean isLocked(){
 		return isLocked;
 	}
 	

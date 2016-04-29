@@ -3,10 +3,9 @@ package controllers.lightning;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.LinkedList;
 
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import boundary.JBlockPanel;
@@ -19,118 +18,156 @@ import controllers.ILevelController;
 import controllers.MainController;
 import entities.EmptyBlock;
 import entities.IBlock;
+import entities.Level;
 import entities.Model;
+import entities.PuzzleLevel;
 import entities.LightningLevel;
 import entities.Tile;
 import move.NonOverlayMove;
+import move.OverlayMove;
 
-public class LightningLevelController implements IController, ILevelController{
-	private LightningLevelView lv;
-	private MainController mc;
+public class LightningLevelController implements IController, ILevelController, Runnable{
+	private LightningLevelView lightningLevelView;
+	private MainController mainController;
 	private IController back;
-	private JButton backButton;
 	private Model model;
-	int level;
+	int levelNum;
 	
-	LinkedList<JBlockPanel> blocks;
-	BullpenControler bucont;
-	BoardController bocont;
-	BlockController blcont;
-	JPanel p;
-	LinkedList<JBlockPanel> currentList ;
+	BullpenControler bullpenController;
+	BoardController boardController;
+	BlockController blockController;
+	JPanel renderPanel;
+	LinkedList<JBlockPanel> currentBlockPanelList;
 	
-	public LightningLevelController(MainController mc, IController back, Model model, int level) {
-		this.mc = mc;
+	public LightningLevelController(MainController mainController, IController back, Model model, int levelNum) {
+		this.mainController = mainController;
 		this.back = back;
-		lv = new LightningLevelView(model.getLevel(level));
-		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(level).getBullpen(), blcont);
-		bocont = new BoardController(model.getLevel(level).getBoard());
-		currentList = null;
 		this.model = model;
-		this.level = level;
+		this.levelNum = levelNum;
+		
+		lightningLevelView = new LightningLevelView(model.getLevel(levelNum));
+		blockController = new BlockController(new EmptyBlock(), this);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		currentBlockPanelList = null;
+		Thread counter = new Thread(this);
+		counter.start();
 	}
 	
 
 	@Override
 	public JPanel getRenderedView() {
-		Point loc = mc.getMouseLocation();
+		// Render the main view
+		renderPanel = lightningLevelView.render();
 		
-		p = lv.render();
-		
-		backButton = lv.getBackButton();
-		backButton.addActionListener(new ActionListener(){
+		//Attach button
+		lightningLevelView.getBackButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();
 			}	
 		});
 		
-		lv.getLayeredPane().add(bocont.render(), new Integer(0), 0);
-		lv.getLayeredPane().add(bucont.render(), new Integer(0), 0);
-
-		return p;
+		// Render the components to the 0th layer
+		lightningLevelView.getLayeredPane().add(boardController.render(), new Integer(0), 0);
+		lightningLevelView.getLayeredPane().add(bullpenController.render(), new Integer(0), 0);
+		
+		return renderPanel;
 		
 	}
+		
 	
 	private void backButtonClicked() {
 		model.reload();
-		mc.requestSwap(back);
+		mainController.requestSwap(back);
 	}
 
 	public void piecePressed(JBlockPanel jBlockPanel) {
-		LinkedList<JBlockPanel> list = bucont.pop(jBlockPanel);
-		currentList = list;
-		try{
-			if(list.isEmpty()) return;
-		}catch(Exception e){
-			return;
-		}
-		for(JBlockPanel item: list){
+		currentBlockPanelList = bullpenController.pop(jBlockPanel);
+		
+		for(JBlockPanel item: currentBlockPanelList){
 			try{
-				p.add(item,new Integer(1), 0);
+				renderPanel.add(item, new Integer(1), 0);
 			}catch(Exception e){
-						
+				e.printStackTrace();	
 			}
 		}
 	}
 
 
 	public void pieceReleased(JBlockPanel jBlockPanel) {
-		JLayeredPane layers = lv.getLayeredPane();
-		layers = new JLayeredPane();
-		// Check for the board
-		// do the move
+		// Lists for the move
 		LinkedList<Tile> tl = new LinkedList<>();
 		LinkedList<IBlock> bl= new LinkedList<>();
+
 		
-		for(JBlockPanel jbp: currentList){
+		// Populating the lists
+		for(JBlockPanel jbp: currentBlockPanelList){
 			try{
-				Tile temp = bocont.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
+				// The tile underneath the JBlockPanel is found and added to the same index of the lists
+				Tile temp = boardController.getTileAtPoint(new Point(16+jbp.getLocation().x, 16+jbp.getLocation().y));
 				bl.add(jbp.getBlock());
 				tl.add(temp);
 			} catch (Exception e){
-	
+			// If the bounds are out of board we will receive an exception and it is handled here
+			// The solution is to re-render without any moves whatsoever.
+				mainController.requestSwap(this);
+				return;
 			}
 		}		
-		
-		if(tl.size() != 6){
-			mc.requestSwap(this);
-			return;
-		}
-		
-		if(new NonOverlayMove(bl, tl).doMove()){
+				
+		// If we get here we check for the validity of the move in doMove() and we act according to it
+		if(new OverlayMove(bl, tl).doMove()){
+		// If the processor gets here this means that the move was valid
 			try {
-				model.getLevel(level).getBullpen().removePiece(bl.getFirst().getPiece());
+				// We get the level and remove the piece from the bullpen
+				// Can be different for other level types
+				model.getLevel(levelNum).getBullpen().removePiece(bl.getFirst().getPiece());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			LightningLevel lvl = (LightningLevel) model.getLevel(level);
-			lvl.setTimeRemaining(lvl.getTimeRemaining() - 1);
-			
+			}	
 		}
 		
-		mc.requestSwap(this);
+		// Update the moves left
+		LightningLevel lvl = (LightningLevel) model.getLevel(levelNum);
+		lvl.updateStars();
+		// Unlock next level if stars >= 1
+		try {
+			Level levelToUnlock = lvl.getFromFile(levelNum + 1);
+			if (lvl.getStars() >= 1){
+				levelToUnlock.unlock();
+			}
+		} catch (ClassNotFoundException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//need to save just stars not whole level
+		try {
+			Level levelToSaveStars = lvl.getFromFile(levelNum);
+			levelToSaveStars.setStars(lvl.getStars());
+			levelToSaveStars.saveToFile();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// finally we re-render
+		mainController.requestSwap(this);
+	}
+
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LightningLevel lvl = (LightningLevel)model.getLevel(levelNum);
+		(lvl).setTimeRemaining(lvl.getTimeRemaining()-1);
+		new Thread(this).start();
+		lightningLevelView.updateTimer();
 	}
 }
 

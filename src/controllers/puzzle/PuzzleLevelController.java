@@ -9,6 +9,7 @@ package controllers.puzzle;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
@@ -23,6 +24,7 @@ import controllers.ILevelController;
 import controllers.MainController;
 import entities.EmptyBlock;
 import entities.IBlock;
+import entities.Level;
 import entities.Model;
 import entities.PuzzleLevel;
 import entities.Tile;
@@ -175,6 +177,26 @@ public class PuzzleLevelController implements IController, ILevelController{
 			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
+			
+			// Unlock next level if stars >= 1
+			try {
+				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
+				if (lvl.getStars() >= 1){
+					levelToUnlock.unlock();
+				}
+			} catch (ClassNotFoundException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//need to save just stars not whole level
+			try {
+				Level levelToSaveStars = lvl.getFromFile(levelNum);
+				levelToSaveStars.setStars(lvl.getStars());
+				levelToSaveStars.saveToFile();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		

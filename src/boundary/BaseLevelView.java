@@ -110,48 +110,41 @@ public class BaseLevelView {
 			e.printStackTrace();
 		}
 		
-		Image star_img_r = star_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-		Image info_img_r = info_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		Image star_img_r = star_img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		if(level.getStars() == 0){
 			
 		}else if(level.getStars() == 1){
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			lblNewLabel_1.setBounds(380, 40, 30, 30);
 			p.add(lblNewLabel_1);
 		}else if(level.getStars() == 2){
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			lblNewLabel_1.setBounds(380, 40, 30, 30);
 			p.add(lblNewLabel_1);
 			
 			JLabel lblNewLabel_2 = new JLabel("");
-			lblNewLabel_2.setBounds(445, 27, 40, 40);
+			lblNewLabel_2.setBounds(432, 40, 30, 30);
 			lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
 			p.add(lblNewLabel_2);
 		}else if(level.getStars() == 3){
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-			lblNewLabel_1.setBounds(341, 27, 40, 40);
+			lblNewLabel_1.setBounds(380, 40, 30, 30);
 			p.add(lblNewLabel_1);
 			
 			JLabel lblNewLabel_2 = new JLabel("");
-			lblNewLabel_2.setBounds(445, 27, 40, 40);
+			lblNewLabel_2.setBounds(432, 40, 30, 30);
 			lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
 			p.add(lblNewLabel_2);
 			
 			JLabel lblNewLabel_3 = new JLabel("");
-			lblNewLabel_3.setBounds(393, 27, 40, 40);
+			lblNewLabel_3.setBounds(484, 40, 30, 30);
 			lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
 			p.add(lblNewLabel_3);
 		}
-		
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(info_img_r));
-		label_1.setBounds(20, 54, 40, 40);
-		p.add(label_1);
 		
 		lp.add(p, new Integer(0), 0);
 		mp.add(lp);
