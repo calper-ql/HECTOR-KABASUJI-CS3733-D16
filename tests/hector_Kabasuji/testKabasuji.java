@@ -119,7 +119,7 @@ public class testKabasuji extends TestCase {
 		}
 	}
 	
-	public void testPieceRotateCCW(){
+	public void testPieceRotateCounterClockwise(){
 		b0.linkEast(b1);
 		b1.linkEast(b2);
 		b2.linkNorth(b3);
