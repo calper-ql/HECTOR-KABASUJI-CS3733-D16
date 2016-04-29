@@ -13,6 +13,8 @@ import entities.LightningLevel;
 public class LightningLevelView extends BaseLevelView{
 	Level level;
 	
+	JLabel remainingTime;
+	
 	public LightningLevelView(Level level) {
 		super(level);
 		this.level = level;
@@ -21,9 +23,12 @@ public class LightningLevelView extends BaseLevelView{
 	public JPanel render() {
 		JPanel superPanel = super.render();
 		// Create the label with the remaining time
-		JLabel remainingTime = new JLabel("Time left: " + new Integer(((LightningLevel)level).getTimeRemaining()).toString());
+		Integer seconds = new Integer(((LightningLevel)level).getTimeRemaining()%60); 
+		Integer minutes = new Integer((((LightningLevel)level).getTimeRemaining() - seconds.intValue())/60); 
+		
+		remainingTime = new JLabel("Time left: " + minutes.toString() + " minutes " + seconds.toString() + " seconds" );
 		remainingTime.setForeground(Color.white);
-		remainingTime.setBounds(400, 20, 150, 20);
+		remainingTime.setBounds(300, 20, 300, 20);
 		
 		// Add to the layer 0 of the base Level View
 		this.getLayeredPane().add(remainingTime, new Integer(0), 0);
@@ -33,6 +38,12 @@ public class LightningLevelView extends BaseLevelView{
 
 	public JButton getBackButton() {
 		return super.getBackButton();
+	}
+
+	public void updateTimer() {
+		Integer seconds = new Integer(((LightningLevel)level).getTimeRemaining()%60); 
+		Integer minutes = new Integer((((LightningLevel)level).getTimeRemaining() - seconds.intValue())/60); 
+		remainingTime.setText("Time left: " + minutes.toString() + " minutes " + seconds.toString() + " seconds");
 	}
 
 }
