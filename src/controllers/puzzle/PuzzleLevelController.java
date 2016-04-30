@@ -161,6 +161,8 @@ public class PuzzleLevelController implements IController, ILevelController{
 			}
 		}		
 		
+		PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
+		
 		// If we get here we check for the validity of the move in doMove() and we act according to it
 		if(new NonOverlayMove(bl, tl).doMove()){
 			// If the processor gets here this means that the move was valid
@@ -174,52 +176,34 @@ public class PuzzleLevelController implements IController, ILevelController{
 			}
 			
 			// Update the moves left
-			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
+			
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
-			// Unlock next level if stars >= 1
-			try {
-				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
-				if (lvl.getStars() >= 1){
-					levelToUnlock.unlock();
-				}
-			} catch (ClassNotFoundException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			//need to save just stars not whole level
-			try {
-				Level levelToSaveStars = lvl.getFromFile(levelNum);
-				levelToSaveStars.setStars(lvl.getStars());
-				levelToSaveStars.saveToFile();
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
-			// Unlock next level if stars >= 1
-			try {
-				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
-				if (lvl.getStars() >= 1){
-					levelToUnlock.unlock();
-				}
-			} catch (ClassNotFoundException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			//need to save just stars not whole level
-			try {
-				Level levelToSaveStars = lvl.getFromFile(levelNum);
-				levelToSaveStars.setStars(lvl.getStars());
-				levelToSaveStars.saveToFile();
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(lvl.hasFinished()){
+				System.out.println("finished");
+				try {
+					if(lvl.getLevelNum()>0){
+						PuzzleLevel savelvl = (PuzzleLevel) lvl.getFromFile(levelNum);
+						savelvl.setStars(lvl.getStars());
+						savelvl.saveToFile();
+					}
+				} catch (ClassNotFoundException | IOException e) {}
+				try {
+					if(lvl.getStars() > 0 && lvl.getLevelNum()>0){
+						Level next = lvl.getFromFile(levelNum+1);
+						next.unlock();
+						next.saveToFile();
+					}
+				} catch (ClassNotFoundException | IOException e) {}
+				model.reload();
+				
 			}
 			
 		}
 		
 		// finally we re-render
-		mainController.requestSwap(this);
+		if(!lvl.hasFinished())mainController.requestSwap(this);
+		else mainController.requestSwap(back);
 	}
 }
