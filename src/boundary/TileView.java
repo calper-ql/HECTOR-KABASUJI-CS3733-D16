@@ -9,9 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import entities.Piece;
 import entities.Tile;
 
-public class TileView implements MouseListener{
+public class TileView {
 	int size;
 	int col;
 	int row;
@@ -22,13 +23,45 @@ public class TileView implements MouseListener{
 	
 	MouseListener builderListener;
 	MouseListener hintListener;
+	MouseListener removeListener;
+	BoardView boardView;
 	
-	public TileView(int size, int col, int row, Tile tile){
+	public TileView(int size, int col, int row, Tile tile, BoardView boardView){
 		this.size = size;
 		this.col = col;
 		this.row = row;
 		tileColor = Color.white;
 		this.tile = tile;
+		this.boardView = boardView;
+		tilep = new JPanel();
+	}
+	
+	public void enableRemoveMode(){
+		removeListener = new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!tile.hasBlock())return;
+				Piece piece = tile.getBlock().getPiece();
+				boardView.removePiece(piece);
+			}
+		};
+		
+		
+		
+		tilep.addMouseListener(removeListener);
+	}
+	
+	public void disableRemoveMode(){
+		tilep.removeMouseListener(removeListener);
 	}
 	
 	public void enableBuilderMode(){
@@ -122,6 +155,7 @@ public class TileView implements MouseListener{
 	
 	public void setColor(Color c){
 		tileColor = c;
+		tilep.setBackground(c);
 	}
 
 	public void disableBuilderMode() {
@@ -132,33 +166,4 @@ public class TileView implements MouseListener{
 		tilep.removeMouseListener(hintListener);
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

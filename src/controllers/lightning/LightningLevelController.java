@@ -49,7 +49,7 @@ public class LightningLevelController implements IController, ILevelController, 
 		lightningLevelView = new LightningLevelView(model.getLevel(levelNum));
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
-		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		boardController = new BoardController(model.getLevel(levelNum), this);
 		currentBlockPanelList = null;
 		counter = new Thread(this);
 		counter.start();
@@ -174,6 +174,11 @@ public class LightningLevelController implements IController, ILevelController, 
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public void requestReRender() {
+		mainController.requestSwap(this);
 	}
 }
 
