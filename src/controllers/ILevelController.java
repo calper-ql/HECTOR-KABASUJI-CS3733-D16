@@ -11,4 +11,5 @@ import entities.Tile;
 public interface ILevelController {
 	public void piecePressed(JBlockPanel jBlockPanel);
 	public void pieceReleased(JBlockPanel jBlockPanel);
+	public void requestReRender();
 }
