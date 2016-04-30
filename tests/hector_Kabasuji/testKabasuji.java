@@ -1,6 +1,7 @@
 package hector_Kabasuji;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import generators.*;
 import boundary.*;
@@ -15,11 +16,11 @@ public class testKabasuji extends TestCase {
 
 	protected void setUp() throws Exception {
 		game = new Application();
-		WindowManager wmg = new WindowManager(200, 200, 640, 535);
-		wmg.link(new GameMainController(new Application()));
+		game.main(null);
 	}
 
 	// Start of Entity Controllers
+	// Piece Tests
 	
 		Piece p0 = new Piece(Color.black, -1);
 		Block b0 = new Block(p0);
@@ -206,5 +207,12 @@ public class testKabasuji extends TestCase {
 		}
 	}
 	
+	public void testDefinedPieces(){
+		DefinedPieces dp = new DefinedPieces();
+		
+		for(int i = 0; i < 35; i++){
+			assertEquals(pieces.contains(dp.getPiece(i)), true);
+		}
+	}
 	
 }
