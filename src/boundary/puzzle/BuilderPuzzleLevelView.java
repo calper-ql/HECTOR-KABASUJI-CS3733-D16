@@ -58,7 +58,7 @@ public class BuilderPuzzleLevelView extends BuilderBaseLevelView {
 		spLabel.setForeground(Color.white);
 		
 		// Create a JSpinner for the View and Give the model of 0 to 1000
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(movesLeft, 0, 1000,1));
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(movesLeft, 0, 1000, 1));
 		spinner.setBounds(400, 10, 50, 50);
 		spinner.setVisible(true);
 		

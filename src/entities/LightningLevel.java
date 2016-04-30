@@ -47,29 +47,4 @@ public class LightningLevel extends Level{
 		if(emptyTiles <= 6) setStars(2);
 		if(emptyTiles == 0) setStars(3);
 	}
-	
-	public void updateAchievements(){
-		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-		if(this.getStars() == 1){
-			achievements.get(3).setisUnlocked();
-			achievements.get(3).saveAchievementToFile();
-		}
-		
-		if(this.getStars() == 2){
-			achievements.get(3).setisUnlocked();
-			achievements.get(3).saveAchievementToFile();
-			achievements.get(4).setisUnlocked();
-			achievements.get(4).saveAchievementToFile();
-		}
-		
-		if(this.getStars() == 3){
-			achievements.get(3).setisUnlocked();
-			achievements.get(3).saveAchievementToFile();
-			achievements.get(4).setisUnlocked();
-			achievements.get(4).saveAchievementToFile();
-			achievements.get(5).setisUnlocked();
-			achievements.get(5).saveAchievementToFile();			
-		}
-	
-	}
 }

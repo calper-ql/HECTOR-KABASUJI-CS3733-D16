@@ -177,6 +177,25 @@ public class PuzzleLevelController implements IController, ILevelController{
 			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
+			// Unlock next level if stars >= 1
+			try {
+				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
+				if (lvl.getStars() >= 1){
+					levelToUnlock.unlock();
+				}
+			} catch (ClassNotFoundException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//need to save just stars not whole level
+			try {
+				Level levelToSaveStars = lvl.getFromFile(levelNum);
+				levelToSaveStars.setStars(lvl.getStars());
+				levelToSaveStars.saveToFile();
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			// Unlock next level if stars >= 1
 			try {

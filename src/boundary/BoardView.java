@@ -71,4 +71,28 @@ public class BoardView {
 			}
 		}
 	}
+
+	public void disableBuilderMode() {
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].disableBuilderMode();
+			}
+		}
+	}
+
+	public void enableHintSelection() {
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].enableHintSelection();
+			}
+		}
+	}
+
+	public void disableHintSelection() {
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].disableHintSelection();
+			}
+		}
+	}
 }

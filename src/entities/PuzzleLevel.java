@@ -56,29 +56,4 @@ public class PuzzleLevel extends Level{
 		if(emptyTiles == 0) setStars(3);
 	}
 	
-	public void updateAchievements(){
-		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-		if(this.getStars() == 1){
-			achievements.get(0).setisUnlocked();
-			achievements.get(0).saveAchievementToFile();
-			}
-		
-		if(this.getStars() == 2){
-			achievements.get(0).setisUnlocked();
-			achievements.get(0).saveAchievementToFile();
-			achievements.get(1).setisUnlocked();
-			achievements.get(1).saveAchievementToFile();
-		}
-		
-		if(this.getStars() == 3){
-			achievements.get(0).setisUnlocked();
-			achievements.get(0).saveAchievementToFile();
-			achievements.get(1).setisUnlocked();
-			achievements.get(1).saveAchievementToFile();
-			achievements.get(2).setisUnlocked();
-			achievements.get(2).saveAchievementToFile();			
-		}
-	
-	}
-
 }
