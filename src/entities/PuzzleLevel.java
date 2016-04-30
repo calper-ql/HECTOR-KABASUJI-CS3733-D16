@@ -41,7 +41,7 @@ public class PuzzleLevel extends Level{
 	public boolean hasFinished(){
 		// check finish condition
 		int emptyTiles = this.getEmptyTileCount();
-		if(movesRemaining == 0 || emptyTiles == 0){
+		if(movesRemaining <= 0 || emptyTiles <= 0){
 			return true;
 		} else return false;
 	}
