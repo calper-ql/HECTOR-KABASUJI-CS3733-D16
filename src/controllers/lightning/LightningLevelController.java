@@ -38,6 +38,7 @@ public class LightningLevelController implements IController, ILevelController, 
 	BlockController blockController;
 	JPanel renderPanel;
 	LinkedList<JBlockPanel> currentBlockPanelList;
+	Thread counter;
 	
 	public LightningLevelController(MainController mainController, IController back, Model model, int levelNum) {
 		this.mainController = mainController;
@@ -50,7 +51,7 @@ public class LightningLevelController implements IController, ILevelController, 
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
 		boardController = new BoardController(model.getLevel(levelNum).getBoard());
 		currentBlockPanelList = null;
-		Thread counter = new Thread(this);
+		counter = new Thread(this);
 		counter.start();
 	}
 	
@@ -78,6 +79,7 @@ public class LightningLevelController implements IController, ILevelController, 
 	
 	private void backButtonClicked() {
 		model.reload();
+		counter.interrupt();
 		mainController.requestSwap(back);
 	}
 
@@ -160,14 +162,18 @@ public class LightningLevelController implements IController, ILevelController, 
 	public void run() {
 		try {
 			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LightningLevel lvl = (LightningLevel)model.getLevel(levelNum);
+			(lvl).setTimeRemaining(lvl.getTimeRemaining()-1);
+			lightningLevelView.updateTimer();
+			counter = new Thread(this);
+			counter.start();
+		} catch (Exception e) {
+			if(e instanceof InterruptedException){
+				
+			}else {
+				e.printStackTrace();
+			}
 		}
-		LightningLevel lvl = (LightningLevel)model.getLevel(levelNum);
-		(lvl).setTimeRemaining(lvl.getTimeRemaining()-1);
-		new Thread(this).start();
-		lightningLevelView.updateTimer();
 	}
 }
 

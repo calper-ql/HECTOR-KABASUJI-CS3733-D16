@@ -28,6 +28,7 @@ public class BuilderBaseLevelView {
 	private JButton resetButton;
 	private JButton saveButton;
 	private JButton undoButton;
+	private JButton previewButton;
 	private JRadioButton hintButton;
 	
 	JLayeredPane lp;
@@ -65,20 +66,25 @@ public class BuilderBaseLevelView {
 		backButton.setBackground(Color.white);
 		p.add(backButton);
 		
-		undoButton = new JButton("undo");
+		undoButton = new JButton("Undo");
 		undoButton.setBounds(10, 60, 90, 30);
 		undoButton.setBackground(Color.white);
 		p.add(undoButton);
 		
-		resetButton = new JButton("reset");
+		resetButton = new JButton("Reset");
 		resetButton.setBounds(210, 60, 90, 30);
 		resetButton.setBackground(Color.white);
 		p.add(resetButton);
 		
-		saveButton = new JButton("save");
+		saveButton = new JButton("Save");
 		saveButton.setBounds(110, 60, 90, 30);
 		saveButton.setBackground(Color.white);
 		p.add(saveButton);
+		
+		previewButton = new JButton("Preview");
+		previewButton.setBounds(310, 60, 90, 30);
+		previewButton.setBackground(Color.white);
+		p.add(previewButton);
 		
 		hintButton = new JRadioButton("Enable Hints");
 		hintButton.setBounds(500, 60, 95, 30);
@@ -101,6 +107,10 @@ public class BuilderBaseLevelView {
 	
 	public JButton getSaveButton(){
 		return saveButton;
+	}
+	
+	public JButton getPreviewButton(){
+		return previewButton;
 	}
 	
 	public JRadioButton getHintButton(){

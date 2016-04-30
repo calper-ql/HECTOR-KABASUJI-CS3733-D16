@@ -52,7 +52,9 @@ public class Level implements Serializable {
 	}
 
 	public boolean saveToFile(){
-		
+		if (levelNum < 0){
+			return false;
+		}
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
@@ -78,11 +80,50 @@ public class Level implements Serializable {
 		return true;
 	}
 	
+	public boolean saveToFile(String name){
+		
+		FileOutputStream fout;
+		ObjectOutputStream oos;
+		try {
+			File dir = new File("levels");
+			if(!dir.exists()){
+				dir.mkdirs();
+			}
+			
+			File save = new File(dir, "level" + name);
+			if(!save.exists()){
+				save.createNewFile();
+			}
+			
+			fout = new FileOutputStream("levels/level" + name);
+			oos = new ObjectOutputStream(fout);
+			oos.writeObject(this);
+			oos.flush();
+			fout.flush();
+			oos.close();
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
+	
 	public Level getFromFile(int levelNum) throws IOException, ClassNotFoundException{
 		FileInputStream fout;
 		ObjectInputStream oos;
 		
 		fout = new FileInputStream(("levels/level" + levelNum));
+		oos = new ObjectInputStream(fout);
+		Level loaded = (Level) oos.readObject();
+		oos.close();
+		return loaded;
+		
+	}
+	
+	public Level getFromFile(String name) throws IOException, ClassNotFoundException{
+		FileInputStream fout;
+		ObjectInputStream oos;
+		
+		fout = new FileInputStream(("levels/level" + name));
 		oos = new ObjectInputStream(fout);
 		Level loaded = (Level) oos.readObject();
 		oos.close();
@@ -111,5 +152,10 @@ public class Level implements Serializable {
 			}
 		}
 		return emptyTiles;
+	}
+
+	public void setLevelNum(int levelNum) {
+		this.levelNum = levelNum;
+		
 	}
 }

@@ -202,7 +202,7 @@ public class BullPenView {
 				
 				panelToAdd.add(sp);
 
-				panelToAdd.setPreferredSize(new Dimension(120, 32 * 6));
+				panelToAdd.setPreferredSize(new Dimension(120, 32 * 7));
 				panel_1.add(panelToAdd);
 
 			}
