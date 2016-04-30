@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 
 import entities.Tile;
 
-public class TileView {
+public class TileView implements MouseListener{
 	int size;
 	int col;
 	int row;
@@ -130,5 +130,35 @@ public class TileView {
 	
 	public void disableHintSelection() {
 		tilep.removeMouseListener(hintListener);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
