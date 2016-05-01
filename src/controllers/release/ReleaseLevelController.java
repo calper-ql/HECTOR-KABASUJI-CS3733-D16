@@ -66,7 +66,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 		releaseLevelView = new ReleaseLevelView(model.getLevel(levelNum));
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
-		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		boardController = new BoardController(model.getLevel(levelNum), this);
 		currentBlockPanelList = null;
 		
 	}
@@ -221,5 +221,11 @@ public class ReleaseLevelController implements IController, ILevelController{
 		
 		// finally we re-render
 		mainController.requestSwap(this);
+	}
+
+	@Override
+	public void requestReRender() {
+		// TODO Auto-generated method stub
+		
 	}
 }
