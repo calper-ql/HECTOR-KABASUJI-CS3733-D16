@@ -66,7 +66,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 		puzzleLevelView = new PuzzleLevelView(model.getLevel(levelNum));
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
-		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		boardController = new BoardController(model.getLevel(levelNum), this);
 		currentBlockPanelList = null;
 		
 	}
@@ -91,6 +91,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 		// Render the components to the 0th layer
 		puzzleLevelView.getLayeredPane().add(boardController.render(), new Integer(0), 0);
 		puzzleLevelView.getLayeredPane().add(bullpenController.render(), new Integer(0), 0);
+		boardController.enableRemoveMode();
 
 		return renderPanel;
 		
@@ -205,5 +206,10 @@ public class PuzzleLevelController implements IController, ILevelController{
 		// finally we re-render
 		if(!lvl.hasFinished())mainController.requestSwap(this);
 		else mainController.requestSwap(back);
+	}
+	
+	@Override
+	public void requestReRender() {
+		mainController.requestSwap(this);
 	}
 }

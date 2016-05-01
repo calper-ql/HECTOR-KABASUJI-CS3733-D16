@@ -75,7 +75,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel) model.getLevel(levelNum)).getTotalMoves());
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
-		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		boardController = new BoardController(model.getLevel(levelNum), this);
 	}
 
 	/**
@@ -232,6 +232,11 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 	@Override
 	public void pieceReleased(JBlockPanel jBlockPanel) {
+	}
+	
+	@Override
+	public void requestReRender() {
+		mainController.requestSwap(this);
 	}
 
 }

@@ -7,8 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import controllers.BoardController;
 import entities.Block;
 import entities.Board;
+import entities.Bullpen;
+import entities.EmptyBlock;
+import entities.Piece;
 import entities.Tile;
 
 public class BoardView {
@@ -21,8 +25,9 @@ public class BoardView {
 	Board board;
 	
 	TileView tileViews[][] = new TileView[12][12];
+	private BoardController boardController;
 	
-	public BoardView(int x, int y, int width, int height, Board board) {
+	public BoardView(int x, int y, int width, int height, Board board, BoardController boardController) {
 		
 		this.x = x;
 		this.y = y;
@@ -30,10 +35,11 @@ public class BoardView {
 		this.height = width;
 		
 		this.board = board;
+		this.boardController = boardController;
 		
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
-				this.tileViews[k][i] = (new TileView(width/12,k,i, board.getTile(k, i)));
+				this.tileViews[k][i] = (new TileView(width/12,k,i, board.getTile(k, i), this));
 			}
 		}
 	}
@@ -87,6 +93,22 @@ public class BoardView {
 			}
 		}
 	}
+	
+	public void enableRemoveMode(){
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].enableRemoveMode();
+			}
+		}
+	}
+
+	public void disableRemoveMode() {
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				this.tileViews[k][i].disableRemoveMode();
+			}
+		}
+	}
 
 	public void disableHintSelection() {
 		for(int i = 0;	i < 12; i++){
@@ -94,5 +116,25 @@ public class BoardView {
 				this.tileViews[k][i].disableHintSelection();
 			}
 		}
+	}
+
+	public void removePiece(Piece piece) {
+		for(int i = 0;	i < 12; i++){
+			for(int k = 0; k < 12; k++){
+				Tile temp = board.getTile(k, i);
+				for(int j = 0;	j < 6; j++){
+					try {
+						if(temp.hasBlock())
+						if(temp.getBlock() == piece.getBlock(j)){
+							temp.setBlock(new EmptyBlock());
+							this.tileViews[k][i].setColor(Color.white);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		boardController.addToBullpen(piece);
 	}
 }

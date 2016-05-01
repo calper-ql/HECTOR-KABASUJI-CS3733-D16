@@ -6,15 +6,21 @@ import javax.swing.JPanel;
 
 import boundary.BoardView;
 import entities.Board;
+import entities.Bullpen;
+import entities.Level;
+import entities.Piece;
 import entities.Tile;
 
 public class BoardController {
 
 	JPanel p;
 	BoardView bv;
-	
-	public BoardController(Board board) {
-		bv = new BoardView(215, 100, 384, 384, board);
+	Level level;
+	ILevelController levelController;
+	public BoardController(Level level, ILevelController levelController) {
+		bv = new BoardView(215, 100, 384, 384, level.getBoard(), this);
+		this.level = level;
+		this.levelController = levelController;
 	}
 	
 	public JPanel render() {
@@ -35,6 +41,15 @@ public class BoardController {
 		
 	}
 
+	public void enableRemoveMode(){
+		bv.enableRemoveMode();
+	}
+
+	public void disableRemoveMode() {
+		bv.disableRemoveMode();
+	}
+
+	
 	public void enableHintSelection() {
 		bv.enableHintSelection();
 		
@@ -43,5 +58,11 @@ public class BoardController {
 		bv.disableHintSelection();
 		
 	}
+
+	public void addToBullpen(Piece piece) {
+		level.getBullpen().addPiece(piece);
+		levelController.requestReRender();
+	}
+
 
 }
