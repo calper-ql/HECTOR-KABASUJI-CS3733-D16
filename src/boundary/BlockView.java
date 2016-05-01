@@ -16,7 +16,7 @@ import entities.EmptyBlock;
 import entities.IBlock;
 import entities.Piece;
 
-public class BlockView{
+public class BlockView {
 
 	int size;
 	LinkedList<JBlockPanel> currentList;
@@ -54,11 +54,63 @@ public class BlockView{
 		
 	}
 
-	public void update(int x, int y) {
+	public void updateLocation(int x, int y) {
 		for(JBlockPanel bp: currentList){
 			Point p = bp.getLocation();
 			bp.setLocation(p.x + x, p.y + y);
 		}
+	}
+	
+	public void updateTransform(JBlockPanel currentPanel) {
+		updateTransformRecursive(currentPanel, currentPanel);
+	}
+	
+	public void updateTransformRecursive(JBlockPanel currentPanel, JBlockPanel caller) {
+		Point p = currentPanel.getLocation();
+		
+		IBlock north = currentPanel.getBlock().getNorth();
+		IBlock south = currentPanel.getBlock().getSouth();
+		IBlock east = currentPanel.getBlock().getEast();
+		IBlock west = currentPanel.getBlock().getWest();
+		
+		JBlockPanel northPanel = null;
+		JBlockPanel southPanel = null;
+		JBlockPanel eastPanel = null;
+		JBlockPanel westPanel = null;
+		
+		if(north.isValidBlock()) northPanel = this.seachForPanel(north);
+		if(south.isValidBlock()) southPanel = this.seachForPanel(south);
+		if(east.isValidBlock()) eastPanel = this.seachForPanel(east);
+		if(west.isValidBlock()) westPanel = this.seachForPanel(west);
+		
+		if(north.isValidBlock() && northPanel != caller){
+			northPanel.setLocation(p.x, p.y - size);
+			updateTransformRecursive(northPanel, currentPanel);
+		}
+		
+		if(south.isValidBlock() && southPanel != caller){
+			southPanel.setLocation(p.x, p.y + size);
+			updateTransformRecursive(southPanel, currentPanel);
+		}
+		
+		if(east.isValidBlock() && eastPanel != caller){
+			eastPanel.setLocation(p.x- size, p.y);
+			updateTransformRecursive(eastPanel, currentPanel);
+		}
+		
+		if(west.isValidBlock() && westPanel != caller){
+			westPanel.setLocation(p.x + size, p.y);
+			updateTransformRecursive(westPanel, currentPanel);
+		}
+		
+	}
+	
+	public JBlockPanel seachForPanel(IBlock block){
+		for(JBlockPanel bp: currentList){
+			if(bp.getBlock() == block)
+				return bp;
+		}
+		return null;
 	}
 
 	public void pressed(JBlockPanel jBlockPanel) {
