@@ -32,6 +32,16 @@ public class ReleaseLevel extends Level{
 	
 	public boolean hasFinished(){
 		//check finish condition
-		if(this.getCompleteSets() == 3)
+		int completeSets = this.getCompleteSets();
+		if(completeSets == 3 || bPen.getSize() == 0) return true;
+		else return false;
+	}
+	
+	public void updateStars(){
+		int completeSets = this.getCompleteSets();
+		if(completeSets == 0) setStars(0);
+		if(completeSets == 1) setStars(1);
+		if(completeSets == 2) setStars(2);
+		if(completeSets == 3) setStars(3);
 	}
 }

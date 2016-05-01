@@ -132,7 +132,7 @@ public class Level implements Serializable {
 	}
 	
 	public void setStars(int stars){
-		if(stars > 0 || stars <= 3){
+		if(stars > 0 || stars <= 3 && stars > this.stars){
 			this.stars = stars;
 		} else this.stars = 0;
 	}
