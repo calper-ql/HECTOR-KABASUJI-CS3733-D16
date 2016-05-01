@@ -13,4 +13,25 @@ public class ReleaseLevel extends Level{
 		
 		return;
 	}
+	
+	public int getCompleteSets(){
+		int result = 0;
+		for(int i = 0; i < 3; i++){
+			if(sets.get(i).isComplete()) result++;
+		}
+		return result;
+	}
+	
+	public int getRemainingSets(){
+		int result = 0;
+		for(int i = 0; i < 3; i++){
+			if(!sets.get(i).isComplete()) result++;
+		}
+		return result;
+	}
+	
+	public boolean hasFinished(){
+		//check finish condition
+		if(this.getCompleteSets() == 3)
+	}
 }
