@@ -15,9 +15,7 @@ public class Piece implements Serializable{
 		this.id = id;
 	}
 	
-	public int getID(){
-		return id;
-	}
+	public int getID(){ return id; }
 	
 	// getBlock returns Exception if the requested block is not a valid array #
 	public Block getBlock(int numBlock) throws Exception{
