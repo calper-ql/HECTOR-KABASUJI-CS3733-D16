@@ -200,6 +200,7 @@ public class BullPenView {
 					public void stateChanged(ChangeEvent arg0) {
 						int val = (int) ((JSpinner)arg0.getSource()).getValue();
 						pieceNumber.set(k, new Integer(val));
+						bullpenControler.stateUpdated();
 					}
 			    });
 				

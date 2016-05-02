@@ -83,6 +83,7 @@ public class TileView {
 			public void mouseClicked(MouseEvent e) {
 				tile.iterateState();
 				propertiesInit();
+				boardView.stateUpdated();
 			}
 		};
 		tilep.addMouseListener(builderListener);
@@ -107,8 +108,10 @@ public class TileView {
 			public void mouseClicked(MouseEvent e) {
 				if (tile.isHintTile()){
 					tile.disableHintTile();
+					boardView.stateUpdated();
 				} else {
 					tile.enableHintTile();
+					boardView.stateUpdated();
 				}
 				propertiesInit();
 				}
