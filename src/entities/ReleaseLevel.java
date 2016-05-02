@@ -69,4 +69,9 @@ public class ReleaseLevel extends Level{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public void setRemaingMoves(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 }
