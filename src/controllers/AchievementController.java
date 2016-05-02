@@ -15,7 +15,6 @@ public class AchievementController implements IController{
 	private JButton backButton;
 	
 	public AchievementController(MainController mc, IController back) {
-		// TODO Auto-generated constructor stub
 		this.mc = mc;
 		this.back = back;
 		av = new AchievementView();

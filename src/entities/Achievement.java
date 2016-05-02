@@ -33,7 +33,6 @@ public class Achievement {
 		try {
 			mock_img = ImageIO.read(url);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
