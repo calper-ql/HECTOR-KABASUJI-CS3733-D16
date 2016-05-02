@@ -220,6 +220,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		// reset the level
 		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum - 1));
 		init();
+		bullpenBuilderModeIsEnabled = false;
 		// send the request to re-render
 		mainController.requestSwap(this);
 	}
