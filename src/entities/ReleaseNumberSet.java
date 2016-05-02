@@ -1,8 +1,9 @@
 package entities;
 
 import java.util.LinkedList;
+import java.io.Serializable;
 
-public class ReleaseNumberSet {
+public class ReleaseNumberSet implements Serializable{
 	int color;
 	LinkedList<ReleaseNumber> numbers = new LinkedList<ReleaseNumber>();
 	
