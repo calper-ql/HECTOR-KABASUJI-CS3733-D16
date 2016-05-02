@@ -137,4 +137,8 @@ public class BoardView {
 		}
 		boardController.addToBullpen(piece);
 	}
+	
+	public void stateUpdated(){
+		boardController.stateUpdated();
+	}
 }

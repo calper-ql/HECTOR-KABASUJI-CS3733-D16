@@ -52,6 +52,10 @@ public class BullpenControler {
 	public ArrayList<Piece> generatePieceList(){
 		return bpv.generatePieceList();
 	}
+	
+	public void stateUpdated(){
+		lc.stateUpdated();
+	}
 
 }
 
