@@ -2,6 +2,10 @@ package boundary;
 
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -10,8 +14,9 @@ import javax.swing.JPanel;
 
 import entities.EmptyBlock;
 import entities.IBlock;
+import entities.Block;
 
-public class JBlockPanel extends JPanel implements MouseMotionListener, MouseListener {
+public class JBlockPanel extends JPanel implements MouseMotionListener, MouseListener, FocusListener, KeyListener {
 	int ofsetx;
 	int ofsety;
 	BlockView bv;
@@ -26,6 +31,9 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 		ofsety = 0;
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		addFocusListener(this);
+		addKeyListener(this);
+		this.setFocusable(true);
 		this.bv = bv;
 		enabled = true;
 		this.ib = ib;
@@ -64,7 +72,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		this.requestFocus();
 	}
 
 	@Override
@@ -72,7 +80,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if(enabled)bv.update(e.getX()-ofsetx, e.getY()-ofsety);
+		if(enabled)bv.updateLocation(e.getX()-ofsetx, e.getY()-ofsety);
 	}
 
 	@Override
@@ -81,7 +89,35 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	}
 
 	public IBlock getBlock() {
-		// TODO Auto-generated method stub
 		return ib;
 	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {}
+
+	@Override
+	public void keyReleased(KeyEvent e) {}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if(e.getKeyChar() == 'e'){
+			((Block)this.ib).rotate(true);
+			bv.updateTransform(this);
+		}
+		if(e.getKeyChar() == 'q'){
+			((Block)this.ib).rotate(false);
+			bv.updateTransform(this);
+		}
+		if(e.getKeyChar() == 'f'){
+			((Block)this.ib).flip();
+			bv.updateTransform(this);
+		}
+		
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }
