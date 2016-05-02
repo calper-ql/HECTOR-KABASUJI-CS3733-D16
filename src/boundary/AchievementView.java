@@ -19,7 +19,6 @@ public class AchievementView {
 	private JButton resetButton;
 	
 	public AchievementView() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -134,4 +133,7 @@ public class AchievementView {
 		return backButton;
 	}
 
+	public JButton getResetButton(){
+		return resetButton;
+	}
 }
