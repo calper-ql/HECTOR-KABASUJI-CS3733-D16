@@ -57,7 +57,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * @param model
 	 * @param levelNum
 	 */
-	
 	public ReleaseLevelController(MainController mainController, IController back, Model model, int levelNum) {
 		this.mainController = mainController;
 		this.back = back;
@@ -79,7 +78,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * @return panel
 	 */
 
-	
 	@Override
 	public JPanel getRenderedView() {
 		// Render the main view
@@ -125,7 +123,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 * @param jBlockPanel
 	 */
-	
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
@@ -137,14 +134,12 @@ public class ReleaseLevelController implements IController, ILevelController{
 			}
 		}
 	}
-
 	/**
 	 * Receives the released signal from the view on a JBlockPanel.
 	 * Checks for the move and acts accordingly.
 	 * 
 	 *  @param jBlockPanel
 	 */
-	
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 		// Lists for the move
 		LinkedList<Tile> tl = new LinkedList<>();
