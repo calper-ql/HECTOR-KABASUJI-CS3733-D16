@@ -213,6 +213,12 @@ public class testKabasuji extends TestCase {
 		assertEquals(dp.getPieces().size(), 35);
 	}
 
+	// Level Tests
 	public void testLevel(){
+		Level lev10 = game.getModel().getLevel(10);
+		
+		assertEquals(lev10.isLocked(),true);
+		lev10.unlock();
+		assertEquals(lev10.isLocked(),false);
 	}
 }

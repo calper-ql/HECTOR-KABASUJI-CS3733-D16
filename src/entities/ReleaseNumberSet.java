@@ -41,4 +41,12 @@ public class ReleaseNumberSet {
 			return true;
 		} else return false;
 	}
+	
+	public boolean removeNumber(ReleaseNumber number){
+		return numbers.remove(number);
+	}
+	
+	public void resetSet(){
+		numbers.clear();
+	}
 }
