@@ -72,17 +72,17 @@ public class BuilderBaseLevelView {
 		p.add(undoButton);
 		
 		resetButton = new JButton("Reset");
-		resetButton.setBounds(210, 60, 90, 30);
+		resetButton.setBounds(310, 60, 90, 30);
 		resetButton.setBackground(Color.white);
 		p.add(resetButton);
 		
 		saveButton = new JButton("Save");
-		saveButton.setBounds(110, 60, 90, 30);
+		saveButton.setBounds(210, 60, 90, 30);
 		saveButton.setBackground(Color.white);
 		p.add(saveButton);
 		
 		previewButton = new JButton("Preview");
-		previewButton.setBounds(310, 60, 90, 30);
+		previewButton.setBounds(410, 60, 90, 30);
 		previewButton.setBackground(Color.white);
 		p.add(previewButton);
 		
