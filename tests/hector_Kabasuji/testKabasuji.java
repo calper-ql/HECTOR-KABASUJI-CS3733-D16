@@ -13,10 +13,11 @@ import junit.framework.TestCase;
 
 public class testKabasuji extends TestCase {
 	Application game;
+	BaseLevelGenerator lev;
 
 	protected void setUp() throws Exception {
 		game = new Application();
-		game.main(null);
+		lev = new BaseLevelGenerator();
 	}
 
 	// Start of Entity Controllers
@@ -209,10 +210,15 @@ public class testKabasuji extends TestCase {
 	
 	public void testDefinedPieces(){
 		DefinedPieces dp = new DefinedPieces();
-		
-		for(int i = 0; i < 35; i++){
-			//assertEquals(pieces.contains(dp.getPiece(i)), true);
-		}
+		assertEquals(dp.getPieces().size(), 35);
 	}
-	
+
+	// Level Tests
+	public void testLevel(){
+		Level lev10 = game.getModel().getLevel(10);
+		
+		assertEquals(lev10.isLocked(),true);
+		lev10.unlock();
+		assertEquals(lev10.isLocked(),false);
+	}
 }
