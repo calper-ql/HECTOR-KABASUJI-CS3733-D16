@@ -83,7 +83,7 @@ public class testKabasuji extends TestCase {
 		b2.linkNorth(b3);
 		b3.linkWest(b4);
 		b3.linkNorth(b5);
-		b4.flip();
+		b4.flip(true);
 		
 		try {
 			assertEquals(p0.getBlock(0).getNorth().isValidBlock(), false);

@@ -4,7 +4,7 @@ public interface IBlock {
 
 	void rotateBlock(IBlock block);
 
-	void flipBlock(IBlock block);
+	void flipBlock(IBlock block, boolean horizontal);
 	
 	IBlock getNorth();
 	IBlock getSouth();

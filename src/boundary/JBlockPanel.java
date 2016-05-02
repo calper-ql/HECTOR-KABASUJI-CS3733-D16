@@ -100,16 +100,20 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if(e.getKeyChar() == 'e'){
+		if(e.getKeyChar() == 'r'){
 			((Block)this.ib).rotate(true);
 			bv.updateTransform(this);
 		}
-		if(e.getKeyChar() == 'q'){
+		if(e.getKeyChar() == 'l'){
 			((Block)this.ib).rotate(false);
 			bv.updateTransform(this);
 		}
-		if(e.getKeyChar() == 'f'){
-			((Block)this.ib).flip();
+		if(e.getKeyChar() == 'h'){
+			((Block)this.ib).flip(true);
+			bv.updateTransform(this);
+		}
+		if(e.getKeyChar() == 'v'){
+			((Block)this.ib).flip(false);
 			bv.updateTransform(this);
 		}
 		
