@@ -1,5 +1,5 @@
-/**	Puzzle Level Controller
- * 	This Controller class is to control the gameplay of the Puzzle Level
+/**	Release Level Controller
+ * 	This Controller class is to control the gameplay of the Release Level
  * 
  * 	@author Can Alper - calper@wpi.edu
  */
@@ -26,7 +26,7 @@ import entities.EmptyBlock;
 import entities.IBlock;
 import entities.Level;
 import entities.Model;
-import entities.PuzzleLevel;
+import entities.ReleaseLevel;
 import entities.Tile;
 import move.NonOverlayMove;
 
@@ -66,7 +66,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 		releaseLevelView = new ReleaseLevelView(model.getLevel(levelNum));
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
-		boardController = new BoardController(model.getLevel(levelNum).getBoard());
+		boardController = new BoardController(model.getLevel(levelNum), this);
 		currentBlockPanelList = null;
 		
 	}
@@ -173,8 +173,8 @@ public class ReleaseLevelController implements IController, ILevelController{
 				e.printStackTrace();
 			}
 			
-			// Update the moves left
-			PuzzleLevel lvl = (PuzzleLevel) model.getLevel(levelNum);
+			// Update the release sets
+			ReleaseLevel lvl = (ReleaseLevel) model.getLevel(levelNum);
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
 			// Unlock next level if stars >= 1
@@ -221,5 +221,11 @@ public class ReleaseLevelController implements IController, ILevelController{
 		
 		// finally we re-render
 		mainController.requestSwap(this);
+	}
+
+	@Override
+	public void requestReRender() {
+		// TODO Auto-generated method stub
+		
 	}
 }
