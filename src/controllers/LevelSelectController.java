@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import boundary.LevelSelectView;
 import controllers.lightning.LightningLevelController;
 import controllers.puzzle.PuzzleLevelController;
+import controllers.release.ReleaseLevelController;
 import entities.Model;
 
 public class LevelSelectController implements IController{
@@ -113,7 +114,7 @@ public class LevelSelectController implements IController{
 			}	
 		});
 		
-		/** !!! When Release is implemented 
+		// !!! When Release is implemented 
 		releaseButtons = lsv.getReleaseButtons();
 		
 		releaseButtons[0].addActionListener(new ActionListener(){
@@ -145,7 +146,7 @@ public class LevelSelectController implements IController{
 				releaseButtonClicked(15);
 			}	
 		});
-		*/
+	//	*/
 		
 		
 		//Render Puzzle Level Icon
@@ -217,10 +218,10 @@ public class LevelSelectController implements IController{
 		mc.requestSwap(lvl);
 	}
 	//!!! when release implemented
-	/**private void releaseButtonClicked(int i){
+	/**/ private void releaseButtonClicked(int i){
 		model.reload();
 		this.lvl = new ReleaseLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
-	*/
+	/**/
 }
