@@ -13,7 +13,7 @@ public class EmptyBlock implements IBlock ,Serializable{
 	}
 
 	@Override
-	public void flipBlock(IBlock block) {
+	public void flipBlock(IBlock block, boolean horizontal) {
 		// TODO Auto-generated method stub
 		
 	}

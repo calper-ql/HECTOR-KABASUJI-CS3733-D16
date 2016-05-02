@@ -45,20 +45,28 @@ public class Block implements IBlock, Serializable{
 		if (caller != this.west && this.west.isValidBlock()) this.west.rotateBlock(this);
 	}
 	
-	public void flip(){
-		flipBlock(this);
+	public void flip(boolean horizontal){
+		flipBlock(this, horizontal);
 		return;
 	}
 
-	public void flipBlock(IBlock caller){
-		IBlock holder = this.east;
-		this.east = this.west;
-		this.west = holder;
+	public void flipBlock(IBlock caller, boolean horizontal){
+		IBlock holder = null;
+		if(horizontal){
+			holder = this.east;
+			this.east = this.west;
+			this.west = holder;
+		} else {
+			holder = this.north;
+			this.north = this.south;
+			this.south = holder;
+		}
 		
-		if(caller != this.east) if(this.east.isValidBlock()) this.east.flipBlock(this);
-		if(caller != this.west) if(this.west.isValidBlock()) this.west.flipBlock(this);
-		if(caller != this.north) if(this.north.isValidBlock()) this.north.flipBlock(this);
-		if(caller != this.south) if(this.south.isValidBlock())	this.south.flipBlock(this);
+		
+		if(caller != this.east) if(this.east.isValidBlock()) this.east.flipBlock(this, horizontal);
+		if(caller != this.west) if(this.west.isValidBlock()) this.west.flipBlock(this, horizontal);
+		if(caller != this.north) if(this.north.isValidBlock()) this.north.flipBlock(this, horizontal);
+		if(caller != this.south) if(this.south.isValidBlock())	this.south.flipBlock(this, horizontal);
 	}
 
 	public void linkNorth(Block b){
