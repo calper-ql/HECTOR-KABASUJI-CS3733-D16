@@ -48,7 +48,7 @@ public class LevelController implements IController, ILevelController{
 		this.back = back;
 		lv = new BaseLevelView(model.getLevel(0));
 		blcont = new BlockController(new EmptyBlock(), this);
-		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont);
+		bucont = new BullpenControler(model.getLevel(0).getBullpen(), blcont, this);
 		bocont = new BoardController(model.getLevel(0), this);
 		currentList = null;
 		
@@ -130,6 +130,13 @@ public class LevelController implements IController, ILevelController{
 
 	@Override
 	public void requestReRender() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void stateUpdated() {
 		// TODO Auto-generated method stub
 		
 	}

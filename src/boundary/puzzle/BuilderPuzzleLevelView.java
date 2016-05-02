@@ -18,20 +18,24 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import boundary.BuilderBaseLevelView;
+import controllers.puzzle.BuilderPuzzleLevelController;
 
 public class BuilderPuzzleLevelView extends BuilderBaseLevelView {
 	
 	/* A class field to keep track of the moves. */
 	int movesLeft;
 	
+	 BuilderPuzzleLevelController builderPuzzleLevelController;
+	
 	/** Constructor  
 	 * Moves Left for the initial view.
 	 * @param movesLeft
 	 * 
 	 */
-	public BuilderPuzzleLevelView(int movesLeft){
+	public BuilderPuzzleLevelView(int movesLeft, BuilderPuzzleLevelController builderPuzzleLevelController){
 		super();
 		this.movesLeft = movesLeft;
+		this.builderPuzzleLevelController = builderPuzzleLevelController;
 	}
 	
 	
@@ -67,6 +71,7 @@ public class BuilderPuzzleLevelView extends BuilderBaseLevelView {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				movesLeft = (int) ((JSpinner)arg0.getSource()).getValue();
+				builderPuzzleLevelController.stateUpdated();
 			}
 	    });
 		

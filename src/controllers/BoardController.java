@@ -67,6 +67,10 @@ public class BoardController {
 		}
 		levelController.requestReRender();
 	}
+	
+	public void stateUpdated(){
+		levelController.stateUpdated();
+	}
 
 
 }

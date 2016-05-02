@@ -12,4 +12,5 @@ public interface ILevelController {
 	public void piecePressed(JBlockPanel jBlockPanel);
 	public void pieceReleased(JBlockPanel jBlockPanel);
 	public void requestReRender();
+	public void stateUpdated();
 }
