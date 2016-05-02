@@ -28,6 +28,12 @@ public class ReleaseLevel extends Level{
 				|| sets.get(2).addNumber(num);
 	}
 	
+	public boolean removeReleaseNumber(ReleaseNumber num){
+		return sets.get(0).removeNumber(num)
+				|| sets.get(1).removeNumber(num)
+				|| sets.get(2).removeNumber(num);
+	}
+	
 	public int getCompleteSets(){
 		int result = 0;
 		for(int i = 0; i < 3; i++){
