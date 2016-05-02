@@ -16,6 +16,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import controllers.BlockController;
+import controllers.BullpenControler;
 import entities.Bullpen;
 import entities.DefinedPieces;
 import entities.EmptyBlock;
@@ -33,12 +34,13 @@ public class BullPenView {
 	ArrayList<Piece> builderList;
 	ArrayList<Integer> pieceNumber;
 	boolean builderMode;
+	BullpenControler bullpenControler;
 
 	JPanel panel;// = new JPanel();
 	JPanel panel_1;// = new JPanel();
 	JScrollPane scrollPane; // = new JScrollPane();
 
-	public BullPenView(int x, int y, int width, int height, Bullpen bullpen, BlockController bc) {
+	public BullPenView(int x, int y, int width, int height, Bullpen bullpen, BlockController bc, BullpenControler bullpenControler) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -47,6 +49,7 @@ public class BullPenView {
 		this.bullpen = bullpen;
 		blocks = new LinkedList<LinkedList<JBlockPanel>>();
 
+		this.bullpenControler = bullpenControler;
 		panel = new JPanel();
 
 		scrollPane = new JScrollPane();

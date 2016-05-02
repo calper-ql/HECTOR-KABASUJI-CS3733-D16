@@ -30,6 +30,7 @@ import entities.EmptyBlock;
 import entities.Level;
 import entities.Model;
 import entities.PuzzleLevel;
+import entities.Tile;
 import generators.BaseLevelGenerator;
 
 public class BuilderPuzzleLevelController implements IController, ILevelController {
@@ -47,6 +48,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	private BoardController boardController;
 	private BlockController blockController;
 	private JPanel renderPanel;
+	
+	/* for undo and redo */
+	private ArrayList<Level> levelStates;
 
 	/**
 	 * Constructor for the class. mainController is for the rendering. back is
@@ -64,8 +68,24 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.levelNum = levelNum;
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
+		this.levelStates = new ArrayList<>();
+		try {
+			levelStates.add(model.getLevel(levelNum).generateLevelCopy());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		init();
 
+	}
+	
+	public void stateUpdated(){
+		try {
+			levelStates.add(model.getLevel(levelNum).generateLevelCopy());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -74,7 +94,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	private void init() {
 		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel) model.getLevel(levelNum)).getTotalMoves());
 		blockController = new BlockController(new EmptyBlock(), this);
-		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
 		boardController = new BoardController(model.getLevel(levelNum), this);
 	}
 
@@ -152,6 +172,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		// return the renderPanel.
 		return renderPanel;
 	}
+	
 	/*
 	 * Controller to save the state of the level builder level then preview that level in the Kabasuji game and then return to the Level Builder screen
 	 */

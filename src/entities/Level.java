@@ -131,6 +131,11 @@ public class Level implements Serializable {
 		
 	}
 	
+	public Level generateLevelCopy() throws ClassNotFoundException, IOException{
+		this.saveToFile("tempCopy");
+		return this.getFromFile("tempCopy");
+	}
+	
 	public void setStars(int stars){
 		if(stars > 0 || stars <= 3 && stars > this.stars) this.stars = stars;
 	}

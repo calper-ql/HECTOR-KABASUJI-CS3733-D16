@@ -15,10 +15,12 @@ public class BullpenControler {
 	
 	BullPenView bpv;
 	Bullpen bp;
+	ILevelController lc;
 	
-	public BullpenControler(Bullpen bp, BlockController bc) {
-		bpv = new BullPenView(6, 100, 192, 384, bp, bc);
+	public BullpenControler(Bullpen bp, BlockController bc, ILevelController lc) {
+		bpv = new BullPenView(6, 100, 192, 384, bp, bc, this);
 		this.bp = bp;
+		this.lc = lc;
 	}
 	
 	public LinkedList<JBlockPanel> pop(JBlockPanel jbp){
