@@ -64,4 +64,9 @@ public class ReleaseLevel extends Level{
 		if(completeSets == 2) setStars(2);
 		if(completeSets == 3) setStars(3);
 	}
+
+	public int getRemainingMoves() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
