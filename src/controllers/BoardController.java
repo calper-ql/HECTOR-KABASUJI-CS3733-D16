@@ -9,6 +9,7 @@ import entities.Board;
 import entities.Bullpen;
 import entities.Level;
 import entities.Piece;
+import entities.PuzzleLevel;
 import entities.Tile;
 
 public class BoardController {
@@ -61,6 +62,9 @@ public class BoardController {
 
 	public void addToBullpen(Piece piece) {
 		level.getBullpen().addPiece(piece);
+		if(level instanceof PuzzleLevel){
+			((PuzzleLevel) level).setRemaingMoves(((PuzzleLevel) level).getRemainingMoves()-1);
+		}
 		levelController.requestReRender();
 	}
 

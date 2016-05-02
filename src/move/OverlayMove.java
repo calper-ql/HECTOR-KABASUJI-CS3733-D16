@@ -37,6 +37,11 @@ public class OverlayMove implements IMove{
 
 	//@Override
 	public boolean valid() {
+		for(Tile t : tlist){
+			if(!t.enabled()){
+				return false;
+			}
+		}
 		return true;
 	}
 
