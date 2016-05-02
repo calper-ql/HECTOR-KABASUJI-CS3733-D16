@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import boundary.BuilderLevelSelectView;
 import boundary.LevelSelectView;
 import controllers.lightning.BuilderLightningLevelController;
+import controllers.release.BuilderReleaseLevelController;
 import controllers.puzzle.BuilderPuzzleLevelController;
 import entities.Model;
 
@@ -97,6 +98,34 @@ public class BuilderLevelSelectController implements IController{
 				lightningButtonClicked(10);
 			}	
 		});
+		releaseButtons = blsv.getReleaseButtons();
+		
+		
+		releaseButtons[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(11);
+			}	
+		});
+		releaseButtons[1].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(12);
+			}	
+		});
+		releaseButtons[2].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(13);
+			}	
+		});
+		releaseButtons[3].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(14);
+			}	
+		});
+		releaseButtons[4].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				releaseButtonClicked(15);
+			}	
+		});
 		
 		//Render Puzzle Level Icon
 				BufferedImage puzzle_img = null;
@@ -163,8 +192,8 @@ public class BuilderLevelSelectController implements IController{
 		mc.requestSwap(lvl);
 	}
 	
-	private void ReleaseButtonClicked(int i){
-		this.lvl = new BuilderPuzzleLevelController(mc, this, model, i);
+	private void releaseButtonClicked(int i){
+		this.lvl = new BuilderReleaseLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 }

@@ -22,7 +22,7 @@ import boundary.BuilderBaseLevelView;
 public class BuilderReleaseLevelView extends BuilderBaseLevelView {
 	
 	/* A class field to keep track of the moves. */
-	int movesLeft;
+	int setsLeft;
 	
 	/** Constructor  
 	 * Moves Left for the initial view.
@@ -31,7 +31,7 @@ public class BuilderReleaseLevelView extends BuilderBaseLevelView {
 	 */
 	public BuilderReleaseLevelView(int movesLeft){
 		super();
-		this.movesLeft = movesLeft;
+		this.setsLeft = movesLeft;
 	}
 	
 	
@@ -39,9 +39,10 @@ public class BuilderReleaseLevelView extends BuilderBaseLevelView {
 	 * 
 	 * @param movesLeft
 	 */
-	public int getMovesLeft(){
+	/*public int getMovesLeft(){
 		return movesLeft;
 	}
+	
 
 	/**	Renders the Builder Base Level View and adds the JSpinner to the right corner of the screen.
 	 * 
@@ -58,7 +59,7 @@ public class BuilderReleaseLevelView extends BuilderBaseLevelView {
 		spLabel.setForeground(Color.white);
 		
 		// Create a JSpinner for the View and Give the model of 0 to 1000
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(movesLeft, 0, 1000, 1));
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(setsLeft, 0, 1000, 1));
 		spinner.setBounds(400, 10, 50, 50);
 		spinner.setVisible(true);
 		
@@ -66,7 +67,7 @@ public class BuilderReleaseLevelView extends BuilderBaseLevelView {
 		spinner.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
-				movesLeft = (int) ((JSpinner)arg0.getSource()).getValue();
+				setsLeft = (int) ((JSpinner)arg0.getSource()).getValue();
 			}
 	    });
 		
