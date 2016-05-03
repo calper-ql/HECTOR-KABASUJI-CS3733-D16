@@ -39,20 +39,19 @@ public class TileView {
 	public void enableRemoveMode(){
 		removeListener = new MouseListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {
+				if(!tile.hasBlock())return;
+				Piece piece = tile.getBlock().getPiece();
+				boardView.removePiece(piece);
+			}
 			@Override
 			public void mousePressed(MouseEvent e) {}
 			@Override
 			public void mouseExited(MouseEvent e) {}
 			@Override
 			public void mouseEntered(MouseEvent e) {}
-			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!tile.hasBlock())return;
-				Piece piece = tile.getBlock().getPiece();
-				boardView.removePiece(piece);
-			}
+			public void mouseClicked(MouseEvent e) {}
 		};
 		
 		
@@ -68,7 +67,11 @@ public class TileView {
 		builderListener = new MouseListener() {
 			
 			@Override
-			public void mouseReleased(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {
+				tile.iterateState();
+				boardView.stateUpdated();
+				propertiesInit();
+			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {}
@@ -80,11 +83,7 @@ public class TileView {
 			public void mouseEntered(MouseEvent e) {}
 			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				tile.iterateState();
-				boardView.stateUpdated();
-				propertiesInit();
-			}
+			public void mouseClicked(MouseEvent e) {}
 		};
 		tilep.addMouseListener(builderListener);
 	}
@@ -93,7 +92,15 @@ public class TileView {
 		hintListener = new MouseListener() {
 			
 			@Override
-			public void mouseReleased(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {
+				if (tile.isHintTile()){
+					tile.disableHintTile();
+				} else {
+					tile.enableHintTile();
+				}
+				propertiesInit();
+				boardView.stateUpdated();
+			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {}
@@ -105,16 +112,8 @@ public class TileView {
 			public void mouseEntered(MouseEvent e) {}
 			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (tile.isHintTile()){
-					tile.disableHintTile();
-					boardView.stateUpdated();
-				} else {
-					tile.enableHintTile();
-					boardView.stateUpdated();
-				}
-				propertiesInit();
-				}
+			public void mouseClicked(MouseEvent e) {}
+			
 			};
 		tilep.addMouseListener(hintListener);
 	}
