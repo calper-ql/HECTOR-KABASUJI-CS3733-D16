@@ -29,7 +29,7 @@ public class MainMenuController implements IController {
 		this.model = model;
 		
 		lsc = new LevelSelectController(mc, this, model);
-		ac = new AchievementController(mc, this, model);
+		ac = new AchievementController(mc, this);
 	}
 	
 	
