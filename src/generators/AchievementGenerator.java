@@ -45,6 +45,5 @@ public class AchievementGenerator {
 		achievements.add(a9);
 		achievements.add(a10);
 		return achievements;
-		
 	}
 }

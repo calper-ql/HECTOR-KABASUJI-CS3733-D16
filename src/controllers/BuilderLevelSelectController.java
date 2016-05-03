@@ -180,7 +180,6 @@ public class BuilderLevelSelectController implements IController{
 				release_label.setIcon(new ImageIcon(release_img_r));
 				release_label.setBounds(9, 360, 100, 75);
 				p.add(release_label);
-				
 		return p;		
 	}
 	

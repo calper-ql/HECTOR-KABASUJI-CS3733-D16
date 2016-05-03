@@ -63,7 +63,6 @@ public class Model implements Cloneable{
 			}
 			}
 	}
-
 	public boolean checkAchievementExists(String name){
 		File dir = new File("achievements");
 		if(!dir.exists()){

@@ -156,9 +156,7 @@ public class LevelSelectController implements IController{
 		for(int i = 1; i<=5; i++){
 			int starCount;
 			try {
-				Level starLevel = model.getLevel(i).getFromFile(i);
-				starLevel.setStars(starLevel.getStars());
-				starCount = starLevel.getStars();
+				starCount = model.getLevel(i).getFromFile(i).getStars();
 				if (starCount >= 1){
 					BufferedImage star_img = null;
 					try {
