@@ -82,8 +82,8 @@ public class TileView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tile.iterateState();
-				propertiesInit();
 				boardView.stateUpdated();
+				propertiesInit();
 			}
 		};
 		tilep.addMouseListener(builderListener);

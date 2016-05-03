@@ -2,6 +2,7 @@ package boundary;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import entities.Block;
 import entities.Board;
 import entities.Bullpen;
 import entities.EmptyBlock;
+import entities.EmptyReleaseNumber;
 import entities.Piece;
 import entities.Tile;
 
@@ -140,5 +142,18 @@ public class BoardView {
 	
 	public void stateUpdated(){
 		boardController.stateUpdated();
+	}
+
+	public ArrayList<ArrayList<Tile>> generateTileList() {
+		ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+		for(int i = 0;	i < 12; i++){
+			ArrayList<Tile> temp = new ArrayList<>();
+			
+			for(int k = 0; k < 12; k++){
+				temp.add(new Tile(new EmptyBlock(), new EmptyReleaseNumber() ,board.getTile(i, k).enabled()));
+			}
+			tiles.add(temp);
+		}
+		return tiles;
 	}
 }
