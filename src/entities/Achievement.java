@@ -8,20 +8,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-public class Achievement {
+public class Achievement implements Serializable{
 	String name;
 	Image img;
 	URL url;
-	boolean unlocked = true;
+	boolean unlocked = false;
 	
 	public Achievement(String name, URL url, boolean unlocked){
 		this.name = name;
 		this.url = url;
-		this.unlocked = unlocked;
+		this.unlocked = unlocked; 
 	}
 	
 	public Image getImage(){
@@ -33,7 +34,6 @@ public class Achievement {
 		try {
 			mock_img = ImageIO.read(url);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -81,6 +81,18 @@ public class Achievement {
 		oos.close();
 		return loaded;
 		
+	}
+	
+	public void deleteAcheivement(){
+		File dir = new File("achievements");
+		if(!dir.exists()){
+			dir.mkdirs();
+		}
+		
+		File save = new File(dir, "achievement " + name);
+		if(save.exists()){
+			save.delete();
+		}
 	}
 	
 	public boolean isUnlocked(){

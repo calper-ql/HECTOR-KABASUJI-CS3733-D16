@@ -21,6 +21,7 @@ import controllers.puzzle.PuzzleLevelController;
 import entities.Achievement;
 import entities.Level;
 import entities.Model;
+import entities.PuzzleLevel;
 
 public class LevelSelectController implements IController{
 	private LevelSelectView lsv;
@@ -155,7 +156,9 @@ public class LevelSelectController implements IController{
 		for(int i = 1; i<=5; i++){
 			int starCount;
 			try {
-				starCount = model.getLevel(i).getFromFile(i).getStars();
+				Level starLevel = model.getLevel(i).getFromFile(i);
+				starLevel.setStars(starLevel.getStars());
+				starCount = starLevel.getStars();
 				if (starCount >= 1){
 					BufferedImage star_img = null;
 					try {
@@ -164,11 +167,51 @@ public class LevelSelectController implements IController{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					Image star_img_r = star_img.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 					JLabel lblNewLabel_1 = new JLabel("");
 					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-					lblNewLabel_1.setBounds(50 + i*110, 535/4 - 40, 100, 75);
+					lblNewLabel_1.setBounds(60 + ((i-1)*110), 175, 20, 20);
 					p.add(lblNewLabel_1);
+				}
+				if (starCount >= 2){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-1)*110), 175, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-1)*110), 175, 20, 20);
+					p.add(lblNewLabel_2);
+				}
+				if (starCount >= 3){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-1)*110), 175, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-1)*110), 175, 20, 20);
+					p.add(lblNewLabel_2);
+					JLabel lblNewLabel_3 = new JLabel("");
+					lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_3.setBounds(120 + ((i-1)*110), 175, 20, 20);
+					p.add(lblNewLabel_3);
 				}
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
@@ -178,38 +221,136 @@ public class LevelSelectController implements IController{
 		}
 		//Render Lightning Level Stars
 		for(int i = 6; i<=10; i++){
-			Level l = model.getLevel(i);
-			if (l.getStars() == 1){
-				BufferedImage star_img = null;
-				try {
-					URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
-					star_img = ImageIO.read(img);
-				} catch (IOException e) {
-					e.printStackTrace();
+			int starCount;
+			try {
+				Level starLevel = model.getLevel(i).getFromFile(i);
+				starLevel.setStars(starLevel.getStars());
+				starCount = starLevel.getStars();
+				if (starCount >= 1){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_1);
 				}
-				Image star_img_r = star_img.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-				JLabel lblNewLabel_1 = new JLabel("");
-				lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-				lblNewLabel_1.setBounds(50 + i*110, 535/4*2 - 40, 100, 75);
-				p.add(lblNewLabel_1);
+				if (starCount >= 2){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_2);
+				}
+				if (starCount >= 3){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_2);
+					JLabel lblNewLabel_3 = new JLabel("");
+					lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_3.setBounds(120 + ((i-6)*110), 310, 20, 20);
+					p.add(lblNewLabel_3);
+				}
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
 		//Render Release Level Stars
 		for(int i = 11; i<=15; i++){
-			Level l = model.getLevel(i);
-			if (l.getStars() == 1){
-				BufferedImage star_img = null;
-				try {
-					URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
-					star_img = ImageIO.read(img);
-				} catch (IOException e) {
-					e.printStackTrace();
+			int starCount;
+			try {
+				Level starLevel = model.getLevel(i).getFromFile(i);
+				starLevel.setStars(starLevel.getStars());
+				starCount = starLevel.getStars();
+				if (starCount >= 1){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_1);
 				}
-				Image star_img_r = star_img.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-				JLabel lblNewLabel_1 = new JLabel("");
-				lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
-				lblNewLabel_1.setBounds(50 + i*110, 535/4*3 - 40, 100, 75);
-				p.add(lblNewLabel_1);
+				if (starCount >= 2){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_2);
+				}
+				if (starCount >= 3){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(60 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_1);
+					JLabel lblNewLabel_2 = new JLabel("");
+					lblNewLabel_2.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_2.setBounds(90 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_2);
+					JLabel lblNewLabel_3 = new JLabel("");
+					lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_3.setBounds(120 + ((i-11)*110), 445, 20, 20);
+					p.add(lblNewLabel_3);
+				}
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
 		

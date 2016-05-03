@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
@@ -22,6 +23,7 @@ import controllers.BullpenControler;
 import controllers.IController;
 import controllers.ILevelController;
 import controllers.MainController;
+import entities.Achievement;
 import entities.EmptyBlock;
 import entities.IBlock;
 import entities.Level;
@@ -180,6 +182,19 @@ public class PuzzleLevelController implements IController, ILevelController{
 			
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
+			PuzzleLevel saveStars;
+				try {
+					saveStars = (PuzzleLevel) lvl.getFromFile(levelNum);
+					saveStars.setStars(lvl.getStars());
+					saveStars.saveToFile();
+				} catch (ClassNotFoundException | IOException e1) {
+					e1.printStackTrace();
+				}
+			ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements();
+			for (Achievement a: needToBeUnlocked){
+				a.setisUnlocked();
+				a.saveAchievementToFile();
+			}
 			if(lvl.hasFinished()){
 				System.out.println("finished");
 				try {
@@ -196,6 +211,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 						next.saveToFile();
 					}
 				} catch (ClassNotFoundException | IOException e) {}
+				
 				model.reload();
 				
 			}

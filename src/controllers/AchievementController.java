@@ -2,12 +2,15 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import boundary.AchievementView;
+import entities.Achievement;
 import entities.Model;
+import generators.AchievementGenerator;
 import generators.BaseLevelGenerator;
 
 public class AchievementController implements IController{
@@ -48,10 +51,12 @@ public class AchievementController implements IController{
 	
 	protected void resetButtonClicked() {
 		// reset the achievements
-		model.getAchievements();
-		
+		ArrayList<Achievement> achievements = AchievementGenerator.makeAchievements();
+		for(Achievement a : achievements){
+			a.deleteAcheivement();
+		}
 		// send the request to re-render
-			mc.requestSwap(this);
+		mc.requestSwap(this);
 	}
 
 	private void backButtonClicked() {
