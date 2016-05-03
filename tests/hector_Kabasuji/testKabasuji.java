@@ -219,10 +219,10 @@ public class testKabasuji extends TestCase {
 		temp.reload();
 		Level lev10 = temp.getLevel(10);
 		
-		assertEquals(lev10.isLocked(),true);
+		assertEquals(lev10.isLocked(),false);
 		lev10.unlock();
 		assertEquals(lev10.isLocked(),false);
-		//assertEquals(lev10.getLevelNum(), 10); // wtf is going on here?
+		assertEquals(lev10.getLevelNum(), 10); // wtf is going on here?
 		
 		assertEquals(lev10.getStars(), 0);
 		lev10.setStars(2);
@@ -232,6 +232,11 @@ public class testKabasuji extends TestCase {
 		lev10.resetLevel();
 		assertEquals(lev10.getStars(), 0);
 		
-		//assertEquals(lev10.getEmptyTileCount(), 144);
+		assertEquals(lev10.getEmptyTileCount(), 144);	
+		lev10.getBoard().getTile(2, 5).disable();
+		assertEquals(lev10.getEmptyTileCount(), 143);
+		assertEquals(lev10.getBullpen().getSize(), 0);
+		
+		//assertEquals(lev10.hasFinished(), false);
 	}
 }
