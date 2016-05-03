@@ -125,6 +125,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
+		
 		for(JBlockPanel item: currentBlockPanelList){
 			try{
 				renderPanel.add(item, new Integer(1), 0);
