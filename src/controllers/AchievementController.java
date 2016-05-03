@@ -19,12 +19,10 @@ public class AchievementController implements IController{
 	private IController back;
 	private JButton backButton;
 	private JButton resetButton;
-	private Model model;
 	
-	public AchievementController(MainController mc, IController back, Model model) {
+	public AchievementController(MainController mc, IController back) {
 		this.mc = mc;
 		this.back = back;
-		this.model = model;
 		av = new AchievementView();
 	}
 
