@@ -66,7 +66,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 		puzzleLevelView = new PuzzleLevelView(model.getLevel(levelNum));
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
-		boardController = new BoardController(model.getLevel(levelNum), this);
+		boardController = new BoardController(model.getLevel(levelNum), this, model);
 		currentBlockPanelList = null;
 		
 	}
@@ -218,5 +218,11 @@ public class PuzzleLevelController implements IController, ILevelController{
 	public void stateUpdated() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void requestReRenderBack() {
+		// TODO Auto-generated method stub
+		mainController.requestSwap(back);
 	}
 }

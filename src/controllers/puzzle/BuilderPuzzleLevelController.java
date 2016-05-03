@@ -110,7 +110,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel) model.getLevel(levelNum)).getTotalMoves(), this);
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
-		boardController = new BoardController(model.getLevel(levelNum), this);
+		boardController = new BoardController(model.getLevel(levelNum), this, model);
 	}
 
 	/**
@@ -299,6 +299,12 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		init();
 		bullpenBuilderModeIsEnabled = false;
 		this.requestReRender();
+	}
+
+	@Override
+	public void requestReRenderBack() {
+		// TODO Auto-generated method stub
+		mainController.requestSwap(back);
 	}
 
 }
