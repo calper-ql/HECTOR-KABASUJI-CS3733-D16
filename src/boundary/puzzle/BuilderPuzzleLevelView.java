@@ -11,6 +11,8 @@
 package boundary.puzzle;
 
 import java.awt.Color;
+
+import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -82,5 +84,6 @@ public class BuilderPuzzleLevelView extends BuilderBaseLevelView {
 		// return the rendered super panel
 		return superPanel;
 	}
+
 
 }

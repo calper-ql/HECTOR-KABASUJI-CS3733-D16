@@ -13,5 +13,10 @@ public class Board implements Serializable{
 	public Tile getTile(int col, int row){
 		return tiles.get(col).get(row);
 	}
+
+	public void replaceTileList(ArrayList<ArrayList<Tile>> generateTileList) {
+		tiles = generateTileList;
+		
+	}
 	
 }

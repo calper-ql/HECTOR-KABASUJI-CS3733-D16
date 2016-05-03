@@ -116,4 +116,8 @@ public class BuilderBaseLevelView {
 	public JRadioButton getHintButton(){
 		return hintButton;
 	}
+	
+	public JButton getUndoButton() {
+		return undoButton;
+	}
 }

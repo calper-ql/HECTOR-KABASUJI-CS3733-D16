@@ -17,6 +17,8 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
+
 import javax.swing.JPanel;
 import boundary.JBlockPanel;
 import boundary.puzzle.BuilderPuzzleLevelView;
@@ -50,7 +52,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	private JPanel renderPanel;
 	
 	/* for undo and redo */
-	private ArrayList<Level> levelStates;
+	private Stack<Level> levelStates;
 
 	/**
 	 * Constructor for the class. mainController is for the rendering. back is
@@ -68,13 +70,14 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.levelNum = levelNum;
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
-		this.levelStates = new ArrayList<>();
+		this.levelStates = new Stack<>();
+		Level temp = null;
 		try {
-			levelStates.add(model.getLevel(levelNum).generateLevelCopy());
+			temp = model.getLevel(levelNum).generateLevelCopy();
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		levelStates.add(temp);
 		init();
 
 	}
@@ -89,7 +92,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 			// replace the piece list with the generated one
 			temp.getBullpen().replacePieceList(bullpenController.generatePieceList());
-		
+			
+			temp.getBoard().replaceTileList(boardController.generateTileList());
+			
 			levelStates.add(temp);
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
@@ -139,6 +144,13 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 		});
 
+		// Undo Button
+		builderPuzzleLevelView.getUndoButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				undoButtonClicked();
+			}
+		});
+		
 		// Preview Button
 		builderPuzzleLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -268,6 +280,24 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
+	}
+	
+	private void undoButtonClicked() {
+		if(levelStates.size() > 1){
+			levelStates.pop();
+		}
+		
+		Level lvl = null;
+		try {
+			lvl = levelStates.peek().generateLevelCopy();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		model.setLevel(levelNum, lvl);
+		init();
+		bullpenBuilderModeIsEnabled = false;
+		this.requestReRender();
 	}
 
 }

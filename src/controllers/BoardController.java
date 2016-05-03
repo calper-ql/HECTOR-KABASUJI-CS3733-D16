@@ -11,6 +11,7 @@ import entities.Level;
 import entities.Piece;
 import entities.PuzzleLevel;
 import entities.Tile;
+import java.util.ArrayList;
 
 public class BoardController {
 
@@ -70,6 +71,10 @@ public class BoardController {
 	
 	public void stateUpdated(){
 		levelController.stateUpdated();
+	}
+
+	public ArrayList<ArrayList<Tile>> generateTileList() {
+		return bv.generateTileList();
 	}
 
 

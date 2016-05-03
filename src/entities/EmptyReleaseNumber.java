@@ -1,6 +1,8 @@
 package entities;
 
-public class EmptyReleaseNumber extends ReleaseNumber {
+import java.io.Serializable;
+
+public class EmptyReleaseNumber extends ReleaseNumber implements Serializable {
 
 	public EmptyReleaseNumber(){
 		super(0, 0);
