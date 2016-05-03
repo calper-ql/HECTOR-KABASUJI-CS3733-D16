@@ -40,8 +40,7 @@ public class AchievementView {
 		Model model = new Model("", null, null);
 		model.reload();
 		
-		model.generateAchievements();
-		model.unlockAchievements();
+		model.getAchievements();
 		
 		ArrayList<Achievement> achievementList = model.getAchievements();
 		

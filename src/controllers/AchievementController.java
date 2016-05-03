@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import boundary.AchievementView;
 import entities.Model;
+import generators.BaseLevelGenerator;
 
 public class AchievementController implements IController{
 	private AchievementView av;
@@ -15,10 +16,12 @@ public class AchievementController implements IController{
 	private IController back;
 	private JButton backButton;
 	private JButton resetButton;
+	private Model model;
 	
-	public AchievementController(MainController mc, IController back) {
+	public AchievementController(MainController mc, IController back, Model model) {
 		this.mc = mc;
 		this.back = back;
+		this.model = model;
 		av = new AchievementView();
 	}
 
@@ -33,7 +36,7 @@ public class AchievementController implements IController{
 			}	
 		});
 		
-		resetButton = av.getBackButton();
+		resetButton = av.getResetButton();
 		resetButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				resetButtonClicked();
@@ -44,11 +47,11 @@ public class AchievementController implements IController{
 	}
 	
 	protected void resetButtonClicked() {
-		Model model = new Model("", null, null);
-		model.reload();
+		// reset the achievements
+		model.getAchievements();
 		
-		model.generateAchievements();
-		model.unlockAchievements();
+		// send the request to re-render
+			mc.requestSwap(this);
 	}
 
 	private void backButtonClicked() {
