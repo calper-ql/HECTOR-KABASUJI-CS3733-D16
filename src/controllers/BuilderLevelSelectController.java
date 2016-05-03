@@ -98,7 +98,6 @@ public class BuilderLevelSelectController implements IController{
 				lightningButtonClicked(10);
 			}	
 		});
-		
 		releaseButtons = blsv.getReleaseButtons();
 		
 		releaseButtons[0].addActionListener(new ActionListener(){

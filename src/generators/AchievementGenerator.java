@@ -45,6 +45,102 @@ public class AchievementGenerator {
 		achievements.add(a8);
 		achievements.add(a9);
 		achievements.add(a10);
+		for (Achievement a : achievements){
+			a.saveAchievementToFile();
+		}
 		return achievements;
+		
+	}
+	
+
+	public ArrayList<Achievement> loadAchievements(){
+		ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
+		
+		Achievement a1 = new Achievement("Earned One Star In Puzzle!", null, false);
+		Achievement a2 = new Achievement("Earned Two Stars In Puzzle!", null, false);
+		Achievement a3 = new Achievement("Earned Three Stars In Puzzle!", null, false);
+		Achievement a4 = new Achievement("Earned One Star In Lightning!", null, false);
+		Achievement a5 = new Achievement("Earned Two Stars In Lightning!", null, false);
+		Achievement a6 = new Achievement("Earned Three Stars In Lightning!", null, false);
+		Achievement a7 = new Achievement("Earned One Star In Release!", null, false);
+		Achievement a8 = new Achievement("Earned Two Star In Release!", null, false);
+		Achievement a9 = new Achievement("Earned Three Star In Release!", null, false);
+		Achievement a10 = new Achievement("Unlocked 15 Levels!", null, false);
+		try {
+			a1 = a1.getAchievementFromFile(a1.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a2 = a2.getAchievementFromFile(a2.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a3 = a3.getAchievementFromFile(a3.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a4 = a4.getAchievementFromFile(a4.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a5 = a5.getAchievementFromFile(a5.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a6 = a6.getAchievementFromFile(a6.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a7 = a7.getAchievementFromFile(a7.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a8 = a8.getAchievementFromFile(a8.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a9 = a9.getAchievementFromFile(a9.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a10 = a10.getAchievementFromFile(a10.getName());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		achievementList.add(a1);
+		achievementList.add(a2);
+		achievementList.add(a3);
+		achievementList.add(a4);
+		achievementList.add(a5);
+		achievementList.add(a6);
+		achievementList.add(a7);
+		achievementList.add(a8);
+		achievementList.add(a9);
+		achievementList.add(a10);
+		
+		return achievementList;
+	}
+	
+	public static void main(String[] args) {
+		makeAchievements();
 	}
 }
