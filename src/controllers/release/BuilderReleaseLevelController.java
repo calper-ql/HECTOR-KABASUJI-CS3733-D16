@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.Stack;
 
 import javax.swing.JPanel;
@@ -39,20 +40,30 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 	private BoardController boardController;
 	private BlockController blockController;
 	private JPanel renderPanel;
-	
+
 	/* for undo and redo */
 	private Stack<Level> levelStates;
 	private Stack<Level> redoStates;
-	
+
 	public BuilderReleaseLevelController(MainController mc, BuilderLevelSelectController back, Model model, int i) {
 		this.back = back;
 		this .levelNum = i;
 		this.mainController = mc;
 		this.model = model;
+		bullpenBuilderModeIsEnabled = false;
+		this.levelStates = new Stack<>();
+		this.redoStates = new Stack<>();
+		Level temp = null;
+		try {
+			temp = model.getLevel(levelNum).generateLevelCopy();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		levelStates.add(temp);
 		
 		init();
 	}
-	
+
 	private void init(){
 		builderReleaseLevelView = new BuilderReleaseLevelView(this);
 		blockController = new BlockController(new EmptyBlock(), this);
@@ -80,7 +91,7 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// Save button
 		builderReleaseLevelView.getSaveButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//saveButtonClicked();
+				saveButtonClicked();
 			}
 		});
 
@@ -95,17 +106,17 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// Undo Button
 		builderReleaseLevelView.getUndoButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//undoButtonClicked();
+				undoButtonClicked();
 			}
 		});
-		
+
 		// Undo Button
 		builderReleaseLevelView.getRedoButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//redoButtonClicked();
+				redoButtonClicked();
 			}
 		});
-		
+
 		// Preview Button
 		builderReleaseLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +159,28 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// return the renderPanel.
 		return renderPanel;
 	}
-	
+
+	protected void saveButtonClicked() {
+		// get level
+		Level lvl = model.getLevel(levelNum);
+
+		// replace the piece list with the generated one
+		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
+		lvl.resetLevel();
+
+		// save to file
+		lvl.saveToFile();
+
+		// reload the model to update and reinitialize
+		model.reload();
+		init();
+
+		// send the request to re-render
+		bullpenBuilderModeIsEnabled = false;
+		mainController.requestSwap(this);
+
+	}
+
 	// Reload the model before backing up.
 	private void backButtonClicked() {
 		model.reload();
@@ -159,25 +191,70 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 	@Override
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void requestReRender() {
-		// TODO Auto-generated method stub
-		
+		mainController.requestSwap(this);
 	}
 
 	@Override
-	public void stateUpdated() {
-		// TODO Auto-generated method stub
+	public void stateUpdated(){
+		this.redoStates = new Stack<>();
+		try {
+			// copy the level
+			Level temp = model.getLevel(levelNum).generateLevelCopy();
+			
+			// replace the piece list with the generated one
+			temp.getBullpen().replacePieceList(bullpenController.generatePieceList());
+			levelStates.add(temp);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void undoButtonClicked() {
+		if(levelStates.size() > 1){
+			redoStates.add(levelStates.pop());
+		}
+		
+		Level lvl = null;
+		try {
+			lvl = levelStates.peek().generateLevelCopy();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		model.setLevel(levelNum, lvl);
+		init();
+		bullpenBuilderModeIsEnabled = false;
+		this.requestReRender();
+	}
+	
+	private void redoButtonClicked() {
+		if(!redoStates.isEmpty()){
+			levelStates.add(redoStates.pop());
+			Level lvl = null;
+			try {
+				lvl = levelStates.peek().generateLevelCopy();
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			model.setLevel(levelNum, lvl);
+			init();
+			bullpenBuilderModeIsEnabled = false;
+			this.requestReRender();
+		}
+		
 		
 	}
-
 }

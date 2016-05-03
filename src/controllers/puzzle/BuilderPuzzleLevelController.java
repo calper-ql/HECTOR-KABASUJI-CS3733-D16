@@ -72,6 +72,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
 		this.levelStates = new Stack<>();
+		this.redoStates = new Stack<>();
 		Level temp = null;
 		try {
 			temp = model.getLevel(levelNum).generateLevelCopy();
@@ -79,7 +80,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			e.printStackTrace();
 		}
 		levelStates.add(temp);
-		this.redoStates = new Stack<>();
+		
 		init();
 
 	}
