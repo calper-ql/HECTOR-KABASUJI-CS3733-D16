@@ -1,6 +1,7 @@
 package controllers;
 
 import java.awt.Point;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -8,6 +9,7 @@ import boundary.BoardView;
 import entities.Board;
 import entities.Bullpen;
 import entities.Level;
+import entities.Model;
 import entities.Piece;
 import entities.PuzzleLevel;
 import entities.Tile;
@@ -19,10 +21,13 @@ public class BoardController {
 	BoardView bv;
 	Level level;
 	ILevelController levelController;
-	public BoardController(Level level, ILevelController levelController) {
+	Model model;
+	
+	public BoardController(Level level, ILevelController levelController, Model model) {
 		bv = new BoardView(215, 100, 384, 384, level.getBoard(), this);
 		this.level = level;
 		this.levelController = levelController;
+		this.model = model;
 	}
 	
 	public JPanel render() {
@@ -65,8 +70,32 @@ public class BoardController {
 		level.getBullpen().addPiece(piece);
 		if(level instanceof PuzzleLevel){
 			((PuzzleLevel) level).setRemaingMoves(((PuzzleLevel) level).getRemainingMoves()-1);
+			
+			if(level.hasFinished()){
+				System.out.println("finished");
+				try {
+					if(level.getLevelNum()>0){
+						PuzzleLevel savelvl = (PuzzleLevel) level.getFromFile(level.getLevelNum());
+						savelvl.setStars(level.getStars());
+						savelvl.saveToFile();
+					}
+				} catch (ClassNotFoundException | IOException e) {}
+				try {
+					if(level.getStars() > 0 && level.getLevelNum()>0){
+						Level next = level.getFromFile(level.getLevelNum()+1);
+						next.unlock();
+						next.saveToFile();
+					}
+				} catch (ClassNotFoundException | IOException e) {}
+				model.reload();
+			}
 		}
-		levelController.requestReRender();
+		
+		if (level.hasFinished()){
+			levelController.requestReRenderBack();
+		} else {
+			levelController.requestReRender();
+		}
 	}
 	
 	public void stateUpdated(){
