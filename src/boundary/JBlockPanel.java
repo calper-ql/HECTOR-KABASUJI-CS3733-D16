@@ -1,5 +1,6 @@
 package boundary;
 
+import java.awt.AWTEvent;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.FocusEvent;
@@ -11,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import entities.EmptyBlock;
 import entities.IBlock;
@@ -58,6 +60,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if(!SwingUtilities.isLeftMouseButton(e)) return;
 		if(!enabled) return;
 		ofsetx = e.getX();
 		ofsety = e.getY();
@@ -67,6 +70,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if(!SwingUtilities.isLeftMouseButton(e)) return;
 		if(enabled)bv.released(this);
 	}
 
@@ -80,6 +84,7 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if(!SwingUtilities.isLeftMouseButton(e)) return;
 		if(enabled)bv.updateLocation(e.getX()-ofsetx, e.getY()-ofsety);
 	}
 
