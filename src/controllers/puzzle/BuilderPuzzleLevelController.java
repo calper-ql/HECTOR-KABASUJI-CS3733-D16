@@ -84,7 +84,10 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	
 	public void stateUpdated(){
 		try {
+			// copy the level
 			Level temp = model.getLevel(levelNum).generateLevelCopy();
+			
+			// set the total moves.
 			((PuzzleLevel) temp).setTotalMoves(builderPuzzleLevelView.getMovesLeft());
 
 			// set the remaining moves which is total moves
@@ -92,8 +95,6 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 			// replace the piece list with the generated one
 			temp.getBullpen().replacePieceList(bullpenController.generatePieceList());
-			
-			temp.getBoard().replaceTileList(boardController.generateTileList());
 			
 			levelStates.add(temp);
 		} catch (ClassNotFoundException | IOException e) {
