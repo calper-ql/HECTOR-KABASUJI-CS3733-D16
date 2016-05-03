@@ -32,7 +32,7 @@ public class Level implements Serializable {
 	}
 	
 	public void unlock(){
-		isLocked = true;
+		isLocked = false;
 	}
 	
 	public int getLevelNum(){
@@ -137,7 +137,7 @@ public class Level implements Serializable {
 	}
 	
 	public void setStars(int stars){
-		if(stars > 0 || stars <= 3 && stars > this.stars) this.stars = stars;
+		if((stars > 0 || stars <= 3) && stars > this.stars) this.stars = stars;
 	}
 	
 	public void resetLevel(){
