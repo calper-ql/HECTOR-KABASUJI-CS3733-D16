@@ -215,10 +215,23 @@ public class testKabasuji extends TestCase {
 
 	// Level Tests
 	public void testLevel(){
-		Level lev10 = game.getModel().getLevel(10);
+		Model temp = new Model("", null, null);
+		temp.reload();
+		Level lev10 = temp.getLevel(10);
 		
 		assertEquals(lev10.isLocked(),true);
 		lev10.unlock();
 		assertEquals(lev10.isLocked(),false);
+		//assertEquals(lev10.getLevelNum(), 10); // wtf is going on here?
+		
+		assertEquals(lev10.getStars(), 0);
+		lev10.setStars(2);
+		assertEquals(lev10.getStars(), 2);
+		lev10.setStars(1);
+		assertEquals(lev10.getStars(), 2);
+		lev10.resetLevel();
+		assertEquals(lev10.getStars(), 0);
+		
+		//assertEquals(lev10.getEmptyTileCount(), 144);
 	}
 }
