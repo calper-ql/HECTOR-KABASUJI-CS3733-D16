@@ -29,7 +29,7 @@ import entities.Model;
 import entities.ReleaseLevel;
 import entities.Tile;
 import move.NonOverlayMove;
-/**
+
 public class ReleaseLevelController implements IController, ILevelController{
 	private ReleaseLevelView releaseLevelView;
 	private MainController mainController;
@@ -42,7 +42,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	BlockController blockController;
 	JPanel renderPanel;
 	LinkedList<JBlockPanel> currentBlockPanelList;
-	*/
+	
 	
 	/**
 	 * Constructor for class
@@ -57,7 +57,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * @param model
 	 * @param levelNum
 	 */
-	/**
+	
 	public ReleaseLevelController(MainController mainController, IController back, Model model, int levelNum) {
 		this.mainController = mainController;
 		this.back = back;
@@ -71,7 +71,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 		currentBlockPanelList = null;
 		
 	}
-	*/
+	
 	
 	/**
 	 * This function adds the functionality to button and renders the views
@@ -79,7 +79,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * @return panel
 	 */
 
-	/**
+	
 	@Override
 	public JPanel getRenderedView() {
 		// Render the main view
@@ -125,7 +125,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 * @param jBlockPanel
 	 */
-	/**
+	
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
@@ -137,7 +137,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 			}
 		}
 	}
-*/
 
 	/**
 	 * Receives the released signal from the view on a JBlockPanel.
@@ -145,7 +144,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 *  @param jBlockPanel
 	 */
-	/**
+	
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 		// Lists for the move
 		LinkedList<Tile> tl = new LinkedList<>();
@@ -227,4 +226,3 @@ public class ReleaseLevelController implements IController, ILevelController{
 		mainController.requestSwap(back);
 	}
 }
-*/

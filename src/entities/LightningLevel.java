@@ -33,7 +33,7 @@ public class LightningLevel extends Level{
 	public boolean hasFinished(){
 		// check finish condition
 		int emptyTiles = this.getEmptyTileCount();
-		if(timeRemaining == 0 || emptyTiles == 0){
+		if(timeRemaining <= 0 || emptyTiles <= 0){
 			return true;
 		} else return false;
 	}
