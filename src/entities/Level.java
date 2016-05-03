@@ -166,4 +166,8 @@ public class Level implements Serializable {
 		this.levelNum = levelNum;
 		
 	}
+
+	public void lock() {
+		isLocked = true;
+	}
 }

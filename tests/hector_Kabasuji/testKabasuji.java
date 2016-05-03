@@ -13,11 +13,16 @@ import junit.framework.TestCase;
 
 public class testKabasuji extends TestCase {
 	Application game;
-	BaseLevelGenerator lev;
+	
+	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
+	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
+	 * 
+	 * 
+	 * 
+	 */
 
 	protected void setUp() throws Exception {
 		game = new Application();
-		lev = new BaseLevelGenerator();
 	}
 
 	// Start of Entity Controllers
@@ -218,11 +223,12 @@ public class testKabasuji extends TestCase {
 		Model temp = new Model("", null, null);
 		temp.reload();
 		Level lev10 = temp.getLevel(10);
+		assertEquals(lev10.getLevelNum(), 10);
 		
-		assertEquals(lev10.isLocked(),true);
 		lev10.unlock();
 		assertEquals(lev10.isLocked(),false);
-		//assertEquals(lev10.getLevelNum(), 10); // wtf is going on here?
+		lev10.lock();
+		assertEquals(lev10.isLocked(),true);
 		
 		assertEquals(lev10.getStars(), 0);
 		lev10.setStars(2);
@@ -232,6 +238,6 @@ public class testKabasuji extends TestCase {
 		lev10.resetLevel();
 		assertEquals(lev10.getStars(), 0);
 		
-		//assertEquals(lev10.getEmptyTileCount(), 144);
+		assertEquals(lev10.getEmptyTileCount(), 144);
 	}
 }
