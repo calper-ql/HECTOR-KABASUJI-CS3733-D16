@@ -17,7 +17,7 @@ public class SplashScreenView {
 	
 	public JPanel render(){
 		JPanel jp = new JPanel();
-		jp.setBackground(Color.darkGray);
+		jp.setBackground(Color.darkGray); 
 		jp.setLayout(null);
 		int width = 640;
 		int height = 535;

@@ -1,11 +1,15 @@
 package hector_Kabasuji;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import generators.*;
 import boundary.*;
 import controllers.*;
+import controllers.puzzle.*;
+import controllers.release.*;
+import controllers.lightning.*;
 import entities.*;
 import kabasuji.application.*;
 import move.*;
@@ -13,6 +17,8 @@ import junit.framework.TestCase;
 
 public class testKabasuji extends TestCase {
 	Application game;
+	MainController mcon;
+	Model model;
 	
 	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
 	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
@@ -23,6 +29,9 @@ public class testKabasuji extends TestCase {
 
 	protected void setUp() throws Exception {
 		game = new Application();
+		mcon = new MainController();
+		model = game.getModel();
+		model.reload();
 	}
 
 	// Start of Entity Controllers
@@ -220,9 +229,7 @@ public class testKabasuji extends TestCase {
 
 	// Level Tests
 	public void testLevel(){
-		Model temp = new Model("", null, null);
-		temp.reload();
-		Level lev10 = temp.getLevel(10);
+		Level lev10 = model.getLevel(10);
 		assertEquals(lev10.getLevelNum(), 10);
 
 		assertEquals(lev10.isLocked(),false);
@@ -248,5 +255,52 @@ public class testKabasuji extends TestCase {
 		lev10.getBoard().getTile(2, 5).disable();
 		assertEquals(lev10.getEmptyTileCount(), 143);
 		assertEquals(lev10.getBullpen().getSize(), 0);
+	}
+	
+	// Boundary Test Cases
+	
+	// Controller Test Cases
+	public void testSplashScreen(){
+		SplashScreenController spc = new SplashScreenController(false);
+		spc.getRenderedView();
+		assertEquals(spc.get().getMainTitle(), "Kabasuji");
+	}
+	
+	public void testMainMenu(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		mmc.getRenderedView();		
+	}
+	
+	public void testAchievementController(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		AchievementController ac = new AchievementController(mcon, mmc);
+		ac.getRenderedView();
+	}
+	
+	public void testLevelSelectController(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
+		lsc.getRenderedView();
+	}
+	
+	public void testPuzzleLevelController(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
+		PuzzleLevelController plc = new PuzzleLevelController(mcon, lsc, model, 1);
+		plc.getRenderedView();
+	}
+	
+	public void testLightningLevelController(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
+		LightningLevelController llc = new LightningLevelController(mcon, lsc, model, 6);
+		llc.getRenderedView();
+	}
+	
+	public void testReleaseLevelController(){
+		MainMenuController mmc = new MainMenuController(mcon, model);
+		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
+		ReleaseLevelController rlc = new ReleaseLevelController(mcon, lsc, model, 11);
+		rlc.getRenderedView();
 	}
 }
