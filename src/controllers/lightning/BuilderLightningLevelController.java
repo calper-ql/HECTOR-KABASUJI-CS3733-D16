@@ -56,7 +56,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		builderLightningLevelView = new BuilderLightningLevelView(
 				((LightningLevel) model.getLevel(levelNum)).getTotalTime());
 		blockController = new BlockController(new EmptyBlock(), this);
-		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
 		boardController = new BoardController(model.getLevel(levelNum), this);
 	}
 
@@ -215,6 +215,12 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
+	}
+
+	@Override
+	public void stateUpdated() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

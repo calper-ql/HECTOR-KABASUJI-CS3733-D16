@@ -17,6 +17,8 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
+
 import javax.swing.JPanel;
 import boundary.JBlockPanel;
 import boundary.puzzle.BuilderPuzzleLevelView;
@@ -30,6 +32,7 @@ import entities.EmptyBlock;
 import entities.Level;
 import entities.Model;
 import entities.PuzzleLevel;
+import entities.Tile;
 import generators.BaseLevelGenerator;
 
 public class BuilderPuzzleLevelController implements IController, ILevelController {
@@ -47,6 +50,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	private BoardController boardController;
 	private BlockController blockController;
 	private JPanel renderPanel;
+	
+	/* for undo and redo */
+	private Stack<Level> levelStates;
 
 	/**
 	 * Constructor for the class. mainController is for the rendering. back is
@@ -64,17 +70,45 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.levelNum = levelNum;
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
+		this.levelStates = new Stack<>();
+		Level temp = null;
+		try {
+			temp = model.getLevel(levelNum).generateLevelCopy();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		levelStates.add(temp);
 		init();
 
+	}
+	
+	public void stateUpdated(){
+		try {
+			Level temp = model.getLevel(levelNum).generateLevelCopy();
+			((PuzzleLevel) temp).setTotalMoves(builderPuzzleLevelView.getMovesLeft());
+
+			// set the remaining moves which is total moves
+			((PuzzleLevel) temp).setRemaingMoves(builderPuzzleLevelView.getMovesLeft());
+
+			// replace the piece list with the generated one
+			temp.getBullpen().replacePieceList(bullpenController.generatePieceList());
+			
+			temp.getBoard().replaceTileList(boardController.generateTileList());
+			
+			levelStates.add(temp);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
 	 * Initializes the Controllers and the view.
 	 */
 	private void init() {
-		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel) model.getLevel(levelNum)).getTotalMoves());
+		builderPuzzleLevelView = new BuilderPuzzleLevelView(((PuzzleLevel) model.getLevel(levelNum)).getTotalMoves(), this);
 		blockController = new BlockController(new EmptyBlock(), this);
-		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController);
+		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
 		boardController = new BoardController(model.getLevel(levelNum), this);
 	}
 
@@ -110,6 +144,13 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 		});
 
+		// Undo Button
+		builderPuzzleLevelView.getUndoButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				undoButtonClicked();
+			}
+		});
+		
 		// Preview Button
 		builderPuzzleLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,6 +193,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		// return the renderPanel.
 		return renderPanel;
 	}
+	
 	/*
 	 * Controller to save the state of the level builder level then preview that level in the Kabasuji game and then return to the Level Builder screen
 	 */
@@ -238,6 +280,24 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
+	}
+	
+	private void undoButtonClicked() {
+		if(levelStates.size() > 1){
+			levelStates.pop();
+		}
+		
+		Level lvl = null;
+		try {
+			lvl = levelStates.peek().generateLevelCopy();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		model.setLevel(levelNum, lvl);
+		init();
+		bullpenBuilderModeIsEnabled = false;
+		this.requestReRender();
 	}
 
 }
