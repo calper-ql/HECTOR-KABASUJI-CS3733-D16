@@ -180,7 +180,6 @@ public class PuzzleLevelController implements IController, ILevelController{
 			
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
-			
 			if(lvl.hasFinished()){
 				System.out.println("finished");
 				try {

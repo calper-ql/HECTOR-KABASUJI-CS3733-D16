@@ -132,27 +132,25 @@ public class LightningLevelController implements IController, ILevelController, 
 		// Update the moves left
 		LightningLevel lvl = (LightningLevel) model.getLevel(levelNum);
 		lvl.updateStars();
-		// Unlock next level if stars >= 1
-		try {
-			Level levelToUnlock = lvl.getFromFile(levelNum + 1);
-			if (lvl.getStars() >= 1){
-				levelToUnlock.unlock();
-			}
-		} catch (ClassNotFoundException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if(lvl.hasFinished()){
+			System.out.println("finished");
+			try {
+				if(lvl.getLevelNum()>0){
+					LightningLevel savelvl = (LightningLevel) lvl.getFromFile(levelNum);
+					savelvl.setStars(lvl.getStars());
+					savelvl.saveToFile();
+				}
+			} catch (ClassNotFoundException | IOException e) {}
+			try {
+				if(lvl.getStars() > 0 && lvl.getLevelNum()>0){
+					Level next = lvl.getFromFile(levelNum+1);
+					next.unlock();
+					next.saveToFile();
+				}
+			} catch (ClassNotFoundException | IOException e) {}
+			model.reload();
+			
 		}
-		//need to save just stars not whole level
-		try {
-			Level levelToSaveStars = lvl.getFromFile(levelNum);
-			levelToSaveStars.setStars(lvl.getStars());
-			levelToSaveStars.saveToFile();
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 		// finally we re-render
 		mainController.requestSwap(this);
 	}

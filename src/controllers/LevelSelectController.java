@@ -1,5 +1,7 @@
 package controllers;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +18,8 @@ import javax.swing.JPanel;
 import boundary.LevelSelectView;
 import controllers.lightning.LightningLevelController;
 import controllers.puzzle.PuzzleLevelController;
+import entities.Achievement;
+import entities.Level;
 import entities.Model;
 
 public class LevelSelectController implements IController{
@@ -147,58 +151,68 @@ public class LevelSelectController implements IController{
 		});
 		*/
 		
+		//Render Puzzle Level Stars
+		for(int i = 1; i<=5; i++){
+			int starCount;
+			try {
+				starCount = model.getLevel(i).getFromFile(i).getStars();
+				if (starCount >= 1){
+					BufferedImage star_img = null;
+					try {
+						URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+						star_img = ImageIO.read(img);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Image star_img_r = star_img.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+					lblNewLabel_1.setBounds(50 + i*110, 535/4 - 40, 100, 75);
+					p.add(lblNewLabel_1);
+				}
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		//Render Lightning Level Stars
+		for(int i = 6; i<=10; i++){
+			Level l = model.getLevel(i);
+			if (l.getStars() == 1){
+				BufferedImage star_img = null;
+				try {
+					URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+					star_img = ImageIO.read(img);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				Image star_img_r = star_img.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+				lblNewLabel_1.setBounds(50 + i*110, 535/4*2 - 40, 100, 75);
+				p.add(lblNewLabel_1);
+			}
+		}
+		//Render Release Level Stars
+		for(int i = 11; i<=15; i++){
+			Level l = model.getLevel(i);
+			if (l.getStars() == 1){
+				BufferedImage star_img = null;
+				try {
+					URL img = boundary.BaseLevelView.class.getResource("/img/star-xxl.png");
+					star_img = ImageIO.read(img);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				Image star_img_r = star_img.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setIcon(new ImageIcon(star_img_r));
+				lblNewLabel_1.setBounds(50 + i*110, 535/4*3 - 40, 100, 75);
+				p.add(lblNewLabel_1);
+			}
+		}
 		
-		//Render Puzzle Level Icon
-		BufferedImage puzzle_img = null;
-		try {
-			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/puzzle.png");
-			puzzle_img = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Image puzzle_img_r = puzzle_img.getScaledInstance(35, 50, Image.SCALE_SMOOTH);
-
-		JLabel puzzle_label = new JLabel("");
-		puzzle_label.setIcon(new ImageIcon(puzzle_img_r));
-		puzzle_label.setBounds(9, 93, 100, 75);
-		p.add(puzzle_label);
-
-		//Render Lightning Level Icon
-		BufferedImage light_img = null;
-		try {
-			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/light.png");
-			light_img = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Image light_img_r = light_img.getScaledInstance(35, 50, Image.SCALE_SMOOTH);
-
-		JLabel light_label = new JLabel("");
-		light_label.setIcon(new ImageIcon(light_img_r));
-		light_label.setBounds(9, 230, 100, 75);
-		p.add(light_label);
-
-
-		//Render Release Level Icon
-		BufferedImage release_img = null;
-		try {
-			URL img = boundary.puzzle.BuilderPuzzleLevelView.class.getResource("/img/release.png");
-			release_img = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Image release_img_r = release_img.getScaledInstance(35, 50, Image.SCALE_SMOOTH);
-		JLabel release_label = new JLabel("");
-		release_label.setIcon(new ImageIcon(release_img_r));
-		release_label.setBounds(9, 360, 100, 75);
-		p.add(release_label);
-
 		return p;		
 	}
 
