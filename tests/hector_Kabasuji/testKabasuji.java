@@ -1,3 +1,12 @@
+/**    	Builder Puzzle level View
+ * 
+ * 	  	This class is the test class for all of Kabasuji.
+ * 	 	A Robot is implemented for some physical testing as well.
+ * 		Visual Aids included
+ * 
+ * 		@author Ryan Wiesenberg - rmwiesenberg@wpi.edu
+ */
+
 package hector_Kabasuji;
 
 import java.awt.Color;
@@ -346,14 +355,14 @@ public class testKabasuji extends TestCase {
 		assertEquals(rl.getStars(), 3);
 	}
 
-	public void testAchievements() {
+	public void testAchievements() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(mcon);
 
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		mmc.getRenderedView();
-		click(70, 300);		
-		wmg.render();
+		click(70, 300);	
+		clickBackButton();
 	}
 
 	// Boundary Test Cases
@@ -622,46 +631,69 @@ public class testKabasuji extends TestCase {
 	}
 
 	public void testBuilderLevelSelectController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
+		
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		blsc.getRenderedView();
 		wmg.render();
 	}
 
-	public void testBuilderPuzzleLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+	public void testBuilderPuzzleLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		blsc.getRenderedView();
-		click(100,175);
-		reloadLevels();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(bcon, blsc, bmodel, 1);
+		wmg.swap(bplc.getRenderedView());
+		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
 		clickBackButton();
-		wmg.render();
+		
+		clickBackButton();
+		reloadLevels();
 	}
 
-	public void testBuilderLightningLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
-		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, model, 6);
+	public void testBuilderLightningLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		bllc.getRenderedView();
-		click(100,325);
-		reloadLevels();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, bmodel, 6);
+		wmg.swap(bllc.getRenderedView());
+		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
 		clickBackButton();
-		wmg.render();
+
+		clickBackButton();
+		reloadLevels();
 	}
 
-	public void testBuilderReleaseLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
-		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, model, 11);
+	public void testBuilderReleaseLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		brlc.getRenderedView();
-		click(100,325);
-		reloadLevels();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, bmodel, 11);
+		wmg.swap(brlc.getRenderedView());
+		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
 		clickBackButton();
-		wmg.render();
+
+		clickBackButton();
+		reloadLevels();
 	}
 
 	public void saveInitialLevels() {
@@ -720,12 +752,20 @@ public class testKabasuji extends TestCase {
 		int mask = InputEvent.BUTTON1_DOWN_MASK;
 		try {
 			minime.mouseMove(200 + x, 200 + y);
-			Thread.sleep(500);
+			Thread.sleep(200);
 			minime.mousePress(mask);
-			Thread.sleep(500);
+			Thread.sleep(200);
+			minime.mouseRelease(mask);
+			Thread.sleep(200);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public void multiclick(int x, int y, int num){
+		for(int i = 0; i < num; i++){
+			click(x, y);
+		}
 	}
 }
