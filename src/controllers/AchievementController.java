@@ -1,3 +1,6 @@
+/**Achievement Controller 
+ * This controller class handles all push events and view updates for achievements
+ */
 package controllers;
 
 import java.awt.event.ActionEvent;
@@ -20,12 +23,21 @@ public class AchievementController implements IController{
 	private JButton backButton;
 	private JButton resetButton;
 	
+	/**
+	 * Class constructor	
+	 * @param mc
+	 * @param back
+	 */
 	public AchievementController(MainController mc, IController back) {
 		this.mc = mc;
 		this.back = back;
 		av = new AchievementView();
 	}
-
+	
+	/**
+	 * Returns the rendered view, which includes the back button and its action listener method
+	 * @return p	
+	 */
 	@Override
 	public JPanel getRenderedView() {
 		JPanel p = av.render();
@@ -47,6 +59,9 @@ public class AchievementController implements IController{
 		return p;		
 	}
 	
+	/**
+	 * Resets the all of the achievements
+	 */
 	protected void resetButtonClicked() {
 		// reset the achievements
 		ArrayList<Achievement> achievements = AchievementGenerator.makeAchievements();
@@ -56,7 +71,10 @@ public class AchievementController implements IController{
 		// send the request to re-render
 		mc.requestSwap(this);
 	}
-
+	
+	/**
+	 * Requests for the view to be re-rendered after the back button has been clicked
+	 */
 	private void backButtonClicked() {
 		mc.requestSwap(back);
 	}

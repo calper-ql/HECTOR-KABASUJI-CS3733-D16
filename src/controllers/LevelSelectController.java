@@ -1,3 +1,6 @@
+/**LevelSelect Controller
+ * This controller class handles the level selection interation and updating of the model
+ */
 package controllers;
 
 import java.awt.Color;
@@ -36,6 +39,12 @@ public class LevelSelectController implements IController{
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
 
+	/**
+	 * Class Constructor
+	 * @param mc
+	 * @param back
+	 * @param model
+	 */
 	public LevelSelectController(MainController mc, IController back, Model model) {
 		this.mc = mc;
 		this.back = back;
@@ -43,6 +52,10 @@ public class LevelSelectController implements IController{
 		lsv = new LevelSelectView();
 	}
 
+	/**
+	 * Returns the view of the level select
+	 * @return p
+	 */
 	@Override
 	public JPanel getRenderedView() {
 		JPanel p = lsv.render();
@@ -358,23 +371,36 @@ public class LevelSelectController implements IController{
 		return p;		
 	}
 
+	/**
+	 * Handles the back button and swaps the current view for the previous view
+	 */
 	private void backButtonClicked() {
 		mc.requestSwap(back);
 	}
 
+	/**
+	 * Handles the a puzzle button press and swaps the current view for the level view
+	 */
 	private void puzzleButtonClicked(int i){
 		model.reload();
 		if(model.getLevel(i).isLocked()) return;
 		this.lvl = new PuzzleLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
+	
+	/**
+	 * Handles the a lightning button press and swaps the current view for the level view
+	 */
 	private void lightningButtonClicked(int i){
 		model.reload();
 		if(model.getLevel(i).isLocked()) return;
 		this.lvl = new LightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
-	//!!! when release implemented
+
+	/**
+	 * Handles the a release button press and swaps the current view for the level view
+	 */
 	private void releaseButtonClicked(int i){
 		model.reload();
 		if(model.getLevel(i).isLocked()) return;

@@ -1,3 +1,6 @@
+/**Board Controller
+ * This controller class handles all push events and view updates for the board
+ */
 package controllers;
 
 import java.awt.Point;
@@ -23,6 +26,12 @@ public class BoardController {
 	ILevelController levelController;
 	Model model;
 	
+	/**
+	 * Class constructor
+	 * @param level
+	 * @param levelController
+	 * @param model
+	 */
 	public BoardController(Level level, ILevelController levelController, Model model) {
 		bv = new BoardView(215, 100, 384, 384, level.getBoard(), this);
 		this.level = level;
@@ -30,42 +39,73 @@ public class BoardController {
 		this.model = model;
 	}
 	
+	/**
+	 * Returns the rendered board view
+	 * @return
+	 */
 	public JPanel render() {
 		
 		return bv.render();
 	}
 	
+	/**
+	 * Returns the rendered view of a tile at a given point p
+	 * @param p
+	 * @return bv.getTileAtPoint(p)
+	 */
 	public Tile getTileAtPoint(Point p){
 		return bv.getTileAtPoint(p);
 	}
 	
+	/**
+	 * Enables the builder mode for the board view associated with this board controller class
+	 */
 	public void enableBuilderMode(){
 		bv.enableBuilderMode();
 	}
 
+	/**
+	 * Disables the builder mode for the board view associated with this board controller class
+	 */
 	public void disableBuilderMode() {
 		bv.disableBuilderMode();
 		
 	}
 
+	/**
+	 * Enables the moving of pieces form the board
+	 */
 	public void enableRemoveMode(){
 		bv.enableRemoveMode();
 	}
 
+	/**
+	 * Disables the moving of pieces form the board
+	 */
 	public void disableRemoveMode() {
 		bv.disableRemoveMode();
 	}
 
-	
+	/**
+	 * Enables the hint selection for the board view associated with this board controller class
+	 */
 	public void enableHintSelection() {
 		bv.enableHintSelection();
 		
 	}
+	
+	/**
+	 * Disables the hint selection for the board view associated with this board controller class
+	 */
 	public void disableHintSelection() {
 		bv.disableHintSelection();
 		
 	}
 
+	/**
+	 * Adds a piece to the bullpen and updates state
+	 * @param piece
+	 */
 	public void addToBullpen(Piece piece) {
 		level.getBullpen().addPiece(piece);
 		if(level instanceof PuzzleLevel){
@@ -98,10 +138,16 @@ public class BoardController {
 		}
 	}
 	
+	/**
+	 * Updates the state of the board
+	 */
 	public void stateUpdated(){
 		levelController.stateUpdated();
 	}
 
+	/**
+	 * Generates a list of Tiles (depricated)
+	 */
 	public ArrayList<ArrayList<Tile>> generateTileList() {
 		return bv.generateTileList();
 	}

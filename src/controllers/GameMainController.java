@@ -1,3 +1,7 @@
+/**Game Main Controller
+ * Controller for the game play of the Kabasuji application
+ * @author 
+ */
 package controllers;
 
 import boundary.WindowManager;
@@ -10,6 +14,10 @@ public class GameMainController extends MainController{
 	private Model model;
 	private Application app;
 	
+	/**
+	 * Class constructor
+	 * @param app
+	 */
 	public GameMainController(Application app) {
 		
 		this.model = app.getModel();
@@ -18,6 +26,10 @@ public class GameMainController extends MainController{
 		mmc = new MainMenuController(this, model);
 	}
 	
+	/**
+	 * Executes the display of the splash screen and the swap to the appropriate initial screen for game play
+	 * @param wm
+	 */
 	public void link(WindowManager wm){
 		super.link(wm);
 		this.requestSwap(ssc);
