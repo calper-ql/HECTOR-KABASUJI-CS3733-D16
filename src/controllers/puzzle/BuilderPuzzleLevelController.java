@@ -7,7 +7,6 @@
  * 
  * 		@author Can Alper - calper@wpi.edu
  */
-
 package controllers.puzzle;
 
 import java.awt.event.ActionEvent;
@@ -107,7 +106,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		}
 	}
 
-	/*
+	/**
 	 * Initializes the Controllers and the view.
 	 */
 	private void init() {
@@ -206,7 +205,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		return renderPanel;
 	}
 	
-	/*
+	/**
 	 * Controller to save the state of the level builder level then preview that level in the Kabasuji game and then return to the Level Builder screen
 	 */
 	private void previewButtonClicked() {
@@ -238,14 +237,18 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		mainController.requestSwap(plc);
 	}
 
-	// Reload the model before backing up.
+	/**
+	 * Handle the back button click and swap in the previous view
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		// send the request to re-render to the higher controller
 		mainController.requestSwap(back);
 	}
-
-	// Save to file
+	
+	/**
+	 * Handle the save button click and save the level
+	 */
 	private void saveButtonClicked() {
 		// get level
 		Level lvl = model.getLevel(levelNum);
@@ -272,6 +275,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		mainController.requestSwap(this);
 	}
 
+	/**
+	 * Handle the reset button click and reset the board
+	 */
 	private void resetButtonClicked() {
 		// reset the level
 		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum - 1));
@@ -291,11 +297,17 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 	}
 	
+	/**
+	 * Swap in the current view
+	 */
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
 	}
 	
+	/**
+	 * Handle the undo button click and do the undo
+	 */
 	private void undoButtonClicked() {
 		if(levelStates.size() > 1){
 			redoStates.add(levelStates.pop());
@@ -314,6 +326,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.requestReRender();
 	}
 	
+	/**
+	 * Handle the redo button click and do the redo
+	 */
 	private void redoButtonClicked() {
 		if(!redoStates.isEmpty()){
 			levelStates.add(redoStates.pop());
@@ -333,7 +348,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		
 	}
 	
-
+	/**
+	 * Swap in the previous view
+	 */
 	@Override
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);

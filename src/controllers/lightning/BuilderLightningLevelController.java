@@ -1,3 +1,8 @@
+/**
+ * This Controller class handles all push events and boundary refreshes for the Lightning Level Builder
+ * @author
+ */
+
 package controllers.lightning;
 
 import java.awt.event.ActionEvent;
@@ -73,6 +78,9 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 
 	}
 
+	/**
+	 * Update the state of the game
+	 */
 	public void stateUpdated(){
 		this.redoStates = new Stack<>();
 		try {
@@ -96,7 +104,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		}
 	}
 	
-	/*
+	/**
 	 * Initializes the Controllers and the view.
 	 */
 	private void init() {
@@ -196,7 +204,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	}
 	
 
-	/*
+	/**
 	 * Controller to save the state of the level builder level then preview that
 	 * level in the Kabasuji game and then return to the Level Builder screen
 	 */
@@ -233,13 +241,18 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		mainController.requestSwap(plc);
 	}
 	
+	/**
+	 * Handles the back button being pressed and swaps the views
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		// send the request to re-render to the higher controller
 		mainController.requestSwap(back);
 	}
 	
-	// Save to file
+	/**
+	 * Handle save button click and save the level to a file
+	 */
 	private void saveButtonClicked() {
 		// get level
 		Level lvl = model.getLevel(levelNum);
@@ -267,6 +280,9 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		mainController.requestSwap(this);
 	}
 	
+	/**
+	 * Handle the reset button click and swap the views
+	 */
 	private void resetButtonClicked() {
 		// reset the level
 		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum - 1));
@@ -284,11 +300,17 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 	}
 
+	/**
+	 * Swap to the current view
+	 */
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
 	}
 	
+	/**
+	 * Handle the undo button click and do undo 
+	 */
 	private void undoButtonClicked() {
 		if(levelStates.size() > 1){
 			redoStates.add(levelStates.pop());
@@ -306,6 +328,10 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		bullpenBuilderModeIsEnabled = false;
 		this.requestReRender();
 	}
+	
+	/**
+	 * Handle the redo button click and do redo 
+	 */
 	private void redoButtonClicked() {
 		if(!redoStates.isEmpty()){
 			levelStates.add(redoStates.pop());
@@ -322,7 +348,10 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 			this.requestReRender();
 		}
 	}
-		
+	
+	/**
+	 * Swap to previois view
+	 */
 	@Override
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);
