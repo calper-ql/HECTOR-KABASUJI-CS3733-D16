@@ -1,3 +1,12 @@
+/**    	Builder Puzzle level View
+ * 
+ * 	  	This class is the test class for all of Kabasuji.
+ * 	 	A Robot is implemented for some physical testing as well.
+ * 		Visual Aids included
+ * 
+ * 		@author Ryan Wiesenberg - rmwiesenberg@wpi.edu
+ */
+
 package hector_Kabasuji;
 
 import java.awt.Color;
