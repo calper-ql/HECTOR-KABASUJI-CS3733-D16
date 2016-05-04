@@ -28,6 +28,7 @@ public class BuilderBaseLevelView {
 	private JButton resetButton;
 	private JButton saveButton;
 	private JButton undoButton;
+	private JButton redoButton;
 	private JButton previewButton;
 	private JRadioButton hintButton;
 	
@@ -70,6 +71,11 @@ public class BuilderBaseLevelView {
 		undoButton.setBounds(10, 60, 90, 30);
 		undoButton.setBackground(Color.white);
 		p.add(undoButton);
+		
+		redoButton = new JButton("Redo");
+		redoButton.setBounds(110, 60, 90, 30);
+		redoButton.setBackground(Color.white);
+		p.add(redoButton);
 		
 		resetButton = new JButton("Reset");
 		resetButton.setBounds(310, 60, 90, 30);
@@ -119,5 +125,9 @@ public class BuilderBaseLevelView {
 	
 	public JButton getUndoButton() {
 		return undoButton;
+	}
+	
+	public JButton getRedoButton() {
+		return redoButton;
 	}
 }
