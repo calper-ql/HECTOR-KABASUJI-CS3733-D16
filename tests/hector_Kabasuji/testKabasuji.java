@@ -25,6 +25,7 @@ public class testKabasuji extends TestCase {
 	GameMainController mcon;
 	Model model;
 	Model bmodel;
+	LinkedList<Level> initLevel = new LinkedList<Level>();
 	
 	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
 	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
@@ -534,6 +535,20 @@ public class testKabasuji extends TestCase {
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(mcon, blsc, model, 11);
 		brlc.getRenderedView();		
+	}
+	
+	public void saveInitialLevels(){
+		for(int i = 0; i < 15; i++){
+			initLevel.add(model.getLevel(i));
+		}
+	}
+	
+	public void reloadLevels(){
+		for(int i = 0; i < 15; i++){
+			Level ss;
+			ss = initLevel.get(i);
+			ss.saveToFile();	
+		}
 	}
 	
 }
