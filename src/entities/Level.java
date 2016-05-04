@@ -167,9 +167,8 @@ public class Level implements Serializable {
 	}
 
 	public void resetLevel() {
-		enableAllTiles();
 		forceStars(0);
-		emptyBullpen();
+		this.isLocked = true;
 	}
 
 	public void forceStars(int stars) {
@@ -223,6 +222,13 @@ public class Level implements Serializable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	// USE WITH CAUTION: TESTING ONLY
+	public void setupTestLevel(){
+		enableAllTiles();
+		forceStars(0);
+		emptyBullpen();
 	}
 
 	public void setLevelNum(int levelNum) {
