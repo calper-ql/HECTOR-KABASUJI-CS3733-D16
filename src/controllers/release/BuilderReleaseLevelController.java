@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.swing.JPanel;
@@ -20,10 +21,12 @@ import controllers.BullpenControler;
 import controllers.IController;
 import controllers.ILevelController;
 import controllers.MainController;
+import controllers.puzzle.PuzzleLevelController;
 import entities.EmptyBlock;
 import entities.Level;
 import entities.Model;
 import entities.PuzzleLevel;
+import generators.BaseLevelGenerator;
 
 public class BuilderReleaseLevelController implements IController, ILevelController {
 
@@ -98,7 +101,7 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// Reset button
 		builderReleaseLevelView.getResetButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//resetButtonClicked();
+				resetButtonClicked();
 			}
 
 		});
@@ -120,7 +123,7 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// Preview Button
 		builderReleaseLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//previewButtonClicked();
+				previewButtonClicked();
 			}
 
 		});
@@ -260,7 +263,39 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 
 	@Override
 	public void requestReRenderBack() {
-		// TODO Auto-generated method stub
-		
+		mainController.requestSwap(back);
 	}
+	
+	private void resetButtonClicked() {
+		// reset the level
+		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum - 1));
+		init();
+		bullpenBuilderModeIsEnabled = false;
+		// send the request to re-render
+		this.requestReRender();
+	}
+	
+	private void previewButtonClicked() {
+		model.getLevel(levelNum).saveToFile("temp");
+		Level tempLevel = null;
+		try {
+			// Load level from temporary file
+			tempLevel = model.getLevel(levelNum).getFromFile("temp");
+			// replace the piece list with the generated one
+			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
+			tempLevel.setLevelNum(-1);
+			tempLevel.setStars(0);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<Level> tempList = new ArrayList<Level>();
+		for (int i = 0; i < 15; i++) {
+			tempList.add(tempLevel);
+		}
+		Model tempModel = new Model("", null, tempList);
+		ReleaseLevelController plc = new ReleaseLevelController(mainController, this, tempModel, 1);
+		mainController.requestSwap(plc);
+	}
+
 }
