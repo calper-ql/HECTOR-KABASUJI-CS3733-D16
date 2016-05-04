@@ -231,13 +231,11 @@ public class PuzzleLevelController implements IController, ILevelController{
 
 	@Override
 	public void stateUpdated() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void requestReRenderBack() {
-		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
 }

@@ -303,7 +303,6 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 	@Override
 	public void requestReRenderBack() {
-		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
 
