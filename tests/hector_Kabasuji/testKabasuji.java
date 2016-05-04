@@ -260,7 +260,7 @@ public class testKabasuji extends TestCase {
 	// Level Tests
 	public void testLevel() {
 		Level lev1 = model.getLevel(1);
-		lev1.resetLevel();
+		lev1.setupTestLevel();
 		assertEquals(lev1.getLevelNum(), 1);
 
 		assertEquals(lev1.isLocked(), false);
@@ -278,7 +278,7 @@ public class testKabasuji extends TestCase {
 		assertEquals(lev1.getStars(), 2);
 		lev1.setStars(1);
 		assertEquals(lev1.getStars(), 2);
-		lev1.resetLevel();
+		lev1.setupTestLevel();
 		assertEquals(lev1.getStars(), 0);
 
 		assertEquals(lev1.getEmptyTileCount(), 144);
@@ -289,7 +289,7 @@ public class testKabasuji extends TestCase {
 
 	public void testPuzzleLevel() {
 		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
-		pl.resetLevel();
+		pl.setupTestLevel();
 
 		pl.setTotalMoves(2);
 		pl.setRemaingMoves(2);
@@ -309,7 +309,7 @@ public class testKabasuji extends TestCase {
 
 	public void testLightningLevel() {
 		LightningLevel ll = (LightningLevel) model.getLevel(6);
-		ll.resetLevel();
+		ll.setupTestLevel();
 
 		ll.forceStars(0);
 
@@ -329,7 +329,7 @@ public class testKabasuji extends TestCase {
 
 	public void testReleaseLevel() {
 		ReleaseLevel rl = (ReleaseLevel) model.getLevel(11);
-		rl.resetLevel();
+		rl.setupTestLevel();
 
 		rl.getBullpen().addPiece(p0);
 
@@ -455,7 +455,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		PuzzleLevelController plc = new PuzzleLevelController(mcon, lsc, model, 1);
-		model.getLevel(1).resetLevel();
+		model.getLevel(1).setupTestLevel();
 		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
 		plc.getRenderedView();
 
@@ -511,7 +511,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		LightningLevelController llc = new LightningLevelController(mcon, lsc, model, 6);
-		model.getLevel(6).resetLevel();
+		model.getLevel(6).setupTestLevel();
 		LightningLevel ll = (LightningLevel) model.getLevel(6);
 		llc.getRenderedView();
 
@@ -571,7 +571,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		ReleaseLevelController rlc = new ReleaseLevelController(mcon, lsc, model, 11);
-		model.getLevel(11).resetLevel();
+		model.getLevel(11).setupTestLevel();
 		ReleaseLevel rl = (ReleaseLevel) model.getLevel(11);
 		rlc.getRenderedView();
 
