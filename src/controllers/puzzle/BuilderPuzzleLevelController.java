@@ -53,6 +53,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	
 	/* for undo and redo */
 	private Stack<Level> levelStates;
+	private Stack<Level> redoStates;
 
 	/**
 	 * Constructor for the class. mainController is for the rendering. back is
@@ -71,6 +72,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
 		this.levelStates = new Stack<>();
+		this.redoStates = new Stack<>();
 		Level temp = null;
 		try {
 			temp = model.getLevel(levelNum).generateLevelCopy();
@@ -78,11 +80,13 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			e.printStackTrace();
 		}
 		levelStates.add(temp);
+		
 		init();
 
 	}
 	
 	public void stateUpdated(){
+		this.redoStates = new Stack<>();
 		try {
 			// copy the level
 			Level temp = model.getLevel(levelNum).generateLevelCopy();
@@ -149,6 +153,13 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		builderPuzzleLevelView.getUndoButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				undoButtonClicked();
+			}
+		});
+		
+		// Undo Button
+		builderPuzzleLevelView.getRedoButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				redoButtonClicked();
 			}
 		});
 		
@@ -245,7 +256,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 
 		// replace the piece list with the generated one
 		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
-		lvl.setStars(0);
+		lvl.resetLevel();
 
 		// save to file
 		lvl.saveToFile();
@@ -285,7 +296,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 	
 	private void undoButtonClicked() {
 		if(levelStates.size() > 1){
-			levelStates.pop();
+			redoStates.add(levelStates.pop());
 		}
 		
 		Level lvl = null;
@@ -300,6 +311,26 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		bullpenBuilderModeIsEnabled = false;
 		this.requestReRender();
 	}
+	
+	private void redoButtonClicked() {
+		if(!redoStates.isEmpty()){
+			levelStates.add(redoStates.pop());
+			Level lvl = null;
+			try {
+				lvl = levelStates.peek().generateLevelCopy();
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			model.setLevel(levelNum, lvl);
+			init();
+			bullpenBuilderModeIsEnabled = false;
+			this.requestReRender();
+		}
+		
+		
+	}
+	
 
 	@Override
 	public void requestReRenderBack() {
