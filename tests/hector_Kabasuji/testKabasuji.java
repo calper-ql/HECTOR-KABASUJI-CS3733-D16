@@ -250,37 +250,37 @@ public class testKabasuji extends TestCase {
 
 	// Level Tests
 	public void testLevel() {
-		Level lev10 = model.getLevel(10);
-		assertEquals(lev10.getLevelNum(), 10);
+		Level lev1 = model.getLevel(1);
+		lev1.resetLevel();
+		assertEquals(lev1.getLevelNum(), 1);
 
-		assertEquals(lev10.isLocked(), false);
-		lev10.unlock();
-		assertEquals(lev10.isLocked(), false);
-		assertEquals(lev10.getLevelNum(), 10); // wtf is going on here?
+		assertEquals(lev1.isLocked(), false);
+		lev1.unlock();
+		assertEquals(lev1.isLocked(), false);
+		assertEquals(lev1.getLevelNum(), 1); // wtf is going on here?
 
-		lev10.unlock();
-		assertEquals(lev10.isLocked(), false);
-		lev10.lock();
-		assertEquals(lev10.isLocked(), true);
+		lev1.unlock();
+		assertEquals(lev1.isLocked(), false);
+		lev1.lock();
+		assertEquals(lev1.isLocked(), true);
 
-		assertEquals(lev10.getStars(), 0);
-		lev10.setStars(2);
-		assertEquals(lev10.getStars(), 2);
-		lev10.setStars(1);
-		assertEquals(lev10.getStars(), 2);
-		lev10.resetLevel();
-		assertEquals(lev10.getStars(), 0);
+		assertEquals(lev1.getStars(), 0);
+		lev1.setStars(2);
+		assertEquals(lev1.getStars(), 2);
+		lev1.setStars(1);
+		assertEquals(lev1.getStars(), 2);
+		lev1.resetLevel();
+		assertEquals(lev1.getStars(), 0);
 
-		assertEquals(lev10.getEmptyTileCount(), 144);
-		lev10.getBoard().getTile(2, 5).disable();
-		assertEquals(lev10.getEmptyTileCount(), 143);
-		assertEquals(lev10.getBullpen().getSize(), 0);
+		assertEquals(lev1.getEmptyTileCount(), 144);
+		lev1.getBoard().getTile(2, 5).disable();
+		assertEquals(lev1.getEmptyTileCount(), 143);
+		assertEquals(lev1.getBullpen().getSize(), 0);
 	}
 
 	public void testPuzzleLevel() {
 		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
-
-		pl.forceStars(0);
+		pl.resetLevel();
 
 		pl.setTotalMoves(2);
 		pl.setRemaingMoves(2);
@@ -300,6 +300,7 @@ public class testKabasuji extends TestCase {
 
 	public void testLightningLevel() {
 		LightningLevel ll = (LightningLevel) model.getLevel(6);
+		ll.resetLevel();
 
 		ll.forceStars(0);
 
@@ -318,9 +319,8 @@ public class testKabasuji extends TestCase {
 	}
 
 	public void testReleaseLevel() {
-		ReleaseLevel rl = (ReleaseLevel) model.getLevel(12);
-
-		rl.forceStars(0);
+		ReleaseLevel rl = (ReleaseLevel) model.getLevel(11);
+		rl.resetLevel();
 
 		rl.getBullpen().addPiece(p0);
 
@@ -446,6 +446,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		PuzzleLevelController plc = new PuzzleLevelController(mcon, lsc, model, 1);
+		model.getLevel(1).resetLevel();
 		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
 		plc.getRenderedView();
 
@@ -501,6 +502,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		LightningLevelController llc = new LightningLevelController(mcon, lsc, model, 6);
+		model.getLevel(6).resetLevel();
 		LightningLevel ll = (LightningLevel) model.getLevel(6);
 		llc.getRenderedView();
 
@@ -560,6 +562,7 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		ReleaseLevelController rlc = new ReleaseLevelController(mcon, lsc, model, 11);
+		model.getLevel(11).resetLevel();
 		ReleaseLevel rl = (ReleaseLevel) model.getLevel(11);
 		rlc.getRenderedView();
 

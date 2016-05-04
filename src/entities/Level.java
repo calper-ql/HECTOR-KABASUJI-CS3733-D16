@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.print.DocFlavor.URL;
 
@@ -28,16 +29,16 @@ public class Level implements Serializable {
 		this.hints = hints;
 		this.isSaveable = true;
 	}
-	
-	public void disableSaving(){
+
+	public void disableSaving() {
 		isSaveable = false;
 	}
-	
-	public boolean getIsSavable(){
+
+	public boolean getIsSavable() {
 		return isSaveable;
 	}
-	
-	public void enableSaving(){
+
+	public void enableSaving() {
 		isSaveable = true;
 	}
 
@@ -66,7 +67,8 @@ public class Level implements Serializable {
 	}
 
 	public boolean saveToFile() {
-		if(!this.isSaveable) return true;
+		if (!this.isSaveable)
+			return true;
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
@@ -93,7 +95,8 @@ public class Level implements Serializable {
 	}
 
 	public boolean saveToFile(String name) {
-		if(!this.isSaveable) return true;
+		if (!this.isSaveable)
+			return true;
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
@@ -120,7 +123,7 @@ public class Level implements Serializable {
 	}
 
 	public Level getFromFile(int levelNum) throws IOException, ClassNotFoundException {
-		if(levelNum == 0){
+		if (levelNum == 0) {
 			FileInputStream fout;
 			ObjectInputStream oos;
 
@@ -164,10 +167,11 @@ public class Level implements Serializable {
 	}
 
 	public void resetLevel() {
-		this.stars = 0;
-		this.isLocked = true;
+		enableAllTiles();
+		forceStars(0);
+		emptyBullpen();
 	}
-	
+
 	public void forceStars(int stars) {
 		this.stars = stars;
 	}
@@ -194,6 +198,29 @@ public class Level implements Serializable {
 		for (int c = 0; c < 12; c++) {
 			for (int r = 0; r < 12; r++) {
 				board.tiles.get(c).get(r).disable();
+			}
+		}
+	}
+
+	// USE WITH CAUTION: TESTING ONLY
+	public void enableAllTiles() {
+		for (int c = 0; c < 12; c++) {
+			for (int r = 0; r < 12; r++) {
+				board.tiles.get(c).get(r).enable();
+			}
+		}
+	}
+	
+	// USE WITH CAUTION: TESTING ONLY
+	public void emptyBullpen() {
+		int size = bPen.getSize();
+		for (int i = 0; i < size; i++) {
+			Piece p = bPen.getPiece(0);
+			try {
+				bPen.removePiece(p);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
