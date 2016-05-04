@@ -156,7 +156,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			}
 		});
 		
-		// Undo Button
+		// Redo Button
 		builderPuzzleLevelView.getRedoButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				redoButtonClicked();

@@ -45,6 +45,8 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 
 	/* for undo and redo */
 	private Stack<Level> levelStates;
+	private Stack<Level> redoStates;
+	
 	/**
 	 * 
 	 * @param mainController
@@ -59,6 +61,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		this.model = model;
 		this.bullpenBuilderModeIsEnabled = false;
 		this.levelStates = new Stack<>();
+		this.redoStates = new Stack<>();
 		Level temp = null;
 		try {
 			temp = model.getLevel(levelNum).generateLevelCopy();
@@ -71,6 +74,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	}
 
 	public void stateUpdated(){
+		this.redoStates = new Stack<>();
 		try {
 			// copy the level
 			Level temp = model.getLevel(levelNum).generateLevelCopy();
@@ -96,8 +100,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	 * Initializes the Controllers and the view.
 	 */
 	private void init() {
-		builderLightningLevelView = new BuilderLightningLevelView(
-				((LightningLevel) model.getLevel(levelNum)).getTotalTime());
+		builderLightningLevelView = new BuilderLightningLevelView(((LightningLevel) model.getLevel(levelNum)).getTotalTime());
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
 		boardController = new BoardController(model.getLevel(levelNum), this, model);
@@ -141,6 +144,14 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 				undoButtonClicked();
 				}
 		});
+		
+		// Redo Button
+		builderLightningLevelView.getRedoButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				redoButtonClicked();
+			}
+			});
+				
 		// Preview Button
 		builderLightningLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,7 +251,8 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 
 		// replace the piece list with the generated one
 		lvl.getBullpen().replacePieceList(bullpenController.generatePieceList());
-
+		lvl.resetLevel();
+		
 		// save to file
 		lvl.saveToFile();
 
@@ -257,6 +269,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		// reset the level
 		model.setLevel(levelNum, BaseLevelGenerator.makeBaseLevels().get(levelNum - 1));
 		init();
+		bullpenBuilderModeIsEnabled = false;
 		// send the request to re-render
 		mainController.requestSwap(this);
 	}
@@ -276,7 +289,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 	
 	private void undoButtonClicked() {
 		if(levelStates.size() > 1){
-			levelStates.pop();
+			redoStates.add(levelStates.pop());
 		}
 		
 		Level lvl = null;
@@ -291,7 +304,23 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		bullpenBuilderModeIsEnabled = false;
 		this.requestReRender();
 	}
-
+	private void redoButtonClicked() {
+		if(!redoStates.isEmpty()){
+			levelStates.add(redoStates.pop());
+			Level lvl = null;
+			try {
+				lvl = levelStates.peek().generateLevelCopy();
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			model.setLevel(levelNum, lvl);
+			init();
+			bullpenBuilderModeIsEnabled = false;
+			this.requestReRender();
+		}
+	}
+		
 	@Override
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);
