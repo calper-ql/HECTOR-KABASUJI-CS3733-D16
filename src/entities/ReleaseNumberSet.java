@@ -25,8 +25,6 @@ public class ReleaseNumberSet implements Serializable{
 		boolean con5 = false;
 		boolean con6 = false;
 		
-		System.out.println("++++++++++++++++++++++++++++++++");
-		System.out.print(numbers.size());
 		for(int i = 0; i < numbers.size(); i++){
 			con1 |= (numbers.get(i).getNum() == 1);
 			con2 |= (numbers.get(i).getNum() == 2);
@@ -35,23 +33,7 @@ public class ReleaseNumberSet implements Serializable{
 			con5 |= (numbers.get(i).getNum() == 5);
 			con6 |= (numbers.get(i).getNum() == 6);
 			
-//			System.out.print(con1);
-//			System.out.print(con2);
-//			System.out.print(con3);
-//			System.out.print(con4);
-//			System.out.print(con5);
-//			System.out.println(con6);
 		}
-		
-		System.out.println("-----------------------------");
-//		System.out.print(con1);
-//		System.out.print(con2);
-//		System.out.print(con3);
-//		System.out.print(con4);
-//		System.out.print(con5);
-//		System.out.println(con6);
-//		System.out.println("-----------------------------");
-		
 		
 		return con1 & con2 & con3 & con4 & con5 & con6;
 	}
