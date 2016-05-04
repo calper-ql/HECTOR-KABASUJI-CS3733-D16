@@ -1,3 +1,10 @@
+/** Base Level Generator
+ * This class creates a base level, or blank level which will be modified 
+ * with specifics in order to be made into a puzzle, lightning, or release level 
+ * 
+ * @author Can Alper - calper@wpi.edu
+ */
+
 package generators;
 
 import java.util.ArrayList;
@@ -5,9 +12,19 @@ import java.util.ArrayList;
 import entities.*;
 
 public class BaseLevelGenerator {
+	
+	/**
+	 * Class constructor
+	 */
 	public BaseLevelGenerator(){
 		
 	}
+	
+	/**
+	 * Creates a set of 15 base levels, with 5 Puzzle Levels, 5 Lightning Levels, and 5 Release Levels
+	 * all including mock pieces, boards and bullpens
+	 * @return baseLevels
+	 */
 	public static ArrayList<Level> makeBaseLevels(){
 		ArrayList<Level> baseLevels = new ArrayList<Level>();
 		//Make base Puzzle Levels
@@ -85,6 +102,10 @@ public class BaseLevelGenerator {
 		return baseLevels;
 	}
 	
+	/**
+	 * Main, runs makeBaseLevels and saves each base level to the file
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ArrayList<Level> baseLevels = makeBaseLevels();
 		for (Level l : baseLevels){

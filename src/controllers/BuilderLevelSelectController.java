@@ -1,3 +1,8 @@
+/**Builder Level Select Controller
+ * This controller class handles all push events and view updates 
+ * associated with the Level Select screen in the Level Builder
+ * @author
+ */
 package controllers;
 
 import java.awt.Image;
@@ -31,6 +36,11 @@ public class BuilderLevelSelectController implements IController{
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
 	
+	/**
+	 * Class constructor
+	 * @param mc
+	 * @param model
+	 */
 	public BuilderLevelSelectController(MainController mc, Model model) {
 		// TODO Auto-generated constructor stub
 		this.mc = mc;
@@ -38,6 +48,11 @@ public class BuilderLevelSelectController implements IController{
 		blsv = new BuilderLevelSelectView();
 	}
 
+	/**
+	 * Returns the rendered view of the level select screen, with buttons 1-15 
+	 * for the puzzle, lightning, and release levels and their associated action listener methods
+	 * @return p
+	 */
 	@Override
 	public JPanel getRenderedView() {
 		JPanel p = blsv.render();
@@ -183,17 +198,31 @@ public class BuilderLevelSelectController implements IController{
 		return p;		
 	}
 	
-	
+	/**
+	 * Creates a new Builder Puzzle Level Controller object once a puzzle button is clicked 
+	 * then requests the view be re-rendered	
+	 * @param i
+	 */
 	private void puzzleButtonClicked(int i){
 		this.lvl = new BuilderPuzzleLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 	
+	/**
+	 * Creates a new Builder Lightning Level Controller object once a puzzle button is clicked 
+	 * then requests the view be re-rendered	
+	 * @param i
+	 */
 	private void lightningButtonClicked(int i){
 		this.lvl = new BuilderLightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 	
+	/**
+	 * Creates a new Builder Release Level Controller object once a puzzle button is clicked 
+	 * then requests the view be re-rendered	
+	 * @param i
+	 */
 	private void releaseButtonClicked(int i){
 		this.lvl = new BuilderReleaseLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);

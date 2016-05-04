@@ -66,7 +66,7 @@ public class LightningLevelController implements IController, ILevelController, 
 		// Render the main view
 		renderPanel = lightningLevelView.render();
 		
-		//Attach button
+		//Attach button  
 		lightningLevelView.getBackButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				backButtonClicked();

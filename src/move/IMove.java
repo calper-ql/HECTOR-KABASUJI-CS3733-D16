@@ -1,5 +1,10 @@
+/**IMove
+ * Interface requiring that all move classes have undo, doMove, and valid methods each returning booleans
+ * @author MichaelHarney
+ */
+
 package move;
-//Michael Harney
+
 public interface IMove {
 	public boolean undo();
 	public boolean doMove();

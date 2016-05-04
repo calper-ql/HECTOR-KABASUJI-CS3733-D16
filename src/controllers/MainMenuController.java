@@ -1,3 +1,7 @@
+/**MainMenu Controller
+ *  Contoller for the main menu/ opening screen
+ * @author 
+ */
 package controllers;
 
 import java.awt.event.ActionEvent;
@@ -22,6 +26,11 @@ public class MainMenuController implements IController {
 	LevelSelectController lsc;
 	AchievementController ac;
 	
+	/**
+	 * Class Constructor
+	 * @param mc
+	 * @param model
+	 */
 	public MainMenuController(MainController mc, Model model) {
 		// TODO Auto-generated constructor stub
 		this.mmv = new MainMenuView();
@@ -32,7 +41,10 @@ public class MainMenuController implements IController {
 		ac = new AchievementController(mc, this);
 	}
 	
-	
+	/**
+	 * renders the view for the main menu
+	 * @return ret
+	 */
 	public JPanel getRenderedView(){
 		JPanel ret = mmv.render();
 		lb = mmv.getLevelsButton();
@@ -53,10 +65,16 @@ public class MainMenuController implements IController {
 		return ret;
 	}
 	
+	/**
+	 * Swap views to the level select
+	 */
 	private void levelsButtonClicked(){
 		mc.requestSwap(lsc);
 	}
 	
+	/**
+	 * Swap the view to the Achievement screen
+	 */
 	private void achivementsButtonClicked(){
 		mc.requestSwap(ac);
 		
