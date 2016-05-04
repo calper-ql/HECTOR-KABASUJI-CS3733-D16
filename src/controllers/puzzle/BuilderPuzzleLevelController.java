@@ -221,8 +221,8 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			((PuzzleLevel) tempLevel).setRemaingMoves(builderPuzzleLevelView.getMovesLeft());
 			// replace the piece list with the generated one
 			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
-			tempLevel.setLevelNum(-1);
-			tempLevel.setStars(0);
+			tempLevel.resetLevel();
+			tempLevel.disableSaving();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
