@@ -1,9 +1,8 @@
 /**	Puzzle Level Controller
- * 	This Controller class is to control the gameplay of the Puzzle Level
+ * 	This Contoller class is to control the gameplay of the Puzzle Level
  * 
  * 	@author Can Alper - calper@wpi.edu
  */
-
 package controllers.puzzle;
 
 import java.awt.Point;
@@ -75,7 +74,6 @@ public class PuzzleLevelController implements IController, ILevelController{
 	
 	/**
 	 * This function adds the functionality to button and renders the views
-	 * 
 	 * @return panel
 	 */
 	@Override
@@ -99,7 +97,9 @@ public class PuzzleLevelController implements IController, ILevelController{
 		
 	}
 	
-	// Reload and swap to the higher controller
+	/**	
+	 * Handle the back button click and swap in the previous view
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		mainController.requestSwap(back);
@@ -122,6 +122,10 @@ public class PuzzleLevelController implements IController, ILevelController{
 	 *     -
 	 *     -
 	 * 
+	 * @param jBlockPanel
+	 */
+	
+	/**Handle the piece press and remove the piece from the bullpen
 	 * @param jBlockPanel
 	 */
 	public void piecePressed(JBlockPanel jBlockPanel) {
@@ -225,21 +229,34 @@ public class PuzzleLevelController implements IController, ILevelController{
 		else mainController.requestSwap(back);
 	}
 	
+	/**
+	 * Swap in the current view
+	 */
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
 	}
 
+	/**	
+	 * Update the state of the game
+	 */
 	@Override
 	public void stateUpdated() {
 		
 	}
 
+	/**	
+	 * Swap in the previous view
+	 */
 	@Override
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);
 	}
 	
+	/**	
+	 * set the current block panel list
+	 * @param list
+	 */
 	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
 		this.currentBlockPanelList = list;
 	}
