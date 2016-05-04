@@ -1,3 +1,9 @@
+/** Achievement Generator
+ * This class defines the achievements
+ * @author Can Alper - calper@wpi.edu
+ * 
+ */
+
 package generators;
 
 import java.net.URL;
@@ -7,9 +13,17 @@ import entities.*;
 
 public class AchievementGenerator {
 	
+	/**
+	 * Class constructor
+	 */
 	public AchievementGenerator(){
 	}
 	
+	
+	/**
+	 * Creates and instantiates our 10 achievements, and adds then to an ArrayList
+	 * @return achievements
+	 */
 	public static ArrayList<Achievement> makeAchievements(){
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 		URL i1 = generators.AchievementGenerator.class.getResource("/img/i1.png");
