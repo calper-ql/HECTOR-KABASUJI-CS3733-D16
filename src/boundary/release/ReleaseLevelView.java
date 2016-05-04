@@ -44,6 +44,8 @@ public class ReleaseLevelView extends BaseLevelView{
 		JPanel superPanel = super.render();
 		
 		// Create the label with the complete release sets
+		//System.out.println(((ReleaseLevel)level).getCompleteSets());
+		//((ReleaseLevel)level).
 		JLabel CompleteReleaseSets = new JLabel("Sets: " + new Integer(((ReleaseLevel)level).getCompleteSets()).toString());
 		CompleteReleaseSets.setForeground(Color.white);
 		CompleteReleaseSets.setBounds(400, 20, 150, 20);

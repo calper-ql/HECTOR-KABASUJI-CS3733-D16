@@ -32,6 +32,7 @@ public class ReleaseNumberSet implements Serializable{
 			con4 |= (numbers.get(i).getNum() == 4);
 			con5 |= (numbers.get(i).getNum() == 5);
 			con6 |= (numbers.get(i).getNum() == 6);
+			
 		}
 		
 		return con1 & con2 & con3 & con4 & con5 & con6;
