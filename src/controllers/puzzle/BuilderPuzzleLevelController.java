@@ -83,7 +83,9 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		init();
 
 	}
-	
+	/**
+	 * Updates the state of the system, including total and remaining moves 
+	 */
 	public void stateUpdated(){
 		this.redoStates = new Stack<>();
 		try {

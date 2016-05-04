@@ -99,7 +99,9 @@ public class ReleaseLevelController implements IController, ILevelController{
 		
 	}
 	
-	// Reload and swap to the higher controller
+	/**
+	 *  Reload and swap to the higher controller
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		mainController.requestSwap(back);
@@ -124,7 +126,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 * @param jBlockPanel
 	 */
-	
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
@@ -213,6 +214,9 @@ public class ReleaseLevelController implements IController, ILevelController{
 		}
 	}
 
+	/**
+	 * request re-render
+	 */
 	@Override
 	public void requestReRender() {
 		// TODO Auto-generated method stub
@@ -220,18 +224,28 @@ public class ReleaseLevelController implements IController, ILevelController{
 		
 	}
 
+	/**
+	 * ensure state is updated
+	 */
 	@Override
 	public void stateUpdated() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * brings the rendering back a step
+	 */
 	@Override
 	public void requestReRenderBack() {
 		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
 	
+	/**
+	 * sets the current block panel list
+	 * @param list
+	 */
 	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
 		this.currentBlockPanelList = list;
 	}

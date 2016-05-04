@@ -1,3 +1,7 @@
+/**Builder Release Level Controller
+ * This class handles all components related 
+ * 
+ */
 package controllers.release;
 
 import java.awt.event.ActionEvent;
@@ -48,6 +52,13 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 	private Stack<Level> levelStates;
 	private Stack<Level> redoStates;
 
+	/**
+	 * Class constructor
+	 * @param mc
+	 * @param back
+	 * @param model
+	 * @param i
+	 */
 	public BuilderReleaseLevelController(MainController mc, BuilderLevelSelectController back, Model model, int i) {
 		this.back = back;
 		this .levelNum = i;
@@ -67,6 +78,9 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		init();
 	}
 
+	/**
+	 * Initializes the Controller and the view
+	 */
 	private void init(){
 		builderReleaseLevelView = new BuilderReleaseLevelView(this);
 		blockController = new BlockController(new EmptyBlock(), this);
@@ -113,14 +127,18 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 			}
 		});
 
-		// Undo Button
+		/**
+		 *  Undo Button
+		 */
 		builderReleaseLevelView.getRedoButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				redoButtonClicked();
 			}
 		});
 
-		// Preview Button
+		/**
+		 *  Preview Button
+		 */
 		builderReleaseLevelView.getPreviewButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				previewButtonClicked();
@@ -128,7 +146,9 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 
 		});
 
-		// Hint button
+		/** Hint button
+		 * 
+		 */
 		builderReleaseLevelView.getHintButton().addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -162,7 +182,12 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		// return the renderPanel.
 		return renderPanel;
 	}
+	
+	
 
+	/**
+	 * Saves Button click action to file, then requests a re-render
+	 */
 	protected void saveButtonClicked() {
 		// get level
 		Level lvl = model.getLevel(levelNum);
@@ -184,7 +209,9 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 
 	}
 
-	// Reload the model before backing up.
+	/**
+	 *  Reload the model before backing up.
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		// send the request to re-render to the higher controller
