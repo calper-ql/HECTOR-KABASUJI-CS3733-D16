@@ -199,8 +199,10 @@ public class ReleaseLevelController implements IController, ILevelController{
 			
 		}
 		
-		// finally we re-render
 		mainController.requestSwap(this);
+		if(model.getLevel(levelNum).hasFinished()){
+			this.requestReRenderBack();
+		}
 	}
 
 	@Override

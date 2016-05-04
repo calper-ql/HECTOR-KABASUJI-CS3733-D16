@@ -41,6 +41,7 @@ public class LightningLevelController implements IController, ILevelController, 
 	JPanel renderPanel;
 	LinkedList<JBlockPanel> currentBlockPanelList;
 	Thread counter;
+	boolean shouldStop;
 	
 	public LightningLevelController(MainController mainController, IController back, Model model, int levelNum) {
 		this.mainController = mainController;
@@ -55,6 +56,8 @@ public class LightningLevelController implements IController, ILevelController, 
 		currentBlockPanelList = null;
 		counter = new Thread(this);
 		counter.start();
+		shouldStop = false;
+		
 	}
 	
 
@@ -81,7 +84,7 @@ public class LightningLevelController implements IController, ILevelController, 
 	
 	private void backButtonClicked() {
 		model.reload();
-		counter.interrupt();
+		shouldStop = true;
 		mainController.requestSwap(back);
 	}
 
@@ -131,7 +134,7 @@ public class LightningLevelController implements IController, ILevelController, 
 			}	
 		}
 		
-		// Update the moves left
+		// Update the model left
 		Level lvl = model.getLevel(levelNum);
 		((LightningLevel)lvl).updateStars();
 		Level saveStars;
@@ -168,7 +171,10 @@ public class LightningLevelController implements IController, ILevelController, 
 		}
 		// finally we re-render
 		if(!lvl.hasFinished())mainController.requestSwap(this);
-		else mainController.requestSwap(back);
+		else {
+			shouldStop = true;
+			mainController.requestSwap(back);
+		}
 	}
 
 
@@ -176,18 +182,63 @@ public class LightningLevelController implements IController, ILevelController, 
 	public void run() {
 		try {
 			Thread.sleep(1000);
-			LightningLevel lvl = (LightningLevel)model.getLevel(levelNum);
-			(lvl).setTimeRemaining(lvl.getTimeRemaining()-1);
+			Level lvlt = model.getLevel(levelNum);
+			((LightningLevel)(lvlt)).setTimeRemaining(((LightningLevel)lvlt).getTimeRemaining()-1);
 			lightningLevelView.updateTimer();
-			counter = new Thread(this);
-			counter.start();
-		} catch (Exception e) {
-			if(e instanceof InterruptedException){
+			
+			
+			if(((LightningLevel)lvlt).getTimeRemaining() <= 0){
+				// Update the model left
+				Level lvl = model.getLevel(levelNum);
+				((LightningLevel)lvl).updateStars();
+				Level saveStars;
+				try {
+					saveStars = lvl.getFromFile(levelNum);
+					saveStars.setStars(lvl.getStars());
+					saveStars.saveToFile();
+				} catch (ClassNotFoundException | IOException e1) {
+					e1.printStackTrace();
+				}
+				ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements();
+				for (Achievement a: needToBeUnlocked){
+					a.setisUnlocked();
+					a.saveAchievementToFile();
+				}
+				if(lvl.hasFinished()){
+					System.out.println("finished");
+					try {
+						if(lvl.getLevelNum()>0){
+							Level savelvl = lvl.getFromFile(levelNum);
+							savelvl.setStars(lvl.getStars());
+							savelvl.saveToFile();
+						}
+					} catch (ClassNotFoundException | IOException e) {}
+					try {
+						if(lvl.getStars() > 0 && lvl.getLevelNum()>0){
+							Level next = lvl.getFromFile(levelNum+1);
+							next.unlock();
+							next.saveToFile();
+						}
+					} catch (ClassNotFoundException | IOException e) {}
+					model.reload();
+					
+				}
+				// finally we re-render
+				if(!lvl.hasFinished())mainController.requestSwap(this);
+				else {
+					shouldStop = true;
+					mainController.requestSwap(back);
+				}
 				
-			}else {
-				e.printStackTrace();
+				
 			}
+			
+			counter = new Thread(this);
+			if(!this.shouldStop)counter.start();
+		} catch (Exception e) {
+		
 		}
+		
 	}
 	
 	@Override
@@ -204,6 +255,7 @@ public class LightningLevelController implements IController, ILevelController, 
 
 	@Override
 	public void requestReRenderBack() {
+		shouldStop = true;
 		mainController.requestSwap(back);
 	}
 	
