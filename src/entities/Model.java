@@ -61,7 +61,7 @@ public class Model implements Cloneable{
 			if(this.achievements.get(i).getName() == achievementName){
 				this.achievements.get(i).saveAchievementToFile(); 
 			}
-			}
+		}
 	}
 	public boolean checkAchievementExists(String name){
 		File dir = new File("achievements");

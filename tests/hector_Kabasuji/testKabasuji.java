@@ -336,6 +336,10 @@ public class testKabasuji extends TestCase {
 		assertEquals(rl.getStars(), 3);
 	}
 	
+	public void testAchievements(){
+		model.checkUnlockedAchievements();
+	}
+	
 	// Boundary Test Cases
 	
 	// Controller Test Cases
@@ -549,6 +553,7 @@ public class testKabasuji extends TestCase {
 		for(int i = 0; i < 15; i++){
 			Level ss;
 			ss = initLevel.get(i);
+			ss.setStars(initLevel.get(i).getStars());
 			ss.saveToFile();	
 		}
 	}
