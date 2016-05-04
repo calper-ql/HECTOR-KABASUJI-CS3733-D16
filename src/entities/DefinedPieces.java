@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * A storage of all defined 35 hexominoes.
+ * A storage of all defined 35 hexominoes. Links the Blocks to thier correct neighbors and makes all 35 unique pieces, stores them in an ArrayList.
  * 
- * @author Courtney Davis
+ * @author 
+ * 
  *
  */
 public class DefinedPieces {

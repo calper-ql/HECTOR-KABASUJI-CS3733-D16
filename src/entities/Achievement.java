@@ -12,23 +12,41 @@ import java.io.Serializable;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-
+/**
+ * Achievement Class
+ * Class to store the state of the achievements.
+ * @author Courtney Davis - cedavis@wpi.edu
+ *
+ */
 public class Achievement implements Serializable{
 	String name;
 	Image img;
 	URL url;
 	boolean unlocked = false;
-	
+	/**
+	 * The Achievement contains information about a single achievement such as a name, image, and if it is unlocked.
+	 * @param name The name of the achievement.
+	 * @param url The URL of the achievement to make the Image.
+	 * @param unlocked The Image associated with the achievement's URL.
+	 */
 	public Achievement(String name, URL url, boolean unlocked){
 		this.name = name;
 		this.url = url;
 		this.unlocked = unlocked; 
 	}
-	
+
+	/**
+	 * Get the Image from the URL given when an Achievement is created.
+	 * @return The Image associated with the achievement's URL
+	 */
 	public Image getImage(){
 		return this.convertURLtoImage();
 	}
 	
+	/**
+	 * Convert the Achievement's associated URL to a rendered and scaled Image.
+	 * @return The rendered and scaled instance of the Image.
+	 */
 	public Image convertURLtoImage(){
 		BufferedImage mock_img = null;
 		try {
@@ -40,11 +58,19 @@ public class Achievement implements Serializable{
 		Image img = mock_img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
 		return img;
 	}
-	
+
+	/**
+	 * Set the achievement's unlocked state to True. 
+	 */
 	public void setisUnlocked(){
 		this.unlocked = true;
 	}
 	
+	/**
+	 * Save the Achievement to a folder called "achievements". Individual achievements are saved in files with the name that is associated with the Achievement object. 
+	 * For example the first Achievement is saved as the file "Earned One Star In Puzzle!".
+	 * @return A boolean determining if saving Achievement to file was successful. Success returns True and Failure returns False. 
+	 */
 	public boolean saveAchievementToFile(){
 		FileOutputStream fout;
 		ObjectOutputStream oos;
@@ -71,6 +97,13 @@ public class Achievement implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Gets the saved Achievement from the File that shares the passed in file name. For example to get the first achievement the method takes "Earned One Star In Puzzle!".
+	 * @param name The name of the Achievement that should be loaded.
+	 * @return The Achievement that has the same associated name as the input to the method. 
+	 * @throws IOException In case of File Opening error.
+	 * @throws ClassNotFoundException In case the serialized Achievement is not recognized.
+	 */
 	public Achievement getAchievementFromFile(String name) throws IOException, ClassNotFoundException{
 		FileInputStream fout;
 		ObjectInputStream oos;
@@ -83,6 +116,9 @@ public class Achievement implements Serializable{
 		
 	}
 	
+	/**
+	 * Deletes the achievement files saved in the achievements directory/folder.
+	 */
 	public void deleteAcheivement(){
 		File dir = new File("achievements");
 		if(!dir.exists()){
@@ -95,10 +131,18 @@ public class Achievement implements Serializable{
 		}
 	}
 	
+	/**
+	 * Informs if an Achievement is locked or not.
+	 * @return The unlock status of the Achievement. Locked is False and Unlocked is True.
+	 */
 	public boolean isUnlocked(){
 		return this.unlocked;
 	}
 	
+	/**
+	 * Informs what String associated with the name of the Achievement is.
+	 * @return The name associated with the Achievement.
+	 */
 	public String getName(){
 		return this.name;
 	}
