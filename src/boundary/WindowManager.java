@@ -1,3 +1,7 @@
+/**Window Manager
+ * This Boundary Class is responsible for managing Window Views 
+ * @author
+ */
 package boundary;
 
 import java.awt.Point;

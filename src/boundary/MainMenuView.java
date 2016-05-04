@@ -1,3 +1,7 @@
+/**
+ * This Boundary class renders all components associated with the Main Menu in the game play application
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -15,10 +19,16 @@ public class MainMenuView {
 	private JButton btnLevels;
 	private JButton btnAchievements;
 	
-	public MainMenuView(){
-
-	}
+	/**
+	 * Class Constructor
+	 */	
+	public MainMenuView(){}
 	
+	/**
+	 * Renders all components associated with the main menu,
+	 * including the Levels and Achievements buttons
+	 * @return jp
+	 */
 	public JPanel render(){
 		JPanel jp = new JPanel();
 		jp.setBackground(Color.darkGray);
@@ -46,10 +56,18 @@ public class MainMenuView {
 		return jp;
 	}
 	
+	/**
+	 * Returns the Achievements Button for use by classes in other packages
+	 * @return btnAchivements
+	 */
 	public JButton getAchievementButton(){
 		return btnAchievements;
 	}
 	
+	/**
+	 * Returns the Levels Button for use by classes in other packages
+	 * @return btnLevels
+	 */
 	public JButton getLevelsButton(){
 		return btnLevels;
 	}
