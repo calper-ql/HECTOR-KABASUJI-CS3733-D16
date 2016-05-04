@@ -204,6 +204,13 @@ public class PuzzleLevelController implements IController, ILevelController{
 					a.saveAchievementToFile();
 				}
 			}
+			try {
+				if(lvl.getStars() > 0 && lvl.getLevelNum()>0){
+					Level next = lvl.getFromFile(levelNum+1);
+					next.unlock();
+					next.saveToFile();
+				}
+			} catch (ClassNotFoundException | IOException e) {}
 			if(lvl.hasFinished()){
 				System.out.println("finished");
 				try {
