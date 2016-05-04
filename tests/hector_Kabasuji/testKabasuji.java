@@ -352,9 +352,8 @@ public class testKabasuji extends TestCase {
 
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		mmc.getRenderedView();
-		click(70, 300);		
-		wmg.render();
-		Thread.sleep(500);
+		click(70, 300);	
+		clickBackButton();
 	}
 
 	// Boundary Test Cases
@@ -637,8 +636,14 @@ public class testKabasuji extends TestCase {
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(bcon, blsc, bmodel, 1);
 		wmg.swap(bplc.getRenderedView());
-		click(100,175);
 		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
+		clickBackButton();
 		
 		clickBackButton();
 		reloadLevels();
@@ -651,6 +656,13 @@ public class testKabasuji extends TestCase {
 		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, bmodel, 6);
 		wmg.swap(bllc.getRenderedView());
 		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
+		clickBackButton();
 
 		clickBackButton();
 		reloadLevels();
@@ -663,6 +675,13 @@ public class testKabasuji extends TestCase {
 		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, bmodel, 11);
 		wmg.swap(brlc.getRenderedView());
 		Thread.sleep(500);
+		
+		click(340, 100);
+		click(540, 100);
+		click(540, 100);
+		multiclick(500, 400, 16);
+		click(440, 100);
+		clickBackButton();
 
 		clickBackButton();
 		reloadLevels();
@@ -724,12 +743,20 @@ public class testKabasuji extends TestCase {
 		int mask = InputEvent.BUTTON1_DOWN_MASK;
 		try {
 			minime.mouseMove(200 + x, 200 + y);
-			Thread.sleep(500);
+			Thread.sleep(200);
 			minime.mousePress(mask);
-			Thread.sleep(500);
+			Thread.sleep(200);
+			minime.mouseRelease(mask);
+			Thread.sleep(200);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public void multiclick(int x, int y, int num){
+		for(int i = 0; i < num; i++){
+			click(x, y);
+		}
 	}
 }
