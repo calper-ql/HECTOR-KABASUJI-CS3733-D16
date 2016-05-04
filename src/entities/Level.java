@@ -145,6 +145,10 @@ public class Level implements Serializable {
 		this.stars = 0;
 		this.isLocked = true;
 	}
+	
+	public void forceStars(int stars) {
+		this.stars = stars;
+	}
 
 	public boolean hasFinished() {
 		return false;

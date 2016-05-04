@@ -2,6 +2,7 @@ package hector_Kabasuji;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -24,6 +25,7 @@ public class testKabasuji extends TestCase {
 	GameMainController mcon;
 	Model model;
 	Model bmodel;
+	LinkedList<Level> initLevel = new LinkedList<Level>();
 	
 	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
 	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
@@ -86,7 +88,7 @@ public class testKabasuji extends TestCase {
 			assertEquals(p0.getBlock(4).getEast(), 	b3);
 			assertEquals(p0.getBlock(4).getWest().isValidBlock(), false);
 			
-			assertEquals(p0.getBlock(5).getNorth().isValidBlock(), false);
+			assertEquals(p0.getBlock(5).getNorth().isValidBlock(), false); 
 			assertEquals(p0.getBlock(5).getSouth(), b3);
 			assertEquals(p0.getBlock(5).getEast().isValidBlock(), false);
 			assertEquals(p0.getBlock(5).getWest().isValidBlock(), false);
@@ -269,6 +271,8 @@ public class testKabasuji extends TestCase {
 	public void testPuzzleLevel(){
 		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
 		
+		pl.forceStars(0);
+		
 		pl.setTotalMoves(2);
 		pl.setRemaingMoves(2);
 		assertEquals(pl.hasFinished(), false);
@@ -286,6 +290,8 @@ public class testKabasuji extends TestCase {
 	public void testLightningLevel(){
 		LightningLevel ll = (LightningLevel) model.getLevel(6);
 		
+		ll.forceStars(0);
+		
 		ll.setTotalTime(2);
 		ll.setTimeRemaining(2);
 		assertEquals(ll.hasFinished(), false);
@@ -302,6 +308,8 @@ public class testKabasuji extends TestCase {
 	
 	public void testReleaseLevel(){
 		ReleaseLevel rl = (ReleaseLevel) model.getLevel(12);
+		
+		rl.forceStars(0);
 		
 		rl.getBullpen().addPiece(p0);
 		
@@ -350,6 +358,61 @@ public class testKabasuji extends TestCase {
 	public void testLevelSelectController(){
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
+		lsc.getRenderedView();
+		
+		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);		
+		pl.setTotalMoves(2);
+		pl.setRemaingMoves(0);		
+		pl.disableAllTiles();
+		pl.updateStars();
+		PuzzleLevel pss;
+		try {
+			pss = (PuzzleLevel) pl.getFromFile(1);
+			pss.setStars(pl.getStars());
+			pss.saveToFile();
+		} catch (ClassNotFoundException | IOException e1) {
+			e1.printStackTrace();
+		}
+	
+	
+		LightningLevel ll = (LightningLevel) model.getLevel(6);		
+		ll.setTotalTime(2);
+		ll.setTimeRemaining(0);		
+		ll.disableAllTiles();
+		ll.updateStars();
+		LightningLevel lss;
+		try {
+			lss = (LightningLevel) ll.getFromFile(6);
+			lss.setStars(ll.getStars());
+			lss.saveToFile();
+		} catch (ClassNotFoundException | IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		ReleaseLevel rl = (ReleaseLevel) model.getLevel(12);
+		rl.getBullpen().addPiece(p0);		
+		LinkedList<ReleaseNumber> rnl = new LinkedList<ReleaseNumber>();
+		for(int c = 0; c < 3; c++){
+			for(int n = 0; n <= 6; n++){
+				rnl.add(new ReleaseNumber(c, n));
+			}
+		}				
+		rl.resetSets();
+		for(int i = 0; i < rnl.size(); i++){
+			ReleaseNumber n = rnl.get(i);
+			rl.addReleaseNumber(n);
+		}	
+		rl.updateStars();
+		ReleaseLevel rss;
+		try {
+			rss = (ReleaseLevel) rl.getFromFile(11);
+			rss.setStars(rl.getStars());
+			rss.saveToFile();
+		} catch (ClassNotFoundException | IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		lsc.getRenderedView();
 	}
 	
@@ -472,6 +535,20 @@ public class testKabasuji extends TestCase {
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(mcon, blsc, model, 11);
 		brlc.getRenderedView();		
+	}
+	
+	public void saveInitialLevels(){
+		for(int i = 0; i < 15; i++){
+			initLevel.add(model.getLevel(i));
+		}
+	}
+	
+	public void reloadLevels(){
+		for(int i = 0; i < 15; i++){
+			Level ss;
+			ss = initLevel.get(i);
+			ss.saveToFile();	
+		}
 	}
 	
 }

@@ -177,7 +177,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 				model.getLevel(levelNum).getBullpen().removePiece(bl.getFirst().getPiece());
 				
 			} catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
 			
 			// Update the moves left
