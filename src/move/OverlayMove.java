@@ -1,21 +1,33 @@
+/** Overlay Move
+ * @author MichaelHarney
+ * @author Can Alper - calper@wpi.edu
+ */
 package move;
 import java.util.LinkedList;
 import entities.Block;
 import entities.IBlock;
 import entities.Tile;
-//Michael Harney
+
+
 public class OverlayMove implements IMove{
 	LinkedList<IBlock> blist;
 	LinkedList<Tile> tlist;
 	LinkedList<Tile> formertiles; //these represent all tiles that were covered so that when we hit 'undo', we can get them back in their former states.
 
+	/**
+	 * Class constructor
+	 * @param blist
+	 * @param tlist
+	 */
 	public OverlayMove(LinkedList<IBlock> blist, LinkedList<Tile> tlist) {
 		this.blist = blist;
 		this.tlist = tlist;
 		this.formertiles = new LinkedList<Tile>();
 	}
 	
-/*	@Override*/
+	/**
+	 * Checks to ensure that the move is valid, if so the current list of tiles is updated
+	 */
 	public boolean doMove() {
 		if (!this.valid()) { return false; } //just a formality		
 		for(int i = 0; i < 6; i++){
@@ -26,7 +38,9 @@ public class OverlayMove implements IMove{
 		return true;
 	}
 
-	//@Override
+	/**
+	 * sets the current list of tiles to the former list 
+	 */
 	public boolean undo() {
 		/*for(int i = 0; i < 6; i++){
 			
@@ -35,7 +49,9 @@ public class OverlayMove implements IMove{
 		return true;
 	}
 
-	//@Override
+	/**
+	 *  checks to make sure a move is valid
+	 */
 	public boolean valid() {
 		for(Tile t : tlist){
 			if(!t.enabled()){
