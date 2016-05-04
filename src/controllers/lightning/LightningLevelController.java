@@ -1,3 +1,7 @@
+/**Lightning Level Controller
+ * This Controller Class is responsible for the push events and 
+ * boundary refreshes for components specific to the Lightning Level
+ */
 package controllers.lightning;
 
 import java.awt.Point;
@@ -43,6 +47,13 @@ public class LightningLevelController implements IController, ILevelController, 
 	Thread counter;
 	boolean shouldStop;
 	
+	/**
+	 * Class Constructor
+	 * @param mainController
+	 * @param back
+	 * @param model
+	 * @param levelNum
+	 */
 	public LightningLevelController(MainController mainController, IController back, Model model, int levelNum) {
 		this.mainController = mainController;
 		this.back = back;
@@ -61,6 +72,9 @@ public class LightningLevelController implements IController, ILevelController, 
 	}
 	
 
+	/**
+	 * Render the view for the lightning level
+	 */
 	@Override
 	public JPanel getRenderedView() {
 		// Render the main view
@@ -81,13 +95,18 @@ public class LightningLevelController implements IController, ILevelController, 
 		
 	}
 		
-	
+	/**
+	 * Handle the back button click and swap the view for the previous view
+	 */
 	private void backButtonClicked() {
 		model.reload();
 		shouldStop = true;
 		mainController.requestSwap(back);
 	}
 
+	/**
+	 * Handle the piece press and remove the piece from the bullpen
+	 */
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
@@ -100,7 +119,9 @@ public class LightningLevelController implements IController, ILevelController, 
 		}
 	}
 
-
+	/**
+	 * Handle the piece release and add the piece to the board and update the state
+	 */
 	public void pieceReleased(JBlockPanel jBlockPanel) {
 		// Lists for the move
 		LinkedList<Tile> tl = new LinkedList<>();
@@ -177,7 +198,9 @@ public class LightningLevelController implements IController, ILevelController, 
 		}
 	}
 
-
+	/**
+	 * Run the lightning level 
+	 */
 	@Override
 	public void run() {
 		try {
@@ -241,24 +264,36 @@ public class LightningLevelController implements IController, ILevelController, 
 		
 	}
 	
+	/**
+	 * render the lightning view and swap in the view
+	 */
 	@Override
 	public void requestReRender() {
 		mainController.requestSwap(this);
 	}
 
-
+	
+	/**
+	 * update the state of the game 
+	 */
 	@Override
 	public void stateUpdated() {
 		
 	}
 
-
+	/**
+	 * swap in the previous view  
+	 */
 	@Override
 	public void requestReRenderBack() {
 		shouldStop = true;
 		mainController.requestSwap(back);
 	}
 	
+	/**
+	 * Set current block panel list
+	 * @param list
+	 */
 	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
 		this.currentBlockPanelList = list;
 	}
