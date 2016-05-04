@@ -3,6 +3,7 @@ package hector_Kabasuji;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import generators.*;
 import boundary.*;
@@ -19,7 +20,7 @@ import junit.framework.TestCase;
 public class testKabasuji extends TestCase {
 	Application game;
 	Builder builder;
-	MainController mcon;
+	GameMainController mcon;
 	Model model;
 	Model bmodel;
 	
@@ -33,7 +34,7 @@ public class testKabasuji extends TestCase {
 	protected void setUp() throws Exception {
 		game = new Application();
 		builder = new Builder();
-		mcon = new MainController();
+		mcon = new GameMainController(game);
 		model = game.getModel();
 		bmodel = builder.getModel();
 		model.reload();
@@ -264,6 +265,67 @@ public class testKabasuji extends TestCase {
 		assertEquals(lev10.getBullpen().getSize(), 0);
 	}
 	
+	public void testPuzzleLevel(){
+		PuzzleLevel pl = (PuzzleLevel) model.getLevel(1);
+		
+		pl.setTotalMoves(2);
+		pl.setRemaingMoves(2);
+		assertEquals(pl.hasFinished(), false);
+		pl.updateStars();
+		assertEquals(pl.getStars(), 0);
+		
+		pl.setRemaingMoves(0);		
+		pl.disableAllTiles();
+		
+		assertEquals(pl.hasFinished(), true);
+		pl.updateStars();
+		assertEquals(pl.getStars(), 3);
+	}
+	
+	public void testLightningLevel(){
+		LightningLevel ll = (LightningLevel) model.getLevel(6);
+		
+		ll.setTotalTime(2);
+		ll.setTimeRemaining(2);
+		assertEquals(ll.hasFinished(), false);
+		ll.updateStars();
+		assertEquals(ll.getStars(), 0);
+		
+		ll.setTimeRemaining(0);		
+		ll.disableAllTiles();
+		
+		assertEquals(ll.hasFinished(), true);
+		ll.updateStars();
+		assertEquals(ll.getStars(), 3);
+	}
+	
+	public void testReleaseLevel(){
+		ReleaseLevel rl = (ReleaseLevel) model.getLevel(12);
+		
+		rl.getBullpen().addPiece(p0);
+		
+		LinkedList<ReleaseNumber> rnl = new LinkedList<ReleaseNumber>();
+		for(int c = 0; c < 3; c++){
+			for(int n = 0; n <= 6; n++){
+				rnl.add(new ReleaseNumber(c, n));
+			}
+		}
+				
+		rl.resetSets();
+		assertEquals(rl.hasFinished(), false);
+		rl.updateStars();
+		assertEquals(rl.getStars(), 0);
+		
+		for(int i = 0; i < rnl.size(); i++){
+			ReleaseNumber n = rnl.get(i);
+			rl.addReleaseNumber(n);
+		}
+		
+		assertEquals(rl.hasFinished(), true);
+		rl.updateStars();
+		assertEquals(rl.getStars(), 3);
+	}
+	
 	// Boundary Test Cases
 	
 	// Controller Test Cases
@@ -290,25 +352,94 @@ public class testKabasuji extends TestCase {
 		lsc.getRenderedView();
 	}
 	
-	public void testPuzzleLevelController(){
+	public void testPuzzleLevelController() throws Exception{
+		WindowManager wmg = new WindowManager(200, 200, 640, 535);
+		wmg.link(mcon);
+		
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		PuzzleLevelController plc = new PuzzleLevelController(mcon, lsc, model, 1);
 		plc.getRenderedView();
+		
+		model.getLevel(1).getBullpen().addPiece(p0);
+		
+		Piece p = model.getLevel(1).getBullpen().getPiece(0);
+		assertEquals(p.equals(p0), true);
+		try{
+			Block b = p.getBlock(0);
+			BlockController bc = new BlockController(b, plc);
+			BlockView bv0 = new BlockView(bc);  
+			LinkedList<JBlockPanel> list = bv0.render(b, 20, 20);
+			
+			mcon.requestSwap(plc);
+
+//			plc.setCurrentBlockPanelList(list);			
+//			plc.piecePressed(list.get(0));
+						  
+			plc.setCurrentBlockPanelList(list);
+			plc.pieceReleased(list.get(0)); 
+		}catch (Exception e){
+		}		
 	}
 	
 	public void testLightningLevelController(){
+		WindowManager wmg = new WindowManager(200, 200, 640, 535);
+		wmg.link(mcon);
+		
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		LightningLevelController llc = new LightningLevelController(mcon, lsc, model, 6);
 		llc.getRenderedView();
+		
+		model.getLevel(6).getBullpen().addPiece(p0);
+		
+		Piece p = model.getLevel(6).getBullpen().getPiece(0);
+		assertEquals(p.equals(p0), true);
+		try{
+			Block b = p.getBlock(0);
+			BlockController bc = new BlockController(b, llc);
+			BlockView bv0 = new BlockView(bc);  
+			LinkedList<JBlockPanel> list = bv0.render(b, 20, 20);
+			
+			mcon.requestSwap(llc);
+
+//			plc.setCurrentBlockPanelList(list);			
+//			plc.piecePressed(list.get(0));
+						  
+			llc.setCurrentBlockPanelList(list);
+			llc.pieceReleased(list.get(0)); 
+		}catch (Exception e){
+		}	
 	}
 	
 	public void testReleaseLevelController(){
+		WindowManager wmg = new WindowManager(200, 200, 640, 535);
+		wmg.link(mcon);
+		
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		ReleaseLevelController rlc = new ReleaseLevelController(mcon, lsc, model, 11);
 		rlc.getRenderedView();
+		
+		model.getLevel(11).getBullpen().addPiece(p0);
+		
+		Piece p = model.getLevel(11).getBullpen().getPiece(0);
+		assertEquals(p.equals(p0), true);
+		try{
+			Block b = p.getBlock(0);
+			BlockController bc = new BlockController(b, rlc);
+			BlockView bv0 = new BlockView(bc);  
+			LinkedList<JBlockPanel> list = bv0.render(b, 400, 400);
+			
+			mcon.requestSwap(rlc);
+
+//			plc.setCurrentBlockPanelList(list);			
+//			plc.piecePressed(list.get(0));
+						  
+			rlc.setCurrentBlockPanelList(list);
+			rlc.pieceReleased(list.get(0));  
+		}catch (Exception e){
+		}
 		
 	}
 	

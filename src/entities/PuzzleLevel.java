@@ -50,10 +50,9 @@ public class PuzzleLevel extends Level{
 		int emptyTiles = this.getEmptyTileCount();
 	
 		// now update the score
-		if(emptyTiles > 12) setStars(0);
-		if(emptyTiles <= 12) setStars(1);
-		if(emptyTiles <= 6) setStars(2);
 		if(emptyTiles == 0) setStars(3);
-	}
-	
+		if(emptyTiles <= 6) setStars(2);
+		if(emptyTiles <= 12) setStars(1);
+		if(emptyTiles > 12) setStars(0);		
+	}	
 }

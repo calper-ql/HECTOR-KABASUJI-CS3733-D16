@@ -240,4 +240,8 @@ public class ReleaseLevelController implements IController, ILevelController{
 		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
+	
+	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
+		this.currentBlockPanelList = list;
+	}
 }

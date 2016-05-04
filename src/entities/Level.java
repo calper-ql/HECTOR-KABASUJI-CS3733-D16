@@ -18,56 +18,56 @@ public class Level implements Serializable {
 	Board board;
 	boolean hints;
 	int stars = 0;
-	
-	public Level(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints){
+
+	public Level(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints) {
 		this.isLocked = isLocked;
 		this.levelNum = levelNum;
 		this.bPen = bPen;
 		this.board = board;
 		this.hints = hints;
 	}
-	
-	public boolean isLocked(){
+
+	public boolean isLocked() {
 		return isLocked;
 	}
-	
-	public void unlock(){
+
+	public void unlock() {
 		isLocked = false;
 	}
-	
-	public int getLevelNum(){
+
+	public int getLevelNum() {
 		return levelNum;
 	}
-	
-	public Bullpen getBullpen(){
+
+	public Bullpen getBullpen() {
 		return bPen;
 	}
-	
-	public Board getBoard(){
+
+	public Board getBoard() {
 		return board;
 	}
-	
-	public int getStars(){
+
+	public int getStars() {
 		return stars;
 	}
 
-	public boolean saveToFile(){
-		if (levelNum < 0){
+	public boolean saveToFile() {
+		if (levelNum < 0) {
 			return false;
 		}
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
 			File dir = new File("levels");
-			if(!dir.exists()){
+			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			
+
 			File save = new File(dir, "level" + levelNum);
-			if(!save.exists()){
+			if (!save.exists()) {
 				save.createNewFile();
 			}
-			
+
 			fout = new FileOutputStream("levels/level" + levelNum);
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -79,22 +79,22 @@ public class Level implements Serializable {
 		}
 		return true;
 	}
-	
-	public boolean saveToFile(String name){
-		
+
+	public boolean saveToFile(String name) {
+
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
 			File dir = new File("levels");
-			if(!dir.exists()){
+			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			
+
 			File save = new File(dir, "level" + name);
-			if(!save.exists()){
+			if (!save.exists()) {
 				save.createNewFile();
 			}
-			
+
 			fout = new FileOutputStream("levels/level" + name);
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -106,65 +106,75 @@ public class Level implements Serializable {
 		}
 		return true;
 	}
-	
-	public Level getFromFile(int levelNum) throws IOException, ClassNotFoundException{
+
+	public Level getFromFile(int levelNum) throws IOException, ClassNotFoundException {
 		FileInputStream fout;
 		ObjectInputStream oos;
-		
+
 		fout = new FileInputStream(("levels/level" + levelNum));
 		oos = new ObjectInputStream(fout);
 		Level loaded = (Level) oos.readObject();
 		oos.close();
 		return loaded;
-		
+
 	}
-	
-	public Level getFromFile(String name) throws IOException, ClassNotFoundException{
+
+	public Level getFromFile(String name) throws IOException, ClassNotFoundException {
 		FileInputStream fout;
 		ObjectInputStream oos;
-		
+
 		fout = new FileInputStream(("levels/level" + name));
 		oos = new ObjectInputStream(fout);
 		Level loaded = (Level) oos.readObject();
 		oos.close();
 		return loaded;
-		
+
 	}
-	
-	public Level generateLevelCopy() throws ClassNotFoundException, IOException{
+
+	public Level generateLevelCopy() throws ClassNotFoundException, IOException {
 		this.saveToFile("tempCopy");
 		return this.getFromFile("tempCopy");
 	}
-	
-	public void setStars(int stars){
-		if((stars > 0 || stars <= 3) && stars > this.stars) this.stars = stars;
+
+	public void setStars(int stars) {
+		if ((stars > 0 || stars <= 3) && stars > this.stars)
+			this.stars = stars;
 	}
-	
-	public void resetLevel(){
+
+	public void resetLevel() {
 		this.stars = 0;
 		this.isLocked = true;
 	}
-	
-	public boolean hasFinished(){
+
+	public boolean hasFinished() {
 		return false;
 	}
-	
-	public int getEmptyTileCount(){
+
+	public int getEmptyTileCount() {
 		int emptyTiles = 144;
-		for(int c = 0; c < 12; c++){
-			for(int r = 0; r < 12; r++){
+		for (int c = 0; c < 12; c++) {
+			for (int r = 0; r < 12; r++) {
 				Tile curTile = board.tiles.get(c).get(r);
-				if(!curTile.enabled() || curTile.hasBlock()){
-					emptyTiles--; 
+				if (!curTile.enabled() || curTile.hasBlock()) {
+					emptyTiles--;
 				}
 			}
 		}
 		return emptyTiles;
 	}
 
+	// USE WITH CAUTION: TESTING ONLY
+	public void disableAllTiles() {
+		for (int c = 0; c < 12; c++) {
+			for (int r = 0; r < 12; r++) {
+				board.tiles.get(c).get(r).disable();
+			}
+		}
+	}
+
 	public void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
-		
+
 	}
 
 	public void lock() {
