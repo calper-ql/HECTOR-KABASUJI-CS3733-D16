@@ -35,6 +35,14 @@ public class ReleaseLevel extends Level{
 	}
 	
 	public int getCompleteSets(){
+		for(int row = 0; row < 12; row++){
+			for(int col = 0; col < 12; col++){
+				if(this.board.getTile(col, row).hasBlock()){
+					addReleaseNumber(this.board.getTile(col, row).getReleaseNumber());
+				}
+			}
+		}
+		
 		int result = 0;
 		for(int i = 0; i < 3; i++){
 			if(sets.get(i).isComplete()) result++;
