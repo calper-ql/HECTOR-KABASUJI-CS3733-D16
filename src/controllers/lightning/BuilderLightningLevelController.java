@@ -217,7 +217,8 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 			// replace the piece list with the generated one
 			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
 			tempLevel.resetLevel();
-			tempLevel.disableSaving();
+			tempLevel.setLevelNum(-1);
+			tempLevel.saveToFile();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -227,7 +228,8 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 			tempList.add(tempLevel);
 		}
 		Model tempModel = new Model("", null, tempList);
-		LightningLevelController plc = new LightningLevelController(mainController, this, tempModel, 1);
+		tempModel.setPreviewLevel(tempLevel);
+		LightningLevelController plc = new LightningLevelController(mainController, this, tempModel, -1);
 		mainController.requestSwap(plc);
 	}
 	

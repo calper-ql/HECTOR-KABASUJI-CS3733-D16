@@ -284,7 +284,8 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 			// replace the piece list with the generated one
 			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
 			tempLevel.resetLevel();
-			tempLevel.disableSaving();
+			tempLevel.setLevelNum(-1);
+			tempLevel.saveToFile();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -294,7 +295,8 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 			tempList.add(tempLevel);
 		}
 		Model tempModel = new Model("", null, tempList);
-		ReleaseLevelController plc = new ReleaseLevelController(mainController, this, tempModel, 1);
+		tempModel.setPreviewLevel(tempLevel);
+		ReleaseLevelController plc = new ReleaseLevelController(mainController, this, tempModel, -1);
 		mainController.requestSwap(plc);
 	}
 

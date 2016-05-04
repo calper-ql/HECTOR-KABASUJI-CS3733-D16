@@ -66,7 +66,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 		this.levelNum = levelNum;
 		
 		puzzleLevelView = new PuzzleLevelView(model.getLevel(levelNum));
-		blockController = new BlockController(new EmptyBlock(), this);
+		blockController = new BlockController(new EmptyBlock(), this); 
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
 		boardController = new BoardController(model.getLevel(levelNum), this, model);
 		currentBlockPanelList = null;
@@ -184,9 +184,9 @@ public class PuzzleLevelController implements IController, ILevelController{
 			
 			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
 			lvl.updateStars();
-			PuzzleLevel saveStars;
+			Level saveStars;
 				try {
-					saveStars = (PuzzleLevel) lvl.getFromFile(levelNum);
+					saveStars = lvl.getFromFile(levelNum);
 					saveStars.setStars(lvl.getStars());
 					saveStars.saveToFile();
 				} catch (ClassNotFoundException | IOException e1) {
@@ -201,7 +201,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 				System.out.println("finished");
 				try {
 					if(lvl.getLevelNum()>0){
-						PuzzleLevel savelvl = (PuzzleLevel) lvl.getFromFile(levelNum);
+						Level savelvl = lvl.getFromFile(levelNum);
 						savelvl.setStars(lvl.getStars());
 						savelvl.saveToFile();
 					}

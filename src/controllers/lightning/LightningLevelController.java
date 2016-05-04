@@ -122,7 +122,7 @@ public class LightningLevelController implements IController, ILevelController, 
 		// If we get here we check for the validity of the move in doMove() and we act according to it
 		if(new OverlayMove(bl, tl).doMove()){
 		// If the processor gets here this means that the move was valid
-			try {
+			try {  
 				// We get the level and remove the piece from the bullpen
 				// Can be different for other level types
 				model.getLevel(levelNum).getBullpen().removePiece(bl.getFirst().getPiece());
@@ -132,11 +132,11 @@ public class LightningLevelController implements IController, ILevelController, 
 		}
 		
 		// Update the moves left
-		LightningLevel lvl = (LightningLevel) model.getLevel(levelNum);
-		lvl.updateStars();
-		LightningLevel saveStars;
+		Level lvl = model.getLevel(levelNum);
+		((LightningLevel)lvl).updateStars();
+		Level saveStars;
 		try {
-			saveStars = (LightningLevel) lvl.getFromFile(levelNum);
+			saveStars = lvl.getFromFile(levelNum);
 			saveStars.setStars(lvl.getStars());
 			saveStars.saveToFile();
 		} catch (ClassNotFoundException | IOException e1) {
@@ -151,7 +151,7 @@ public class LightningLevelController implements IController, ILevelController, 
 			System.out.println("finished");
 			try {
 				if(lvl.getLevelNum()>0){
-					LightningLevel savelvl = (LightningLevel) lvl.getFromFile(levelNum);
+					Level savelvl = lvl.getFromFile(levelNum);
 					savelvl.setStars(lvl.getStars());
 					savelvl.saveToFile();
 				}

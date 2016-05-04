@@ -9,6 +9,7 @@ import generators.AchievementGenerator;
 public class Model implements Cloneable{
 	String name;
 	ArrayList<Level> levels;
+	Level previewLevel;
 	ArrayList<Achievement> achievements;
 	
 	public Model(String name, ArrayList<Achievement> achievements, ArrayList<Level> levels){
@@ -16,11 +17,21 @@ public class Model implements Cloneable{
 		this.name = name;
 		this.achievements = achievements;
 		this.levels  = levels;
+		
+		previewLevel = new Level(true, -1, null, null, false);
+		try {
+			previewLevel.saveToFile();
+			previewLevel = previewLevel.getFromFile(-1);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getName(){
 		return name;
 	}
+	
 	
 	
 	public void reload(){
@@ -36,6 +47,11 @@ public class Model implements Cloneable{
 			levels.add(level);
 		}
 
+		try {
+			previewLevel = previewLevel.getFromFile(-1);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 		
 		ArrayList<Achievement> achievementList = null;
 		
@@ -44,11 +60,18 @@ public class Model implements Cloneable{
 	}
 	
 	public Level getLevel(int num){
+		if(num == -1){
+			return previewLevel;
+		}
 		return levels.get(num-1);
 	}
 	
 	public void setLevel(int index, Level level){
 		levels.set(index-1, level);
+	}
+	
+	public void setPreviewLevel(Level level){
+		previewLevel = level;
 	}
 
 	public ArrayList<Achievement> getAchievements() {
