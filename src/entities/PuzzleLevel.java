@@ -14,8 +14,8 @@ public class PuzzleLevel extends Level{
 	
 	public PuzzleLevel(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints,
 			int movesTotal){
-		super(hints, levelNum, bPen, board, hints);
-		
+		super(isLocked, levelNum, bPen, board, hints);
+		  
 		this.movesTotal = movesTotal;
 		this.movesRemaining = movesTotal;
 		

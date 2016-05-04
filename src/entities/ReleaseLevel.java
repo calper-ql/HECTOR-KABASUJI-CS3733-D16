@@ -8,7 +8,7 @@ public class ReleaseLevel extends Level{
 		
 	public ReleaseLevel(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints,
 			ArrayList<ReleaseNumberSet> sets){
-		super(hints, levelNum, bPen, board, hints);
+		super(isLocked, levelNum, bPen, board, hints);
 		
 		sets.add(new ReleaseNumberSet(0, new LinkedList<ReleaseNumber>()));
 		sets.add(new ReleaseNumberSet(1, new LinkedList<ReleaseNumber>()));
