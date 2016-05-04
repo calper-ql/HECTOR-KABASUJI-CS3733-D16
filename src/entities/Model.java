@@ -5,13 +5,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import generators.AchievementGenerator;
-
+/**
+ * Class to create a specific Model that will represent our game of level,  
+ * @author 
+ *
+ */
 public class Model implements Cloneable{
 	String name;
 	ArrayList<Level> levels;
 	Level previewLevel;
 	ArrayList<Achievement> achievements;
 	
+	/**
+	 * The Model takes a name, array list of achievements, and an array list of levels.
+	 * @param name The name of the Model.
+	 * @param achievements The achievements of a model.
+	 * @param levels The levels of a model.
+	 */
 	public Model(String name, ArrayList<Achievement> achievements, ArrayList<Level> levels){
 		
 		this.name = name;
@@ -20,20 +30,25 @@ public class Model implements Cloneable{
 		
 		previewLevel = new Level(true, -1, null, null, false);
 		try {
+			//Save the Preview and Get it from the temporary file.
 			previewLevel.saveToFile();
 			previewLevel = previewLevel.getFromFile(-1);
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Gets the Name associated with the Model.
+	 * @return The name of the Model.
+	 */
 	public String getName(){
 		return name;
 	}
 	
-	
-	
+	/**
+	 * Reloads the Levels of the Model from the files.
+	 */
 	public void reload(){
 		Level level = new Level(true, 16 , null, null, true);
 		ArrayList<Level> levels = new ArrayList<Level>();
@@ -62,6 +77,11 @@ public class Model implements Cloneable{
 		this.levels = levels;
 	}
 	
+	/**
+	 * Gets the Level from the Model list of levels at the specified index.
+	 * @param num The index of the Level to retrieve.
+	 * @return The level at that specified index.
+	 */
 	public Level getLevel(int num){
 		if(num == -1){
 			return previewLevel;
@@ -69,19 +89,36 @@ public class Model implements Cloneable{
 		return levels.get(num-1);
 	}
 	
+	/**
+	 * Sets the level at the given index in the level list of the Model.
+	 * @param index The index to set the Level at.
+	 * @param level The Level to be added at the given index.
+	 */
 	public void setLevel(int index, Level level){
 		levels.set(index-1, level);
 	}
 	
+	/**
+	 * Sets the Level that will be used as a Preview in Level Builder.
+	 * @param level The level to set as preview.
+	 */
 	public void setPreviewLevel(Level level){
 		previewLevel = level;
 	}
 
+	/**
+	 * Generates all ten of our predefined achievements and stores them in the Model achievement list.
+	 * @return The list of our ten achievements generated.
+	 */
 	public ArrayList<Achievement> getAchievements() {
 		achievements = AchievementGenerator.makeAchievements(); 
 		return achievements;
 	}
 	
+	/**
+	 * Saves a given Achievement by name to the achievements directory.
+	 * @param achievementName The name of the achievement to be saved.
+	 */
 	public void saveAchievement (String achievementName){
 		for (int i = 0; i <= 9; i++){
 			if(this.achievements.get(i).getName() == achievementName){
@@ -89,6 +126,12 @@ public class Model implements Cloneable{
 			}
 		}
 	}
+	
+	/**
+	 * Check if an Achievement is already existing in the directory.
+	 * @param name The name of the achievement to check if it exists.
+	 * @return Boolean that says if the achievement exists or not in the files. True means it does and False means it does not.
+	 */
 	public boolean checkAchievementExists(String name){
 		File dir = new File("achievements");
 		if(!dir.exists()){
@@ -102,6 +145,11 @@ public class Model implements Cloneable{
 		
 		return true;
 	}
+	
+	/**
+	 * Gets a list of all the Achievements that are currently unlocked and meet requirements to unlock.
+	 * @return The array list of Achievements are unlocked.
+	 */
 	public ArrayList<Achievement> getUnlockedAchievements(){
 		ArrayList<Achievement> unlocked = new ArrayList<Achievement>();
 		if(this.checkAchievementExists("Earned One Star In Puzzle!")){
@@ -147,6 +195,10 @@ public class Model implements Cloneable{
 		return unlocked;
 	}
 	
+	/**
+	 * Checks if an Achievement needs to be unlocked and adds them to an Array List.
+	 * @return The list of achievements that need to be unlocked.
+	 */
 	public ArrayList<Achievement> checkUnlockedAchievements(){
 		ArrayList<Achievement> needToBeUnlocked = new ArrayList<Achievement>();
 			if(!this.checkAchievementExists("Earned One Star In Puzzle!")){
@@ -237,6 +289,11 @@ public class Model implements Cloneable{
 			return needToBeUnlocked;
 	}
 	
+	/**
+	 * Loads the given Achievement from file based on the name of the achievement.
+	 * @param achievementName The name of the Achievement to load from file.
+	 * @return The Achievement loaded from file.
+	 */
 	public Achievement loadAchievement(String achievementName){
 		achievements = AchievementGenerator.makeAchievements(); 
 		for (int i = 0; i <= 9; i++){

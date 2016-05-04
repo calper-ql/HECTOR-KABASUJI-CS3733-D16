@@ -199,7 +199,9 @@ public class PuzzleLevelController implements IController, ILevelController{
 			ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements(); 
 			for (Achievement a: needToBeUnlocked){
 				a.setisUnlocked();
-				a.saveAchievementToFile();
+				if(this.levelNum > 0) {
+					a.saveAchievementToFile();
+				}
 			}
 			if(lvl.hasFinished()){
 				System.out.println("finished");
