@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.io.Serializable;
 /**
- * 
- * @author 
+ * Class to Store the Sets of Release Numbers and their states.
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  *
  */
 public class ReleaseNumberSet implements Serializable{

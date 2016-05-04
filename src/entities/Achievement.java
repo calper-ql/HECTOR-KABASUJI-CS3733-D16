@@ -15,8 +15,9 @@ import javax.imageio.ImageIO;
 /**
  * Achievement Class
  * Class to store the state of the achievements.
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  * @author Courtney Davis - cedavis@wpi.edu
- *
  */
 public class Achievement implements Serializable{
 	String name;

@@ -1,6 +1,11 @@
 /**
  * This Boundary Class is to render all components 
  * associated with the Level Select View in the Level Builder application 
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
  */
 package boundary;
 

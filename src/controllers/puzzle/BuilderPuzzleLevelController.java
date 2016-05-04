@@ -4,7 +4,7 @@
  * 		
  * 		Specifically it uses BuilderPuzzleLevelView to display the builder.
  * 		It handles things like button presses.
- * 
+ * 		@author Zach Armsby - zrarmsby@wpi.edu
  * 		@author Can Alper - calper@wpi.edu
  */
 package controllers.puzzle;

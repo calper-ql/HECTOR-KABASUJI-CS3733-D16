@@ -5,6 +5,8 @@
  * 		This class adds the label for the moves left to the base level view class.
  * 
  * 		@author Can Alper - calper@wpi.edu
+ * 		@author Zach Armsby - zrarmsby@wpi.edu
+ * 		@author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 
 

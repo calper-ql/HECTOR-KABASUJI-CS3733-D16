@@ -1,6 +1,7 @@
 /**Bullpen Controller
  *  Controller for dealing with the bullpen
- * @author 
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  */
 package controllers;
 

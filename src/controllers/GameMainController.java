@@ -1,6 +1,6 @@
 /**Game Main Controller
  * Controller for the game play of the Kabasuji application
- * @author 
+ * @author Can Alper - calper@wpi.edu
  */
 package controllers;
 

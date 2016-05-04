@@ -1,5 +1,6 @@
 /** MainController
 * the main controller of kabasuji, handles the window and swaps
+* @author Can Alper - calper@wpi.edu
 */
 
 package controllers;

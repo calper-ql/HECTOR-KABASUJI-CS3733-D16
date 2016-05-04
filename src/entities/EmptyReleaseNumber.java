@@ -4,8 +4,7 @@ import java.io.Serializable;
 /**
  * Class to Set up the Empty Release Numbers that will be in all Tiles without Release Numbers.
  * @author Can Alper - calper@wpi.edu
- * @author 
- * @author 
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  *
  */
 public class EmptyReleaseNumber extends ReleaseNumber implements Serializable {

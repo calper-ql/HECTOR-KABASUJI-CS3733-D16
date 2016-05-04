@@ -1,6 +1,6 @@
 /**Splash Screen View
  * This Boundary Class is responsible for rendering all components associated with the Splash Screen view
- * @author
+ * @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

@@ -1,8 +1,8 @@
 /**ILevelController
  * Requires that all classes with the ILevelController interface, have the 
  * piecePressed(JBlockPanel jBlockPanel), and pieceReleased(JBlockPanel jBlockPanel) methods
- * 
- * @author
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
  */
 package controllers;
 

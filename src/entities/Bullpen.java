@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Class that defines the Bull pen and its attributes. Bull pen contains an ArrayList of Pieces.
  * @author Can Alper - calper@wpi.edu
- *
+ * @author Zach Armsby - zrarmsby@wpi.edu
  */
 public class Bullpen implements Serializable{
 	ArrayList<Piece> pieces;

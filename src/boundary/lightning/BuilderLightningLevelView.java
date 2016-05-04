@@ -1,7 +1,9 @@
 /**
  * This Boundary class is responsible for everything associated 
  * with the view for the Lightning Level in Level Builder
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package boundary.lightning;
 

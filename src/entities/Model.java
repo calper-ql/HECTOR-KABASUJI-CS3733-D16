@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import generators.AchievementGenerator;
 /**
  * Class to create a specific Model that will represent our game of level,  
- * @author 
- *
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 public class Model implements Cloneable{
 	String name;

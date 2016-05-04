@@ -1,7 +1,9 @@
 /**Builder Level Select Controller
  * This controller class handles all push events and view updates 
  * associated with the Level Select screen in the Level Builder
- * @author
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  */
 package controllers;
 

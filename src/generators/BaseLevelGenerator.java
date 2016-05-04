@@ -2,7 +2,9 @@
  * This class creates a base level, or blank level which will be modified 
  * with specifics in order to be made into a puzzle, lightning, or release level 
  * 
- * @author Can Alper - calper@wpi.edu
+ *  @author Morgan Garbett - mlgarbett@wpi.edu
+ *  @author Can Alper - calper@wpi.edu
+ *  @author Courtney Davis - cedavis@wpi.edu
  */
 
 package generators;

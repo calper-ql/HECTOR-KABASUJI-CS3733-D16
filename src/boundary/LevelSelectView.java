@@ -1,7 +1,10 @@
 /**
  * This Boundary class is responsible for rendering 
  * all components associated with the Level Select view in the game play application
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
  */
 package boundary;
 

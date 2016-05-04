@@ -1,6 +1,8 @@
 /**
  * This Boundary Class is responsible for rendering all components associated with a tile's view
- * @author
+ * @author Can Alper - calper@wpi.edu
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package boundary;
 

@@ -1,7 +1,7 @@
 /**	Block View
  * 	This Boundary class is to render all components associated with blocks
- * 
- * 	@author 
+ *  @author Can Alper - calper@wpi.edu
+ *  @author Zach Armsby - zrarmsby@wpi.edu
  */
 package boundary;
 

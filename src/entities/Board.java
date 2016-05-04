@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Class to represent the Board of the game. Boards contain a double array list of Tiles.
  * @author Can Alper - calper@wpi.edu
- *
+ * @author Zach Armsby - zrarmsby@wpi.edu
  */
 public class Board implements Serializable{
 	ArrayList<ArrayList<Tile>> tiles; // column, row

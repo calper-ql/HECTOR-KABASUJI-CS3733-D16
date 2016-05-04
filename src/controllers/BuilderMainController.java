@@ -1,6 +1,6 @@
 /**Builder Main Controller
  * Controller for the Level Builder application
- * @author 
+ * @author Can Alper - calper@wpi.edu
  */
 package controllers;
 

@@ -1,7 +1,9 @@
 /**	Release Level Controller
  * 	This Controller class is to control the gameplay of the Release Level
- * 
+ *  @author Zach Armsby - zrarmsby@wpi.edu
  * 	@author Can Alper - calper@wpi.edu
+ *  @author Mike Harney - mdharney@wpi.edu
+ *  @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 
 package controllers.release;

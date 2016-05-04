@@ -1,5 +1,9 @@
 /**LevelSelect Controller
  * This controller class handles the level selection interation and updating of the model
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
  */
 package controllers;
 

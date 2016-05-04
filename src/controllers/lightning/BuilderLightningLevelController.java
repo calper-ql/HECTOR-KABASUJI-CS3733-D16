@@ -1,6 +1,9 @@
 /**
  * This Controller class handles all push events and boundary refreshes for the Lightning Level Builder
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 
 package controllers.lightning;

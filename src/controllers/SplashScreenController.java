@@ -1,6 +1,6 @@
 /**SplashScreen Controller
  *  Contoller displaying the splash screen 
- * @author 
+ * @author Can Alper - calper@wpi.edu 
  */
 package controllers;
 

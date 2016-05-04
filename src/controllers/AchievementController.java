@@ -1,5 +1,8 @@
 /**Achievement Controller 
  * This controller class handles all push events and view updates for achievements
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package controllers;
 

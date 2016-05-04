@@ -1,6 +1,7 @@
 /**Bullpen View
  * This Boundary class is to render all components associated with the Bullpen View
- * @author
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

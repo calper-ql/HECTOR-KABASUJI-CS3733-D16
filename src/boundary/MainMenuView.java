@@ -1,6 +1,6 @@
 /**
  * This Boundary class renders all components associated with the Main Menu in the game play application
- * @author
+ * @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

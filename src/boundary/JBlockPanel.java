@@ -1,6 +1,7 @@
 /**
  * This Boundary class is to render all components associated with JBlockPanels
- * @author 
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
  */
 package boundary;
 

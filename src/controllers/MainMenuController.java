@@ -1,6 +1,8 @@
 /**MainMenu Controller
- *  Contoller for the main menu/ opening screen
- * @author 
+ *  Controller for the main menu/ opening screen
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package controllers;
 

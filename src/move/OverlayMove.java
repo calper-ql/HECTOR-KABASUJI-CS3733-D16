@@ -1,5 +1,5 @@
 /** Overlay Move
- * @author MichaelHarney
+ * @author Mike Harney - mdharney@wpi.edu
  * @author Can Alper - calper@wpi.edu
  */
 package move;

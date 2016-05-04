@@ -3,7 +3,10 @@ package entities;
 import java.io.Serializable;
 /**
  * The Class to keep track of the Release Number state. 
- * @author
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  *
  */
 public class ReleaseNumber implements Serializable {

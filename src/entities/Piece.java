@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * The Class that contains the relevant state of a Piece.
- * @author 
+ * @author Can Alper - calper@wpi.edu
  *
  */
 public class Piece implements Serializable{

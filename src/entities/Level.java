@@ -15,7 +15,7 @@ import javax.print.DocFlavor.URL;
  * Class to store all the persistent information of a Level.
  * @author Can Alper - calper@wpi.edu
  * @author Courtney Davis - cedavis@wpi.edu
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
  *
  */
 public class Level implements Serializable {

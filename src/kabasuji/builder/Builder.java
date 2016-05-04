@@ -1,7 +1,12 @@
 /** Builder 
  * Application for Kabasuji Level Builder
  * 
+ * @author Morgan Garbett - mlgarbett@wpi.edu
  * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 
 package kabasuji.builder;

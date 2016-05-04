@@ -1,6 +1,6 @@
 /**IMove
  * Interface requiring that all move classes have undo, doMove, and valid methods each returning booleans
- * @author MichaelHarney
+ * @author Mike Harney - mdharney@wpi.edu
  */
 
 package move;

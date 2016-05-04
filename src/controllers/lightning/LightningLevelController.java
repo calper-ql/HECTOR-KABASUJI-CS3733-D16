@@ -1,6 +1,10 @@
 /**Lightning Level Controller
  * This Controller Class is responsible for the push events and 
  * boundary refreshes for components specific to the Lightning Level
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package controllers.lightning;
 

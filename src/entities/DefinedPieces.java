@@ -6,9 +6,9 @@ import java.util.ArrayList;
 /**
  * A storage of all defined 35 hexominoes. Links the Blocks to thier correct neighbors and makes all 35 unique pieces, stores them in an ArrayList.
  * 
- * @author 
- * 
- *
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 public class DefinedPieces {
 	ArrayList<Piece> pieces;

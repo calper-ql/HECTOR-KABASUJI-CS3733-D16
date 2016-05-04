@@ -1,6 +1,8 @@
 /** Builder Base Level View
  * This Boundary class is to render all components associated with the base level view in the Level Builder
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

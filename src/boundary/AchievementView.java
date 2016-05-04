@@ -1,7 +1,9 @@
 /**	Achievement View
  * 	This Boundary class is to render Achievements
  * 
- * 	@author 
+ * 	@author Morgan Garbett - mlgarbett@wpi.edu
+ *  @author Courtney Davis - cedavis@wpi.edu
+ *  @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

@@ -1,6 +1,8 @@
 /** Achievement Generator
  * This class defines the achievements
  * @author Can Alper - calper@wpi.edu
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  * 
  */
 

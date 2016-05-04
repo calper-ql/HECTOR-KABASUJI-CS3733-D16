@@ -2,7 +2,8 @@ package entities;
 /**
  * Interface for IBlocks. Any block object that wants to flip or rotate, should implement this interface.
  * @author Can Alper - calper@wpi.edu
- *
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 public interface IBlock {
 

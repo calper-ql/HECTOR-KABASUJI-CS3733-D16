@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * The Tile is within the Board of the Level and contains a Block and relevant state.
- * @author 
+ * @author Can Alper - calper@wpi.edu
  *
  */
 public class Tile implements Serializable {

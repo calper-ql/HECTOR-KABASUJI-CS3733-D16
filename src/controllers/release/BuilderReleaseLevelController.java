@@ -1,6 +1,9 @@
 /**Builder Release Level Controller
  * This class handles all components related 
- * 
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * 	@author Can Alper - calper@wpi.edu
+ *  @author Mike Harney - mdharney@wpi.edu
+ *  @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 package controllers.release;
 

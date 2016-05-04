@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * Class to Represent Empty Blocks 
  * @author Can Alper - calper@wpi.edu
- *
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 public class EmptyBlock implements IBlock ,Serializable{
 	/**

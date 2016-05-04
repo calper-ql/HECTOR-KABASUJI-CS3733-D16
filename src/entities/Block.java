@@ -4,7 +4,8 @@ import java.io.Serializable;
 /**
  * Class that defines the Blocks that will compose pieces. Blocks are aware of their neighbors and are linked. Blocks with no neighbors are neighbors with Empty Blocks.
  * @author Can Alper - calper@wpi.edu
- *
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 public class Block implements IBlock, Serializable{
 	Piece piece;

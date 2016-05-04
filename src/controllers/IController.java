@@ -1,7 +1,7 @@
 /**IController
  * Requires that all classes with the IController interface, have the getRenderedView()
  * 
- * @author 
+ * @author Can Alper - calper@wpi.edu 
  */
 package controllers;
 

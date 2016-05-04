@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 /**
  * The Class to define the attributes and state of the Release Level.
- * @author 
- *
+ * @author Can Alper - calper@wpi.edu
+ * @author Mike Harney - mdharney@wpi.edu
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
 public class ReleaseLevel extends Level{
 	ArrayList<ReleaseNumberSet> sets = new ArrayList<ReleaseNumberSet>(3);

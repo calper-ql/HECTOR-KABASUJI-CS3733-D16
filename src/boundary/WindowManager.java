@@ -1,6 +1,6 @@
 /**Window Manager
  * This Boundary Class is responsible for managing Window Views 
- * @author
+ * @author Can Alper - calper@wpi.edu
  */
 package boundary;
 

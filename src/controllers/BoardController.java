@@ -1,5 +1,9 @@
 /**Board Controller
  * This controller class handles all push events and view updates for the board
+ * @author Zach Armsby - zrarmsby@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package controllers;
 

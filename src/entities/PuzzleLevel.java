@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 /**
  * Class that Defines the state of a Puzzle Level.
- * @author 
+ * @author Can Alper - calper@wpi.edu
  *
  */
 public class PuzzleLevel extends Level{

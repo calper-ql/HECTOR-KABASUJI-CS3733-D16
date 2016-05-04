@@ -1,6 +1,8 @@
 /**
  *This Boundary Class is responsible for rendering all components specific to the Lightning Level in the game play application  
- * @author
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
+ * @author Courtney Davis - cedavis@wpi.edu
  */
 package boundary.lightning;
 

@@ -3,7 +3,7 @@ package entities;
 import java.util.LinkedList;
 /**
  * The Splash Screen with all of our team members and the project name.
- * @author
+ * @author Can Alper - calper@wpi.edu
  *
  */
 public class SplashScreen {

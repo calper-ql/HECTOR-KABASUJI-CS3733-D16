@@ -1,6 +1,7 @@
 /**Block Controller
  * This controller class handles all push events and view updates for blocks
- */
+ * @author Can Alper - calper@wpi.edu
+*/
 package controllers;
 
 import java.util.LinkedList;

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 /**
  * The Class to define the attributes and state of the Lightning Level.
  * @author Courtney Davis - cedavis@wpi.edu
- *
+ * @author Morgan Garbett - mlgarbett@wpi.edu
+ * @author Can Alper - calper@wpi.edu
  */
 public class LightningLevel extends Level{
 	int totalTime;

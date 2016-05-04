@@ -2,6 +2,7 @@
  * 	This Contoller class is to control the gameplay of the Puzzle Level
  * 
  * 	@author Can Alper - calper@wpi.edu
+ *  @author Zach Armsby - zrarmsby@wpi.edu
  */
 package controllers.puzzle;
 

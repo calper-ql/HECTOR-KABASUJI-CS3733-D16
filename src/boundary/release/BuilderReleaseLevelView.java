@@ -1,7 +1,10 @@
 /**Builder Release Level View
  * This Boundary class handles the views of all compoents specific to the release level in the Level Builder application
- * @author
+ * 		@author Can Alper - calper@wpi.edu
+ * 		@author Zach Armsby - zrarmsby@wpi.edu
+ * 		@author Ryan Wiesenberg - rmwiesenberg@wpi.edu
  */
+ 
 package boundary.release;
 
 import javax.swing.JPanel;
