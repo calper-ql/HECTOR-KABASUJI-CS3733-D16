@@ -1,5 +1,5 @@
-package entities;
 
+package entities;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,7 +34,6 @@ public class Achievement implements Serializable{
 		this.url = url;
 		this.unlocked = unlocked; 
 	}
-
 	/**
 	 * Get the Image from the URL given when an Achievement is created.
 	 * @return The Image associated with the achievement's URL
@@ -58,7 +57,7 @@ public class Achievement implements Serializable{
 		Image img = mock_img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
 		return img;
 	}
-
+	
 	/**
 	 * Set the achievement's unlocked state to True. 
 	 */

@@ -120,7 +120,7 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 		builderLightningLevelView.getBackButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				backButtonClicked();
-			}
+			} 
 		});
 
 		// Save button
