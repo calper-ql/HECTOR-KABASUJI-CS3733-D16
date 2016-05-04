@@ -553,9 +553,8 @@ public class testKabasuji extends TestCase {
 		for(int i = 0; i < 15; i++){
 			Level ss;
 			ss = initLevel.get(i);
-			ss.setStars(initLevel.get(i).getStars());
 			ss.saveToFile();	
-		}
+		} 
 	}
 	
 }
