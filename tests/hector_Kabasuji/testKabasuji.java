@@ -346,7 +346,7 @@ public class testKabasuji extends TestCase {
 		assertEquals(rl.getStars(), 3);
 	}
 
-	public void testAchievements() {
+	public void testAchievements() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(mcon);
 
@@ -354,6 +354,7 @@ public class testKabasuji extends TestCase {
 		mmc.getRenderedView();
 		click(70, 300);		
 		wmg.render();
+		Thread.sleep(500);
 	}
 
 	// Boundary Test Cases
@@ -622,46 +623,49 @@ public class testKabasuji extends TestCase {
 	}
 
 	public void testBuilderLevelSelectController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
+		
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		blsc.getRenderedView();
 		wmg.render();
 	}
 
-	public void testBuilderPuzzleLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+	public void testBuilderPuzzleLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		blsc.getRenderedView();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(bcon, blsc, bmodel, 1);
+		wmg.swap(bplc.getRenderedView());
 		click(100,175);
-		reloadLevels();
+		Thread.sleep(500);
+		
 		clickBackButton();
-		wmg.render();
+		reloadLevels();
 	}
 
-	public void testBuilderLightningLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
-		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, model, 6);
+	public void testBuilderLightningLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		bllc.getRenderedView();
-		click(100,325);
-		reloadLevels();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, bmodel, 6);
+		wmg.swap(bllc.getRenderedView());
+		Thread.sleep(500);
+
 		clickBackButton();
-		wmg.render();
+		reloadLevels();
 	}
 
-	public void testBuilderReleaseLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
-		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, model, 11);
+	public void testBuilderReleaseLevelController() throws InterruptedException {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(bcon);
-		brlc.getRenderedView();
-		click(100,325);
-		reloadLevels();
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, bmodel, 11);
+		wmg.swap(brlc.getRenderedView());
+		Thread.sleep(500);
+
 		clickBackButton();
-		wmg.render();
+		reloadLevels();
 	}
 
 	public void saveInitialLevels() {
