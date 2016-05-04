@@ -364,17 +364,20 @@ public class LevelSelectController implements IController{
 
 	private void puzzleButtonClicked(int i){
 		model.reload();
+		if(model.getLevel(i).isLocked()) return;
 		this.lvl = new PuzzleLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 	private void lightningButtonClicked(int i){
 		model.reload();
+		if(model.getLevel(i).isLocked()) return;
 		this.lvl = new LightningLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}
 	//!!! when release implemented
 	private void releaseButtonClicked(int i){
 		model.reload();
+		if(model.getLevel(i).isLocked()) return;
 		this.lvl = new ReleaseLevelController(mc, this, model, i);
 		mc.requestSwap(lvl);
 	}

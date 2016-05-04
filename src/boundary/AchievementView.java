@@ -41,16 +41,11 @@ public class AchievementView {
 		model.reload();
 
 		ArrayList<Achievement> achievementList = AchievementGenerator.makeAchievements();
-
-		for(Achievement a: achievementList){
-			a.saveAchievementToFile();
-		}
-
 		
 		int counter = 0;
 		for(int i = 0; i< 3; i++){
 			for(int k = 0; k < 3; k++){
-				
+				  
 				if (model.checkAchievementExists(achievementList.get(counter).getName())){
 					Image img = achievementList.get(counter).getImage();
 

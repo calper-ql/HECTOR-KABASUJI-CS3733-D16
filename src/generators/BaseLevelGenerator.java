@@ -11,13 +11,13 @@ public class BaseLevelGenerator {
 	public static ArrayList<Level> makeBaseLevels(){
 		ArrayList<Level> baseLevels = new ArrayList<Level>();
 		//Make base Puzzle Levels
-		for (int i = 1; i <= 5; i++){
+		for (int i = 1; i <= 5; i++){ 
 			ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
 			
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
+					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), false);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);
@@ -28,7 +28,10 @@ public class BaseLevelGenerator {
 			
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
-			baseLevels.add(new PuzzleLevel(true, i, mockBullpen, mockBoard, false, 0));
+			PuzzleLevel temp = new PuzzleLevel(true, i, mockBullpen, mockBoard, false, 0);
+			if(i == 1) temp.unlock();
+			baseLevels.add(temp);
+			
 		}
 		//Make base Lightning Levels
 		for (int i = 6; i <= 10; i++){
@@ -37,7 +40,7 @@ public class BaseLevelGenerator {
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), true);
+					Tile mockTile = new Tile(new EmptyBlock(), new EmptyReleaseNumber(), false);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);
@@ -50,7 +53,9 @@ public class BaseLevelGenerator {
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 			
-			baseLevels.add(new LightningLevel(true, i, mockBullpen, mockBoard, false, 0));
+			LightningLevel temp = new LightningLevel(true, i, mockBullpen, mockBoard, false, 0);
+			if(i == 6) temp.unlock();
+			baseLevels.add(temp);
 		}
 		//Make base Release Levels
 		for (int i = 11; i <= 15; i++){
@@ -60,7 +65,7 @@ public class BaseLevelGenerator {
 			for(int j = 0;	j < 12; j++){
 				ArrayList<Tile> mockTileRow = (new ArrayList<Tile>());
 				for(int k = 0; k < 12; k++){
-					Tile mockTile = new Tile(new EmptyBlock(), new ReleaseNumber(0,0), true);
+					Tile mockTile = new Tile(new EmptyBlock(), new ReleaseNumber(0,0), false);
 					mockTileRow.add(mockTile);
 				}
 				mockTiles.add(mockTileRow);
@@ -72,7 +77,9 @@ public class BaseLevelGenerator {
 			Board mockBoard = new Board(mockTiles);
 			Bullpen mockBullpen = new Bullpen(mockArrayPieces);
 			//!!! Fix the releaseNumbers
-			baseLevels.add(new ReleaseLevel(true, i, mockBullpen, mockBoard, false, releaseNumbers));
+			ReleaseLevel temp = new ReleaseLevel(true, i, mockBullpen, mockBoard, false, releaseNumbers);
+			if(i == 11) temp.unlock();
+			baseLevels.add(temp);
 		}
 		
 		return baseLevels;
