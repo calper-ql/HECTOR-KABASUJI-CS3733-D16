@@ -214,7 +214,7 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 		Level tempLevel = null;
 		try {
 			// Load level from temporary file
-			tempLevel = model.getLevel(levelNum).getFromFile("temp");
+			tempLevel = (PuzzleLevel)model.getLevel(levelNum).getFromFile("temp");
 			// set the total moves
 			((PuzzleLevel) tempLevel).setTotalMoves(builderPuzzleLevelView.getMovesLeft());
 			// set the remaining moves which is total moves
@@ -222,7 +222,8 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			// replace the piece list with the generated one
 			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
 			tempLevel.resetLevel();
-			tempLevel.disableSaving();
+			tempLevel.setLevelNum(-1);
+			tempLevel.saveToFile();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -232,7 +233,8 @@ public class BuilderPuzzleLevelController implements IController, ILevelControll
 			tempList.add(tempLevel);
 		}
 		Model tempModel = new Model("", null, tempList);
-		PuzzleLevelController plc = new PuzzleLevelController(mainController, this, tempModel, 1);
+		tempModel.setPreviewLevel(tempLevel);
+		PuzzleLevelController plc = new PuzzleLevelController(mainController, this, tempModel, -1);
 		mainController.requestSwap(plc);
 	}
 

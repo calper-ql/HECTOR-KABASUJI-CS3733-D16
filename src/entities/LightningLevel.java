@@ -40,7 +40,7 @@ public class LightningLevel extends Level{
 	
 	public void updateStars(){
 		int emptyTiles = this.getEmptyTileCount();
-	
+	  
 		// now update the score
 		if(emptyTiles > 12) setStars(0);
 		if(emptyTiles <= 12) setStars(1);

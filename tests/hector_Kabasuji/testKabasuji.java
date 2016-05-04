@@ -614,9 +614,15 @@ public class testKabasuji extends TestCase {
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
 		wmg.link(mcon);
 		blsc.getRenderedView();
+<<<<<<< HEAD
 	}
 
 	public void testBuilderPuzzleLevelController() {
+=======
+	} 
+	
+	public void testBuilderPuzzleLevelController(){
+>>>>>>> refs/remotes/origin/master
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(mcon, blsc, model, 1);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
