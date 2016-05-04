@@ -216,8 +216,8 @@ public class BuilderLightningLevelController implements IController, ILevelContr
 
 			// replace the piece list with the generated one
 			tempLevel.getBullpen().replacePieceList(bullpenController.generatePieceList());
-			tempLevel.setLevelNum(-1);
-			tempLevel.setStars(0);
+			tempLevel.resetLevel();
+			tempLevel.disableSaving();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}

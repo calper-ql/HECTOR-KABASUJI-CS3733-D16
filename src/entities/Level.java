@@ -18,6 +18,7 @@ public class Level implements Serializable {
 	Board board;
 	boolean hints;
 	int stars = 0;
+	boolean isSaveable;
 
 	public Level(boolean isLocked, int levelNum, Bullpen bPen, Board board, boolean hints) {
 		this.isLocked = isLocked;
@@ -25,6 +26,19 @@ public class Level implements Serializable {
 		this.bPen = bPen;
 		this.board = board;
 		this.hints = hints;
+		this.isSaveable = true;
+	}
+	
+	public void disableSaving(){
+		isSaveable = false;
+	}
+	
+	public boolean getIsSavable(){
+		return isSaveable;
+	}
+	
+	public void enableSaving(){
+		isSaveable = true;
 	}
 
 	public boolean isLocked() {
@@ -52,9 +66,7 @@ public class Level implements Serializable {
 	}
 
 	public boolean saveToFile() {
-		if (levelNum < 0) {
-			return false;
-		}
+		if(!this.isSaveable) return true;
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
@@ -81,7 +93,7 @@ public class Level implements Serializable {
 	}
 
 	public boolean saveToFile(String name) {
-
+		if(!this.isSaveable) return true;
 		FileOutputStream fout;
 		ObjectOutputStream oos;
 		try {
