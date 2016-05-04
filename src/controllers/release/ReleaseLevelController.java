@@ -175,7 +175,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 			
 			// Update the release sets
 			ReleaseLevel lvl = (ReleaseLevel) model.getLevel(levelNum);
-			lvl.setRemaingMoves(lvl.getRemainingMoves() - 1);
+			//lvl.getCompleteSets();
 			lvl.updateStars();
 			// Unlock next level if stars >= 1
 			try {
@@ -206,6 +206,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	@Override
 	public void requestReRender() {
 		// TODO Auto-generated method stub
+		mainController.requestSwap(this);
 		
 	}
 
