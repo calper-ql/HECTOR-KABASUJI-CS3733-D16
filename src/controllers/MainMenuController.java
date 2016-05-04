@@ -36,7 +36,7 @@ public class MainMenuController implements IController {
 	public JPanel getRenderedView(){
 		JPanel ret = mmv.render();
 		lb = mmv.getLevelsButton();
-		ab = mmv.getAchivementButton();
+		ab = mmv.getAchievementButton();
 		
 		lb.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
