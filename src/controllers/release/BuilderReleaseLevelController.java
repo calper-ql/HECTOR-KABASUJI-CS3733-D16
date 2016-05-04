@@ -68,7 +68,7 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 		builderReleaseLevelView = new BuilderReleaseLevelView(this);
 		blockController = new BlockController(new EmptyBlock(), this);
 		bullpenController = new BullpenControler(model.getLevel(levelNum).getBullpen(), blockController, this);
-		boardController = new BoardController(model.getLevel(levelNum), this);
+		boardController = new BoardController(model.getLevel(levelNum), this, model);
 	}
 
 	/**
@@ -255,6 +255,12 @@ public class BuilderReleaseLevelController implements IController, ILevelControl
 			this.requestReRender();
 		}
 		
+		
+	}
+
+	@Override
+	public void requestReRenderBack() {
+		// TODO Auto-generated method stub
 		
 	}
 }
