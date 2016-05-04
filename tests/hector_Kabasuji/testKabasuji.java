@@ -3,7 +3,13 @@ package hector_Kabasuji;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.LinkedList;
+=======
+import java.util.Observable;
+
+import javax.imageio.ImageIO;
+>>>>>>> refs/remotes/origin/master
 
 import generators.*;
 import boundary.*;

@@ -43,7 +43,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	JPanel renderPanel;
 	LinkedList<JBlockPanel> currentBlockPanelList;
 	
-	
 	/**
 	 * Constructor for class
 	 * 
@@ -71,11 +70,13 @@ public class ReleaseLevelController implements IController, ILevelController{
 		
 	}
 	
+	
 	/**
 	 * This function adds the functionality to button and renders the views
 	 * 
 	 * @return panel
 	 */
+
 	@Override
 	public JPanel getRenderedView() {
 		// Render the main view
@@ -121,6 +122,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 * @param jBlockPanel
 	 */
+	
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
@@ -132,8 +134,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 			}
 		}
 	}
-
-
 	/**
 	 * Receives the released signal from the view on a JBlockPanel.
 	 * Checks for the move and acts accordingly.
@@ -197,26 +197,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 				e.printStackTrace();
 			}
 			
-			// Unlock next level if stars >= 1
-			try {
-				Level levelToUnlock = lvl.getFromFile(levelNum + 1);
-				if (lvl.getStars() >= 1){
-					levelToUnlock.unlock();
-				}
-			} catch (ClassNotFoundException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			//need to save just stars not whole level
-			try {
-				Level levelToSaveStars = lvl.getFromFile(levelNum);
-				levelToSaveStars.setStars(lvl.getStars());
-				levelToSaveStars.saveToFile();
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
 		
 		// finally we re-render
@@ -240,8 +220,12 @@ public class ReleaseLevelController implements IController, ILevelController{
 		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
+<<<<<<< HEAD
 	
 	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
 		this.currentBlockPanelList = list;
 	}
 }
+=======
+}
+>>>>>>> refs/remotes/origin/master

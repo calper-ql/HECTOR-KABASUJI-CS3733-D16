@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.io.Serializable;
 
 public class ReleaseNumberSet implements Serializable{
 	int color;

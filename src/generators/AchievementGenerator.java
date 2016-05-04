@@ -1,6 +1,5 @@
 package generators;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -46,5 +45,6 @@ public class AchievementGenerator {
 		achievements.add(a9);
 		achievements.add(a10);
 		return achievements;
+		
 	}
 }
