@@ -26,6 +26,7 @@ public class testKabasuji extends TestCase {
 	Application game;
 	Builder builder;
 	GameMainController mcon;
+	BuilderMainController bcon;
 	Model model;
 	Model bmodel;
 	LinkedList<Level> initLevel;
@@ -45,6 +46,7 @@ public class testKabasuji extends TestCase {
 		game = new Application();
 		builder = new Builder();
 		mcon = new GameMainController(game);
+		bcon = new BuilderMainController(builder); 
 		model = game.getModel();
 		bmodel = builder.getModel();
 		model.reload();
@@ -345,9 +347,13 @@ public class testKabasuji extends TestCase {
 	}
 
 	public void testAchievements() {
+		WindowManager wmg = new WindowManager(200, 200, 640, 535);
+		wmg.link(mcon);
+
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		mmc.getRenderedView();
-		click(60, 350);		
+		click(70, 300);		
+		wmg.render();
 	}
 
 	// Boundary Test Cases
@@ -483,6 +489,7 @@ public class testKabasuji extends TestCase {
 		minime.mousePress(mask);
 		Thread.sleep(500);
 		minime.mouseRelease(mask);
+		Thread.sleep(500);
 
 		clickBackButton();
 	}
@@ -537,7 +544,8 @@ public class testKabasuji extends TestCase {
 			Thread.sleep(500);
 			minime.mousePress(mask);
 			Thread.sleep(500);
-			minime.mouseRelease(500);
+			minime.mouseRelease(mask);
+			Thread.sleep(500);
 		} catch (Exception e) {
 
 		}
@@ -594,7 +602,8 @@ public class testKabasuji extends TestCase {
 			Thread.sleep(500);
 			minime.mousePress(mask);
 			Thread.sleep(500);
-			minime.mouseRelease(500);
+			minime.mouseRelease(mask);
+			Thread.sleep(500);
 		} catch (Exception e) {
 
 		}
@@ -610,46 +619,46 @@ public class testKabasuji extends TestCase {
 	}
 
 	public void testBuilderLevelSelectController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
-		wmg.link(mcon);
+		wmg.link(bcon);
 		blsc.getRenderedView();
-<<<<<<< HEAD
+		wmg.render();
 	}
 
 	public void testBuilderPuzzleLevelController() {
-=======
-	} 
-	
-	public void testBuilderPuzzleLevelController(){
->>>>>>> refs/remotes/origin/master
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
-		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(mcon, blsc, model, 1);
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
-		wmg.link(mcon);
-		bplc.getRenderedView();
+		wmg.link(bcon);
+		blsc.getRenderedView();
+		click(100,175);
 		reloadLevels();
 		clickBackButton();
+		wmg.render();
 	}
 
 	public void testBuilderLightningLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
-		BuilderLightningLevelController bllc = new BuilderLightningLevelController(mcon, blsc, model, 6);
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderLightningLevelController bllc = new BuilderLightningLevelController(bcon, blsc, model, 6);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
-		wmg.link(mcon);
+		wmg.link(bcon);
 		bllc.getRenderedView();
+		click(100,325);
 		reloadLevels();
 		clickBackButton();
+		wmg.render();
 	}
 
 	public void testBuilderReleaseLevelController() {
-		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
-		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(mcon, blsc, model, 11);
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(bcon, bmodel);
+		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(bcon, blsc, model, 11);
 		WindowManager wmg = new WindowManager(200, 200, 640, 535);
-		wmg.link(mcon);
+		wmg.link(bcon);
 		brlc.getRenderedView();
+		click(100,325);
 		reloadLevels();
 		clickBackButton();
+		wmg.render();
 	}
 
 	public void saveInitialLevels() {
