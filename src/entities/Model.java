@@ -172,7 +172,7 @@ public class Model implements Cloneable{
 						needToBeUnlocked.add(a);
 					}
 				}
-			}
+			}  
 			if(!this.checkAchievementExists("Earned One Star In Lightning!")){
 				for(int i = 5; i <= 9; i++){
 					if(levels.get(i).getStars() >= 1){

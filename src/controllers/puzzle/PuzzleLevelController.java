@@ -192,7 +192,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}
-			ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements();
+			ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements(); 
 			for (Achievement a: needToBeUnlocked){
 				a.setisUnlocked();
 				a.saveAchievementToFile();
