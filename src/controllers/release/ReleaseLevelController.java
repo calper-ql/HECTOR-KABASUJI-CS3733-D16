@@ -220,12 +220,9 @@ public class ReleaseLevelController implements IController, ILevelController{
 		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
-<<<<<<< HEAD
 	
 	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
 		this.currentBlockPanelList = list;
 	}
+
 }
-=======
-}
->>>>>>> refs/remotes/origin/master
