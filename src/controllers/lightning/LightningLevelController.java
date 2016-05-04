@@ -206,5 +206,9 @@ public class LightningLevelController implements IController, ILevelController, 
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);
 	}
+	
+	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
+		this.currentBlockPanelList = list;
+	}
 }
 

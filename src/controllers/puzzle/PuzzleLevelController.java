@@ -127,6 +127,7 @@ public class PuzzleLevelController implements IController, ILevelController{
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
+		//System.out.println(currentBlockPanelList);
 		
 		for(JBlockPanel item: currentBlockPanelList){
 			try{
@@ -237,5 +238,9 @@ public class PuzzleLevelController implements IController, ILevelController{
 	@Override
 	public void requestReRenderBack() {
 		mainController.requestSwap(back);
+	}
+	
+	public void setCurrentBlockPanelList(LinkedList<JBlockPanel> list){
+		this.currentBlockPanelList = list;
 	}
 }
