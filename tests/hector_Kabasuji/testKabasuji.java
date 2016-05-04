@@ -1,6 +1,8 @@
 package hector_Kabasuji;
 
 import java.awt.Color;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class testKabasuji extends TestCase {
 	Model model;
 	Model bmodel;
 	LinkedList<Level> initLevel = new LinkedList<Level>();
+	Robot minime;
 	
 	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
 	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
@@ -42,6 +45,8 @@ public class testKabasuji extends TestCase {
 		bmodel = builder.getModel();
 		model.reload();
 		bmodel.reload();
+		minime = new Robot();
+		saveInitialLevels();
 	}
 
 	// Start of Game Tests
@@ -335,6 +340,10 @@ public class testKabasuji extends TestCase {
 		assertEquals(rl.getStars(), 3);
 	}
 	
+	public void testAchievements(){
+		model.checkUnlockedAchievements();
+	}
+	
 	// Boundary Test Cases
 	
 	// Controller Test Cases
@@ -342,6 +351,7 @@ public class testKabasuji extends TestCase {
 		SplashScreenController spc = new SplashScreenController(false);
 		spc.getRenderedView();
 		assertEquals(spc.get().getMainTitle(), "Kabasuji");
+		clickBackButton();
 	}
 	
 	public void testMainMenu(){
@@ -353,6 +363,8 @@ public class testKabasuji extends TestCase {
 		MainMenuController mmc = new MainMenuController(mcon, model);
 		AchievementController ac = new AchievementController(mcon, mmc);
 		ac.getRenderedView();
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void testLevelSelectController(){
@@ -414,6 +426,8 @@ public class testKabasuji extends TestCase {
 		}
 		
 		lsc.getRenderedView();
+		reloadLevels();
+		clickBackButton();
 	}
 	
 	public void testPuzzleLevelController() throws Exception{
@@ -443,7 +457,9 @@ public class testKabasuji extends TestCase {
 			plc.setCurrentBlockPanelList(list);
 			plc.pieceReleased(list.get(0)); 
 		}catch (Exception e){
-		}		
+		}	
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void testLightningLevelController(){
@@ -474,6 +490,8 @@ public class testKabasuji extends TestCase {
 			llc.pieceReleased(list.get(0)); 
 		}catch (Exception e){
 		}	
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void testReleaseLevelController(){
@@ -504,7 +522,8 @@ public class testKabasuji extends TestCase {
 			rlc.pieceReleased(list.get(0));  
 		}catch (Exception e){
 		}
-		
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	// Start of Builder Tests
@@ -523,22 +542,28 @@ public class testKabasuji extends TestCase {
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(mcon, blsc, model, 1);
 		bplc.getRenderedView();
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void testBuilderLightningLevelController(){
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderLightningLevelController bllc = new BuilderLightningLevelController(mcon, blsc, model, 6);
 		bllc.getRenderedView();
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void testBuilderReleaseLevelController(){
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(mcon, blsc, model, 11);
 		brlc.getRenderedView();		
+		reloadLevels();		
+		clickBackButton();
 	}
 	
 	public void saveInitialLevels(){
-		for(int i = 0; i < 15; i++){
+		for(int i = 1; i <= 15; i++){
 			initLevel.add(model.getLevel(i));
 		}
 	}
@@ -548,7 +573,14 @@ public class testKabasuji extends TestCase {
 			Level ss;
 			ss = initLevel.get(i);
 			ss.saveToFile();	
-		}
+		} 
+	}
+	
+	public void clickBackButton(){
+		int mask = InputEvent.BUTTON1_DOWN_MASK;
+		minime.mouseMove(200 + 65, 200 + 50);           
+		minime.mousePress(mask);     
+		minime.mouseRelease(mask);
 	}
 	
 }
