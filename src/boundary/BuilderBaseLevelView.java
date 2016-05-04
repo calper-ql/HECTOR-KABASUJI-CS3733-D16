@@ -1,3 +1,7 @@
+/** Builder Base Level View
+ * This Boundary class is to render all components associated with the base level view in the Level Builder
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -34,15 +38,25 @@ public class BuilderBaseLevelView {
 	
 	JLayeredPane lp;
 	
+	/**
+	 * Class Constructor
+	 */
 	public BuilderBaseLevelView(){
-
 	}
 	
+	/**
+	 * Returns the JLayered Pane for use by other classes
+	 * @return lp
+	 */
 	public JLayeredPane getLayeredPane(){
 		return lp;
 	}
 	
-	
+	/**
+	 * Renders all components displayed as a part of the Level Builder Base Level View
+	 * including the back button, undo button, save button, hint button, and preview button
+	 * @return mp
+	 */
 	public JPanel render(){
 		int width = 640;
 		int height = 535;
@@ -103,30 +117,58 @@ public class BuilderBaseLevelView {
 		return mp;
 	}
 	
+	/**
+	 * Returns the JButton back button for use by other classes 
+	 * @return backButton
+	 */
 	public JButton getBackButton(){
 		return backButton;
 	}
 	
+	/**
+	 * Returns the JButton reset button for use by other classes 
+	 * @return resetButton
+	 */
 	public JButton getResetButton(){
 		return resetButton;
 	}
 	
+	/**
+	 * Returns the JButton save button for use by other classes
+	 * @return saveButton
+	 */
 	public JButton getSaveButton(){
 		return saveButton;
 	}
 	
+	/**
+	 * Returns the JButton preview button for use by other classes
+	 * @return previewButton
+	 */
 	public JButton getPreviewButton(){
 		return previewButton;
 	}
 	
+	/**
+	 * Returns the JRadioButton hint button for use by other classes
+	 * @return hintButton
+	 */
 	public JRadioButton getHintButton(){
 		return hintButton;
 	}
 	
+	/**
+	 * Returns the JButton undo button for use by other classes
+	 * @return undoButton
+	 */
 	public JButton getUndoButton() {
 		return undoButton;
 	}
 	
+	/**
+	 * Returns the JButton redo button for use by other classes
+	 * @return redoButton
+	 */
 	public JButton getRedoButton() {
 		return redoButton;
 	}

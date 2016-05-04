@@ -1,3 +1,7 @@
+/**
+ * This Boundary class is to render all components associated with JBlockPanels
+ * @author 
+ */
 package boundary;
 
 import java.awt.AWTEvent;
@@ -26,7 +30,12 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	
 	Point clickLocation;
 	boolean enabled;
-	
+
+	/**
+	 * Class constructor
+	 * @param bv
+	 * @param ib
+	 */
 	public JBlockPanel(BlockView bv, IBlock ib) {
 		super();
 		ofsetx = 0;
@@ -40,24 +49,52 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 		enabled = true;
 		this.ib = ib;
 	}
-	
+
+	/**
+	 * Sets enabled boolean to true
+	 */
 	public void enablePress(){
 		enabled = true;
 	}
 	
+	/**
+	 * Sets enabled boolean to false
+	 */
 	public void disablePress(){
 		enabled = false;
 	}
 	
+	/**
+	 * Returns the int ofsetx for use by classes in other packages
+	 * @return ofsetx
+	 */
 	public int getOfsetX() {return ofsetx;}
+	
+	/**
+	 * Returns the int ofsety for use by classes in other packages
+	 * @return ofsety
+	 */
 	public int getOfsetY() {return ofsety;}
 	
+	/**
+	 * Sets ofsetx to the integer passed in as a parameter	
+	 * @param x
+	 */
 	public void setOfsetX(int x) {ofsetx = x;}
+	
+	/**
+	 * Sets ofsety to the integer passed in as a parameter	
+	 * @param y
+	 */
 	public void setOfsetY(int y) {ofsety = y;}
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {}
 
+	/**
+	 * Once a mouse is pressed, the location and ofsetx and ofsety are updated
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getButton() == 3) return;
@@ -68,20 +105,30 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 		clickLocation = this.getLocation();
 	}
 
+	/**
+	 * If this JBlockPanel is enabled, the released method is called on the associated Block View
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(e.getButton() == 3) return;
 		if(enabled)bv.released(this);
 	}
 
+	/**
+	 * Calls the request Focus method once a mouse event takes place
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		this.requestFocus();
 	}
 
+	
 	@Override
 	public void mouseExited(MouseEvent e) {}
 
+	/**
+	 * Handles necessary view components of a dragging action
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(e.getButton() == 3) return;
@@ -89,10 +136,12 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-	
-	}
+	public void mouseMoved(MouseEvent e) {}
 
+	/**
+	 * Returns the IBlock associated with this JBlockPanel for use by classes in other packages
+	 * @return ib
+	 */
 	public IBlock getBlock() {
 		return ib;
 	}
@@ -103,6 +152,13 @@ public class JBlockPanel extends JPanel implements MouseMotionListener, MouseLis
 	@Override
 	public void keyReleased(KeyEvent e) {}
 
+	/**
+	 * Handles the use of keys.
+	 * Rotates right if r key is pressed
+	 * Rotates left is l key is pressed
+	 * Flips horizontally if h key is pressed
+	 * Flips vertically if v key is pressed 
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if(e.getKeyChar() == 'r'){

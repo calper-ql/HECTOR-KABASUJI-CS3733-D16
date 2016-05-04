@@ -1,3 +1,8 @@
+/**	Base Level View
+ * 	This Boundary class is to render all components associated with the Base Level
+ * 
+ * 	@author 
+ */
 package boundary;
 
 import java.awt.Color;
@@ -40,22 +45,57 @@ public class BaseLevelView {
 	private Level level;
 	JLayeredPane lp;
 	
+	/**
+	 * Constructor for the class 
+	 * 
+	 * the level parameter sets what the given level is  
+	 * 
+	 * @param level
+	 */	
 	public BaseLevelView(Level level) {
 		this.level = level;
 	}
-	
+
+	/**
+	 * Returns all view layers
+	 * 
+	 * @return lp
+	 */
 	public JLayeredPane getLayeredPane(){
 		return lp;
 	}
-	
+
+	/**
+	 * Adds a JBlockPanel (which is an extension of JPanel, 
+	 * and handles mouse controls and moves other block panels when necessary)
+	 *  to the set of all layered views
+	 *  
+	 *  Parameter bv determines which JBlockPanel will be added to lp 
+	 *  (the set of all layered views)
+	 * 
+	 * @param bv
+	 */
+
 	public void addJBlockPanel(JBlockPanel bv){
 		lp.add(bv, new Integer(1), 0);
 	}
-	
+
+	/**
+	 * Removes a layer	
+	 */
 	public void clear(){
 		removeLayer(lp, 1);
 	}
-	
+
+	/**
+	 * 	Removes a layer and all its components from a given JLayeredPane
+	 * 
+	 * pane specifies the JLayeredPane from which a layer will be removed
+	 * layer specifies which layer will be removed
+	 * 
+	 * @param pane
+	 * @param layer
+	 */
 	void removeLayer(JLayeredPane pane, int layer) {    
 		Component[] comps = pane.getComponentsInLayer(layer);    
 		for(int x = 0; x < comps.length; x++) {       
@@ -64,7 +104,15 @@ public class BaseLevelView {
 		pane.repaint();
 		System.out.println("Should be removed");
 	} 
-	
+
+	/**
+	 * Renders all components displayed as a part of a Base Level including
+	 * 	window size and background color
+	 * 	back and info buttons 
+	 * 	stars, depending on how many have been earned
+	 * 	
+	 * @return mp
+	 */
 	public JPanel render(){
 		int width = 640;
 		int height = 535;
@@ -157,7 +205,12 @@ public class BaseLevelView {
 		
 		return mp;
 	}
-	
+
+	/**
+	 * 	Returns the back button for use by other classes
+	 * 
+	 * @return backButton
+	 */
 	public JButton getBackButton(){
 		return backButton;
 	}

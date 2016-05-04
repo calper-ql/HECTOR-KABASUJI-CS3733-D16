@@ -1,3 +1,8 @@
+/**	Block View
+ * 	This Boundary class is to render all components associated with blocks
+ * 
+ * 	@author 
+ */
 package boundary;
 
 import java.util.LinkedList;
@@ -22,12 +27,27 @@ public class BlockView {
 	LinkedList<JBlockPanel> currentList;
 	IBlock currentBlock;
 	BlockController bc;
-	
+
+	/**
+	 * Class Constructor
+	 * the BlockController parameter sets which block controller is being interacted with	
+	 * @param bc
+	 */
 	public BlockView(BlockController bc){
 		size = 32;
 		this.bc = bc;
 	}
 
+	/**
+	 * Renders all components displayed as a part of a block, including the block's color and location
+	 * block specifies the IBlock being rendered
+	 * x specifies the integer location on the x axis
+	 * y specifies the integer location on the y axis
+	 * @param block
+	 * @param x
+	 * @param y
+	 * @return list
+	 */
 	public LinkedList<JBlockPanel> render(IBlock block, int x, int y){
 		LinkedList<JBlockPanel> list = new LinkedList<JBlockPanel>();
 		IBlock dummyBlock = new Block(new Piece(Color.black, 0));
@@ -36,7 +56,15 @@ public class BlockView {
 		currentBlock = block;
 		return list;
 	}
-	
+
+	/**
+	 * Renders all blocks bordering a given block
+	 * @param block
+	 * @param caller
+	 * @param list
+	 * @param x
+	 * @param y
+	 */
 	public void renderToList(IBlock block, IBlock caller,LinkedList<JBlockPanel> list, int x, int y){
 		if(block.isValidBlock()){
 			JBlockPanel p = new JBlockPanel(this, block);
@@ -53,18 +81,33 @@ public class BlockView {
 		}
 		
 	}
-
+	
+	/**
+	 * Finds the location of a block in a JBlockPanel and updates this location
+	 * @param x
+	 * @param y
+	 */
 	public void updateLocation(int x, int y) {
 		for(JBlockPanel bp: currentList){
 			Point p = bp.getLocation();
 			bp.setLocation(p.x + x, p.y + y);
 		}
 	}
-	
+
+	/**
+	 * Updates the transform based on the current panels
+	 * @param currentPanel
+	 */
 	public void updateTransform(JBlockPanel currentPanel) {
 		updateTransformRecursive(currentPanel, currentPanel);
 	}
 	
+	/**
+	 * Takes a JBlockPanel, and updates the transform of that JBlockPanel, 
+	 * as well as all its neighboring panels 
+	 * @param currentPanel
+	 * @param caller
+	 */
 	public void updateTransformRecursive(JBlockPanel currentPanel, JBlockPanel caller) {
 		Point p = currentPanel.getLocation();
 		
@@ -105,6 +148,11 @@ public class BlockView {
 		
 	}
 	
+	/**
+	 * Iterates through the current list to find a block passed in as a parameter  
+	 * @param block
+	 * @return
+	 */
 	public JBlockPanel seachForPanel(IBlock block){
 		for(JBlockPanel bp: currentList){
 			if(bp.getBlock() == block)
@@ -113,10 +161,20 @@ public class BlockView {
 		return null;
 	}
 
+	/**
+	 * Accepts a JBlockPanel that has been pressed, 
+	 * then calls the pressed method from the block controller class
+	 * @param jBlockPanel
+	 */
 	public void pressed(JBlockPanel jBlockPanel) {
 		bc.pressed(jBlockPanel);
 	}
 
+	/**
+	 * Accepts a JBlockPanel that has been released, 
+	 * then calls the released method from the block controller class
+	 * @param jBlockPanel
+	 */
 	public void released(JBlockPanel jBlockPanel) {
 		bc.released(jBlockPanel);
 	}

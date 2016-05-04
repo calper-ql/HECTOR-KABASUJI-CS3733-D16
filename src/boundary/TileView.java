@@ -1,3 +1,7 @@
+/**
+ * This Boundary Class is responsible for rendering all components associated with a tile's view
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -25,7 +29,14 @@ public class TileView {
 	MouseListener hintListener;
 	MouseListener removeListener;
 	BoardView boardView;
-	
+
+	/**
+	 * Class Constructor
+	 * @param size
+	 * @param col
+	 * @param row
+	 * @param tile
+	 */
 	public TileView(int size, int col, int row, Tile tile, BoardView boardView){
 		this.size = size;
 		this.col = col;
@@ -36,6 +47,9 @@ public class TileView {
 		tilep = new JPanel();
 	}
 	
+	/**
+	 * Enables the remove mode functionality 
+	 */
 	public void enableRemoveMode(){
 		removeListener = new MouseListener() {
 			@Override
@@ -59,10 +73,16 @@ public class TileView {
 		tilep.addMouseListener(removeListener);
 	}
 	
+	/**
+	 * Disables the remove mode functionality
+	 */
 	public void disableRemoveMode(){
 		tilep.removeMouseListener(removeListener);
 	}
 	
+	/**
+	 * Disables the builder mode functionality
+	 */
 	public void enableBuilderMode(){
 		builderListener = new MouseListener() {
 			
@@ -88,6 +108,9 @@ public class TileView {
 		tilep.addMouseListener(builderListener);
 	}
 	
+	/**
+	 * Allows for selecting of tiles to be hints
+	 */
 	public void enableHintSelection(){
 		hintListener = new MouseListener() {
 			
@@ -118,6 +141,10 @@ public class TileView {
 		tilep.addMouseListener(hintListener);
 	}
 	
+	/**
+	 * Renders the views of all components associated with a tile
+	 * @return
+	 */
 	public JPanel render(){
 		tilep = new JPanel();
 		propertiesInit();
@@ -125,6 +152,9 @@ public class TileView {
 		return tilep;
 	}
 	
+	/**
+	 * Initializes all the Swing components associated with tiles
+	 */
 	private void propertiesInit(){
 		tilep.removeAll();
 		tilep.setVisible(true);
@@ -151,19 +181,32 @@ public class TileView {
 		}
 	}
 	
+	/**
+	 * sets the tile color back to white, indicating it have been reset
+	 */
 	public void reset(){
 		tileColor = Color.white;
 	}
 	
+	/**
+	 * Changes the color of a tile, based on any given color
+	 * @param c
+	 */
 	public void setColor(Color c){
 		tileColor = c;
 		tilep.setBackground(c);
 	}
 
+	/**
+	 * removes any Builder functionality for a tile
+	 */
 	public void disableBuilderMode() {
 		tilep.removeMouseListener(builderListener);
 	}
 	
+	/**
+	 * removes any hint functionality for a tile
+	 */
 	public void disableHintSelection() {
 		tilep.removeMouseListener(hintListener);
 	}

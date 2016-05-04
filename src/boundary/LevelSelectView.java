@@ -1,3 +1,8 @@
+/**
+ * This Boundary class is responsible for rendering 
+ * all components associated with the Level Select view in the game play application
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -17,11 +22,19 @@ public class LevelSelectView {
 	private JButton[] puzzleButtons;
 	private JButton[] lightningButtons;
 	private JButton[] releaseButtons;
-	
+
+	/**
+	 * Class constructor
+	 */
 	public LevelSelectView() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	/**
+	 * Renders all components associated with the Level Select View
+	 * including the back button, puzzle, lightning, and release level buttons
+	 * @return p
+	 */
 	public JPanel render(){
 		JPanel p = new JPanel();
 		p.setBackground(Color.darkGray);
@@ -107,18 +120,34 @@ public class LevelSelectView {
 		return p;
 	}
 	
+	/**
+	 * Returns the JButton backButton for use by classes in other packages
+	 * @return backButton
+	 */
 	public JButton getBackButton(){
 		return backButton;
 	}
 	
+	/**
+	 * returns the set of puzzleButtons for use by classes in other packages
+	 * @return puzzleButtons
+	 */
 	public JButton[] getPuzzleButtons(){
 		return puzzleButtons;
 	}
 	
+	/**
+	 * Returns the set of lightningButtons for use by classes in other packages
+	 * @return lightningButtons
+	 */
 	public JButton[] getLightningButtons(){
 		return lightningButtons;
 	}
 	
+	/**
+	 * Returns the set of releaseButtons for use by classes in other packages
+	 * @return releaseButtons
+	 */
 	public JButton[] getReleaseButtons(){
 		return releaseButtons;
 	}

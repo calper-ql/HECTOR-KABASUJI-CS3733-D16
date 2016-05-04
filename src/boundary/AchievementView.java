@@ -1,3 +1,8 @@
+/**	Achievement View
+ * 	This Boundary class is to render Achievements
+ * 
+ * 	@author 
+ */
 package boundary;
 
 import java.awt.Color;
@@ -17,11 +22,20 @@ import generators.AchievementGenerator;
 public class AchievementView {
 	private JButton backButton;
 	private JButton resetButton;
-
+	
+	/**
+	 * Constructor for class
+	 * 
+	 */
 	public AchievementView() {
 	}
 
-
+	/**
+	 * This method renders all components displayed in the Achievements window,
+	 * this includes checking to see which achievements have been earned before displaying them
+	 * 
+	 * @return p
+	 */
 	public JPanel render(){
 		JPanel p = new JPanel();
 		p.setBackground(Color.darkGray);
@@ -92,11 +106,21 @@ public class AchievementView {
 
 
 	}
-
+	
+	/**
+	 * This returns the back button for use by other classes
+	 * 
+	 * @return backButton
+	 */
 	public JButton getBackButton(){
 		return backButton;
 	}
-
+	
+	/**
+	 * This returns the reset button for use by other classes
+	 * 
+	 * @return resetButton
+	 */
 	public JButton getResetButton(){
 		return resetButton;
 	}

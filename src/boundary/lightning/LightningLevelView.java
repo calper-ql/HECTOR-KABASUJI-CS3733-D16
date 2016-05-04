@@ -1,3 +1,7 @@
+/**
+ *This Boundary Class is responsible for rendering all components specific to the Lightning Level in the game play application  
+ * @author
+ */
 package boundary.lightning;
 
 import java.awt.Color;
@@ -15,11 +19,20 @@ public class LightningLevelView extends BaseLevelView{
 	
 	JLabel remainingTime;
 	
+	/**
+	 * Class Constructor
+	 * @param level
+	 */
 	public LightningLevelView(Level level) {
 		super(level);
 		this.level = level;
 	}
 	
+	/**
+	 * Renders elements that are specific to the Lightning Level in the game play application,
+	 * i.e. the timer
+	 * @return superPanel
+	 */
 	public JPanel render() {
 		JPanel superPanel = super.render();
 		// Create the label with the remaining time
@@ -36,10 +49,17 @@ public class LightningLevelView extends BaseLevelView{
 		return superPanel;
 	}
 
+	/**
+	 * Returns the back button from the super class for use by classes in other packages
+	 * @return super.getBackButton()
+	 */
 	public JButton getBackButton() {
 		return super.getBackButton();
 	}
 
+	/**
+	 * Gets the minutes and seconds remaining and updates the timer display
+	 */
 	public void updateTimer() {
 		Integer seconds = new Integer(((LightningLevel)level).getTimeRemaining()%60); 
 		Integer minutes = new Integer((((LightningLevel)level).getTimeRemaining() - seconds.intValue())/60); 

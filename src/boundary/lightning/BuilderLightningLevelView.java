@@ -1,3 +1,8 @@
+/**
+ * This Boundary class is responsible for everything associated 
+ * with the view for the Lightning Level in Level Builder
+ * @author
+ */
 package boundary.lightning;
 
 import java.awt.Color;
@@ -14,21 +19,38 @@ import javax.swing.event.ChangeListener;
 public class BuilderLightningLevelView extends BuilderBaseLevelView {
 	int minutes;
 	int seconds;
-	
+
+	/**
+	 * Class Constructor
+	 * @param seconds
+	 */
 	public BuilderLightningLevelView(int seconds){
 		super();
 		this.seconds = seconds%60;
 		this.minutes = (seconds-this.seconds)/60; 
 	}
 	
+	/**
+	 * Returns the remaining seconds for use by classes in other packages 
+	 * @return this.seconds
+	 */
 	public int getSecondsLeft(){
 		return this.seconds;
 	}
 
+	/**
+	 * Returns the remaining minutes for use by classes in other packages
+	 * @return this.minutes
+	 */
 	public int getMinutesLeft(){
 		return this.minutes;
 	}
 	
+	/**
+	 * Renders components specifically associated with Lightning Level builder, 
+	 * i.e. the timer
+	 * @return superPanel
+	 */
 	public JPanel render() {
 		JPanel superPanel = super.render();
 		
@@ -66,6 +88,10 @@ public class BuilderLightningLevelView extends BuilderBaseLevelView {
 		return superPanel;
 	}
 
+	/**
+	 * Returns the JLayeredPane 
+	 * @return super.getLayeredPane()
+	 */
 	public JLayeredPane getLayeredPane() {
 		return super.getLayeredPane();
 	}

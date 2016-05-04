@@ -1,3 +1,7 @@
+/** Board View
+ * This Boundary class is to render all components associated with the board
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -29,6 +33,14 @@ public class BoardView {
 	TileView tileViews[][] = new TileView[12][12];
 	private BoardController boardController;
 	
+	/**
+	 * Constructor for the class
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param board
+	 */
 	public BoardView(int x, int y, int width, int height, Board board, BoardController boardController) {
 		
 		this.x = x;
@@ -46,6 +58,12 @@ public class BoardView {
 		}
 	}
 	
+	/**
+	 * Render all components displayed as a part of a Board, 
+	 * including the board's color, location, width and height
+	 * This method also sets the colors for and renders all tiles in the Board	
+	 * @return panel
+	 */
 	public JPanel render(){
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.darkGray);
@@ -64,7 +82,12 @@ public class BoardView {
 		
 		return panel;
 	}
-	
+
+	/**
+	 * Returns the tile located at the given point location	
+	 * @param p
+	 * @return tile
+	 */
 	public Tile getTileAtPoint(Point p){
 		Point abs = new Point(p.x - x,p.y - y);
 		if(abs.x < 0) return board.getTile(-1, -1);
@@ -72,6 +95,9 @@ public class BoardView {
 		return board.getTile(abs.x/32, abs.y/32);
 	}
 	
+	/**
+	 * 	Processes the board and calls the enableBuilderMode method on each tile
+	 */
 	public void enableBuilderMode(){
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -80,6 +106,9 @@ public class BoardView {
 		}
 	}
 
+	/**
+	 * 	Processes the board and calls the disableBuilderMode method on each tile
+	 */
 	public void disableBuilderMode() {
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -88,6 +117,9 @@ public class BoardView {
 		}
 	}
 
+	/**
+	 * Processes the board and calls the enableHintSelection method on each tile	
+	 */
 	public void enableHintSelection() {
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -96,6 +128,9 @@ public class BoardView {
 		}
 	}
 	
+	/**
+	 * Processes the board and calls the enableRemoveMode method on each tile	
+	 */
 	public void enableRemoveMode(){
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -104,6 +139,9 @@ public class BoardView {
 		}
 	}
 
+	/**
+	 * Processes the board and calls the diableRemoveMode method on each tile	
+	 */
 	public void disableRemoveMode() {
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -112,6 +150,9 @@ public class BoardView {
 		}
 	}
 
+	/**
+	 * Processes the board and calls the disableHintSelection method on each tile
+	 */
 	public void disableHintSelection() {
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -120,6 +161,10 @@ public class BoardView {
 		}
 	}
 
+	/**
+	 * removes a piece from the board
+	 * @param piece
+	 */
 	public void removePiece(Piece piece) {
 		for(int i = 0;	i < 12; i++){
 			for(int k = 0; k < 12; k++){
@@ -140,10 +185,17 @@ public class BoardView {
 		boardController.addToBullpen(piece);
 	}
 	
+	/**
+	 * Updates the state of the boardController
+	 */
 	public void stateUpdated(){
 		boardController.stateUpdated();
 	}
 
+	/**
+	 * Generates a list of current tiles
+	 * @return tiles
+	 */
 	public ArrayList<ArrayList<Tile>> generateTileList() {
 		ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
 		for(int i = 0;	i < 12; i++){

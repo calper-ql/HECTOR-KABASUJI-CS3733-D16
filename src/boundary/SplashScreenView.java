@@ -1,3 +1,7 @@
+/**Splash Screen View
+ * This Boundary Class is responsible for rendering all components associated with the Splash Screen view
+ * @author
+ */
 package boundary;
 
 import java.awt.Color;
@@ -9,12 +13,23 @@ import javax.swing.SwingConstants;
 
 import entities.SplashScreen;
 
+
 public class SplashScreenView {
 	private SplashScreen sp;
+	
+	/**
+	 * Class Constructor
+	 * @param sp
+	 */
 	public SplashScreenView(SplashScreen sp){
 		this.sp = sp;
 	}
 	
+	/**
+	 * Renders all components associated with the splash screen view,
+	 * including the game title, and team member names
+	 * @return jp
+	 */	
 	public JPanel render(){
 		JPanel jp = new JPanel();
 		jp.setBackground(Color.darkGray); 
