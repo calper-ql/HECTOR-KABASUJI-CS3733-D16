@@ -89,7 +89,7 @@ public class BaseLevelView {
 		backButton.setBackground(Color.WHITE);
 		p.add(backButton);
 		
-		
+		  
 		JButton btnNewButton = new JButton("<");
 		btnNewButton.setBounds(10, 5, 65, 48);
 		p.add(btnNewButton);
@@ -150,7 +150,7 @@ public class BaseLevelView {
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(info_img_r));
 		label_1.setBounds(20, 54, 40, 40);
-		p.add(label_1);
+		//p.add(label_1);
 		
 		lp.add(p, new Integer(0), 0);
 		mp.add(lp);
