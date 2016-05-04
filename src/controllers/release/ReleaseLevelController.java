@@ -174,9 +174,9 @@ public class ReleaseLevelController implements IController, ILevelController{
 			}
 			
 			// Update the release sets
-			ReleaseLevel lvl = (ReleaseLevel) model.getLevel(levelNum);
+			Level lvl = model.getLevel(levelNum);
 			//lvl.getCompleteSets();
-			lvl.updateStars();
+			((ReleaseLevel)lvl).updateStars();
 			// Unlock next level if stars >= 1
 			try {
 				Level levelToUnlock = lvl.getFromFile(levelNum + 1);

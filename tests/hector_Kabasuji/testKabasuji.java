@@ -536,7 +536,7 @@ public class testKabasuji extends TestCase {
 	public void testBuilderLevelSelectController(){
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
 		blsc.getRenderedView();
-	}
+	} 
 	
 	public void testBuilderPuzzleLevelController(){
 		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);

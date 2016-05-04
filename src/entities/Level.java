@@ -120,6 +120,16 @@ public class Level implements Serializable {
 	}
 
 	public Level getFromFile(int levelNum) throws IOException, ClassNotFoundException {
+		if(levelNum == 0){
+			FileInputStream fout;
+			ObjectInputStream oos;
+
+			fout = new FileInputStream(("levels/level" + -1));
+			oos = new ObjectInputStream(fout);
+			Level loaded = (Level) oos.readObject();
+			oos.close();
+			return loaded;
+		}
 		FileInputStream fout;
 		ObjectInputStream oos;
 
