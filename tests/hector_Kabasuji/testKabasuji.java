@@ -42,6 +42,7 @@ public class testKabasuji extends TestCase {
 		bmodel = builder.getModel();
 		model.reload();
 		bmodel.reload();
+		saveInitialLevels();
 	}
 
 	// Start of Game Tests
@@ -414,6 +415,7 @@ public class testKabasuji extends TestCase {
 		}
 		
 		lsc.getRenderedView();
+		reloadLevels();
 	}
 	
 	public void testPuzzleLevelController() throws Exception{
@@ -538,7 +540,7 @@ public class testKabasuji extends TestCase {
 	}
 	
 	public void saveInitialLevels(){
-		for(int i = 0; i < 15; i++){
+		for(int i = 1; i <= 15; i++){
 			initLevel.add(model.getLevel(i));
 		}
 	}
