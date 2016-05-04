@@ -1,3 +1,9 @@
+/**ILevelController
+ * Requires that all classes with the ILevelController interface, have the 
+ * piecePressed(JBlockPanel jBlockPanel), and pieceReleased(JBlockPanel jBlockPanel) methods
+ * 
+ * @author
+ */
 package controllers;
 
 import java.awt.Point;
