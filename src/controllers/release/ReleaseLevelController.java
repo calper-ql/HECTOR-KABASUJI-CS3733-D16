@@ -43,7 +43,6 @@ public class ReleaseLevelController implements IController, ILevelController{
 	JPanel renderPanel;
 	LinkedList<JBlockPanel> currentBlockPanelList;
 	
-	
 	/**
 	 * Constructor for class
 	 * 
@@ -123,6 +122,7 @@ public class ReleaseLevelController implements IController, ILevelController{
 	 * 
 	 * @param jBlockPanel
 	 */
+	
 	public void piecePressed(JBlockPanel jBlockPanel) {
 		currentBlockPanelList = bullpenController.pop(jBlockPanel);
 		
