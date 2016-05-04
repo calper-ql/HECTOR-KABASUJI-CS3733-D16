@@ -41,6 +41,9 @@ public class Model implements Cloneable{
 		for(int i = 1; i < 16; i++){
 			try {
 				level = level.getFromFile(i);
+				if(i == 1 || i == 6 || i == 11){
+					level.unlock();
+				}
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
