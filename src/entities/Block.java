@@ -1,7 +1,11 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Can Alper - calper@wpi.edu
+ *
+ */
 public class Block implements IBlock, Serializable{
 	Piece piece;
 	
