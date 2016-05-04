@@ -13,7 +13,7 @@ import entities.SplashScreen;
 
 public class MainMenuView {
 	private JButton btnLevels;
-	private JButton btnAchivements;
+	private JButton btnAchievements;
 	
 	public MainMenuView(){
 
@@ -38,16 +38,16 @@ public class MainMenuView {
 		btnLevels.setBounds(50, 185, 200, 50);
 		jp.add(btnLevels);
 		
-		btnAchivements = new JButton("Achievements");
-		btnAchivements.setBackground(Color.WHITE);
-		btnAchivements.setBounds(50, 245, 200, 50);
-		jp.add(btnAchivements);
+		btnAchievements = new JButton("Achievements");
+		btnAchievements.setBackground(Color.WHITE);
+		btnAchievements.setBounds(50, 245, 200, 50);
+		jp.add(btnAchievements);
 		
 		return jp;
 	}
 	
-	public JButton getAchivementButton(){
-		return btnAchivements;
+	public JButton getAchievementButton(){
+		return btnAchievements;
 	}
 	
 	public JButton getLevelsButton(){
