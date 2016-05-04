@@ -98,7 +98,6 @@ public class BuilderLevelSelectController implements IController{
 				lightningButtonClicked(10);
 			}	
 		});
-		
 		releaseButtons = blsv.getReleaseButtons();
 		
 		releaseButtons[0].addActionListener(new ActionListener(){
@@ -181,7 +180,6 @@ public class BuilderLevelSelectController implements IController{
 				release_label.setIcon(new ImageIcon(release_img_r));
 				release_label.setBounds(9, 360, 100, 75);
 				p.add(release_label);
-				
 		return p;		
 	}
 	

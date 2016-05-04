@@ -19,7 +19,6 @@ public class AchievementView {
 	private JButton resetButton;
 	
 	public AchievementView() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -41,82 +40,158 @@ public class AchievementView {
 		Model model = new Model("", null, null);
 		model.reload();
 		
-		model.generateAchievements();
-		model.unlockAchievements();
+		ArrayList<Achievement> achievementList = AchievementGenerator.makeAchievements();
 		
-		ArrayList<Achievement> achievementList = model.getAchievements();
+			if (model.checkAchievementExists("Earned One Star In Puzzle!")){
+				Image img = achievementList.get(0).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 0*160, 65, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(0).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 0*150, 50, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
+			if (model.checkAchievementExists("Earned Two Stars In Puzzle!")){
+				Image img = achievementList.get(1).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 1*160, 65, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(1).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 1*150, 50, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
+			if (model.checkAchievementExists("Earned Three Stars In Puzzle!")){
+				Image img = achievementList.get(2).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 2*160, 65, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(2).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 2*150, 50, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
+			if (model.checkAchievementExists("Earned One Star In Lightning!")){
+				Image img = achievementList.get(3).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 0*160, 165, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(3).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 0*150, 150, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
+			if (model.checkAchievementExists("Earned Two Stars In Lightning!")){
+				Image img = achievementList.get(4).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 1*160, 165, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(4).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 1*150, 150, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
+			if (model.checkAchievementExists("Earned Three Stars In Lightning!")){
+				Image img = achievementList.get(5).getImage();
+				
+				JLabel lblNewLabel = new JLabel("\n");
+				
+				lblNewLabel.setBounds(110 + 2*160, 165, 101, 90);
+				p.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(achievementList.get(5).getName());
+				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+				lblNewLabel_1.setForeground(Color.WHITE);
+				lblNewLabel_1.setBounds(100 + 2*150, 150, 300, 200);
+				lblNewLabel.setIcon(new ImageIcon(img));
+				p.add(lblNewLabel_1);
+			}
 		
-		for(int i = 0; i<=2; i++){
-			Achievement a = achievementList.get(i);
-			if (a.isUnlocked()){
-				Image img = a.getImage();
-				
-				JLabel lblNewLabel = new JLabel("\n");
-				
-				lblNewLabel.setBounds(110 + i*160, 65, 101, 90);
-				p.add(lblNewLabel);
-				
-				JLabel lblNewLabel_1 = new JLabel(a.getName());
-				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
-				lblNewLabel_1.setForeground(Color.WHITE);
-				lblNewLabel_1.setBounds(100 + i*150, 50, 300, 200);
-				lblNewLabel.setIcon(new ImageIcon(img));
-				p.add(lblNewLabel_1);
-			}
+		if (model.checkAchievementExists("Earned One Star In Release!")){
+			Image img = achievementList.get(6).getImage();
+			
+			JLabel lblNewLabel = new JLabel("\n");
+			
+			lblNewLabel.setBounds(110 + 0*160, 265, 101, 90);
+			p.add(lblNewLabel);
+			
+			JLabel lblNewLabel_1 = new JLabel(achievementList.get(6).getName());
+			lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+			lblNewLabel_1.setForeground(Color.WHITE);
+			lblNewLabel_1.setBounds(100 + 0*150, 250, 300, 200);
+			lblNewLabel.setIcon(new ImageIcon(img));
+			p.add(lblNewLabel_1);
 		}
-		for(int i = 0; i<=2; i++){
-			Achievement a = achievementList.get(i+3);
-			if (a.isUnlocked()){
-				Image img = a.getImage();
-				
-				JLabel lblNewLabel = new JLabel("\n");
-				
-				lblNewLabel.setBounds(110 + i*160, 165, 101, 90);
-				p.add(lblNewLabel);
-				
-				JLabel lblNewLabel_1 = new JLabel(a.getName());
-				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
-				lblNewLabel_1.setForeground(Color.WHITE);
-				lblNewLabel_1.setBounds(100 + i*150, 150, 300, 200);
-				lblNewLabel.setIcon(new ImageIcon(img));
-				p.add(lblNewLabel_1);
-			}
+		if (model.checkAchievementExists("Earned Two Star In Release!")){
+			Image img = achievementList.get(7).getImage();
+			
+			JLabel lblNewLabel = new JLabel("\n");
+			
+			lblNewLabel.setBounds(110 + 1*160, 265, 101, 90);
+			p.add(lblNewLabel);
+			
+			JLabel lblNewLabel_1 = new JLabel(achievementList.get(7).getName());
+			lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+			lblNewLabel_1.setForeground(Color.WHITE);
+			lblNewLabel_1.setBounds(100 + 1*150, 250, 300, 200);
+			lblNewLabel.setIcon(new ImageIcon(img));
+			p.add(lblNewLabel_1);
 		}
-		for(int i = 0; i<=2; i++){
-			Achievement a = achievementList.get(i+6);
-			if (a.isUnlocked()){
-				Image img = a.getImage();
-				
-				JLabel lblNewLabel = new JLabel("\n");
-				
-				lblNewLabel.setBounds(110 + i*160, 265, 101, 90);
-				p.add(lblNewLabel);
-				
-				JLabel lblNewLabel_1 = new JLabel(a.getName());
-				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
-				lblNewLabel_1.setForeground(Color.WHITE);
-				lblNewLabel_1.setBounds(100 + i*150, 250, 300, 200);
-				lblNewLabel.setIcon(new ImageIcon(img));
-				p.add(lblNewLabel_1);
-			}
+		if (model.checkAchievementExists("Earned Three Star In Release!")){
+			Image img = achievementList.get(8).getImage();
+			
+			JLabel lblNewLabel = new JLabel("\n");
+			
+			lblNewLabel.setBounds(110 + 2*160, 265, 101, 90);
+			p.add(lblNewLabel);
+			
+			JLabel lblNewLabel_1 = new JLabel(achievementList.get(8).getName());
+			lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+			lblNewLabel_1.setForeground(Color.WHITE);
+			lblNewLabel_1.setBounds(100 + 2*150, 250, 300, 200);
+			lblNewLabel.setIcon(new ImageIcon(img));
+			p.add(lblNewLabel_1);
 		}
-		for(int i = 0; i<=0; i++){
-			Achievement a = achievementList.get(i+9);
-			if (a.isUnlocked()){
-				Image img = a.getImage();
-				
-				JLabel lblNewLabel = new JLabel("\n");
-				
-				lblNewLabel.setBounds(270, 365, 101, 90);
-				p.add(lblNewLabel);
-				
-				JLabel lblNewLabel_1 = new JLabel(a.getName());
-				lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
-				lblNewLabel_1.setForeground(Color.WHITE);
-				lblNewLabel_1.setBounds(263, 350, 300, 200);
-				lblNewLabel.setIcon(new ImageIcon(img));
-				p.add(lblNewLabel_1);
-			}
+		if (model.checkAchievementExists("Unlocked 15 Levels!")){
+			Image img = achievementList.get(9).getImage();
+			
+			JLabel lblNewLabel = new JLabel("\n");
+			
+			lblNewLabel.setBounds(270, 365, 101, 90);
+			p.add(lblNewLabel);
+			
+			JLabel lblNewLabel_1 = new JLabel(achievementList.get(9).getName());
+			lblNewLabel_1.setFont(new Font("Menlo", Font.PLAIN, 9));
+			lblNewLabel_1.setForeground(Color.WHITE);
+			lblNewLabel_1.setBounds(263, 350, 300, 200);
+			lblNewLabel.setIcon(new ImageIcon(img));
+			p.add(lblNewLabel_1);
 		}
 		
 		JLabel lblEarnedAchivements = new JLabel("Earned Achievements");
@@ -134,4 +209,7 @@ public class AchievementView {
 		return backButton;
 	}
 
+	public JButton getResetButton(){
+		return resetButton;
+	}
 }

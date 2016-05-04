@@ -111,7 +111,8 @@ public class BaseLevelView {
 		}
 		
 		Image star_img_r = star_img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		
+
+		Image info_img_r = info_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		if(level.getStars() == 0){
 			
 		}else if(level.getStars() == 1){
@@ -145,6 +146,11 @@ public class BaseLevelView {
 			lblNewLabel_3.setIcon(new ImageIcon(star_img_r));
 			p.add(lblNewLabel_3);
 		}
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(info_img_r));
+		label_1.setBounds(20, 54, 40, 40);
+		p.add(label_1);
 		
 		lp.add(p, new Integer(0), 0);
 		mp.add(lp);

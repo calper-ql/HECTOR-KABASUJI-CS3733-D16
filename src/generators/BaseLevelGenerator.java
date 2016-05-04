@@ -54,7 +54,6 @@ public class BaseLevelGenerator {
 		}
 		//Make base Release Levels
 		for (int i = 11; i <= 15; i++){
-			//!!!
 			ArrayList<ReleaseNumberSet> releaseNumbers = new ArrayList<ReleaseNumberSet>();
 			ArrayList<ArrayList<Tile>> mockTiles = (new ArrayList<ArrayList<Tile>>());
 			

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import controllers.BullpenControler;
 import controllers.IController;
 import controllers.ILevelController;
 import controllers.MainController;
+import entities.Achievement;
 import entities.EmptyBlock;
 import entities.IBlock;
 import entities.Level;
@@ -132,29 +134,41 @@ public class LightningLevelController implements IController, ILevelController, 
 		// Update the moves left
 		LightningLevel lvl = (LightningLevel) model.getLevel(levelNum);
 		lvl.updateStars();
-		// Unlock next level if stars >= 1
+		LightningLevel saveStars;
 		try {
-			Level levelToUnlock = lvl.getFromFile(levelNum + 1);
-			if (lvl.getStars() >= 1){
-				levelToUnlock.unlock();
-			}
+			saveStars = (LightningLevel) lvl.getFromFile(levelNum);
+			saveStars.setStars(lvl.getStars());
+			saveStars.saveToFile();
 		} catch (ClassNotFoundException | IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//need to save just stars not whole level
-		try {
-			Level levelToSaveStars = lvl.getFromFile(levelNum);
-			levelToSaveStars.setStars(lvl.getStars());
-			levelToSaveStars.saveToFile();
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList<Achievement> needToBeUnlocked = model.checkUnlockedAchievements();
+		for (Achievement a: needToBeUnlocked){
+			a.setisUnlocked();
+			a.saveAchievementToFile();
 		}
-		
-		
+		if(lvl.hasFinished()){
+			System.out.println("finished");
+			try {
+				if(lvl.getLevelNum()>0){
+					LightningLevel savelvl = (LightningLevel) lvl.getFromFile(levelNum);
+					savelvl.setStars(lvl.getStars());
+					savelvl.saveToFile();
+				}
+			} catch (ClassNotFoundException | IOException e) {}
+			try {
+				if(lvl.getStars() > 0 && lvl.getLevelNum()>0){
+					Level next = lvl.getFromFile(levelNum+1);
+					next.unlock();
+					next.saveToFile();
+				}
+			} catch (ClassNotFoundException | IOException e) {}
+			model.reload();
+			
+		}
 		// finally we re-render
-		mainController.requestSwap(this);
+		if(!lvl.hasFinished())mainController.requestSwap(this);
+		else mainController.requestSwap(back);
 	}
 
 
@@ -184,14 +198,12 @@ public class LightningLevelController implements IController, ILevelController, 
 
 	@Override
 	public void stateUpdated() {
-		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
 	public void requestReRenderBack() {
-		// TODO Auto-generated method stub
 		mainController.requestSwap(back);
 	}
 }

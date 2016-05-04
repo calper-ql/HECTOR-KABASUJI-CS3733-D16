@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,60 +22,6 @@ public class Model implements Cloneable{
 		return name;
 	}
 	
-	public void unlockAchievements(){
-		// If any puzzle levels have 1 2 or 3 stars unlock respective achievements
-		for (int i = 1; i <= 5; i++){
-			Level l = this.getLevel(i);
-			if(l.getStars() >= 1){
-				achievements.get(0).setisUnlocked();
-			}
-			if(l.getStars() >= 2){
-				achievements.get(1).setisUnlocked();
-			}
-			if(l.getStars() >= 3){
-				achievements.get(2).setisUnlocked();
-			}
-		}
-		
-		// If any lightning levels have 1 2 or 3 stars unlock respective achievements
-		for (int i = 6; i <= 10; i++){
-			Level l = this.getLevel(i);
-			if(l.getStars() >= 1){
-				achievements.get(3).setisUnlocked();
-			}
-			if(l.getStars() >= 2){
-				achievements.get(4).setisUnlocked();
-			}
-			if(l.getStars() >= 3){
-				achievements.get(5).setisUnlocked();
-			}
-		}
-		
-		// If any release levels have 1 2 or 3 stars unlock respective achievements
-		for (int i = 11; i <= 15; i++){
-			Level l = this.getLevel(i);
-			if(l.getStars() >= 1){
-				achievements.get(6).setisUnlocked();
-			}
-			if(l.getStars() >= 2){
-				achievements.get(7).setisUnlocked();
-			}
-			if(l.getStars() >= 3){
-				achievements.get(8).setisUnlocked();
-			}
-		}
-		
-		// If all 15 levels are unlocked unlock last achievement
-		int j = 0;
-		for (Level l : levels){
-			if (l.isLocked() == false){
-				j++;
-			}
-		}
-		if (j == 15){
-			achievements.get(9).setisUnlocked();
-		}
-	}
 	
 	public void reload(){
 		Level level = new Level(true, 16 , null, null, true);
@@ -84,7 +31,6 @@ public class Model implements Cloneable{
 			try {
 				level = level.getFromFile(i);
 			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			levels.add(level);
@@ -105,12 +51,175 @@ public class Model implements Cloneable{
 		levels.set(index-1, level);
 	}
 
-	public void generateAchievements() {
-		this.achievements = AchievementGenerator.makeAchievements();
-	}
-
 	public ArrayList<Achievement> getAchievements() {
-		return this.achievements;
+		achievements = AchievementGenerator.makeAchievements(); 
+		return achievements;
 	}
-
+	
+	public void saveAchievement (String achievementName){
+		for (int i = 0; i <= 9; i++){
+			if(this.achievements.get(i).getName() == achievementName){
+				this.achievements.get(i).saveAchievementToFile(); 
+			}
+			}
+	}
+	public boolean checkAchievementExists(String name){
+		File dir = new File("achievements");
+		if(!dir.exists()){
+			return false;
+		}
+		
+		File save = new File(dir, "achievement " + name);
+		if(!save.exists()){
+			return false;
+		}
+		
+		return true;
+	}
+	public ArrayList<Achievement> getUnlockedAchievements(){
+		ArrayList<Achievement> unlocked = new ArrayList<Achievement>();
+		if(this.checkAchievementExists("Earned One Star In Puzzle!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(0);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Two Stars In Puzzle!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(1);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Three Stars In Puzzle!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(2);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned One Star In Lightning!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(3);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Two Stars In Lightning!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(4);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Three Stars In Lightning!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(5);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned One Star In Release!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(6);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Two Star In Release!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(7);
+			unlocked.add(a);
+		}
+		if(this.checkAchievementExists("Earned Three Star In Release!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(8);
+			unlocked.add(a);
+		} 
+		if(this.checkAchievementExists("Unlocked 15 Levels!")){
+			Achievement a = AchievementGenerator.makeAchievements().get(9);
+			unlocked.add(a);
+		}
+		return unlocked;
+	}
+	
+	public ArrayList<Achievement> checkUnlockedAchievements(){
+		ArrayList<Achievement> needToBeUnlocked = new ArrayList<Achievement>();
+			if(!this.checkAchievementExists("Earned One Star In Puzzle!")){
+				for(int i = 0; i <= 4; i++){
+					if(levels.get(i).getStars() >= 1){
+						Achievement a = AchievementGenerator.makeAchievements().get(0);
+						needToBeUnlocked.add(a);
+					}
+				}
+			} 
+			if(!this.checkAchievementExists("Earned Two Stars In Puzzle!")){
+				for(int i = 0; i <= 4; i++){
+					if(levels.get(i).getStars() >= 2){
+						Achievement a = AchievementGenerator.makeAchievements().get(1);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned Three Stars In Puzzle!")){
+				for(int i = 0; i <= 4; i++){
+					if(levels.get(i).getStars() >= 3){
+						Achievement a = AchievementGenerator.makeAchievements().get(2);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned One Star In Lightning!")){
+				for(int i = 5; i <= 9; i++){
+					if(levels.get(i).getStars() >= 1){
+						Achievement a = AchievementGenerator.makeAchievements().get(3);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned Two Stars In Lightning!")){
+				for(int i = 5; i <= 9; i++){
+					if(levels.get(i).getStars() >= 2){
+						Achievement a = AchievementGenerator.makeAchievements().get(4);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned Three Stars In Lightning!")){
+				for(int i = 5; i <= 9; i++){
+					if(levels.get(i).getStars() >= 3){
+						Achievement a = AchievementGenerator.makeAchievements().get(5);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned One Star In Release!")){
+				for(int i = 10; i <= 14; i++){
+					if(levels.get(i).getStars() >= 1){
+						Achievement a = AchievementGenerator.makeAchievements().get(6);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned Two Star In Release!")){
+				for(int i = 10; i <= 14; i++){
+					if(levels.get(i).getStars() >= 2){
+						Achievement a = AchievementGenerator.makeAchievements().get(7);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Earned Three Star In Release!")){
+				for(int i = 10; i <= 14; i++){
+					if(levels.get(i).getStars() >= 3){
+						Achievement a = AchievementGenerator.makeAchievements().get(8);
+						needToBeUnlocked.add(a);
+					}
+				}
+			}
+			if(!this.checkAchievementExists("Unlocked 15 Levels!")){
+				// If all 15 levels are unlocked unlock last achievement
+				int j = 0;
+				for (Level l : levels){
+					if (l.isLocked() == false){
+						j++;
+					}
+				}
+				if (j == 15){
+					Achievement a = AchievementGenerator.makeAchievements().get(9);
+					needToBeUnlocked.add(a);
+				}
+			}
+			return needToBeUnlocked;
+	}
+	
+	public Achievement loadAchievement(String achievementName){
+		achievements = AchievementGenerator.makeAchievements(); 
+		for (int i = 0; i <= 9; i++){
+		try {
+			return this.achievements.get(i).getAchievementFromFile(achievementName);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		}
+		return null;
+	}
 }
