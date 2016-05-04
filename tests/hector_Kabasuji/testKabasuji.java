@@ -12,13 +12,16 @@ import controllers.release.*;
 import controllers.lightning.*;
 import entities.*;
 import kabasuji.application.*;
+import kabasuji.builder.*;
 import move.*;
 import junit.framework.TestCase;
 
 public class testKabasuji extends TestCase {
 	Application game;
+	Builder builder;
 	MainController mcon;
 	Model model;
+	Model bmodel;
 	
 	/*  IMPORTANT, When any changes are made in the entities, you need to re generate them.
 	 *  Do this by running the BaseLevelGenerator.java file, MANUALLY!
@@ -29,11 +32,15 @@ public class testKabasuji extends TestCase {
 
 	protected void setUp() throws Exception {
 		game = new Application();
+		builder = new Builder();
 		mcon = new MainController();
 		model = game.getModel();
+		bmodel = builder.getModel();
 		model.reload();
+		bmodel.reload();
 	}
 
+	// Start of Game Tests
 	// Start of Entity Controllers
 	// Piece Tests
 	
@@ -302,5 +309,37 @@ public class testKabasuji extends TestCase {
 		LevelSelectController lsc = new LevelSelectController(mcon, mmc, model);
 		ReleaseLevelController rlc = new ReleaseLevelController(mcon, lsc, model, 11);
 		rlc.getRenderedView();
+		
 	}
+	
+	// Start of Builder Tests
+	public void testBuilderSplashScreen(){
+		SplashScreenController spc = new SplashScreenController(true);
+		spc.getRenderedView();
+		assertEquals(spc.get().getMainTitle(), "Kabasuji Level Builder");
+	}
+	
+	public void testBuilderLevelSelectController(){
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
+		blsc.getRenderedView();
+	}
+	
+	public void testBuilderPuzzleLevelController(){
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
+		BuilderPuzzleLevelController bplc = new BuilderPuzzleLevelController(mcon, blsc, model, 1);
+		bplc.getRenderedView();
+	}
+	
+	public void testBuilderLightningLevelController(){
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
+		BuilderLightningLevelController bllc = new BuilderLightningLevelController(mcon, blsc, model, 6);
+		bllc.getRenderedView();
+	}
+	
+	public void testBuilderReleaseLevelController(){
+		BuilderLevelSelectController blsc = new BuilderLevelSelectController(mcon, bmodel);
+		BuilderReleaseLevelController brlc = new BuilderReleaseLevelController(mcon, blsc, model, 11);
+		brlc.getRenderedView();		
+	}
+	
 }
